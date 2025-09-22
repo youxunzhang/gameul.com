@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GameUL Hyper Runner</title>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Outfit', 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, rgba(110, 91, 255, 0.3), #070b16 55%);
+      color: #f0f3ff;
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    main {
+      width: min(420px, 100%);
+      text-align: center;
+    }
+
+    canvas {
+      width: 100%;
+      height: auto;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #05070f;
+      box-shadow: 0 20px 40px rgba(5, 12, 30, 0.5);
+      display: block;
+    }
+
+    h1 {
+      font-size: 1.45rem;
+      margin: 0 0 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    p.meta {
+      color: rgba(240, 243, 255, 0.7);
+      font-size: 0.85rem;
+      margin: 1rem 0 0;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+      color: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: rgba(108, 99, 255, 0.4);
+      border-color: rgba(108, 99, 255, 0.6);
+    }
+
+    .scoreboard {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin: 0 0 1rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .toast {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: rgba(5, 8, 18, 0.8);
+      border-radius: 22px;
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      color: #fff;
+      gap: 0.8rem;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .toast strong {
+      font-size: 1.3rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 id="game-label">Hyper Runner</h1>
+    <div class="scoreboard">
+      <span>Score: <strong id="score">0</strong></span>
+      <span id="status">00:00</span>
+    </div>
+    <div style="position: relative;">
+      <canvas id="game" width="420" height="640"></canvas>
+      <div class="toast" id="toast">
+        <strong id="toast-title">Tap to start</strong>
+        <span id="toast-body">Use ← → or swipe to move. Space to shield.</span>
+        <button id="restart">Play again</button>
+      </div>
+    </div>
+    <p class="meta">Swipe or tap the left/right side to move. Hold space for a shield if available.</p>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const label = params.get('label') || 'Hyper Runner';
+    const paletteName = (params.get('palette') || 'neon').toLowerCase();
+    const speedMultiplier = Math.max(0.8, Math.min(1.6, parseFloat(params.get('speed') || '1')));
+    const shieldEnabled = params.get('shield') === '1';
+
+    const palettes = {
+      neon: { road: '#090f23', lane: '#1f315a', player: '#5ef9ff', obstacle: '#ff3f81', trail: '#06d7d9' },
+      violet: { road: '#0b0d19', lane: '#1e1c46', player: '#ff66ff', obstacle: '#ffc75f', trail: '#9d6cff' },
+      magenta: { road: '#160916', lane: '#331733', player: '#ff5f9e', obstacle: '#7cf0ff', trail: '#ffb4d6' },
+      azure: { road: '#05111f', lane: '#142c47', player: '#56ffe3', obstacle: '#ff9b42', trail: '#00b4ff' },
+      crimson: { road: '#190708', lane: '#33131a', player: '#ff6f6f', obstacle: '#ffc46b', trail: '#ff2e63' },
+      teal: { road: '#051313', lane: '#163636', player: '#6ffff4', obstacle: '#ff885b', trail: '#19d3c5' }
+    };
+
+    const colors = palettes[paletteName] || palettes.neon;
+    document.getElementById('game-label').textContent = label;
+    document.getElementById('toast-body').textContent = shieldEnabled
+      ? 'Use ← → or swipe to move. Space activates your shield.'
+      : 'Use ← → or swipe to move. Stay focused on the lanes!';
+
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+    if (!CanvasRenderingContext2D.prototype.roundRect) {
+      CanvasRenderingContext2D.prototype.roundRect = function (x, y, width, height) {
+        this.rect(x, y, width, height);
+      };
+    }
+
+    const toast = document.getElementById('toast');
+    const scoreNode = document.getElementById('score');
+    const statusNode = document.getElementById('status');
+    const restartButton = document.getElementById('restart');
+
+    const laneCount = 3;
+    const laneWidth = canvas.width / laneCount;
+    let lastTime = 0;
+    let running = false;
+    let score = 0;
+    let elapsed = 0;
+    let obstacles = [];
+    let ticks = 0;
+
+    const player = {
+      lane: 1,
+      x: laneWidth / 2,
+      width: 60,
+      height: 60,
+      y: canvas.height - 100,
+      shield: 0,
+      shieldCooldown: 0
+    };
+
+    function resetGame() {
+      score = 0;
+      elapsed = 0;
+      obstacles = [];
+      ticks = 0;
+      player.lane = 1;
+      player.shield = 0;
+      player.shieldCooldown = shieldEnabled ? 2.5 : 0;
+      running = true;
+      toast.classList.remove('visible');
+      lastTime = performance.now();
+      requestAnimationFrame(loop);
+    }
+
+    function spawnObstacle() {
+      const lane = Math.floor(Math.random() * laneCount);
+      const width = 62;
+      const height = 68;
+      obstacles.push({
+        lane,
+        x: lane * laneWidth + laneWidth / 2,
+        y: -height,
+        width,
+        height,
+        speed: (160 + Math.random() * 60) * speedMultiplier
+      });
+    }
+
+    function update(delta) {
+      const seconds = delta / 1000;
+      elapsed += seconds;
+      score += seconds * 25 * speedMultiplier;
+      ticks += delta;
+
+      if (player.shield > 0) {
+        player.shield = Math.max(0, player.shield - seconds);
+      } else if (shieldEnabled) {
+        player.shieldCooldown = Math.max(0, player.shieldCooldown - seconds);
+      }
+
+      if (ticks > 650 / speedMultiplier) {
+        spawnObstacle();
+        ticks = 0;
+      }
+
+      obstacles.forEach((obstacle) => {
+        obstacle.y += obstacle.speed * seconds;
+      });
+
+      obstacles = obstacles.filter((obstacle) => obstacle.y < canvas.height + 80);
+
+      const targetX = player.lane * laneWidth + laneWidth / 2;
+      player.x += (targetX - player.x) * Math.min(1, seconds * 10);
+
+      obstacles.forEach((obstacle, index) => {
+        const dx = Math.abs(obstacle.x - player.x);
+        const overlapX = dx < (obstacle.width + player.width) / 2 - 10;
+        const overlapY = obstacle.y + obstacle.height > player.y + 10 && obstacle.y < player.y + player.height;
+        if (overlapX && overlapY) {
+          if (player.shield > 0) {
+            obstacles.splice(index, 1);
+          } else {
+            gameOver();
+          }
+        }
+      });
+
+      scoreNode.textContent = Math.floor(score);
+      statusNode.textContent = formatTime(elapsed);
+    }
+
+    function formatTime(total) {
+      const minutes = Math.floor(total / 60);
+      const seconds = Math.floor(total % 60);
+      return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function drawBackground() {
+      ctx.fillStyle = colors.road;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 1; i < laneCount; i += 1) {
+        ctx.strokeStyle = colors.lane;
+        ctx.lineWidth = 2;
+        ctx.setLineDash([12, 18]);
+        ctx.beginPath();
+        ctx.moveTo(i * laneWidth, 0);
+        ctx.lineTo(i * laneWidth, canvas.height);
+        ctx.stroke();
+      }
+      ctx.setLineDash([]);
+    }
+
+    function drawPlayer() {
+      ctx.fillStyle = colors.player;
+      ctx.beginPath();
+      ctx.roundRect(player.x - player.width / 2, player.y, player.width, player.height, 12);
+      ctx.fill();
+
+      ctx.fillStyle = colors.trail;
+      ctx.globalAlpha = 0.25;
+      ctx.beginPath();
+      ctx.roundRect(player.x - player.width / 4, player.y + player.height - 10, player.width / 2, 40, 8);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+
+      if (player.shield > 0) {
+        ctx.strokeStyle = colors.trail;
+        ctx.lineWidth = 6;
+        ctx.globalAlpha = 0.8;
+        ctx.beginPath();
+        ctx.arc(player.x, player.y + player.height / 2, player.width, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    function drawObstacles() {
+      ctx.fillStyle = colors.obstacle;
+      obstacles.forEach((obstacle) => {
+        ctx.beginPath();
+        ctx.roundRect(obstacle.x - obstacle.width / 2, obstacle.y, obstacle.width, obstacle.height, 14);
+        ctx.fill();
+      });
+    }
+
+    function drawHud() {
+      if (shieldEnabled) {
+        ctx.fillStyle = 'rgba(255,255,255,0.45)';
+        ctx.font = '14px Outfit, sans-serif';
+        const cooldown = player.shield > 0 ? 0 : Math.ceil(player.shieldCooldown);
+        const text = player.shield > 0 ? 'Shield active' : cooldown > 0 ? `Shield in ${cooldown}s` : 'Shield ready';
+        ctx.fillText(text, 16, 28);
+      }
+    }
+
+    function draw(delta) {
+      drawBackground();
+      drawObstacles();
+      drawPlayer();
+      drawHud(delta);
+    }
+
+    function loop(timestamp) {
+      if (!running) return;
+      const delta = timestamp - lastTime;
+      lastTime = timestamp;
+      update(delta);
+      draw(delta);
+      requestAnimationFrame(loop);
+    }
+
+    function gameOver() {
+      running = false;
+      toast.classList.add('visible');
+      document.getElementById('toast-title').textContent = 'Game over';
+      document.getElementById('toast-body').textContent = `Final score: ${Math.floor(score)} · Tap restart to try again.`;
+    }
+
+    function move(direction) {
+      player.lane = Math.min(laneCount - 1, Math.max(0, player.lane + direction));
+    }
+
+    function activateShield() {
+      if (!shieldEnabled) return;
+      if (player.shield > 0 || player.shieldCooldown > 0) return;
+      player.shield = 2.5;
+      player.shieldCooldown = 8;
+    }
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft' || event.key === 'a') {
+        move(-1);
+      } else if (event.key === 'ArrowRight' || event.key === 'd') {
+        move(1);
+      } else if (event.key === ' ' || event.code === 'Space') {
+        activateShield();
+      }
+    });
+
+    let touchStartX = 0;
+    canvas.addEventListener('touchstart', (event) => {
+      const touch = event.changedTouches[0];
+      touchStartX = touch.clientX;
+      if (!running) {
+        resetGame();
+      }
+    });
+
+    canvas.addEventListener('touchend', (event) => {
+      const touch = event.changedTouches[0];
+      const deltaX = touch.clientX - touchStartX;
+      if (Math.abs(deltaX) < 20) {
+        if (touch.clientX < window.innerWidth / 2) {
+          move(-1);
+        } else {
+          move(1);
+        }
+      } else if (deltaX > 0) {
+        move(1);
+      } else {
+        move(-1);
+      }
+    });
+
+    canvas.addEventListener('click', () => {
+      if (!running) {
+        resetGame();
+      }
+    });
+
+    restartButton.addEventListener('click', resetGame);
+
+    toast.classList.add('visible');
+    drawBackground();
+    drawPlayer();
+    drawObstacles();
+    drawHud(0);
+  </script>
+</body>
+</html>

@@ -1,93 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GameUL – Free Games & AI/Gaming Tools</title>
-<meta name="description" content="Play free online games and explore AI & gaming tools on GameUL.">
-<link rel="preconnect" href="https://cdn.tailwindcss.com">
-<script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GameUL | Discover Web Games, Rankings & Creator Tools</title>
+  <meta name="description" content="GameUL is a curated arcade of instant-play web games plus AI and development tools for creators. Dive into racing, puzzles, action hits, rankings, and resources tailored for modern players.">
+  <meta name="keywords" content="web games, browser games, indie games, ai game tools, racing games, puzzle games, game rankings">
+  <link rel="canonical" href="https://gameul.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GameUL | Discover Web Games, Rankings & Creator Tools">
+  <meta property="og:description" content="Find trending browser games, explore creator resources, and launch AI-powered game tools on GameUL.">
+  <meta property="og:url" content="https://gameul.com/">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GameUL | Discover Web Games, Rankings & Creator Tools">
+  <meta name="twitter:description" content="A discovery hub for playable web games, rankings and creator tools.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=1200&q=80">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "GameUL",
+    "url": "https://gameul.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://gameul.com/games?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
 </head>
-<body class="bg-gray-50 text-gray-800">
-<header class="bg-gray-900 text-white p-4 flex justify-between items-center">
-  <a href="/" class="text-xl font-bold">GameUL</a>
-  <input id="search" placeholder="Search games or tools..." class="p-2 rounded text-black w-72">
-</header>
-
-<main class="max-w-7xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-12 gap-6">
-  <aside class="lg:col-span-3">
-    <nav class="bg-white p-4 rounded shadow">
-      <h2 class="font-semibold mb-3">Navigation</h2>
-      <ul class="space-y-2 text-sm">
-        <li><a href="/src/pages/games.html" class="hover:text-blue-600">Games</a></li>
-        <li><a href="/src/pages/tools.html" class="hover:text-blue-600">AI Tools</a></li>
-        <li><a href="/src/pages/tools.html?category=Game%20Portals" class="hover:text-blue-600">Game Portals</a></li>
-        <li><a href="/src/pages/rankings.html" class="hover:text-blue-600">Rankings</a></li>
-        <li><a href="/src/pages/about.html" class="hover:text-blue-600">About</a></li>
-      </ul>
-    </nav>
-    <div class="mt-4">
-      <div class="ad-slot h-32 bg-gray-200 rounded flex items-center justify-center text-gray-500" data-slot="sidebar-top">Ad</div>
+<body data-page="home">
+  <header class="site-header">
+    <div class="container top-bar">
+      <a class="brand" href="/">GameUL</a>
+      <nav class="main-nav" aria-label="Primary">
+        <a class="nav-link" data-nav="home" href="/">Home</a>
+        <a class="nav-link" data-nav="games" href="/games/">Games</a>
+        <a class="nav-link" data-nav="tools" href="/tools/">Tools</a>
+        <a class="nav-link" data-nav="rankings" href="/rankings/">Rankings</a>
+        <a class="nav-link" data-nav="about" href="/about/">About</a>
+      </nav>
+      <form class="search-form" id="global-search-form" role="search">
+        <label class="sr-only" for="global-search">Search the site</label>
+        <input id="global-search" name="q" type="search" autocomplete="off" placeholder="Search games, tools, portals...">
+        <button type="button" id="search-close" class="search-close" aria-label="Close search results">×</button>
+      </form>
     </div>
-  </aside>
+    <div class="container tool-nav" aria-label="Tool categories">
+      <a href="/tools/?category=AI%20Tools">AI Tools</a>
+      <a href="/tools/?category=Game%20Tools">Game Tools</a>
+      <a href="/tools/?category=Game%20Portals">Game Portals</a>
+      <a href="/tools/?category=Gaming%20Resources">Gaming Resources</a>
+    </div>
+  </header>
 
-  <section class="lg:col-span-9">
-    <div class="ad-slot h-24 bg-gray-200 rounded mb-4 flex items-center justify-center text-gray-500" data-slot="banner-top">Ad</div>
-
-    <h2 class="text-lg font-semibold mb-3">Featured Games</h2>
-    <div id="game-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
-
-    <h2 class="text-lg font-semibold mt-8 mb-3">Popular Tools</h2>
-    <div id="tool-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-  </section>
-</main>
-
-<script>
-(async function(){
-  const [games, tools] = await Promise.all([
-    fetch('/data/games.json').then(r=>r.json()),
-    fetch('/data/links.json').then(r=>r.json())
-  ]);
-
-  // render games
-  const g = document.getElementById('game-grid');
-  games.slice(0,8).forEach(item=>{
-    g.insertAdjacentHTML('beforeend', `
-      <div class="bg-white shadow rounded p-2 hover:shadow-md transition">
-        <a href="/src/pages/game.html?slug=${encodeURIComponent(item.slug)}">
-          <img src="${item.cover}" alt="${item.title}" class="rounded w-full h-40 object-cover" loading="lazy">
-          <h3 class="mt-2 font-semibold text-sm line-clamp-1">${item.title}</h3>
-          <div class="text-xs text-gray-500">${item.categories.join(', ')}</div>
-        </a>
+  <section class="search-panel" id="search-panel" hidden>
+    <div class="container">
+      <div class="search-panel__header">
+        <h2>Search results</h2>
+        <p id="search-summary">Start typing to search the entire site.</p>
       </div>
-    `);
-  });
+      <ul class="search-results" id="search-results" aria-live="polite"></ul>
+      <div class="search-empty" id="search-empty" hidden>
+        <p>No results yet. Try different keywords such as <strong>racing</strong>, <strong>puzzle</strong> or <strong>AI art</strong>.</p>
+      </div>
+    </div>
+  </section>
 
-  // render tools
-  const t = document.getElementById('tool-grid');
-  tools.slice(0,6).forEach(item=>{
-    t.insertAdjacentHTML('beforeend', `
-      <a href="${item.url}" target="_blank" rel="noopener nofollow" class="bg-white flex items-center gap-3 p-3 rounded shadow hover:shadow-md">
-        <img src="${item.icon}" alt="${item.title}" class="w-8 h-8 rounded" loading="lazy">
-        <div>
-          <div class="font-medium">${item.title}</div>
-          <div class="text-xs text-gray-500 line-clamp-1">${item.description}</div>
+  <main>
+    <section class="hero">
+      <div class="container hero__content">
+        <div class="hero__text">
+          <p class="eyebrow">Playable in your browser</p>
+          <h1>Discover mini games &amp; creator tools built for the next generation.</h1>
+          <p class="lead">Browse bite-sized racing, puzzle and action hits, then supercharge your workflow with AI art generators, game engines and publishing portals.</p>
+          <div class="hero__actions">
+            <a class="btn btn-primary" href="/games/">Explore games</a>
+            <a class="btn btn-secondary" href="/tools/">Browse creator tools</a>
+          </div>
+          <dl class="hero-stats">
+            <div>
+              <dt>9 curated games</dt>
+              <dd>Playable instantly, no install required.</dd>
+            </div>
+            <div>
+              <dt>12+ pro resources</dt>
+              <dd>AI assistants, engines and asset hubs.</dd>
+            </div>
+          </dl>
         </div>
-      </a>
-    `);
-  });
+        <div class="hero__media" aria-hidden="true">
+          <div class="hero-card">
+            <strong>Now trending</strong>
+            <p>Galactic Runner · Puzzle Nexus · Shadow Arena</p>
+            <span class="tag">Updated daily</span>
+          </div>
+          <div class="hero-card">
+            <strong>Creator spotlight</strong>
+            <p>Build faster with Scenario, GDevelop, Phaser, and more hand-picked tools.</p>
+            <span class="tag tag--outline">For designers &amp; devs</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  // simple search
-  const input = document.getElementById('search');
-  let timer=null;
-  input.addEventListener('input', ()=>{
-    clearTimeout(timer);
-    timer=setTimeout(()=>{
-      const q = input.value.trim();
-      if(q.length>1) location.href = '/src/pages/games.html?q=' + encodeURIComponent(q);
-    },300);
-  });
-})();
-</script>
+    <section class="section" aria-labelledby="featured-games-heading">
+      <div class="container section__header">
+        <h2 id="featured-games-heading">Featured games</h2>
+        <a class="section__link" href="/games/">View all</a>
+      </div>
+      <div class="container">
+        <div class="card-grid" id="featured-games"></div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="categories-heading">
+      <div class="container section__header">
+        <h2 id="categories-heading">Browse by vibe</h2>
+        <p>Pick a category to jump into specific styles of play.</p>
+      </div>
+      <div class="container">
+        <div class="category-grid" id="category-grid"></div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="tools-heading">
+      <div class="container section__header">
+        <h2 id="tools-heading">Creator toolbox</h2>
+        <a class="section__link" href="/tools/">See all tools</a>
+      </div>
+      <div class="container">
+        <div class="tool-grid" id="featured-tools"></div>
+      </div>
+    </section>
+
+    <section class="section section--alt" aria-labelledby="rankings-preview-heading">
+      <div class="container rankings-preview">
+        <div>
+          <h2 id="rankings-preview-heading">Daily rankings</h2>
+          <p>Check the Top, New and Trending charts to see what the community is playing.</p>
+          <a class="btn btn-outline" href="/rankings/">View rankings</a>
+        </div>
+        <div class="rankings-preview__list">
+          <ol id="rankings-preview"></ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__grid">
+      <div>
+        <strong>GameUL</strong>
+        <p>Your curated shortcut to web games, AI tools and gaming resources. Made for casual players, streamers and indie creators.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="/games/">Game library</a></li>
+          <li><a href="/tools/">Tool hub</a></li>
+          <li><a href="/rankings/">Rankings</a></li>
+          <li><a href="/about/">About &amp; contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Stay updated</h3>
+        <p>New games and tools are added regularly. Bookmark us or follow the RSS-style sitemap to keep track.</p>
+        <a class="footer-link" href="/sitemap.xml">Sitemap</a>
+      </div>
+    </div>
+    <p class="footer__note">© <span id="footer-year"></span> GameUL. Built for the global gaming community.</p>
+  </footer>
+
+  <script src="/assets/js/site-data.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script>
+    window.PageInit.home();
+  </script>
 </body>
 </html>
