@@ -130,27 +130,6 @@ img {
   padding: 0;
 }
 
-.tool-nav {
-  display: flex;
-  gap: 1.2rem;
-  padding: 0 0 1rem;
-  font-size: 0.82rem;
-  opacity: 0.85;
-  flex-wrap: wrap;
-}
-
-.tool-nav a {
-  padding: 0.35rem 0.7rem;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.tool-nav a:hover {
-  background: rgba(108, 99, 255, 0.18);
-  border-color: rgba(108, 99, 255, 0.4);
-}
-
 .hero {
   background: radial-gradient(circle at top right, rgba(108, 99, 255, 0.35), transparent 45%),
     linear-gradient(160deg, rgba(17, 26, 46, 0.9), rgba(11, 17, 29, 0.98));
