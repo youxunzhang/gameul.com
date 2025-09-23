@@ -54,6 +54,32 @@
       recommended: ['galactic-runner', 'synthwave-rider']
     },
     {
+      slug: 'pixel-racer',
+      title: 'Pixel Racer',
+      shortDescription: 'Thread through 16-bit traffic, chaining drift boosts and nitro bursts in a retro street sprint.',
+      description:
+        'Pixel Racer is a top-down retro racer tuned for lightning-fast laps. Weave through procedurally generated traffic, feather the brake to chain drifts, and trigger nitro bursts to chase pixel-perfect records.',
+      categories: ['Racing', 'Arcade'],
+      tags: ['retro', 'drift', 'top-down'],
+      releaseDate: '2024-04-09',
+      rating: 4.4,
+      playTime: '2-4 min heats',
+      cover: 'https://images.unsplash.com/photo-1526404428533-25d31580b5c3?auto=format&fit=crop&w=1200&q=80',
+      hero: 'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=80',
+      screenshots: [
+        'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=1200&q=80'
+      ],
+      embedUrl: '/assets/playables/runner.html?label=Pixel%20Racer&palette=amber&speed=1.15&drift=1',
+      playUrl: '/assets/playables/runner.html?label=Pixel%20Racer&palette=amber&speed=1.15&drift=1',
+      controls: ['← → to weave through traffic', 'Space to trigger drift boost'],
+      platforms: ['Web Browser', 'Mobile Friendly'],
+      developer: 'Bitshift Garage',
+      languages: ['English'],
+      features: ['Unlockable pixel cars', 'Procedural traffic patterns', 'Weekly leaderboard events'],
+      recommended: ['neon-drift', 'galactic-runner', 'synthwave-rider']
+    },
+    {
       slug: 'puzzle-nexus',
       title: 'Puzzle Nexus',
       shortDescription: 'Flux through dimensional tiles that rotate each time you tap them — align the network to win.',
