@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8794607118520437" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Game Entry Builder | GameUL</title>
+  <meta name="description" content="Draft new GameUL entries by filling out this internal helper form and copying the generated game object snippet.">
+  <link rel="canonical" href="https://gameul.com/tools/game-entry/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Game Entry Builder | GameUL">
+  <meta property="og:description" content="Fill out every field for a new GameUL listing, generate a formatted JSON snippet and copy it back into site-data.js.">
+  <meta property="og:url" content="https://gameul.com/tools/game-entry/">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1200&q=80">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <style>
+    .game-entry {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .game-entry__form {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .form-section {
+      background: #ffffff;
+      border: 1px solid #d9e1ec;
+      border-radius: 16px;
+      padding: 1.75rem;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .form-section h2 {
+      margin: 0 0 0.75rem;
+      font-size: 1.25rem;
+      line-height: 1.4;
+    }
+
+    .field-group {
+      display: grid;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .field-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .field-label {
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .required {
+      color: #dc2626;
+      font-weight: 600;
+    }
+
+    .game-entry__form input,
+    .game-entry__form textarea {
+      width: 100%;
+      border: 1px solid #c8d5eb;
+      border-radius: 10px;
+      padding: 0.65rem 0.8rem;
+      font: inherit;
+      line-height: 1.5;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      background: #f8fbff;
+    }
+
+    .game-entry__form textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .game-entry__form input:focus,
+    .game-entry__form textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      background: #ffffff;
+    }
+
+    .dynamic-list {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .dynamic-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .dynamic-row button {
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      border: none;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(37, 99, 235, 0.22);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid #1d4ed8;
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, #2563eb, #7c3aed);
+      color: #ffffff;
+      padding: 0.6rem 1.35rem;
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #0f172a;
+      padding: 0.5rem 1.05rem;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: #1d4ed8;
+      padding: 0.35rem 0.6rem;
+      box-shadow: none;
+    }
+
+    .btn-ghost:hover {
+      box-shadow: none;
+      text-decoration: underline;
+    }
+
+    .field-hint {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #475569;
+    }
+
+    .field-error {
+      margin: 0;
+      min-height: 1.25rem;
+      font-size: 0.85rem;
+      color: #dc2626;
+    }
+
+    .game-entry__form input.invalid,
+    .game-entry__form textarea.invalid,
+    .dynamic-list.has-error {
+      border-color: #dc2626 !important;
+      box-shadow: none;
+    }
+
+    .dynamic-list.has-error input {
+      border-color: #dc2626;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(129, 140, 248, 0.12));
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      border-radius: 20px;
+      padding: 1.75rem;
+    }
+
+    .info-box h2 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-size: 1.3rem;
+    }
+
+    .info-box ol {
+      margin: 0 0 1rem 1.25rem;
+      padding: 0;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .info-box p {
+      margin: 0;
+      color: #1f2937;
+    }
+
+    .json-panel {
+      background: #0f172a;
+      color: #f1f5f9;
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.45);
+      overflow: hidden;
+    }
+
+    .json-panel header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      gap: 1rem;
+    }
+
+    .json-panel pre {
+      margin: 0;
+      white-space: pre;
+      overflow: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .copy-status {
+      font-size: 0.85rem;
+      color: #a5b4fc;
+      min-height: 1.2rem;
+    }
+
+    @media (min-width: 900px) {
+      .game-entry__form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+      }
+
+      .form-section--full {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .dynamic-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .dynamic-row button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body data-page="tools">
+  <header class="site-header">
+    <div class="container top-bar">
+      <a class="brand" href="/">GameUL</a>
+      <nav class="main-nav" aria-label="Primary">
+        <a class="nav-link" data-nav="home" href="/">Home</a>
+        <a class="nav-link" data-nav="games" href="/games/">Games</a>
+        <a class="nav-link" data-nav="new-games" href="/games/new-game/">New Games</a>
+        <a class="nav-link" data-nav="tools" href="/tools/">Tools</a>
+        <a class="nav-link" data-nav="rankings" href="/rankings/">Rankings</a>
+        <a class="nav-link" data-nav="about" href="/about/">About</a>
+      </nav>
+      <form class="search-form" id="global-search-form" role="search">
+        <label class="sr-only" for="global-search">Search the site</label>
+        <input id="global-search" name="q" type="search" autocomplete="off" placeholder="Search games, tools, portals...">
+        <button type="button" id="search-close" class="search-close" aria-label="Close search results">×</button>
+      </form>
+    </div>
+    <div class="container tool-nav" aria-label="Tool categories">
+      <a href="/tools/?category=AI%20Tools">AI Tools</a>
+      <a href="/tools/?category=Game%20Tools">Game Tools</a>
+      <a href="/tools/?category=Game%20Portals">Game Portals</a>
+      <a href="/tools/?category=Gaming%20Resources">Gaming Resources</a>
+    </div>
+  </header>
+
+  <section class="search-panel" id="search-panel" hidden>
+    <div class="container">
+      <div class="search-panel__header">
+        <h2>Search results</h2>
+        <p id="search-summary">Start typing to search the entire site.</p>
+      </div>
+      <ul class="search-results" id="search-results" aria-live="polite"></ul>
+      <div class="search-empty" id="search-empty" hidden>
+        <p>No results yet. Try keywords like <strong>engine</strong> or <strong>portal</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <header class="section__header">
+          <div>
+            <h1>Game entry builder</h1>
+            <p>Internal helper for the GameUL team. Capture every field used on <code>site-data.js</code> and grab a ready-to-paste object without digging through previous entries.</p>
+          </div>
+        </header>
+
+        <div class="game-entry">
+          <div class="info-box" aria-labelledby="game-entry-instructions">
+            <h2 id="game-entry-instructions">How to use this helper</h2>
+            <ol>
+              <li>Fill out every field below. Use the “Add another” buttons to add as many categories, screenshots or other list items as needed.</li>
+              <li>Watch the live JSON preview update as you type. Fix any validation notes (slug pattern, duplicate slug, rating range, URL format) before copying.</li>
+              <li>Click <strong>Copy snippet</strong> to place the object on your clipboard, then paste it inside the <code>const games = []</code> array in <code>assets/js/site-data.js</code>.</li>
+              <li>Duplicate an existing detail page, rename it to <code>games/&lt;slug&gt;/index.html</code>, and update the screenshots, copy and embed.</li>
+            </ol>
+            <p>Tip: recommended slugs should point to existing entries so the “You may also like” list stays accurate.</p>
+          </div>
+
+          <form class="game-entry__form" id="game-entry-form" novalidate>
+            <div class="game-entry__form-grid">
+              <section class="form-section">
+                <h2>Core details</h2>
+                <div class="field-group">
+                  <label class="field-label" for="slug">Slug <span class="required">*</span></label>
+                  <input id="slug" name="slug" type="text" autocomplete="off" placeholder="e.g. neon-drift" aria-describedby="slug-hint slug-error">
+                  <p class="field-hint" id="slug-hint">Lowercase letters, numbers and hyphens only.</p>
+                  <p class="field-error" id="slug-error" aria-live="polite"></p>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="title">Title <span class="required">*</span></label>
+                  <input id="title" name="title" type="text" placeholder="Game title" aria-describedby="title-hint">
+                  <p class="field-hint" id="title-hint">Shown on listings, search results and detail pages.</p>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="shortDescription">Short description <span class="required">*</span></label>
+                  <textarea id="shortDescription" name="shortDescription" placeholder="One-sentence teaser shown in cards."></textarea>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="description">Full description <span class="required">*</span></label>
+                  <textarea id="description" name="description" placeholder="1–2 paragraph summary used on the detail page."></textarea>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="releaseDate">Release date <span class="required">*</span></label>
+                  <input id="releaseDate" name="releaseDate" type="date" aria-describedby="releaseDate-error">
+                  <p class="field-error" id="releaseDate-error" aria-live="polite"></p>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="rating">Rating (0–5) <span class="required">*</span></label>
+                  <input id="rating" name="rating" type="number" step="0.1" min="0" max="5" placeholder="4.6" aria-describedby="rating-error">
+                  <p class="field-error" id="rating-error" aria-live="polite"></p>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="playTime">Typical play time <span class="required">*</span></label>
+                  <input id="playTime" name="playTime" type="text" placeholder="e.g. 90-second runs">
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="developer">Developer <span class="required">*</span></label>
+                  <input id="developer" name="developer" type="text" placeholder="Studio or creator name">
+                </div>
+              </section>
+
+              <section class="form-section">
+                <h2>Media &amp; URLs</h2>
+                <div class="field-group">
+                  <label class="field-label" for="cover">Cover image URL <span class="required">*</span></label>
+                  <input id="cover" name="cover" type="url" inputmode="url" placeholder="https://..." aria-describedby="cover-error">
+                  <p class="field-hint">Used for cards and structured data. Prefer 1200×630 images.</p>
+                  <p class="field-error" id="cover-error" aria-live="polite"></p>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="hero">Hero image URL <span class="required">*</span></label>
+                  <input id="hero" name="hero" type="url" inputmode="url" placeholder="https://..." aria-describedby="hero-error">
+                  <p class="field-hint">Displayed as the banner on the detail page.</p>
+                  <p class="field-error" id="hero-error" aria-live="polite"></p>
+                </div>
+                <div class="field-group" data-field="screenshots">
+                  <span class="field-label">Screenshot URLs <span class="required">*</span></span>
+                  <div class="dynamic-list" id="screenshots-list" aria-describedby="screenshots-error"></div>
+                  <button type="button" class="btn btn-secondary" data-action="add" data-field="screenshots">Add another screenshot</button>
+                  <p class="field-error" id="screenshots-error" aria-live="polite"></p>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="embedUrl">Embed URL <span class="required">*</span></label>
+                  <input id="embedUrl" name="embedUrl" type="url" inputmode="url" placeholder="/assets/playables/game.html" aria-describedby="embedUrl-error">
+                  <p class="field-error" id="embedUrl-error" aria-live="polite"></p>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="playUrl">Direct play URL <span class="required">*</span></label>
+                  <input id="playUrl" name="playUrl" type="url" inputmode="url" placeholder="https://... or /assets/..." aria-describedby="playUrl-error">
+                  <p class="field-error" id="playUrl-error" aria-live="polite"></p>
+                </div>
+              </section>
+
+              <section class="form-section form-section--full">
+                <h2>Categories &amp; tags</h2>
+                <div class="field-group" data-field="categories">
+                  <span class="field-label">Categories <span class="required">*</span></span>
+                  <div class="dynamic-list" id="categories-list" aria-describedby="categories-error"></div>
+                  <button type="button" class="btn btn-secondary" data-action="add" data-field="categories">Add another category</button>
+                  <p class="field-error" id="categories-error" aria-live="polite"></p>
+                </div>
+                <div class="field-group" data-field="tags">
+                  <span class="field-label">Tags <span class="required">*</span></span>
+                  <div class="dynamic-list" id="tags-list" aria-describedby="tags-error"></div>
+                  <button type="button" class="btn btn-secondary" data-action="add" data-field="tags">Add another tag</button>
+                  <p class="field-error" id="tags-error" aria-live="polite"></p>
+                </div>
+              </section>
+
+              <section class="form-section form-section--full">
+                <h2>Gameplay details</h2>
+                <div class="field-group" data-field="controls">
+                  <span class="field-label">Controls <span class="required">*</span></span>
+                  <div class="dynamic-list" id="controls-list" aria-describedby="controls-error"></div>
+                  <button type="button" class="btn btn-secondary" data-action="add" data-field="controls">Add another control hint</button>
+                  <p class="field-error" id="controls-error" aria-live="polite"></p>
+                </div>
+                <div class="field-group" data-field="platforms">
+                  <span class="field-label">Platforms <span class="required">*</span></span>
+                  <div class="dynamic-list" id="platforms-list" aria-describedby="platforms-error"></div>
+                  <button type="button" class="btn btn-secondary" data-action="add" data-field="platforms">Add another platform</button>
+                  <p class="field-error" id="platforms-error" aria-live="polite"></p>
+                </div>
+                <div class="field-group" data-field="languages">
+                  <span class="field-label">Languages <span class="required">*</span></span>
+                  <div class="dynamic-list" id="languages-list" aria-describedby="languages-error"></div>
+                  <button type="button" class="btn btn-secondary" data-action="add" data-field="languages">Add another language</button>
+                  <p class="field-error" id="languages-error" aria-live="polite"></p>
+                </div>
+                <div class="field-group" data-field="features">
+                  <span class="field-label">Key features <span class="required">*</span></span>
+                  <div class="dynamic-list" id="features-list" aria-describedby="features-error"></div>
+                  <button type="button" class="btn btn-secondary" data-action="add" data-field="features">Add another feature</button>
+                  <p class="field-error" id="features-error" aria-live="polite"></p>
+                </div>
+                <div class="field-group" data-field="recommended">
+                  <span class="field-label">Recommended slugs</span>
+                  <div class="dynamic-list" id="recommended-list" aria-describedby="recommended-error"></div>
+                  <button type="button" class="btn btn-secondary" data-action="add" data-field="recommended">Add another recommendation</button>
+                  <p class="field-hint">Use slugs that already exist in the library.</p>
+                  <p class="field-error" id="recommended-error" aria-live="polite"></p>
+                </div>
+              </section>
+            </div>
+          </form>
+
+          <section class="json-panel" aria-live="polite">
+            <header>
+              <h2 style="margin: 0; font-size: 1.2rem;">Live game object preview</h2>
+              <button type="button" class="btn btn-primary" id="copy-snippet">Copy snippet</button>
+            </header>
+            <pre id="json-preview">{}</pre>
+            <p class="copy-status" id="copy-status" aria-live="polite"></p>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__grid">
+      <div>
+        <strong>GameUL</strong>
+        <p>Your curated shortcut to web games, AI tools and gaming resources. Made for casual players, streamers and indie creators.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="/games/">Game library</a></li>
+          <li><a href="/tools/">Tool hub</a></li>
+          <li><a href="/rankings/">Rankings</a></li>
+          <li><a href="/about/">About &amp; contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Stay updated</h3>
+        <p>New games and tools are added regularly. Bookmark us or follow the RSS-style sitemap to keep track.</p>
+        <a class="footer-link" href="/sitemap.xml">Sitemap</a>
+      </div>
+    </div>
+    <p class="footer__note">© <span id="footer-year"></span> GameUL. Built for the global gaming community.</p>
+  </footer>
+
+  <script src="/assets/js/site-data.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script>
+    (function () {
+      window.PageInit?.tools?.();
+
+      const data = window.siteData || { games: [] };
+      const existingSlugs = new Set((data.games || []).map((game) => game.slug));
+
+      const form = document.getElementById('game-entry-form');
+      const preview = document.getElementById('json-preview');
+      const copyButton = document.getElementById('copy-snippet');
+      const copyStatus = document.getElementById('copy-status');
+
+      if (!form || !preview) return;
+
+      const urlPattern = /^(https?:\/\/|\/)[^\s]+$/i;
+      const slugPattern = /^[a-z0-9-]+$/;
+
+      const dynamicFields = {
+        categories: { placeholder: 'e.g. Racing', label: 'category', required: true },
+        tags: { placeholder: 'e.g. endless runner', label: 'tag', required: true },
+        screenshots: { placeholder: 'https://...', label: 'screenshot URL', required: true, type: 'url', allowRelative: false },
+        controls: { placeholder: 'e.g. Space to jump', label: 'control hint', required: true },
+        platforms: { placeholder: 'e.g. Web Browser', label: 'platform', required: true },
+        languages: { placeholder: 'e.g. English', label: 'language', required: true },
+        features: { placeholder: 'e.g. Daily challenges', label: 'feature', required: true },
+        recommended: { placeholder: 'Existing slug', label: 'recommended slug', required: false }
+      };
+
+      function sanitizeInline(value) {
+        return value.replace(/\s+/g, ' ').trim();
+      }
+
+      function sanitizeParagraph(value) {
+        return value.replace(/\s+/g, ' ').trim();
+      }
+
+      function escapeString(value) {
+        return value.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+      }
+
+      function formatString(value) {
+        return `'${escapeString(value)}'`;
+      }
+
+      function formatNumber(value) {
+        if (!Number.isFinite(value)) return '0';
+        return Number.isInteger(value) ? String(value) : value.toFixed(1);
+      }
+
+      function formatArray(indent, key, values) {
+        const base = `${indent}${key}: `;
+        if (!values.length) {
+          return `${base}[],`;
+        }
+        const innerIndent = `${indent}  `;
+        const items = values
+          .map((item, index) => {
+            const suffix = index === values.length - 1 ? '' : ',';
+            return `${innerIndent}${formatString(item)}${suffix}`;
+          })
+          .join('\n');
+        return `${base}[\n${items}\n${indent}],`;
+      }
+
+      function collectList(name) {
+        return Array.from(form.querySelectorAll(`[name="${name}[]"]`))
+          .map((input) => sanitizeInline(input.value))
+          .filter(Boolean);
+      }
+
+      function collectGame() {
+        const ratingInput = form.elements.rating;
+        const ratingValue = ratingInput ? parseFloat(ratingInput.value) : NaN;
+        const rating = Number.isFinite(ratingValue) ? Math.min(5, Math.max(0, ratingValue)) : 0;
+
+        return {
+          slug: sanitizeInline(form.elements.slug?.value || ''),
+          title: sanitizeInline(form.elements.title?.value || ''),
+          shortDescription: sanitizeParagraph(form.elements.shortDescription?.value || ''),
+          description: sanitizeParagraph(form.elements.description?.value || ''),
+          categories: collectList('categories'),
+          tags: collectList('tags'),
+          releaseDate: sanitizeInline(form.elements.releaseDate?.value || ''),
+          rating,
+          playTime: sanitizeInline(form.elements.playTime?.value || ''),
+          cover: sanitizeInline(form.elements.cover?.value || ''),
+          hero: sanitizeInline(form.elements.hero?.value || ''),
+          screenshots: collectList('screenshots'),
+          embedUrl: sanitizeInline(form.elements.embedUrl?.value || ''),
+          playUrl: sanitizeInline(form.elements.playUrl?.value || ''),
+          controls: collectList('controls'),
+          platforms: collectList('platforms'),
+          developer: sanitizeInline(form.elements.developer?.value || ''),
+          languages: collectList('languages'),
+          features: collectList('features'),
+          recommended: collectList('recommended')
+        };
+      }
+
+      function formatGameObject(game) {
+        const indentBase = '    ';
+        const indent = '      ';
+        const lines = [
+          `${indentBase}{`,
+          `${indent}slug: ${formatString(game.slug)},`,
+          `${indent}title: ${formatString(game.title)},`,
+          `${indent}shortDescription: ${formatString(game.shortDescription)},`,
+          `${indent}description:`,
+          `${indent}  ${formatString(game.description)},`,
+          formatArray(indent, 'categories', game.categories),
+          formatArray(indent, 'tags', game.tags),
+          `${indent}releaseDate: ${formatString(game.releaseDate)},`,
+          `${indent}rating: ${formatNumber(game.rating)},`,
+          `${indent}playTime: ${formatString(game.playTime)},`,
+          `${indent}cover: ${formatString(game.cover)},`,
+          `${indent}hero: ${formatString(game.hero)},`,
+          formatArray(indent, 'screenshots', game.screenshots),
+          `${indent}embedUrl: ${formatString(game.embedUrl)},`,
+          `${indent}playUrl: ${formatString(game.playUrl)},`,
+          formatArray(indent, 'controls', game.controls),
+          formatArray(indent, 'platforms', game.platforms),
+          `${indent}developer: ${formatString(game.developer)},`,
+          formatArray(indent, 'languages', game.languages),
+          formatArray(indent, 'features', game.features),
+          formatArray(indent, 'recommended', game.recommended).replace(/,\s*$/, ''),
+          `${indentBase}}`
+        ];
+        return lines.join('\n');
+      }
+
+      function createRow(field, value = '') {
+        const settings = dynamicFields[field];
+        const list = document.getElementById(`${field}-list`);
+        if (!list) return;
+        const row = document.createElement('div');
+        row.className = 'dynamic-row';
+
+        const input = document.createElement('input');
+        input.type = settings.type === 'url' ? 'url' : 'text';
+        input.name = `${field}[]`;
+        input.placeholder = settings.placeholder || '';
+        input.value = value;
+
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.className = 'btn btn-ghost';
+        remove.textContent = 'Remove';
+        remove.addEventListener('click', () => {
+          row.remove();
+          if (!list.querySelector('[name]')) {
+            createRow(field);
+          }
+          update();
+        });
+
+        input.addEventListener('input', update);
+        row.appendChild(input);
+        row.appendChild(remove);
+        list.appendChild(row);
+      }
+
+      Object.keys(dynamicFields).forEach((field) => {
+        createRow(field);
+        const addButton = form.querySelector(`[data-action="add"][data-field="${field}"]`);
+        addButton?.addEventListener('click', () => {
+          createRow(field);
+          update();
+        });
+      });
+
+      function validateSlug() {
+        const input = form.elements.slug;
+        const error = document.getElementById('slug-error');
+        if (!input || !error) return true;
+        const value = sanitizeInline(input.value);
+        let message = '';
+        if (!value) {
+          message = 'Slug is required.';
+        } else if (!slugPattern.test(value)) {
+          message = 'Use lowercase letters, numbers and hyphens only.';
+        } else if (existingSlugs.has(value)) {
+          message = 'This slug already exists in site-data.js. Choose another or update that entry directly.';
+        }
+        if (message) {
+          input.classList.add('invalid');
+        } else {
+          input.classList.remove('invalid');
+        }
+        error.textContent = message;
+        return !message;
+      }
+
+      function validateRating() {
+        const input = form.elements.rating;
+        const error = document.getElementById('rating-error');
+        if (!input || !error) return true;
+        const value = input.value.trim();
+        let message = '';
+        if (!value) {
+          message = 'Provide a rating between 0 and 5.';
+        } else {
+          const number = parseFloat(value);
+          if (!Number.isFinite(number)) {
+            message = 'Rating must be a number.';
+          } else if (number < 0 || number > 5) {
+            message = 'Rating must stay between 0 and 5.';
+          }
+        }
+        if (message) {
+          input.classList.add('invalid');
+        } else {
+          input.classList.remove('invalid');
+        }
+        error.textContent = message;
+        return !message;
+      }
+
+      function validateDate() {
+        const input = form.elements.releaseDate;
+        const error = document.getElementById('releaseDate-error');
+        if (!input || !error) return true;
+        const value = input.value.trim();
+        const message = value ? '' : 'Release date is required.';
+        if (message) {
+          input.classList.add('invalid');
+        } else {
+          input.classList.remove('invalid');
+        }
+        error.textContent = message;
+        return !message;
+      }
+
+      function validateUrlField(name, { allowRelative = true } = {}) {
+        const input = form.elements[name];
+        const error = document.getElementById(`${name}-error`);
+        if (!input || !error) return true;
+        const value = sanitizeInline(input.value);
+        let message = '';
+        if (!value) {
+          message = 'URL is required.';
+        } else {
+          const pattern = allowRelative ? urlPattern : /^(https?:\/\/)[^\s]+$/i;
+          if (!pattern.test(value)) {
+            message = allowRelative
+              ? 'Enter a valid URL starting with http(s) or a leading slash.'
+              : 'Enter a valid https:// URL.';
+          }
+        }
+        if (message) {
+          input.classList.add('invalid');
+        } else {
+          input.classList.remove('invalid');
+        }
+        error.textContent = message;
+        return !message;
+      }
+
+      function validateList(field) {
+        const settings = dynamicFields[field];
+        const list = document.getElementById(`${field}-list`);
+        const inputs = Array.from(form.querySelectorAll(`[name="${field}[]"]`));
+        const error = document.getElementById(`${field}-error`);
+        if (!list || !error) return true;
+        let message = '';
+        const values = inputs.map((input) => sanitizeInline(input.value));
+        const filled = values.filter(Boolean);
+
+        list.classList.remove('has-error');
+        inputs.forEach((input) => input.classList.remove('invalid'));
+
+        if (settings.required && filled.length === 0) {
+          message = `Add at least one ${settings.label}.`;
+        }
+
+        inputs.forEach((input, index) => {
+          const value = values[index];
+          if (!value) return;
+          if (settings.type === 'url') {
+            const pattern = settings.allowRelative ? urlPattern : /^(https?:\/\/)[^\s]+$/i;
+            if (!pattern.test(value)) {
+              if (!message) {
+                message = settings.allowRelative
+                  ? 'Use http(s) URLs or leading slashes for this list.'
+                  : 'Use full http(s) URLs for this list.';
+              }
+              input.classList.add('invalid');
+            }
+          }
+        });
+
+        if (message) {
+          list.classList.add('has-error');
+        }
+
+        error.textContent = message;
+        return !message;
+      }
+
+      function runValidations() {
+        validateSlug();
+        validateRating();
+        validateDate();
+        validateUrlField('cover', { allowRelative: false });
+        validateUrlField('hero', { allowRelative: false });
+        validateUrlField('embedUrl', { allowRelative: true });
+        validateUrlField('playUrl', { allowRelative: true });
+        Object.keys(dynamicFields).forEach((field) => validateList(field));
+      }
+
+      function update() {
+        const game = collectGame();
+        preview.textContent = formatGameObject(game);
+        runValidations();
+      }
+
+      form.addEventListener('input', update);
+      form.addEventListener('change', update);
+      form.addEventListener('submit', (event) => event.preventDefault());
+
+      copyButton?.addEventListener('click', async () => {
+        const text = preview.textContent;
+        if (!text) return;
+        try {
+          await navigator.clipboard.writeText(text);
+          copyStatus.textContent = 'Snippet copied to clipboard.';
+        } catch (error) {
+          const range = document.createRange();
+          range.selectNodeContents(preview);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          copyStatus.textContent = 'Clipboard not available. Press Ctrl+C to copy manually.';
+        }
+        setTimeout(() => {
+          copyStatus.textContent = '';
+        }, 4000);
+      });
+
+      update();
+    })();
+  </script>
+</body>
+</html>
