@@ -445,6 +445,11 @@
     renderList();
   }
 
+  function renderNewGamesPage() {
+    setActiveNav('games');
+    setFooterYear();
+  }
+
   function renderToolFilters(container, activeCategory, onChange) {
     container.innerHTML = '';
     const categories = ['All', 'AI Tools', 'Game Tools', 'Game Portals', 'Gaming Resources'];
@@ -680,6 +685,7 @@
   window.PageInit = {
     home: renderHome,
     games: renderGamesPage,
+    newGames: renderNewGamesPage,
     tools: renderToolsPage,
     rankings: renderRankingsPage,
     gameDetail: renderGameDetail,

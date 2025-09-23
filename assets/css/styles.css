@@ -239,6 +239,94 @@ img {
   color: var(--accent-2);
 }
 
+.new-games-list {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.game-feature {
+  background: var(--surface-light);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: clamp(1.5rem, 2.5vw, 2.2rem);
+  display: grid;
+  gap: 1.5rem;
+  box-shadow: 0 16px 36px rgba(8, 14, 35, 0.26);
+}
+
+.game-feature__copy h2 {
+  margin: 0 0 0.6rem;
+}
+
+.game-feature__publisher {
+  margin: 0 0 1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.game-feature__description {
+  margin: 0 0 1.2rem;
+  color: var(--text-muted);
+}
+
+.game-feature__instructions h3 {
+  margin: 0 0 0.6rem;
+}
+
+.game-feature__instructions-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.35rem;
+  color: var(--text-muted);
+}
+
+.game-feature__instructions-text {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.game-feature__embed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-feature__embed iframe {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  background: #000;
+  min-height: 320px;
+}
+
+.new-games-note {
+  margin-top: 2rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+@media (min-width: 960px) {
+  .game-feature {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .new-games-list {
+    gap: 2rem;
+  }
+
+  .game-feature {
+    padding: 1.35rem;
+  }
+
+  .game-feature__embed iframe {
+    min-height: 260px;
+  }
+}
+
 .card-grid,
 .tool-grid {
   display: grid;
