@@ -200,6 +200,21 @@ img {
   background: var(--surface);
 }
 
+.classic-spotlight {
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 1.8rem;
+}
+
+.classic-spotlight__intro p {
+  max-width: 42rem;
+  color: var(--text-muted);
+}
+
+.classic-spotlight__grid {
+  margin-top: 0.4rem;
+}
+
 .section__header {
   display: flex;
   align-items: baseline;

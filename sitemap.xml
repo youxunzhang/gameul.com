@@ -65,4 +65,16 @@
     <loc>https://gameul.com/games/shadow-arena/</loc>
     <changefreq>weekly</changefreq>
   </url>
+  <url>
+    <loc>https://gameul.com/games/super-mario-bros/</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://gameul.com/games/magic-cube-plus/</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://gameul.com/games/freerider-carbon/</loc>
+    <changefreq>weekly</changefreq>
+  </url>
 </urlset>
