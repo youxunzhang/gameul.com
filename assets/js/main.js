@@ -1195,12 +1195,33 @@
     const iframeSection = document.createElement('section');
     iframeSection.className = 'play-section';
     iframeSection.id = 'play';
-    iframeSection.innerHTML = `
-      <div class="iframe-wrapper">
-        <iframe src="${game.embedUrl}" title="Play ${game.title}" loading="lazy" allowfullscreen></iframe>
-      </div>
-      <p class="play-tip">Tip: Use ${game.controls.join(', ')}.</p>
-    `;
+
+    const iframeWrapper = document.createElement('div');
+    iframeWrapper.className = 'iframe-wrapper';
+
+    const iframe = document.createElement('iframe');
+    iframe.src = game.embedUrl;
+    iframe.title = `Play ${game.title}`;
+    iframe.loading = 'lazy';
+    iframe.allowFullscreen = true;
+    iframe.setAttribute('allowfullscreen', '');
+    const extraIframeAttrs = game.iframeAttributes && typeof game.iframeAttributes === 'object' ? game.iframeAttributes : {};
+    Object.entries(extraIframeAttrs).forEach(([key, value]) => {
+      if (value === true) {
+        iframe.setAttribute(key, '');
+      } else if (value !== false && value != null) {
+        iframe.setAttribute(key, String(value));
+      }
+    });
+
+    iframeWrapper.appendChild(iframe);
+
+    const tip = document.createElement('p');
+    tip.className = 'play-tip';
+    tip.textContent = `Tip: Use ${game.controls.join(', ')}.`;
+
+    iframeSection.appendChild(iframeWrapper);
+    iframeSection.appendChild(tip);
 
     const details = document.createElement('section');
     details.className = 'details-section';

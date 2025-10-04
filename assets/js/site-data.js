@@ -25,7 +25,7 @@
       developer: 'Photon Forge Collective',
       languages: ['English'],
       features: ['Procedural lanes every run', 'Reactive synth soundtrack', 'Global ghost leaderboard'],
-      recommended: ['neon-drift', 'synthwave-rider', 'shadow-arena']
+      recommended: ['neon-drift', 'synthwave-rider', 'geometry-dash']
     },
     {
       slug: 'neon-drift',
@@ -51,7 +51,39 @@
       developer: 'CityGrid Labs',
       languages: ['English'],
       features: ['Dynamic drifting lanes', 'Ghost car chasing', 'Daily drift challenges'],
-      recommended: ['galactic-runner', 'synthwave-rider']
+      recommended: ['galactic-runner', 'synthwave-rider', 'geometry-dash']
+    },
+    {
+      slug: 'geometry-dash',
+      title: 'Geometry Dash',
+      shortDescription: 'Tap to the beat, leap past spikes and portals in this relentless rhythm runner.',
+      description:
+        'Geometry Dash distills rhythm platforming into pure reaction. Pulse with the soundtrack, tap to clear spike gauntlets, ride rocket ships through tight tunnels and memorise patterns as you chase 100% completion across neon stages.',
+      categories: ['Platformer', 'Rhythm'],
+      tags: ['rhythm', 'platformer', 'challenge'],
+      releaseDate: '2013-08-13',
+      rating: 4.8,
+      playTime: '1-2 min per attempt',
+      cover: 'https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1200&q=80',
+      hero: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80',
+      screenshots: [
+        'https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80'
+      ],
+      embedUrl: 'https://1games.io/game/geometry-lite/',
+      playUrl: 'https://1games.io/game/geometry-lite/',
+      iframeAttributes: {
+        allow: 'autoplay; fullscreen; gamepad; picture-in-picture; encrypted-media',
+        sandbox:
+          'allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-pointer-lock allow-downloads allow-presentation',
+        frameborder: '0'
+      },
+      controls: ['Space or click to jump over spikes', 'Hold to keep flying with the ship portal'],
+      platforms: ['Web Browser', 'Mobile Friendly'],
+      developer: 'RobTop Games',
+      languages: ['English'],
+      features: ['Rhythm-synced platforming', 'Ship, gravity and ball transformations', 'Practice mode checkpoints', 'Unlockable icons and trails'],
+      recommended: ['neon-drift', 'synthwave-rider', 'quantum-leap']
     },
     {
       slug: 'pixel-racer',
@@ -203,7 +235,7 @@
       developer: 'RetroPulse',
       languages: ['English'],
       features: ['Beat-synced obstacles', 'Unlockable tracklist', 'Custom neon themes'],
-      recommended: ['neon-drift', 'galactic-runner']
+      recommended: ['geometry-dash', 'neon-drift', 'galactic-runner']
     },
     {
       slug: 'quantum-leap',
@@ -465,9 +497,9 @@
   ];
 
   const rankings = {
-    top: ['super-mario-bros', 'shadow-arena', 'galactic-runner', 'puzzle-nexus', 'freerider-carbon'],
-    new: ['magic-cube-plus', 'freerider-carbon', 'super-mario-bros', 'rogue-chef', 'puzzle-nexus'],
-    trending: ['super-mario-bros', 'magic-cube-plus', 'freerider-carbon', 'galactic-runner', 'shadow-arena']
+    top: ['geometry-dash', 'super-mario-bros', 'shadow-arena', 'galactic-runner', 'puzzle-nexus'],
+    new: ['geometry-dash', 'magic-cube-plus', 'freerider-carbon', 'super-mario-bros', 'rogue-chef'],
+    trending: ['geometry-dash', 'super-mario-bros', 'magic-cube-plus', 'freerider-carbon', 'galactic-runner']
   };
 
   const categories = Array.from(
