@@ -389,9 +389,14 @@
 
     const action = document.createElement('a');
     action.href = tool.url;
-    action.target = '_blank';
-    action.rel = 'noopener';
-    action.textContent = 'Visit site →';
+    const isExternal = /^https?:/i.test(tool.url);
+    if (isExternal) {
+      action.target = '_blank';
+      action.rel = 'noopener';
+    } else {
+      action.rel = 'bookmark';
+    }
+    action.textContent = isExternal ? 'Visit site →' : 'Open tool →';
 
     article.appendChild(title);
     article.appendChild(desc);
@@ -982,6 +987,334 @@
     setFooterYear();
   }
 
+  function renderJsonEditorPage() {
+    setActiveNav('tools');
+    setFooterYear();
+
+    const fileInput = byId('json-file-input');
+    const dropzone = byId('json-dropzone');
+    const editor = byId('json-editor-area');
+    const status = byId('json-status');
+    const preview = byId('json-preview');
+    const fileInfo = byId('json-file-info');
+    const summary = byId('json-structure-summary');
+    const treeContainer = byId('json-tree');
+    const clearBtn = byId('json-clear');
+    const formatBtn = byId('json-format');
+    const copyBtn = byId('json-copy');
+    const downloadBtn = byId('json-download');
+
+    if (!editor || !status || !preview) {
+      return;
+    }
+
+    let currentFileName = '';
+    let parseTimer = null;
+
+    const formatBytes = (bytes) => {
+      if (!Number.isFinite(bytes) || bytes <= 0) {
+        return '';
+      }
+      const units = ['B', 'KB', 'MB', 'GB'];
+      let value = bytes;
+      let unitIndex = 0;
+      while (value >= 1024 && unitIndex < units.length - 1) {
+        value /= 1024;
+        unitIndex += 1;
+      }
+      const precision = value >= 100 || unitIndex === 0 ? 0 : 1;
+      return `${value.toFixed(precision)} ${units[unitIndex]}`;
+    };
+
+    const escapeHtml = (value) =>
+      String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+
+    const formatPrimitive = (value) => {
+      if (value === null) {
+        return '<span class="json-tree__value json-tree__value--null">null</span>';
+      }
+      if (typeof value === 'number') {
+        return `<span class="json-tree__value json-tree__value--number">${value}</span>`;
+      }
+      if (typeof value === 'boolean') {
+        return `<span class="json-tree__value json-tree__value--boolean">${value}</span>`;
+      }
+      if (typeof value === 'string') {
+        return `<span class="json-tree__value json-tree__value--string">"${escapeHtml(value)}"</span>`;
+      }
+      return `<span class="json-tree__value">${escapeHtml(String(value))}</span>`;
+    };
+
+    const buildTreeNode = (parent, value, label) => {
+      const item = document.createElement('li');
+      if (value && typeof value === 'object') {
+        const details = document.createElement('details');
+        details.open = true;
+
+        const summaryEl = document.createElement('summary');
+        const isArray = Array.isArray(value);
+        const size = isArray ? value.length : Object.keys(value).length;
+        summaryEl.innerHTML = `
+          <span class="json-tree__key">${escapeHtml(label)}</span>
+          <span class="json-tree__type">${isArray ? 'Array' : 'Object'} (${size})</span>
+        `;
+        details.appendChild(summaryEl);
+
+        const list = document.createElement('ul');
+        list.className = 'json-tree';
+        const entries = isArray ? value.map((entry, index) => [index, entry]) : Object.entries(value);
+        if (entries.length === 0) {
+          const empty = document.createElement('li');
+          empty.className = 'json-tree__empty';
+          empty.textContent = 'Empty';
+          list.appendChild(empty);
+        } else {
+          entries.forEach(([key, child]) => {
+            const childLabel = isArray ? `[${key}]` : key;
+            buildTreeNode(list, child, childLabel);
+          });
+        }
+        details.appendChild(list);
+        item.appendChild(details);
+      } else {
+        item.innerHTML = `
+          <span class="json-tree__key">${escapeHtml(label)}</span>
+          <span class="json-tree__separator">:</span>
+          ${formatPrimitive(value)}
+        `;
+      }
+      parent.appendChild(item);
+    };
+
+    const renderTree = (value) => {
+      if (!treeContainer) {
+        return;
+      }
+      treeContainer.innerHTML = '';
+      if (value === undefined) {
+        const empty = document.createElement('p');
+        empty.className = 'json-tree__empty';
+        empty.textContent = 'Structure preview appears once JSON parses correctly.';
+        treeContainer.appendChild(empty);
+        return;
+      }
+      const list = document.createElement('ul');
+      list.className = 'json-tree';
+      buildTreeNode(list, value, 'root');
+      treeContainer.appendChild(list);
+    };
+
+    const describeStructure = (value) => {
+      if (value === null) {
+        return 'null value';
+      }
+      if (Array.isArray(value)) {
+        const count = value.length;
+        return `Array with ${count} item${count === 1 ? '' : 's'}`;
+      }
+      if (typeof value === 'object') {
+        const keys = Object.keys(value).length;
+        return `Object with ${keys} key${keys === 1 ? '' : 's'}`;
+      }
+      return `Primitive ${typeof value}`;
+    };
+
+    const setStatus = (message, tone = 'muted') => {
+      status.textContent = message;
+      status.dataset.tone = tone;
+    };
+
+    const updateFileInfo = (message) => {
+      if (fileInfo) {
+        fileInfo.textContent = message;
+      }
+    };
+
+    const updateSummary = (value) => {
+      if (summary) {
+        summary.textContent = value;
+      }
+    };
+
+    const resetPreview = () => {
+      preview.textContent = '{\n}';
+      renderTree(undefined);
+      updateSummary('No data loaded');
+    };
+
+    const parseEditor = () => {
+      const raw = editor.value.trim();
+      if (!raw) {
+        resetPreview();
+        setStatus('Upload a JSON file or paste JSON to get started.');
+        return null;
+      }
+      try {
+        const parsed = JSON.parse(raw);
+        const formatted = JSON.stringify(parsed, null, 2);
+        preview.textContent = formatted;
+        renderTree(parsed);
+        updateSummary(describeStructure(parsed));
+        setStatus('Valid JSON detected.', 'success');
+        return { parsed, formatted };
+      } catch (error) {
+        setStatus(`Invalid JSON: ${error.message}`, 'error');
+        updateSummary('Parsing error');
+        return null;
+      }
+    };
+
+    const scheduleParse = () => {
+      window.clearTimeout(parseTimer);
+      parseTimer = window.setTimeout(parseEditor, 250);
+    };
+
+    const loadText = (text, name, size) => {
+      editor.value = text;
+      currentFileName = name || '';
+      const characters = text.length;
+      const parts = [];
+      if (name) {
+        parts.push(`Loaded ${name}`);
+      } else {
+        parts.push('Loaded pasted JSON');
+      }
+      if (Number.isFinite(size)) {
+        const formattedSize = formatBytes(size);
+        if (formattedSize) {
+          parts.push(`~${formattedSize}`);
+        }
+      }
+      parts.push(`${characters} character${characters === 1 ? '' : 's'}`);
+      updateFileInfo(parts.join(' • '));
+      parseEditor();
+    };
+
+    const handleFile = (file) => {
+      if (!file) {
+        return;
+      }
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        const text = typeof reader.result === 'string' ? reader.result : '';
+        loadText(text, file.name, file.size);
+      });
+      reader.addEventListener('error', () => {
+        setStatus('Unable to read file. Please try again.', 'error');
+      });
+      reader.readAsText(file);
+    };
+
+    fileInput?.addEventListener('change', (event) => {
+      const input = event.target;
+      const [file] = input.files || [];
+      handleFile(file);
+      input.value = '';
+    });
+
+    if (dropzone) {
+      const clearDragState = () => dropzone.classList.remove('is-dragover');
+
+      dropzone.addEventListener('click', () => {
+        fileInput?.click();
+      });
+
+      dropzone.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          fileInput?.click();
+        }
+      });
+
+      dropzone.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        dropzone.classList.add('is-dragover');
+        if (event.dataTransfer) {
+          event.dataTransfer.dropEffect = 'copy';
+        }
+      });
+
+      dropzone.addEventListener('dragleave', clearDragState);
+      dropzone.addEventListener('dragend', clearDragState);
+      dropzone.addEventListener('drop', (event) => {
+        event.preventDefault();
+        clearDragState();
+        const items = event.dataTransfer?.files;
+        if (items && items.length) {
+          handleFile(items[0]);
+          return;
+        }
+        const text = event.dataTransfer?.getData('application/json') || event.dataTransfer?.getData('text/plain');
+        if (text) {
+          loadText(text, 'pasted-data.json');
+        }
+      });
+    }
+
+    editor.addEventListener('input', scheduleParse);
+
+    clearBtn?.addEventListener('click', () => {
+      editor.value = '';
+      currentFileName = '';
+      updateFileInfo('No file selected yet.');
+      resetPreview();
+      setStatus('Editor cleared. Paste or upload new JSON.');
+    });
+
+    formatBtn?.addEventListener('click', () => {
+      const result = parseEditor();
+      if (result) {
+        editor.value = result.formatted;
+        setStatus('JSON formatted with 2-space indentation.', 'success');
+      }
+    });
+
+    copyBtn?.addEventListener('click', async () => {
+      const value = editor.value;
+      if (!value) {
+        setStatus('Nothing to copy yet. Paste or load JSON first.');
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(value);
+        setStatus('JSON copied to clipboard.', 'success');
+      } catch (error) {
+        console.error(error);
+        setStatus('Copy failed. Please copy manually.', 'error');
+      }
+    });
+
+    downloadBtn?.addEventListener('click', () => {
+      const result = parseEditor();
+      if (!result) {
+        setStatus('Fix JSON errors before downloading.', 'error');
+        return;
+      }
+      const filename = currentFileName && currentFileName.toLowerCase().endsWith('.json')
+        ? currentFileName
+        : currentFileName
+        ? `${currentFileName}.json`
+        : 'json-data.json';
+      const blob = new Blob([result.formatted], { type: 'application/json' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+      setStatus(`Downloaded ${filename}.`, 'success');
+    });
+
+    updateFileInfo('No file selected yet.');
+    resetPreview();
+  }
+
   function init() {
     initSearch();
   }
@@ -996,6 +1329,7 @@
     tools: renderToolsPage,
     rankings: renderRankingsPage,
     gameDetail: renderGameDetail,
-    about: renderAboutPage
+    about: renderAboutPage,
+    jsonEditor: renderJsonEditorPage
   };
 })();

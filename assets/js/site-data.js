@@ -452,6 +452,15 @@
       icon: 'https://opengameart.org/sites/default/files/icon_16.png',
       category: 'Gaming Resources',
       tags: ['assets', 'community']
+    },
+    {
+      slug: 'json-editor',
+      title: 'JSON Viewer & Editor',
+      description: 'Upload, inspect and edit JSON files with formatting, tree previews and one-click exports.',
+      url: '/tools/json-editor/',
+      icon: '/assets/icons/favicon.svg',
+      category: 'Game Tools',
+      tags: ['json', 'utilities']
     }
   ];
 
@@ -479,15 +488,18 @@
       url: `/games/${game.slug}/`,
       tags: [...game.categories, ...game.tags]
     })),
-    ...tools.map((tool) => ({
-      type: 'tool',
-      title: tool.title,
-      slug: tool.slug,
-      description: tool.description,
-      url: tool.url,
-      tags: [tool.category, ...(tool.tags || [])],
-      external: true
-    }))
+    ...tools.map((tool) => {
+      const isExternal = /^https?:/i.test(tool.url);
+      return {
+        type: 'tool',
+        title: tool.title,
+        slug: tool.slug,
+        description: tool.description,
+        url: tool.url,
+        tags: [tool.category, ...(tool.tags || [])],
+        external: isExternal
+      };
+    })
   ];
 
   window.siteData = {
