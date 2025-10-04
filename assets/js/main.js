@@ -1003,6 +1003,9 @@
     const formatBtn = byId('json-format');
     const copyBtn = byId('json-copy');
     const downloadBtn = byId('json-download');
+    const submitForm = byId('json-submit-form');
+    const submitUrlInput = byId('json-submit-url');
+    const submitBtn = byId('json-submit');
 
     if (!editor || !status || !preview) {
       return;
@@ -1010,6 +1013,7 @@
 
     let currentFileName = '';
     let parseTimer = null;
+    const submitStorageKey = 'gameul-json-editor-submit-url';
 
     const formatBytes = (bytes) => {
       if (!Number.isFinite(bytes) || bytes <= 0) {
@@ -1174,6 +1178,33 @@
       parseTimer = window.setTimeout(parseEditor, 250);
     };
 
+    const getStoredSubmitUrl = () => {
+      if (!submitUrlInput) {
+        return '';
+      }
+      try {
+        return window.localStorage.getItem(submitStorageKey) || '';
+      } catch (error) {
+        console.warn('Unable to read stored submit URL', error);
+        return '';
+      }
+    };
+
+    const persistSubmitUrl = (value) => {
+      if (!submitUrlInput) {
+        return;
+      }
+      try {
+        if (value) {
+          window.localStorage.setItem(submitStorageKey, value);
+        } else {
+          window.localStorage.removeItem(submitStorageKey);
+        }
+      } catch (error) {
+        console.warn('Unable to store submit URL', error);
+      }
+    };
+
     const loadText = (text, name, size) => {
       editor.value = text;
       currentFileName = name || '';
@@ -1311,8 +1342,93 @@
       setStatus(`Downloaded ${filename}.`, 'success');
     });
 
+    submitUrlInput?.addEventListener('blur', (event) => {
+      const input = event.target;
+      if (input instanceof HTMLInputElement) {
+        persistSubmitUrl(input.value.trim());
+      }
+    });
+
+    submitForm?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (typeof fetch !== 'function') {
+        setStatus('Submit is not supported in this browser.', 'error');
+        return;
+      }
+
+      const result = parseEditor();
+      if (!result) {
+        setStatus('Fix JSON errors before submitting.', 'error');
+        return;
+      }
+
+      const rawUrl = submitUrlInput?.value.trim() || '';
+      if (!rawUrl) {
+        setStatus('Enter a submit endpoint URL first.', 'error');
+        submitUrlInput?.focus();
+        return;
+      }
+
+      let endpoint;
+      try {
+        endpoint = new URL(rawUrl);
+      } catch (error) {
+        setStatus('Submit endpoint must be a valid URL (https://example.com/path).', 'error');
+        submitUrlInput?.focus();
+        return;
+      }
+
+      if (!['http:', 'https:'].includes(endpoint.protocol)) {
+        setStatus('Submit endpoint must start with http:// or https://.', 'error');
+        submitUrlInput?.focus();
+        return;
+      }
+
+      persistSubmitUrl(endpoint.toString());
+
+      const button = submitBtn;
+      const previousText = button?.textContent || '';
+      if (button) {
+        button.disabled = true;
+        button.textContent = 'Submitting…';
+      }
+
+      setStatus(`Submitting JSON to ${endpoint.host}…`);
+
+      try {
+        const response = await fetch(endpoint.toString(), {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: result.formatted
+        });
+
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        setStatus(`Submitted JSON successfully (status ${response.status}).`, 'success');
+      } catch (error) {
+        console.error(error);
+        const message = error instanceof Error ? error.message : 'Unknown error';
+        setStatus(`Submit failed: ${message}.`, 'error');
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.textContent = previousText || 'Submit';
+        }
+      }
+    });
+
     updateFileInfo('No file selected yet.');
     resetPreview();
+
+    const storedUrl = getStoredSubmitUrl();
+    if (storedUrl && submitUrlInput) {
+      submitUrlInput.value = storedUrl;
+    }
   }
 
   function init() {
