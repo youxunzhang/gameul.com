@@ -499,7 +499,14 @@
         tags: [tool.category, ...(tool.tags || [])],
         external: isExternal
       };
-    })
+    }),
+    {
+      type: 'page',
+      title: 'Browsergame 精选',
+      description: '即开即玩的浏览器小游戏清单，直接点击即可游玩或了解详情。',
+      url: '/browsergame/',
+      tags: ['browser games', '精选', '中文页面']
+    }
   ];
 
   window.siteData = {

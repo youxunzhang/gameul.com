@@ -3,6 +3,7 @@
   const searchIndex = window.searchIndex || [];
   const gameMap = new Map((data.games || []).map((game) => [game.slug, game]));
   let directoryCache = null;
+  let browserGamesCache = null;
 
   async function loadGameDirectory() {
     if (directoryCache) {
@@ -30,6 +31,33 @@
     }
   }
 
+  async function loadBrowserGamesData() {
+    if (browserGamesCache) {
+      return browserGamesCache;
+    }
+    try {
+      const response = await fetch('/assets/data/browser-games.json', { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error(`Failed to fetch browser games: ${response.status}`);
+      }
+      const raw = await response.text();
+      let payload;
+      try {
+        payload = JSON.parse(raw);
+      } catch (parseError) {
+        console.error('Failed to parse browser-games.json', parseError);
+        throw parseError;
+      }
+      const games = Array.isArray(payload?.games) ? payload.games : [];
+      const featured = payload?.featured ?? null;
+      browserGamesCache = { games, payload, raw, featured };
+      return browserGamesCache;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
   function byId(id) {
     return document.getElementById(id);
   }
@@ -49,6 +77,16 @@
     const footerYear = byId('footer-year');
     if (footerYear) {
       footerYear.textContent = new Date().getFullYear();
+    }
+  }
+
+  function isExternalUrl(url) {
+    if (!url) return false;
+    try {
+      const parsed = new URL(url, window.location.origin);
+      return parsed.origin !== window.location.origin;
+    } catch (error) {
+      return /^https?:/i.test(url);
     }
   }
 
@@ -356,6 +394,82 @@
     return article;
   }
 
+  function createBrowserGameCard(item) {
+    const article = document.createElement('article');
+    article.className = 'game-card';
+
+    const detailUrl = item.detailsUrl || item.link || '#';
+    const playUrl = item.link || item.detailsUrl || '#';
+
+    if (item.image) {
+      const mediaLink = document.createElement('a');
+      mediaLink.href = detailUrl;
+      mediaLink.className = 'game-card__media';
+      mediaLink.setAttribute('aria-label', `${item.title} details`);
+      if (isExternalUrl(detailUrl)) {
+        mediaLink.target = '_blank';
+        mediaLink.rel = 'noopener';
+      }
+
+      const image = document.createElement('img');
+      image.src = item.image;
+      image.alt = `${item.title} 预览图`;
+      image.loading = 'lazy';
+      mediaLink.appendChild(image);
+      article.appendChild(mediaLink);
+    }
+
+    const body = document.createElement('div');
+    body.className = 'game-card__body';
+
+    const title = document.createElement('h3');
+    const titleLink = document.createElement('a');
+    titleLink.href = detailUrl;
+    titleLink.textContent = item.title;
+    if (isExternalUrl(detailUrl)) {
+      titleLink.target = '_blank';
+      titleLink.rel = 'noopener';
+    }
+    title.appendChild(titleLink);
+    body.appendChild(title);
+
+    const meta = document.createElement('div');
+    meta.className = 'game-card__meta';
+    if (item.genre) {
+      meta.appendChild(createChip(item.genre));
+    }
+    if (Array.isArray(item.tags)) {
+      item.tags.slice(0, 2).forEach((tag) => {
+        if (tag) {
+          meta.appendChild(createChip(tag));
+        }
+      });
+    }
+    if (meta.childElementCount > 0) {
+      body.appendChild(meta);
+    }
+
+    if (item.description) {
+      const desc = document.createElement('p');
+      desc.textContent = item.description;
+      desc.style.margin = '0';
+      body.appendChild(desc);
+    }
+
+    const cta = document.createElement('a');
+    cta.className = 'game-card__cta';
+    cta.href = playUrl;
+    cta.textContent = '立即游玩';
+    if (isExternalUrl(playUrl)) {
+      cta.target = '_blank';
+      cta.rel = 'noopener';
+    }
+    body.appendChild(cta);
+
+    article.appendChild(body);
+    return article;
+  }
+
   function createCategoryTile(category, gameCount) {
     const link = document.createElement('a');
     link.href = `/games/?category=${encodeURIComponent(category)}`;
@@ -579,6 +693,170 @@
   function renderNewGamesPage() {
     setActiveNav('games');
     setFooterYear();
+  }
+
+  function renderBrowserGamesPage() {
+    setActiveNav('browsergame');
+    setFooterYear();
+
+    const summary = byId('browsergame-summary');
+    const updated = byId('browsergame-updated');
+    const grid = byId('browsergame-grid');
+    const feature = byId('browsergame-feature');
+
+    if (!grid || !feature) {
+      return;
+    }
+
+    grid.innerHTML = '';
+    feature.innerHTML = '<div class="browsergames-feature__placeholder">精选推荐加载中…</div>';
+    if (summary) {
+      summary.textContent = '正在加载精选小游戏…';
+    }
+    if (updated) {
+      updated.hidden = true;
+      updated.textContent = '';
+    }
+
+    const renderFeature = (item) => {
+      if (!feature) return;
+      feature.innerHTML = '';
+      if (!item) {
+        feature.innerHTML = '<div class="browsergames-feature__placeholder">暂未找到推荐游戏。</div>';
+        return;
+      }
+
+      const detailUrl = item.detailsUrl || item.link || '#';
+      const playUrl = item.playUrl || item.link || detailUrl;
+
+      if (item.image) {
+        const mediaLink = document.createElement('a');
+        mediaLink.className = 'browsergames-feature__media';
+        mediaLink.href = detailUrl;
+        if (isExternalUrl(detailUrl)) {
+          mediaLink.target = '_blank';
+          mediaLink.rel = 'noopener';
+        }
+        const img = document.createElement('img');
+        img.src = item.image;
+        img.alt = `${item.title} 特色封面`;
+        img.loading = 'lazy';
+        mediaLink.appendChild(img);
+        feature.appendChild(mediaLink);
+      }
+
+      const body = document.createElement('div');
+      body.className = 'browsergames-feature__body';
+
+      const title = document.createElement('h2');
+      const titleLink = document.createElement('a');
+      titleLink.href = detailUrl;
+      titleLink.textContent = item.title;
+      if (isExternalUrl(detailUrl)) {
+        titleLink.target = '_blank';
+        titleLink.rel = 'noopener';
+      }
+      title.appendChild(titleLink);
+      body.appendChild(title);
+
+      if (item.tagline) {
+        const intro = document.createElement('p');
+        intro.className = 'browsergames-feature__intro';
+        intro.textContent = item.tagline;
+        body.appendChild(intro);
+      }
+
+      if (item.description) {
+        const desc = document.createElement('p');
+        desc.textContent = item.description;
+        body.appendChild(desc);
+      }
+
+      if (Array.isArray(item.tags) && item.tags.length > 0) {
+        const tags = document.createElement('div');
+        tags.className = 'browsergames-feature__tags';
+        item.tags.forEach((tag) => tags.appendChild(createChip(tag)));
+        body.appendChild(tags);
+      }
+
+      const actions = document.createElement('div');
+      actions.className = 'browsergames-feature__actions';
+
+      if (playUrl && playUrl !== '#') {
+        const playButton = document.createElement('a');
+        playButton.className = 'btn btn-primary';
+        playButton.href = playUrl;
+        playButton.textContent = '开始游戏';
+        if (isExternalUrl(playUrl)) {
+          playButton.target = '_blank';
+          playButton.rel = 'noopener';
+        }
+        actions.appendChild(playButton);
+      }
+
+      if (item.detailsUrl && item.detailsUrl !== playUrl) {
+        const infoButton = document.createElement('a');
+        infoButton.className = 'btn btn-secondary';
+        infoButton.href = item.detailsUrl;
+        infoButton.textContent = '了解详情';
+        if (isExternalUrl(item.detailsUrl)) {
+          infoButton.target = '_blank';
+          infoButton.rel = 'noopener';
+        }
+        actions.appendChild(infoButton);
+      }
+
+      if (actions.childElementCount > 0) {
+        body.appendChild(actions);
+      }
+
+      feature.appendChild(body);
+    };
+
+    loadBrowserGamesData()
+      .then(({ games, payload, featured }) => {
+        const meta = payload?.meta || {};
+        const description = meta.description || meta.subtitle || meta.title || '';
+        if (summary) {
+          const fallback = games.length
+            ? `共精选 ${games.length} 款无需下载的浏览器小游戏。`
+            : '暂未收录浏览器小游戏。';
+          summary.textContent = description || fallback;
+        }
+        if (updated) {
+          if (meta.updated) {
+            updated.textContent = `最近更新：${meta.updated}`;
+            updated.hidden = false;
+          } else {
+            updated.textContent = '';
+            updated.hidden = true;
+          }
+        }
+
+        if (!games.length) {
+          grid.innerHTML = '<p class="browsergames-empty">暂时没有可用的浏览器游戏，请稍后再来查看。</p>';
+          renderFeature(featured || null);
+          return;
+        }
+
+        renderFeature(featured || games[0]);
+        grid.innerHTML = '';
+        games.forEach((item) => {
+          grid.appendChild(createBrowserGameCard(item));
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        if (summary) {
+          summary.textContent = '未能加载浏览器游戏列表，请稍后再试。';
+        }
+        if (updated) {
+          updated.textContent = '';
+          updated.hidden = true;
+        }
+        feature.innerHTML = '<div class="browsergames-feature__placeholder">加载失败，请刷新页面重试。</div>';
+        grid.innerHTML = '<p class="browsergames-empty">加载失败，请检查网络连接。</p>';
+      });
   }
 
   function renderGameDirectoryPage() {
@@ -1441,6 +1719,7 @@
     home: renderHome,
     games: renderGamesPage,
     newGames: renderNewGamesPage,
+    browsergame: renderBrowserGamesPage,
     gameDirectory: renderGameDirectoryPage,
     tools: renderToolsPage,
     rankings: renderRankingsPage,
