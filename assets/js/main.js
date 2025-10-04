@@ -2,6 +2,26 @@
   const data = window.siteData || { games: [], tools: [], rankings: {}, categories: [] };
   const searchIndex = window.searchIndex || [];
   const gameMap = new Map((data.games || []).map((game) => [game.slug, game]));
+  let directoryCache = null;
+
+  async function loadGameDirectory() {
+    if (directoryCache) {
+      return directoryCache;
+    }
+    try {
+      const response = await fetch('/assets/data/games-directory.json', { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error(`Failed to fetch directory: ${response.status}`);
+      }
+      const payload = await response.json();
+      const games = Array.isArray(payload?.games) ? payload.games : [];
+      directoryCache = games;
+      return games;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 
   function byId(id) {
     return document.getElementById(id);
@@ -230,6 +250,105 @@
     return article;
   }
 
+  function createDirectoryCard(game) {
+    const article = document.createElement('article');
+    article.className = 'directory-card';
+
+    if (game.thumbnail) {
+      const media = document.createElement('div');
+      media.className = 'directory-card__media';
+      const img = document.createElement('img');
+      img.src = game.thumbnail;
+      img.alt = `${game.title} cover art`;
+      img.loading = 'lazy';
+      if (game.detailUrl) {
+        const link = document.createElement('a');
+        link.href = game.detailUrl;
+        link.appendChild(img);
+        media.appendChild(link);
+      } else {
+        media.appendChild(img);
+      }
+      article.appendChild(media);
+    }
+
+    const body = document.createElement('div');
+    body.className = 'directory-card__body';
+
+    const title = document.createElement('h3');
+    if (game.detailUrl) {
+      const titleLink = document.createElement('a');
+      titleLink.href = game.detailUrl;
+      titleLink.textContent = game.title;
+      title.appendChild(titleLink);
+    } else {
+      title.textContent = game.title;
+    }
+    body.appendChild(title);
+
+    if (game.summary) {
+      const summary = document.createElement('p');
+      summary.className = 'directory-card__summary';
+      summary.textContent = game.summary;
+      body.appendChild(summary);
+    }
+
+    const meta = document.createElement('div');
+    meta.className = 'directory-card__meta';
+    (game.categories || []).forEach((category) => meta.appendChild(createChip(category)));
+    if (typeof game.rating === 'number') {
+      meta.appendChild(createChip(`⭐ ${game.rating.toFixed(1)}`));
+    }
+    if (game.releaseDate) {
+      meta.appendChild(createChip(game.releaseDate));
+    }
+    if (meta.childElementCount > 0) {
+      body.appendChild(meta);
+    }
+
+    const footer = document.createElement('div');
+    footer.className = 'directory-card__footer';
+
+    if (game.developer) {
+      const developer = document.createElement('span');
+      developer.className = 'directory-card__developer';
+      developer.textContent = `By ${game.developer}`;
+      footer.appendChild(developer);
+    }
+
+    const links = document.createElement('div');
+    links.className = 'directory-card__links';
+
+    if (game.detailUrl) {
+      const details = document.createElement('a');
+      details.href = game.detailUrl;
+      details.textContent = 'Details';
+      links.appendChild(details);
+    }
+
+    if (game.playUrl) {
+      const play = document.createElement('a');
+      play.href = game.playUrl;
+      if (game.playUrl.startsWith('http')) {
+        play.target = '_blank';
+        play.rel = 'noopener';
+      }
+      play.textContent = 'Play';
+      links.appendChild(play);
+    }
+
+    if (links.childElementCount > 0) {
+      footer.appendChild(links);
+    }
+
+    if (footer.childElementCount > 0) {
+      body.appendChild(footer);
+    }
+
+    article.appendChild(body);
+    return article;
+  }
+
   function createCategoryTile(category, gameCount) {
     const link = document.createElement('a');
     link.href = `/games/?category=${encodeURIComponent(category)}`;
@@ -448,6 +567,81 @@
   function renderNewGamesPage() {
     setActiveNav('games');
     setFooterYear();
+  }
+
+  function renderGameDirectoryPage() {
+    setActiveNav('game-directory');
+    setFooterYear();
+
+    const grid = byId('game-directory-grid');
+    const status = byId('game-directory-status');
+    const searchInput = byId('directory-search');
+    const categorySelect = byId('directory-category');
+
+    if (!grid) {
+      return;
+    }
+
+    loadGameDirectory()
+      .then((games) => {
+        if (categorySelect) {
+          const categories = Array.from(
+            new Set(games.flatMap((game) => Array.isArray(game.categories) ? game.categories : []))
+          ).sort((a, b) => a.localeCompare(b));
+          categorySelect.innerHTML = '<option value="">All categories</option>';
+          categories.forEach((category) => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category;
+            categorySelect.appendChild(option);
+          });
+        }
+
+        const render = (items) => {
+          grid.innerHTML = '';
+          if (items.length === 0) {
+            if (status) {
+              status.textContent = 'No games match your filters yet. Try clearing the search or choosing another category.';
+            }
+            return;
+          }
+
+          items.forEach((game) => grid.appendChild(createDirectoryCard(game)));
+          if (status) {
+            const query = (searchInput?.value || '').trim();
+            const category = categorySelect?.value || '';
+            status.textContent = `${items.length} game${items.length === 1 ? '' : 's'} listed${
+              category ? ` in “${category}”` : ''
+            }${query ? ` matching “${query}”` : ''}.`;
+          }
+        };
+
+        const applyFilters = () => {
+          const query = (searchInput?.value || '').trim().toLowerCase();
+          const category = categorySelect?.value || '';
+          const filtered = games.filter((game) => {
+            const matchesCategory = !category || (game.categories || []).includes(category);
+            if (!query) return matchesCategory;
+            const haystack = `${game.title} ${game.summary || ''} ${(game.tags || []).join(' ')} ${game.developer || ''}`;
+            return matchesCategory && haystack.toLowerCase().includes(query);
+          });
+          render(filtered);
+        };
+
+        searchInput?.addEventListener('input', () => applyFilters());
+        categorySelect?.addEventListener('change', () => applyFilters());
+
+        if (status) {
+          status.textContent = 'Rendering game list…';
+        }
+
+        applyFilters();
+      })
+      .catch(() => {
+        if (status) {
+          status.textContent = 'Failed to load the game directory. Please refresh and try again.';
+        }
+      });
   }
 
   function renderToolFilters(container, activeCategory, onChange) {
@@ -686,6 +880,7 @@
     home: renderHome,
     games: renderGamesPage,
     newGames: renderNewGamesPage,
+    gameDirectory: renderGameDirectoryPage,
     tools: renderToolsPage,
     rankings: renderRankingsPage,
     gameDetail: renderGameDetail,
