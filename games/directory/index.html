@@ -96,6 +96,29 @@
       </div>
     </section>
 
+    <section class="section">
+      <div class="container">
+        <div class="directory-editor" id="directory-json-panel">
+          <div class="directory-editor__top">
+            <div>
+              <h2>JSON data preview</h2>
+              <p class="directory-editor__intro">Review and edit the <code>games-directory.json</code> file without leaving this page. Apply changes to refresh the list above, then copy or download your edits to update the source file.</p>
+            </div>
+            <div class="directory-editor__actions">
+              <button class="btn btn-outline" type="button" id="json-reload">Reset</button>
+              <button class="btn btn-outline" type="button" id="json-format">Format</button>
+              <button class="btn btn-outline" type="button" id="json-apply">Apply preview</button>
+              <button class="btn btn-outline" type="button" id="json-copy">Copy</button>
+              <button class="btn btn-outline" type="button" id="json-download">Download</button>
+            </div>
+          </div>
+          <label class="sr-only" for="directory-json-editor">games-directory.json editor</label>
+          <textarea id="directory-json-editor" spellcheck="false" aria-describedby="json-editor-status"></textarea>
+          <p class="directory-editor__status" id="json-editor-status">Loading JSON data…</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section section--alt">
       <div class="container directory-guide">
         <h2>How to update the list</h2>
