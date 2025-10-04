@@ -13,10 +13,17 @@
       if (!response.ok) {
         throw new Error(`Failed to fetch directory: ${response.status}`);
       }
-      const payload = await response.json();
+      const raw = await response.text();
+      let payload;
+      try {
+        payload = JSON.parse(raw);
+      } catch (parseError) {
+        console.error('Failed to parse games-directory.json', parseError);
+        throw parseError;
+      }
       const games = Array.isArray(payload?.games) ? payload.games : [];
-      directoryCache = games;
-      return games;
+      directoryCache = { games, payload, raw };
+      return directoryCache;
     } catch (error) {
       console.error(error);
       throw error;
@@ -583,10 +590,15 @@
     }
 
     loadGameDirectory()
-      .then((games) => {
-        if (categorySelect) {
+      .then((directory) => {
+        const initialGames = Array.isArray(directory?.games) ? directory.games : [];
+        let workingGames = initialGames;
+
+        const populateCategories = (items) => {
+          if (!categorySelect) return;
+          const previous = categorySelect.value;
           const categories = Array.from(
-            new Set(games.flatMap((game) => Array.isArray(game.categories) ? game.categories : []))
+            new Set(items.flatMap((game) => (Array.isArray(game.categories) ? game.categories : [])))
           ).sort((a, b) => a.localeCompare(b));
           categorySelect.innerHTML = '<option value="">All categories</option>';
           categories.forEach((category) => {
@@ -595,7 +607,10 @@
             option.textContent = category;
             categorySelect.appendChild(option);
           });
-        }
+          if (previous && categories.includes(previous)) {
+            categorySelect.value = previous;
+          }
+        };
 
         const render = (items) => {
           grid.innerHTML = '';
@@ -619,7 +634,7 @@
         const applyFilters = () => {
           const query = (searchInput?.value || '').trim().toLowerCase();
           const category = categorySelect?.value || '';
-          const filtered = games.filter((game) => {
+          const filtered = workingGames.filter((game) => {
             const matchesCategory = !category || (game.categories || []).includes(category);
             if (!query) return matchesCategory;
             const haystack = `${game.title} ${game.summary || ''} ${(game.tags || []).join(' ')} ${game.developer || ''}`;
@@ -635,7 +650,104 @@
           status.textContent = 'Rendering game list…';
         }
 
+        populateCategories(workingGames);
         applyFilters();
+
+        const updateFromEditor = (nextGames) => {
+          workingGames = Array.isArray(nextGames) ? nextGames : [];
+          populateCategories(workingGames);
+          applyFilters();
+        };
+
+        const editor = byId('directory-json-editor');
+        if (editor) {
+          const formatButton = byId('json-format');
+          const copyButton = byId('json-copy');
+          const downloadButton = byId('json-download');
+          const applyButton = byId('json-apply');
+          const resetButton = byId('json-reload');
+          const editorStatus = byId('json-editor-status');
+
+          const initialText = directory?.raw && directory.raw.trim()
+            ? directory.raw
+            : JSON.stringify(directory?.payload ?? { games: workingGames }, null, 2);
+          const originalGames = workingGames.slice();
+
+          const setEditorStatus = (message, tone = 'info') => {
+            if (!editorStatus) return;
+            editorStatus.textContent = message;
+            editorStatus.dataset.tone = tone;
+          };
+
+          editor.value = initialText;
+          setEditorStatus(`Loaded ${workingGames.length} game${workingGames.length === 1 ? '' : 's'} from games-directory.json.`);
+
+          const parseEditorValue = () => {
+            try {
+              const parsed = JSON.parse(editor.value);
+              const gamesFromJson = Array.isArray(parsed?.games)
+                ? parsed.games
+                : Array.isArray(parsed)
+                ? parsed
+                : null;
+              if (!Array.isArray(gamesFromJson)) {
+                throw new Error('The JSON must include a top-level "games" array.');
+              }
+              return { parsed, games: gamesFromJson };
+            } catch (err) {
+              setEditorStatus(`JSON error: ${err.message}`, 'error');
+              return null;
+            }
+          };
+
+          formatButton?.addEventListener('click', () => {
+            const result = parseEditorValue();
+            if (!result) return;
+            editor.value = JSON.stringify(result.parsed, null, 2);
+            setEditorStatus('Formatted JSON with standard indentation.', 'success');
+          });
+
+          applyButton?.addEventListener('click', () => {
+            const result = parseEditorValue();
+            if (!result) return;
+            editor.value = JSON.stringify(result.parsed, null, 2);
+            updateFromEditor(result.games);
+            setEditorStatus(
+              `Applied ${result.games.length} game${result.games.length === 1 ? '' : 's'} to the directory preview. Remember to copy or download the JSON to save it.`,
+              'success'
+            );
+          });
+
+          copyButton?.addEventListener('click', () => {
+            if (!navigator?.clipboard) {
+              setEditorStatus('Clipboard API unavailable. Select the text and copy it manually.', 'error');
+              return;
+            }
+            navigator.clipboard
+              .writeText(editor.value)
+              .then(() => setEditorStatus('Copied JSON to clipboard. Paste it into games-directory.json to save your changes.', 'success'))
+              .catch(() => setEditorStatus('Failed to copy JSON. Please copy it manually.', 'error'));
+          });
+
+          downloadButton?.addEventListener('click', () => {
+            const blob = new Blob([editor.value], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const anchor = document.createElement('a');
+            anchor.href = url;
+            anchor.download = 'games-directory.json';
+            document.body.appendChild(anchor);
+            anchor.click();
+            anchor.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 0);
+            setEditorStatus('Downloaded a JSON file with your edits.', 'success');
+          });
+
+          resetButton?.addEventListener('click', () => {
+            editor.value = initialText;
+            updateFromEditor(originalGames.slice());
+            setEditorStatus('Reverted to the published JSON data.', 'success');
+          });
+        }
       })
       .catch(() => {
         if (status) {
