@@ -1303,6 +1303,349 @@
 
     let results = [];
 
+    const GAME_DISTRIBUTION_BASE_URL = 'https://gamedistribution.com';
+    const GAME_DISTRIBUTION_PATH = '/games/';
+    const GAME_DISTRIBUTION_PAGE_SIZE = 60;
+    const GAME_DISTRIBUTION_MAX_PAGES = 10;
+
+    const toArray = (value) => {
+      if (!value) return [];
+      return Array.isArray(value) ? value : [value];
+    };
+
+    const pickFirstString = (candidates) => {
+      for (const candidate of candidates) {
+        if (typeof candidate === 'string') {
+          const trimmed = candidate.trim();
+          if (trimmed) {
+            return trimmed;
+          }
+        }
+      }
+      return undefined;
+    };
+
+    const normalizeUrl = (baseUrl, relative) => {
+      if (!relative) return undefined;
+      try {
+        return new URL(relative, baseUrl).toString();
+      } catch (error) {
+        return undefined;
+      }
+    };
+
+    const extractSlugFromUrl = (candidateUrl) => {
+      if (!candidateUrl) return undefined;
+      try {
+        const parsed = new URL(candidateUrl, GAME_DISTRIBUTION_BASE_URL);
+        const parts = parsed.pathname.replace(/\/$/, '').split('/').filter(Boolean);
+        if (!parts.length) return undefined;
+        return parts[parts.length - 1];
+      } catch (error) {
+        const fallbackMatch = String(candidateUrl).match(/([a-z0-9-]+)(?:\.[a-z]+)?$/i);
+        return fallbackMatch ? fallbackMatch[1] : undefined;
+      }
+    };
+
+    const looksLikeGame = (node) => {
+      if (!node || typeof node !== 'object') {
+        return false;
+      }
+      const hasSlug = typeof node.slug === 'string' && node.slug.trim().length > 0;
+      const hasTitle = typeof node.title === 'string' && node.title.trim().length > 0;
+      const hasName = typeof node.name === 'string' && node.name.trim().length > 0;
+      const hasUrl =
+        typeof node.url === 'string' ||
+        (node.urls && (typeof node.urls === 'string' || typeof node.urls === 'object')) ||
+        (node.links && (typeof node.links === 'string' || typeof node.links === 'object'));
+      return (hasSlug && (hasTitle || hasName)) || (hasTitle && hasUrl) || (hasName && hasUrl);
+    };
+
+    const extractGamesFromObject = (node) => {
+      if (!node || typeof node !== 'object') {
+        return [];
+      }
+
+      if (Array.isArray(node)) {
+        return node.flatMap((entry) => extractGamesFromObject(entry));
+      }
+
+      const candidates = [];
+      for (const value of Object.values(node)) {
+        if (!value) continue;
+        if (typeof value === 'object') {
+          candidates.push(...extractGamesFromObject(value));
+        }
+      }
+
+      if (looksLikeGame(node)) {
+        candidates.push(node);
+      }
+
+      return candidates;
+    };
+
+    const extractNuxtAssignment = (snippet) => {
+      const assignmentRegex = /window\.__NUXT__\s*=\s*([\s\S]+?);(?:\s*window\.__NUXT__|\s*$)/;
+      const match = snippet.match(assignmentRegex);
+      if (!match) {
+        return null;
+      }
+      const expression = match[1].trim();
+      if (!expression) {
+        return null;
+      }
+      try {
+        return Function('"use strict"; return (' + expression + ');')();
+      } catch (error) {
+        try {
+          return Function('"use strict"; const window = {}; return (' + expression + ');')();
+        } catch (secondaryError) {
+          return null;
+        }
+      }
+    };
+
+    const extractFromHtml = (html) => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const scripts = Array.from(doc.querySelectorAll('script'));
+      const payloads = [];
+
+      scripts.forEach((script) => {
+        const text = (script.textContent || '').trim();
+        if (!text) {
+          return;
+        }
+
+        const type = (script.getAttribute('type') || '').toLowerCase();
+        if (type.includes('json')) {
+          try {
+            payloads.push(JSON.parse(text));
+            return;
+          } catch (error) {
+            console.error('Failed to parse JSON script from GameDistribution page', error);
+          }
+        }
+
+        if (text.startsWith('{') || text.startsWith('[')) {
+          try {
+            payloads.push(JSON.parse(text));
+            return;
+          } catch (error) {
+            // Ignore JSON parse failures for inline scripts.
+          }
+        }
+
+        if (text.includes('window.__NUXT__')) {
+          const nuxtPayload = extractNuxtAssignment(text);
+          if (nuxtPayload) {
+            payloads.push(nuxtPayload);
+          }
+        }
+      });
+
+      if (!payloads.length) {
+        return [];
+      }
+
+      return payloads.flatMap((payload) => extractGamesFromObject(payload));
+    };
+
+    const extractFromJson = (json) => {
+      if (!json) {
+        return [];
+      }
+      return extractGamesFromObject(json);
+    };
+
+    const normaliseGame = (node) => {
+      const slug = pickFirstString([
+        node.slug,
+        node.alias,
+        node.gameSlug,
+        node.seo && node.seo.slug,
+        node.url && typeof node.url === 'string' && extractSlugFromUrl(node.url),
+        node.urls && typeof node.urls === 'object' && extractSlugFromUrl(node.urls.detail || node.urls.play),
+        node.links && typeof node.links === 'object' && extractSlugFromUrl(node.links.detail || node.links.play),
+      ]);
+
+      const title = pickFirstString([
+        node.title,
+        node.name,
+        node.gameTitle,
+        node.seo && node.seo.title,
+      ]);
+
+      const thumbnail = pickFirstString([
+        node.thumbnail,
+        node.thumb,
+        node.image,
+        node.cover,
+        node.icon,
+        node.images && node.images.thumbnail,
+        node.images && node.images.cover,
+        node.assets && node.assets.thumbnail,
+        node.assets && node.assets.icon,
+      ]);
+
+      const detailUrl = pickFirstString([
+        node.detailUrl,
+        node.detailsUrl,
+        node.urls && node.urls.detail,
+        node.links && node.links.detail,
+        node.seo && node.seo.url,
+      ]);
+
+      const normalizedDetailUrl =
+        normalizeUrl(GAME_DISTRIBUTION_BASE_URL, detailUrl) ||
+        (slug ? `${GAME_DISTRIBUTION_BASE_URL}${GAME_DISTRIBUTION_PATH}${slug.replace(/^\/+/, '')}/` : null);
+
+      const normalizedCover = normalizeUrl(GAME_DISTRIBUTION_BASE_URL, thumbnail) || thumbnail || null;
+
+      return {
+        slug: slug || null,
+        title: title || null,
+        cover: normalizedCover,
+        detailUrl: normalizedDetailUrl,
+      };
+    };
+
+    const fetchGameDistributionPage = async (pageNumber) => {
+      const url = new URL(GAME_DISTRIBUTION_PATH, GAME_DISTRIBUTION_BASE_URL);
+      url.searchParams.set('page', String(pageNumber));
+      url.searchParams.set('limit', String(GAME_DISTRIBUTION_PAGE_SIZE));
+      url.searchParams.set('pageSize', String(GAME_DISTRIBUTION_PAGE_SIZE));
+      url.searchParams.set('perPage', String(GAME_DISTRIBUTION_PAGE_SIZE));
+
+      const response = await fetch(url.toString(), {
+        headers: {
+          accept: 'text/html,application/json;q=0.9,*/*;q=0.8',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
+      const contentType = response.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        return { kind: 'json', payload: await response.json() };
+      }
+
+      return { kind: 'html', payload: await response.text() };
+    };
+
+    const scrapeFromGameDistribution = async (setProgress) => {
+      const entries = new Map();
+      const order = [];
+
+      for (let page = 1; page <= GAME_DISTRIBUTION_MAX_PAGES; page += 1) {
+        setProgress?.(`正在抓取 GameDistribution 第 ${page} 页…`, 'info');
+
+        let source;
+        try {
+          source = await fetchGameDistributionPage(page);
+        } catch (error) {
+          throw error;
+        }
+
+        const rawGames =
+          source.kind === 'json'
+            ? extractFromJson(source.payload)
+            : extractFromHtml(source.payload);
+
+        if (!rawGames.length) {
+          if (page === 1) {
+            throw new Error('未在 GameDistribution 页面中找到游戏数据。');
+          }
+          break;
+        }
+
+        let pageAdded = 0;
+        rawGames.forEach((raw) => {
+          const normalized = normaliseGame(raw);
+          if (!normalized.detailUrl && !normalized.slug) {
+            return;
+          }
+
+          const key =
+            (normalized.slug || normalized.detailUrl || normalized.title || '').toLowerCase();
+          if (!key) {
+            return;
+          }
+
+          if (!entries.has(key)) {
+            order.push(key);
+            entries.set(key, {
+              title: normalized.title || normalized.slug || '未命名游戏',
+              url: normalized.detailUrl || null,
+              cover: normalized.cover || '',
+            });
+            if (entries.get(key).url) {
+              pageAdded += 1;
+            }
+          } else {
+            const existing = entries.get(key);
+            if (!existing.title && normalized.title) {
+              existing.title = normalized.title;
+            }
+            if (!existing.url && normalized.detailUrl) {
+              existing.url = normalized.detailUrl;
+            }
+            if (!existing.cover && normalized.cover) {
+              existing.cover = normalized.cover;
+            }
+          }
+        });
+
+        if (pageAdded === 0 && rawGames.length < GAME_DISTRIBUTION_PAGE_SIZE) {
+          break;
+        }
+      }
+
+      const mapped = order
+        .map((key) => entries.get(key))
+        .filter((entry) => entry && entry.url)
+        .map((entry) => ({
+          title: entry.title || '未命名游戏',
+          url: entry.url,
+          cover: entry.cover || '',
+        }));
+
+      if (!mapped.length) {
+        throw new Error('未成功抓取到任何 GameDistribution 游戏。');
+      }
+
+      return mapped;
+    };
+
+    const loadLocalGamesFallback = async () => {
+      let games = Array.isArray(data.games) ? data.games : [];
+      if (!games.length) {
+        try {
+          const fallback = await loadBrowserGamesData();
+          games = Array.isArray(fallback?.games) ? fallback.games : [];
+        } catch (error) {
+          console.error('Failed to fetch browser games data for fallback', error);
+        }
+      }
+
+      if (!games.length) {
+        return [];
+      }
+
+      return games.map((game) => {
+        const url = new URL(`/games/${game.slug}/`, window.location.origin).href;
+        const cover = game.cover || game.hero || (Array.isArray(game.screenshots) ? game.screenshots[0] : '');
+        return {
+          title: game.title,
+          url,
+          cover,
+        };
+      });
+    };
+
     const updateStatus = (message, tone = 'info') => {
       status.textContent = message;
       status.dataset.tone = tone;
@@ -1365,40 +1708,35 @@
       jsonOutput.textContent = results.length ? JSON.stringify(results, null, 2) : '[]';
     };
 
-    const getGames = async () => {
-      let games = Array.isArray(data.games) ? data.games : [];
-      if (!games.length) {
-        try {
-          const fallback = await loadBrowserGamesData();
-          games = Array.isArray(fallback?.games) ? fallback.games : [];
-        } catch (error) {
-          console.error('Failed to fetch browser games data', error);
-        }
-      }
-      return games;
-    };
-
     scrapeButton.addEventListener('click', async () => {
       scrapeButton.disabled = true;
       downloadButton.disabled = true;
-      updateStatus('正在抓取游戏数据…', 'info');
+      updateStatus('正在连接 GameDistribution…', 'info');
 
       try {
-        const games = await getGames();
-        results = games.map((game) => {
-          const url = new URL(`/games/${game.slug}/`, window.location.origin).href;
-          const cover = game.cover || game.hero || (Array.isArray(game.screenshots) ? game.screenshots[0] : '');
-          return {
-            title: game.title,
-            url,
-            cover
-          };
+        results = await scrapeFromGameDistribution((message, tone) => {
+          updateStatus(message, tone);
         });
-        updateStatus(`成功抓取 ${results.length} 条游戏记录。`, 'success');
+        updateStatus(`成功抓取 ${results.length} 条 GameDistribution 游戏记录。`, 'success');
       } catch (error) {
-        console.error('Failed to scrape games', error);
-        results = [];
-        updateStatus('抓取失败，请稍后重试。', 'error');
+        console.error('Failed to scrape GameDistribution games', error);
+        try {
+          const fallbackResults = await loadLocalGamesFallback();
+          if (fallbackResults.length) {
+            results = fallbackResults;
+            updateStatus(
+              `GameDistribution 抓取失败，已回退到站内游戏数据（共 ${results.length} 条）。`,
+              'error'
+            );
+          } else {
+            results = [];
+            updateStatus('抓取失败，请稍后重试。', 'error');
+          }
+        } catch (fallbackError) {
+          console.error('Failed to load fallback games', fallbackError);
+          results = [];
+          updateStatus('抓取失败，请稍后重试。', 'error');
+        }
       }
 
       updateCount();
@@ -1415,7 +1753,7 @@
       const blob = new Blob([JSON.stringify(results, null, 2)], { type: 'application/json' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = 'gameul-games.json';
+      link.download = 'gamedistribution-games.json';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
