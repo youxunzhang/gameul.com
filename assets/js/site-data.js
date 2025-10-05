@@ -486,6 +486,15 @@
       tags: ['assets', 'community']
     },
     {
+      slug: 'kungfu',
+      title: 'Kungfu 数据抓取器',
+      description: '进入 Kungfu 页面一键抓取 GameUL 游戏标题、详情链接与封面图，并导出 JSON。',
+      url: '/kungfu/',
+      icon: '/assets/icons/favicon.svg',
+      category: 'Game Tools',
+      tags: ['scraper', 'json', 'automation']
+    },
+    {
       slug: 'json-editor',
       title: 'JSON Viewer & Editor',
       description: 'Upload, inspect and edit JSON files with formatting, tree previews and one-click exports.',
