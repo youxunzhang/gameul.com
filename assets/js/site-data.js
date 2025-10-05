@@ -486,6 +486,15 @@
       tags: ['assets', 'community']
     },
     {
+      slug: 'game-scraper',
+      title: 'Game Data Scraper',
+      description: 'Capture GameUL titles, detail links and cover art in one click and download the JSON export.',
+      url: '/tools/game-scraper/',
+      icon: '/assets/icons/favicon.svg',
+      category: 'Game Tools',
+      tags: ['scraper', 'json', 'automation']
+    },
+    {
       slug: 'json-editor',
       title: 'JSON Viewer & Editor',
       description: 'Upload, inspect and edit JSON files with formatting, tree previews and one-click exports.',

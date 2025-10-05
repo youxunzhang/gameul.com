@@ -1286,6 +1286,148 @@
     setFooterYear();
   }
 
+  function renderGameScraperPage() {
+    setActiveNav('tools');
+    setFooterYear();
+
+    const scrapeButton = byId('scrape-button');
+    const downloadButton = byId('scrape-download');
+    const status = byId('scrape-status');
+    const tableBody = byId('scrape-table-body');
+    const count = byId('scrape-count');
+    const jsonOutput = byId('scrape-json');
+
+    if (!scrapeButton || !downloadButton || !status || !tableBody || !jsonOutput || !count) {
+      return;
+    }
+
+    let results = [];
+
+    const updateStatus = (message, tone = 'info') => {
+      status.textContent = message;
+      status.dataset.tone = tone;
+    };
+
+    const updateCount = () => {
+      count.textContent = results.length.toString();
+    };
+
+    const renderRows = () => {
+      tableBody.innerHTML = '';
+      if (!results.length) {
+        const row = document.createElement('tr');
+        const empty = document.createElement('td');
+        empty.colSpan = 4;
+        empty.className = 'scraper-table__empty';
+        empty.textContent = '暂无数据，点击上方按钮开始抓取。';
+        row.appendChild(empty);
+        tableBody.appendChild(row);
+        return;
+      }
+
+      results.forEach((item, index) => {
+        const row = document.createElement('tr');
+
+        const indexCell = document.createElement('td');
+        indexCell.textContent = String(index + 1);
+        row.appendChild(indexCell);
+
+        const coverCell = document.createElement('td');
+        if (item.cover) {
+          const image = document.createElement('img');
+          image.src = item.cover;
+          image.alt = `${item.title} 封面图`;
+          image.loading = 'lazy';
+          coverCell.appendChild(image);
+        } else {
+          coverCell.textContent = '—';
+        }
+        row.appendChild(coverCell);
+
+        const titleCell = document.createElement('td');
+        titleCell.textContent = item.title;
+        row.appendChild(titleCell);
+
+        const linkCell = document.createElement('td');
+        const anchor = document.createElement('a');
+        anchor.href = item.url;
+        anchor.target = '_blank';
+        anchor.rel = 'noopener';
+        anchor.textContent = '打开链接';
+        linkCell.appendChild(anchor);
+        row.appendChild(linkCell);
+
+        tableBody.appendChild(row);
+      });
+    };
+
+    const updateJsonPreview = () => {
+      jsonOutput.textContent = results.length ? JSON.stringify(results, null, 2) : '[]';
+    };
+
+    const getGames = async () => {
+      let games = Array.isArray(data.games) ? data.games : [];
+      if (!games.length) {
+        try {
+          const fallback = await loadBrowserGamesData();
+          games = Array.isArray(fallback?.games) ? fallback.games : [];
+        } catch (error) {
+          console.error('Failed to fetch browser games data', error);
+        }
+      }
+      return games;
+    };
+
+    scrapeButton.addEventListener('click', async () => {
+      scrapeButton.disabled = true;
+      downloadButton.disabled = true;
+      updateStatus('正在抓取游戏数据…', 'info');
+
+      try {
+        const games = await getGames();
+        results = games.map((game) => {
+          const url = new URL(`/games/${game.slug}/`, window.location.origin).href;
+          const cover = game.cover || game.hero || (Array.isArray(game.screenshots) ? game.screenshots[0] : '');
+          return {
+            title: game.title,
+            url,
+            cover
+          };
+        });
+        updateStatus(`成功抓取 ${results.length} 条游戏记录。`, 'success');
+      } catch (error) {
+        console.error('Failed to scrape games', error);
+        results = [];
+        updateStatus('抓取失败，请稍后重试。', 'error');
+      }
+
+      updateCount();
+      renderRows();
+      updateJsonPreview();
+      downloadButton.disabled = results.length === 0;
+      scrapeButton.disabled = false;
+    });
+
+    downloadButton.addEventListener('click', () => {
+      if (!results.length) {
+        return;
+      }
+      const blob = new Blob([JSON.stringify(results, null, 2)], { type: 'application/json' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'gameul-games.json';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    });
+
+    updateStatus('待命：点击“开始抓取”即可获取最新数据。');
+    updateCount();
+    renderRows();
+    updateJsonPreview();
+  }
+
   function renderJsonEditorPage() {
     setActiveNav('tools');
     setFooterYear();
@@ -1746,6 +1888,7 @@
     rankings: renderRankingsPage,
     gameDetail: renderGameDetail,
     about: renderAboutPage,
+    gameScraper: renderGameScraperPage,
     jsonEditor: renderJsonEditorPage
   };
 })();
