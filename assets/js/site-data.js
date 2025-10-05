@@ -486,10 +486,10 @@
       tags: ['assets', 'community']
     },
     {
-      slug: 'game-scraper',
-      title: 'Game Data Scraper',
-      description: 'Capture GameUL titles, detail links and cover art in one click and download the JSON export.',
-      url: '/tools/game-scraper/',
+      slug: 'kungfu',
+      title: 'Kungfu 数据抓取器',
+      description: '进入 Kungfu 页面一键抓取 GameUL 游戏标题、详情链接与封面图，并导出 JSON。',
+      url: '/kungfu/',
       icon: '/assets/icons/favicon.svg',
       category: 'Game Tools',
       tags: ['scraper', 'json', 'automation']

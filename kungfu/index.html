@@ -16,24 +16,33 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>游戏数据抓取器 | GameUL</title>
-  <meta name="description" content="一键抓取 GameUL 游戏库中的名称、详情链接和封面图片，实时预览并导出 JSON 数据。">
-  <link rel="canonical" href="https://gameul.com/tools/game-scraper/">
+  <title>Kungfu 数据抓取器 | GameUL</title>
+  <meta name="description" content="在 Kungfu 页面快速抓取 GameUL 游戏名称、详情链接和封面图片，并即时导出 JSON。">
+  <link rel="canonical" href="https://gameul.com/kungfu/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="游戏数据抓取器 | GameUL">
-  <meta property="og:description" content="抓取 GameUL 游戏库的基础数据，查看结果并下载 JSON。">
-  <meta property="og:url" content="https://gameul.com/tools/game-scraper/">
+  <meta property="og:title" content="Kungfu 数据抓取器 | GameUL">
+  <meta property="og:description" content="进入 Kungfu 页面，一键抓取 GameUL 游戏库数据并导出 JSON 文件。">
+  <meta property="og:url" content="https://gameul.com/kungfu/">
   <meta property="og:image" content="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&amp;fit=crop&amp;w=1200&amp;q=80">
   <link rel="stylesheet" href="/assets/css/styles.css">
   <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
   <style>
-    .scraper-card {
-      background: var(--surface);
+    .kungfu-hero {
+      background: linear-gradient(135deg, rgba(108, 99, 255, 0.28), rgba(29, 209, 161, 0.18));
       border-radius: var(--radius);
-      padding: clamp(1.3rem, 2vw, 1.8rem);
-      box-shadow: var(--shadow);
+      padding: clamp(1.6rem, 3vw, 2.4rem);
       display: grid;
-      gap: 1.6rem;
+      gap: 1.4rem;
+    }
+
+    .kungfu-hero h1 {
+      margin: 0;
+    }
+
+    .kungfu-hero__tagline {
+      margin: 0;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.86);
     }
 
     .scraper-controls {
@@ -87,6 +96,11 @@
 
     .scraper-status[data-tone="info"] {
       color: var(--text-muted);
+    }
+
+    .scraper-grid {
+      display: grid;
+      gap: clamp(1.4rem, 3vw, 2rem);
     }
 
     .scraper-table-wrapper {
@@ -211,13 +225,12 @@
 
   <main>
     <section class="section">
-      <div class="container scraper-card">
-        <header class="section__header">
-          <div>
-            <h1>游戏数据抓取器</h1>
-            <p>从 GameUL 游戏库即时抓取游戏名称、详情链接以及封面图片，并导出 JSON 文件方便分享或接入到自己的项目中。</p>
-          </div>
-        </header>
+      <div class="container scraper-grid">
+        <div class="kungfu-hero">
+          <h1>Kungfu 数据抓取器</h1>
+          <p class="kungfu-hero__tagline">一步调度 GameUL 全站游戏基础资料 —— 游戏名称、详情链接与封面图片全部就绪。</p>
+          <p class="kungfu-hero__tagline">点击下方按钮即可启动“Kungfu 一键抓取”，右侧 JSON 预览会实时同步，方便开发或分享。</p>
+        </div>
 
         <div class="scraper-controls" role="group" aria-label="Scraper actions">
           <button type="button" class="btn btn-primary" id="scrape-button">开始抓取</button>
@@ -281,7 +294,7 @@
   <script src="/assets/js/site-data.js"></script>
   <script src="/assets/js/main.js"></script>
   <script>
-    window.PageInit.gameScraper();
+    window.PageInit.kungfu();
   </script>
 </body>
 </html>

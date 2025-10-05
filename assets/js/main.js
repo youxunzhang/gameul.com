@@ -1286,7 +1286,7 @@
     setFooterYear();
   }
 
-  function renderGameScraperPage() {
+  function renderKungfuPage() {
     setActiveNav('tools');
     setFooterYear();
 
@@ -1888,7 +1888,7 @@
     rankings: renderRankingsPage,
     gameDetail: renderGameDetail,
     about: renderAboutPage,
-    gameScraper: renderGameScraperPage,
+    kungfu: renderKungfuPage,
     jsonEditor: renderJsonEditorPage
   };
 })();
