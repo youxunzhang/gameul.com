@@ -1,0 +1,14 @@
+{
+  "name": "gameul.com",
+  "version": "1.0.0",
+  "description": "gameul.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scrape:gamedistribution": "node tools/scrape-gamedistribution.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
