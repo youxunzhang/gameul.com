@@ -1290,23 +1290,155 @@
     setActiveNav('tools');
     setFooterYear();
 
-    const scrapeButton = byId('scrape-button');
     const downloadButton = byId('scrape-download');
     const status = byId('scrape-status');
     const tableBody = byId('scrape-table-body');
     const count = byId('scrape-count');
     const jsonOutput = byId('scrape-json');
+    const sourceLabel = byId('scrape-source-label');
+    const siteCards = Array.from(document.querySelectorAll('[data-site-card]'));
 
-    if (!scrapeButton || !downloadButton || !status || !tableBody || !jsonOutput || !count) {
+    if (!downloadButton || !status || !tableBody || !jsonOutput || !count) {
       return;
     }
 
     let results = [];
+    let activeSiteId = '';
+    let activeSiteName = '';
 
     const GAME_DISTRIBUTION_BASE_URL = 'https://gamedistribution.com';
     const GAME_DISTRIBUTION_PATH = '/games/';
     const GAME_DISTRIBUTION_PAGE_SIZE = 60;
     const GAME_DISTRIBUTION_MAX_PAGES = 10;
+
+    const CARD_BADGE_LABELS = {
+      idle: '站点待命',
+      progress: '抓取中…',
+      success: '抓取成功',
+      warning: '已回退',
+      error: '抓取失败'
+    };
+
+    const badgeLabelForTone = (tone) => CARD_BADGE_LABELS[tone] || CARD_BADGE_LABELS.idle;
+
+    const createCardState = (card) => {
+      const badge = card.querySelector('[data-role="badge"]');
+      const message = card.querySelector('[data-role="status"]');
+      return (tone, text) => {
+        const effectiveTone = tone || 'idle';
+        if (badge) {
+          badge.dataset.tone = effectiveTone;
+          badge.textContent = badgeLabelForTone(effectiveTone);
+        }
+        if (message) {
+          message.textContent = text || '';
+        }
+      };
+    };
+
+    const updateSourceLabel = () => {
+      if (sourceLabel) {
+        sourceLabel.textContent = activeSiteName || '未选择';
+      }
+    };
+
+    const updateStatus = (message, tone = 'info') => {
+      status.textContent = message;
+      status.dataset.tone = tone;
+    };
+
+    const updateCount = () => {
+      count.textContent = results.length.toString();
+    };
+
+    const deriveTitleFromUrl = (value) => {
+      if (!value) {
+        return '';
+      }
+      try {
+        const parsed = new URL(value, window.location.origin);
+        const segments = parsed.pathname.split('/').filter(Boolean);
+        if (!segments.length) {
+          return decodeURIComponent(parsed.hostname);
+        }
+        const last = decodeURIComponent(segments[segments.length - 1]);
+        return last.replace(/[-_]+/g, ' ').trim() || decodeURIComponent(parsed.hostname);
+      } catch (error) {
+        const safe = String(value);
+        const parts = safe.split('/').filter(Boolean);
+        const candidate = parts.length ? parts[parts.length - 1] : safe;
+        return decodeURIComponent(candidate).replace(/[-_]+/g, ' ').trim();
+      }
+    };
+
+    const renderRows = () => {
+      tableBody.innerHTML = '';
+      if (!results.length) {
+        const row = document.createElement('tr');
+        const empty = document.createElement('td');
+        empty.colSpan = 4;
+        empty.className = 'scraper-table__empty';
+        empty.textContent = '暂无数据，选择上方站点开始抓取。';
+        row.appendChild(empty);
+        tableBody.appendChild(row);
+        return;
+      }
+
+      results.forEach((item, index) => {
+        const row = document.createElement('tr');
+
+        const indexCell = document.createElement('td');
+        indexCell.textContent = String(index + 1);
+        row.appendChild(indexCell);
+
+        const coverCell = document.createElement('td');
+        if (item.cover) {
+          const image = document.createElement('img');
+          image.src = item.cover;
+          image.alt = `${item.title || deriveTitleFromUrl(item.url)} 封面图`;
+          image.loading = 'lazy';
+          coverCell.appendChild(image);
+        } else {
+          coverCell.textContent = '—';
+        }
+        row.appendChild(coverCell);
+
+        const titleCell = document.createElement('td');
+        const title = item.title?.trim() || deriveTitleFromUrl(item.url) || '未命名链接';
+        titleCell.textContent = title;
+        row.appendChild(titleCell);
+
+        const linkCell = document.createElement('td');
+        if (item.url) {
+          const anchor = document.createElement('a');
+          anchor.href = item.url;
+          anchor.target = '_blank';
+          anchor.rel = 'noopener';
+          anchor.textContent = '打开链接';
+          linkCell.appendChild(anchor);
+        } else {
+          linkCell.textContent = '—';
+        }
+        row.appendChild(linkCell);
+
+        tableBody.appendChild(row);
+      });
+    };
+
+    const updateJsonPreview = () => {
+      jsonOutput.textContent = results.length ? JSON.stringify(results, null, 2) : '[]';
+    };
+
+    const applyResults = (siteId, siteName, newResults) => {
+      results = newResults;
+      activeSiteId = siteId;
+      activeSiteName = siteName;
+      updateCount();
+      renderRows();
+      updateJsonPreview();
+      updateSourceLabel();
+      downloadButton.disabled = results.length === 0;
+    };
 
     const toArray = (value) => {
       if (!value) return [];
@@ -1467,14 +1599,14 @@
         node.seo && node.seo.slug,
         node.url && typeof node.url === 'string' && extractSlugFromUrl(node.url),
         node.urls && typeof node.urls === 'object' && extractSlugFromUrl(node.urls.detail || node.urls.play),
-        node.links && typeof node.links === 'object' && extractSlugFromUrl(node.links.detail || node.links.play),
+        node.links && typeof node.links === 'object' && extractSlugFromUrl(node.links.detail || node.links.play)
       ]);
 
       const title = pickFirstString([
         node.title,
         node.name,
         node.gameTitle,
-        node.seo && node.seo.title,
+        node.seo && node.seo.title
       ]);
 
       const thumbnail = pickFirstString([
@@ -1486,7 +1618,7 @@
         node.images && node.images.thumbnail,
         node.images && node.images.cover,
         node.assets && node.assets.thumbnail,
-        node.assets && node.assets.icon,
+        node.assets && node.assets.icon
       ]);
 
       const detailUrl = pickFirstString([
@@ -1494,7 +1626,7 @@
         node.detailsUrl,
         node.urls && node.urls.detail,
         node.links && node.links.detail,
-        node.seo && node.seo.url,
+        node.seo && node.seo.url
       ]);
 
       const normalizedDetailUrl =
@@ -1507,7 +1639,7 @@
         slug: slug || null,
         title: title || null,
         cover: normalizedCover,
-        detailUrl: normalizedDetailUrl,
+        detailUrl: normalizedDetailUrl
       };
     };
 
@@ -1520,12 +1652,12 @@
 
       const response = await fetch(url.toString(), {
         headers: {
-          accept: 'text/html,application/json;q=0.9,*/*;q=0.8',
-        },
+          accept: 'text/html,application/json;q=0.9,*/*;q=0.8'
+        }
       });
 
       if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
+        throw new Error(`请求失败：HTTP ${response.status}`);
       }
 
       const contentType = response.headers.get('content-type') || '';
@@ -1536,19 +1668,15 @@
       return { kind: 'html', payload: await response.text() };
     };
 
-    const scrapeFromGameDistribution = async (setProgress) => {
+    const scrapeFromGameDistribution = async (setProgress, maxPages = GAME_DISTRIBUTION_MAX_PAGES) => {
       const entries = new Map();
       const order = [];
+      const pagesToFetch = Math.min(GAME_DISTRIBUTION_MAX_PAGES, Math.max(1, Number(maxPages) || 1));
 
-      for (let page = 1; page <= GAME_DISTRIBUTION_MAX_PAGES; page += 1) {
+      for (let page = 1; page <= pagesToFetch; page += 1) {
         setProgress?.(`正在抓取 GameDistribution 第 ${page} 页…`, 'info');
 
-        let source;
-        try {
-          source = await fetchGameDistributionPage(page);
-        } catch (error) {
-          throw error;
-        }
+        const source = await fetchGameDistributionPage(page);
 
         const rawGames =
           source.kind === 'json'
@@ -1580,7 +1708,7 @@
             entries.set(key, {
               title: normalized.title || normalized.slug || '未命名游戏',
               url: normalized.detailUrl || null,
-              cover: normalized.cover || '',
+              cover: normalized.cover || ''
             });
             if (entries.get(key).url) {
               pageAdded += 1;
@@ -1610,7 +1738,7 @@
         .map((entry) => ({
           title: entry.title || '未命名游戏',
           url: entry.url,
-          cover: entry.cover || '',
+          cover: entry.cover || ''
         }));
 
       if (!mapped.length) {
@@ -1621,7 +1749,9 @@
     };
 
     const loadLocalGamesFallback = async () => {
-      let games = Array.isArray(data.games) ? data.games : [];
+      const localGames = Array.isArray(data.games) ? data.games : [];
+      let games = localGames;
+
       if (!games.length) {
         try {
           const fallback = await loadBrowserGamesData();
@@ -1641,131 +1771,214 @@
         return {
           title: game.title,
           url,
-          cover,
+          cover
         };
       });
     };
 
-    const updateStatus = (message, tone = 'info') => {
-      status.textContent = message;
-      status.dataset.tone = tone;
+    const pickTextFromNode = (node, names) => {
+      for (const name of names) {
+        let element = null;
+        if (typeof node.getElementsByTagName === 'function') {
+          element = node.getElementsByTagName(name)[0];
+        }
+        if (!element && typeof node.getElementsByTagNameNS === 'function') {
+          element = node.getElementsByTagNameNS('*', name.split(':').pop())[0];
+        }
+        if (!element && typeof node.querySelector === 'function') {
+          const selector = name.includes(':') ? name.replace(/:/g, '\:') : name;
+          element = node.querySelector(selector);
+        }
+        const text = element?.textContent?.trim();
+        if (text) {
+          return text;
+        }
+      }
+      return '';
     };
 
-    const updateCount = () => {
-      count.textContent = results.length.toString();
+    const fetchXmlSitemap = async (url) => {
+      const response = await fetch(url, {
+        headers: {
+          accept: 'application/xml,text/xml;q=0.9,*/*;q=0.8'
+        },
+        cache: 'no-store'
+      });
+
+      if (!response.ok) {
+        throw new Error(`请求失败：HTTP ${response.status}`);
+      }
+
+      return response.text();
     };
 
-    const renderRows = () => {
-      tableBody.innerHTML = '';
-      if (!results.length) {
-        const row = document.createElement('tr');
-        const empty = document.createElement('td');
-        empty.colSpan = 4;
-        empty.className = 'scraper-table__empty';
-        empty.textContent = '暂无数据，点击上方按钮开始抓取。';
-        row.appendChild(empty);
-        tableBody.appendChild(row);
+    const parseSitemapEntries = (xmlText) => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(xmlText, 'application/xml');
+      if (doc.querySelector('parsererror')) {
+        throw new Error('Sitemap XML 解析失败。');
+      }
+
+      const entries = [];
+
+      const urlNodes = Array.from(doc.getElementsByTagName('url'));
+      urlNodes.forEach((node) => {
+        const locText = pickTextFromNode(node, ['loc']);
+        if (!locText) {
+          return;
+        }
+        const imageText = pickTextFromNode(node, ['image:loc', 'image:thumbnail_loc', 'image:image', 'image:contentloc']);
+        entries.push({
+          title: deriveTitleFromUrl(locText),
+          url: locText,
+          cover: imageText || ''
+        });
+      });
+
+      if (!entries.length) {
+        const sitemapNodes = Array.from(doc.getElementsByTagName('sitemap'));
+        sitemapNodes.forEach((node) => {
+          const locText = pickTextFromNode(node, ['loc']);
+          if (!locText) {
+            return;
+          }
+          entries.push({
+            title: deriveTitleFromUrl(locText),
+            url: locText,
+            cover: ''
+          });
+        });
+      }
+
+      const unique = new Map();
+      entries.forEach((entry) => {
+        const key = entry.url || entry.title;
+        if (!key) {
+          return;
+        }
+        if (!unique.has(key)) {
+          unique.set(key, entry);
+        }
+      });
+
+      return Array.from(unique.values());
+    };
+
+    siteCards.forEach((card) => {
+      const startButton = card.querySelector('[data-role="start"]');
+      const limitInput = card.querySelector('[data-role="limit-input"]');
+      const siteId = card.dataset.siteId || '';
+      const type = card.dataset.type || 'xml';
+      const sitemapUrl = card.dataset.sitemap || '';
+      const siteName = card.querySelector('h3')?.textContent?.trim() || siteId || '站点';
+      const setCardState = createCardState(card);
+
+      setCardState('idle', '站点待抓取。');
+
+      if (!startButton) {
         return;
       }
 
-      results.forEach((item, index) => {
-        const row = document.createElement('tr');
+      startButton.addEventListener('click', async () => {
+        const rawLimit = limitInput ? Number.parseInt(limitInput.value, 10) : Number.NaN;
+        const limit = Number.isFinite(rawLimit) && rawLimit > 0 ? rawLimit : null;
 
-        const indexCell = document.createElement('td');
-        indexCell.textContent = String(index + 1);
-        row.appendChild(indexCell);
+        startButton.disabled = true;
+        setCardState('progress', `正在抓取 ${siteName}…`);
+        updateStatus(`正在抓取 ${siteName}…`, 'info');
 
-        const coverCell = document.createElement('td');
-        if (item.cover) {
-          const image = document.createElement('img');
-          image.src = item.cover;
-          image.alt = `${item.title} 封面图`;
-          image.loading = 'lazy';
-          coverCell.appendChild(image);
-        } else {
-          coverCell.textContent = '—';
-        }
-        row.appendChild(coverCell);
-
-        const titleCell = document.createElement('td');
-        titleCell.textContent = item.title;
-        row.appendChild(titleCell);
-
-        const linkCell = document.createElement('td');
-        const anchor = document.createElement('a');
-        anchor.href = item.url;
-        anchor.target = '_blank';
-        anchor.rel = 'noopener';
-        anchor.textContent = '打开链接';
-        linkCell.appendChild(anchor);
-        row.appendChild(linkCell);
-
-        tableBody.appendChild(row);
-      });
-    };
-
-    const updateJsonPreview = () => {
-      jsonOutput.textContent = results.length ? JSON.stringify(results, null, 2) : '[]';
-    };
-
-    scrapeButton.addEventListener('click', async () => {
-      scrapeButton.disabled = true;
-      downloadButton.disabled = true;
-      updateStatus('正在连接 GameDistribution…', 'info');
-
-      try {
-        results = await scrapeFromGameDistribution((message, tone) => {
-          updateStatus(message, tone);
-        });
-        updateStatus(`成功抓取 ${results.length} 条 GameDistribution 游戏记录。`, 'success');
-      } catch (error) {
-        console.error('Failed to scrape GameDistribution games', error);
         try {
-          const fallbackResults = await loadLocalGamesFallback();
-          if (fallbackResults.length) {
-            results = fallbackResults;
-            updateStatus(
-              `GameDistribution 抓取失败，已回退到站内游戏数据（共 ${results.length} 条）。`,
-              'error'
-            );
-          } else {
-            results = [];
-            updateStatus('抓取失败，请稍后重试。', 'error');
-          }
-        } catch (fallbackError) {
-          console.error('Failed to load fallback games', fallbackError);
-          results = [];
-          updateStatus('抓取失败，请稍后重试。', 'error');
-        }
-      }
+          if (type === 'gamedistribution') {
+            const pagesNeeded = limit
+              ? Math.min(
+                  GAME_DISTRIBUTION_MAX_PAGES,
+                  Math.max(1, Math.ceil(limit / GAME_DISTRIBUTION_PAGE_SIZE))
+                )
+              : GAME_DISTRIBUTION_MAX_PAGES;
 
-      updateCount();
-      renderRows();
-      updateJsonPreview();
-      downloadButton.disabled = results.length === 0;
-      scrapeButton.disabled = false;
+            const progress = (message, tone = 'info') => {
+              const badgeTone = tone === 'success' ? 'success' : tone === 'error' ? 'error' : 'progress';
+              setCardState(badgeTone, message);
+              updateStatus(message, tone);
+            };
+
+            const allResults = await scrapeFromGameDistribution(progress, pagesNeeded);
+            const truncated = limit ? allResults.slice(0, limit) : allResults;
+            setCardState('success', `成功抓取 ${truncated.length} 条记录。`);
+            updateStatus(`已更新 ${siteName} 数据，共 ${truncated.length} 条。`, 'success');
+            applyResults(siteId, siteName, truncated);
+            return;
+          }
+
+          if (!sitemapUrl) {
+            throw new Error('未配置 sitemap 地址。');
+          }
+
+          const xml = await fetchXmlSitemap(sitemapUrl);
+          const entries = parseSitemapEntries(xml);
+          if (!entries.length) {
+            throw new Error('未在 sitemap 中解析到任何链接。');
+          }
+
+          const truncated = limit ? entries.slice(0, limit) : entries;
+          setCardState('success', `成功抓取 ${truncated.length} 条记录。`);
+          updateStatus(`已更新 ${siteName} 数据，共 ${truncated.length} 条。`, 'success');
+          applyResults(siteId, siteName, truncated);
+        } catch (error) {
+          console.error(`Failed to scrape ${siteName}`, error);
+          const message = error instanceof Error ? error.message : '未知错误';
+
+          if (type === 'gamedistribution') {
+            try {
+              const fallbackResults = await loadLocalGamesFallback();
+              if (fallbackResults.length) {
+                const truncated = limit ? fallbackResults.slice(0, limit) : fallbackResults;
+                setCardState('warning', `抓取失败，已回退到站内数据（${truncated.length} 条）。`);
+                updateStatus(`GameDistribution 抓取失败，已回退到站内数据。`, 'warning');
+                applyResults(`${siteId}-fallback`, `${siteName}（站内备份）`, truncated);
+              } else {
+                setCardState('error', `抓取失败：${message}`);
+                updateStatus(`抓取失败：${message}`, 'error');
+              }
+            } catch (fallbackError) {
+              console.error('Failed to load fallback games', fallbackError);
+              setCardState('error', `抓取失败：${message}`);
+              updateStatus(`抓取失败：${message}`, 'error');
+            }
+          } else {
+            setCardState('error', `抓取失败：${message}`);
+            updateStatus(`抓取失败：${message}`, 'error');
+          }
+        } finally {
+          startButton.disabled = false;
+        }
+      });
     });
 
     downloadButton.addEventListener('click', () => {
       if (!results.length) {
         return;
       }
+      const filenameBase = activeSiteId || 'scraped-data';
+      const filename = `${filenameBase}.json`;
       const blob = new Blob([JSON.stringify(results, null, 2)], { type: 'application/json' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = 'gamedistribution-games.json';
+      link.download = filename;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+      updateStatus(`已下载 ${filename}。`, 'success');
     });
 
-    updateStatus('待命：点击“开始抓取”即可获取最新数据。');
+    updateStatus('待命：选择任意站点并点击“抓取”。', 'info');
     updateCount();
     renderRows();
     updateJsonPreview();
+    updateSourceLabel();
+    downloadButton.disabled = true;
   }
-
   function renderJsonEditorPage() {
     setActiveNav('tools');
     setFooterYear();
