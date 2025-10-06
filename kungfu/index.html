@@ -98,6 +98,112 @@
       color: var(--text-muted);
     }
 
+    .scraper-status[data-tone="warning"] {
+      color: #ffb347;
+      border-color: rgba(255, 179, 71, 0.4);
+      background: rgba(255, 179, 71, 0.12);
+    }
+
+    .scraper-site-grid {
+      display: grid;
+      gap: clamp(1rem, 2vw, 1.4rem);
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .scraper-site-card {
+      display: grid;
+      gap: 0.75rem;
+      padding: 1.1rem 1.25rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(8px);
+    }
+
+    .scraper-site-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .scraper-site-card__badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .scraper-site-card__badge[data-tone="idle"] {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+
+    .scraper-site-card__badge[data-tone="progress"] {
+      background: rgba(108, 99, 255, 0.18);
+      color: #b3b1ff;
+    }
+
+    .scraper-site-card__badge[data-tone="success"] {
+      background: rgba(29, 209, 161, 0.2);
+      color: var(--accent-2);
+    }
+
+    .scraper-site-card__badge[data-tone="error"] {
+      background: rgba(255, 107, 129, 0.18);
+      color: #ff6b81;
+    }
+
+    .scraper-site-card__badge[data-tone="warning"] {
+      background: rgba(255, 179, 71, 0.2);
+      color: #ffb347;
+    }
+
+    .scraper-site-card__summary {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    .scraper-site-card__meta {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .scraper-site-card__field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .scraper-site-card__field input[type="number"] {
+      width: 100%;
+      max-width: 120px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 0.45rem 0.6rem;
+      color: #fff;
+    }
+
+    .scraper-site-card__status {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      min-height: 1.4em;
+    }
+
+    .scraper-site-card__button {
+      justify-self: flex-start;
+    }
+
     .scraper-grid {
       display: grid;
       gap: clamp(1.4rem, 3vw, 2rem);
@@ -229,16 +335,93 @@
         <div class="kungfu-hero">
           <h1>Kungfu 数据抓取器</h1>
           <p class="kungfu-hero__tagline">一步调度 GameDistribution 官网游戏基础资料 —— 游戏名称、详情链接与封面图片全部就绪。</p>
-          <p class="kungfu-hero__tagline">点击下方按钮即可启动“Kungfu 一键抓取”，右侧 JSON 预览会实时同步，方便开发或分享。</p>
+          <p class="kungfu-hero__tagline">新版面可手动挑选站点与抓取数量，点击对应按钮再开始抓取，避免打开页面即触发大批量请求。</p>
+        </div>
+
+        <div class="scraper-site-grid" id="scrape-sites">
+          <article class="scraper-site-card" data-site-card data-site-id="1games" data-type="xml" data-sitemap="https://1games.io/sitemap.xml">
+            <header class="scraper-site-card__header">
+              <h3>1Games.io</h3>
+              <span class="scraper-site-card__badge" data-role="badge" data-tone="idle">站点待命</span>
+            </header>
+            <p class="scraper-site-card__summary">默认读取 1Games 的站点地图，可快速预览链接并导出 JSON。</p>
+            <p class="scraper-site-card__meta">Sitemap：<a href="https://1games.io/sitemap.xml" target="_blank" rel="noopener">https://1games.io/sitemap.xml</a></p>
+            <label class="scraper-site-card__field">
+              <span>抓取条数</span>
+              <input type="number" min="1" max="500" value="12" data-role="limit-input">
+            </label>
+            <button type="button" class="btn btn-primary scraper-site-card__button" data-role="start">抓取 1Games.io</button>
+            <p class="scraper-site-card__status" data-role="status">站点待抓取。</p>
+          </article>
+
+          <article class="scraper-site-card" data-site-card data-site-id="crazygames" data-type="xml" data-sitemap="https://www.crazygames.com/sitemap.xml">
+            <header class="scraper-site-card__header">
+              <h3>CrazyGames</h3>
+              <span class="scraper-site-card__badge" data-role="badge" data-tone="idle">站点待命</span>
+            </header>
+            <p class="scraper-site-card__summary">CrazyGames 的 sitemap 结构清晰，可按需抓取部分或全部链接。</p>
+            <p class="scraper-site-card__meta">Sitemap：<a href="https://www.crazygames.com/sitemap.xml" target="_blank" rel="noopener">https://www.crazygames.com/sitemap.xml</a></p>
+            <label class="scraper-site-card__field">
+              <span>抓取条数</span>
+              <input type="number" min="1" max="500" value="12" data-role="limit-input">
+            </label>
+            <button type="button" class="btn btn-primary scraper-site-card__button" data-role="start">抓取 CrazyGames</button>
+            <p class="scraper-site-card__status" data-role="status">站点待抓取。</p>
+          </article>
+
+          <article class="scraper-site-card" data-site-card data-site-id="gamemonetize" data-type="xml" data-sitemap="https://gamemonetize.com/sitemap.xml">
+            <header class="scraper-site-card__header">
+              <h3>GameMonetize</h3>
+              <span class="scraper-site-card__badge" data-role="badge" data-tone="idle">站点待命</span>
+            </header>
+            <p class="scraper-site-card__summary">抓取 GameMonetize sitemap，可快速导出对应链接供后续处理。</p>
+            <p class="scraper-site-card__meta">Sitemap：<a href="https://gamemonetize.com/sitemap.xml" target="_blank" rel="noopener">https://gamemonetize.com/sitemap.xml</a></p>
+            <label class="scraper-site-card__field">
+              <span>抓取条数</span>
+              <input type="number" min="1" max="500" value="12" data-role="limit-input">
+            </label>
+            <button type="button" class="btn btn-primary scraper-site-card__button" data-role="start">抓取 GameMonetize</button>
+            <p class="scraper-site-card__status" data-role="status">站点待抓取。</p>
+          </article>
+
+          <article class="scraper-site-card" data-site-card data-site-id="gamedistribution" data-type="gamedistribution">
+            <header class="scraper-site-card__header">
+              <h3>GameDistribution</h3>
+              <span class="scraper-site-card__badge" data-role="badge" data-tone="idle">站点待命</span>
+            </header>
+            <p class="scraper-site-card__summary">通过分页请求抓取 GameDistribution 游戏清单，自动清洗并输出标题、链接与封面。</p>
+            <p class="scraper-site-card__meta">源站：<a href="https://gamedistribution.com/games/" target="_blank" rel="noopener">https://gamedistribution.com/games/</a></p>
+            <label class="scraper-site-card__field">
+              <span>抓取条数</span>
+              <input type="number" min="12" max="600" value="120" step="12" data-role="limit-input">
+            </label>
+            <button type="button" class="btn btn-primary scraper-site-card__button" data-role="start">抓取 GameDistribution</button>
+            <p class="scraper-site-card__status" data-role="status">站点待抓取。</p>
+          </article>
+
+          <article class="scraper-site-card" data-site-card data-site-id="scratch" data-type="xml" data-sitemap="https://scratch.mit.edu/sitemap.xml">
+            <header class="scraper-site-card__header">
+              <h3>Scratch</h3>
+              <span class="scraper-site-card__badge" data-role="badge" data-tone="idle">站点待命</span>
+            </header>
+            <p class="scraper-site-card__summary">可选地抓取 Scratch 的 sitemap，预览链接后再决定是否进一步处理。</p>
+            <p class="scraper-site-card__meta">Sitemap：<a href="https://scratch.mit.edu/sitemap.xml" target="_blank" rel="noopener">https://scratch.mit.edu/sitemap.xml</a></p>
+            <label class="scraper-site-card__field">
+              <span>抓取条数</span>
+              <input type="number" min="1" max="500" value="12" data-role="limit-input">
+            </label>
+            <button type="button" class="btn btn-primary scraper-site-card__button" data-role="start">抓取 Scratch</button>
+            <p class="scraper-site-card__status" data-role="status">站点待抓取。</p>
+          </article>
         </div>
 
         <div class="scraper-controls" role="group" aria-label="Scraper actions">
-          <button type="button" class="btn btn-primary" id="scrape-button">开始抓取</button>
           <button type="button" class="btn btn-outline" id="scrape-download" disabled>下载 JSON</button>
           <span class="scraper-summary">当前记录：<span class="scraper-count" id="scrape-count">0</span></span>
+          <span class="scraper-summary">来源：<span id="scrape-source-label">未选择</span></span>
         </div>
 
-        <p class="scraper-status" id="scrape-status" data-tone="info">待命：点击“开始抓取”即可获取最新数据。</p>
+        <p class="scraper-status" id="scrape-status" data-tone="info">待命：选择任意站点并点击“抓取”。</p>
 
         <div class="scraper-table-wrapper" aria-live="polite">
           <table class="scraper-table">
@@ -252,7 +435,7 @@
             </thead>
             <tbody id="scrape-table-body">
               <tr>
-                <td colspan="4" class="scraper-table__empty">暂无数据，点击上方按钮开始抓取。</td>
+                <td colspan="4" class="scraper-table__empty">暂无数据，选择上方站点开始抓取。</td>
               </tr>
             </tbody>
           </table>
