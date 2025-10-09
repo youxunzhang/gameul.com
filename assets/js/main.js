@@ -1286,6 +1286,11 @@
     setFooterYear();
   }
 
+  function renderIframePage() {
+    setActiveNav('iframe');
+    setFooterYear();
+  }
+
   function renderKungfuPage() {
     setActiveNav('tools');
     setFooterYear();
@@ -2439,6 +2444,7 @@
     rankings: renderRankingsPage,
     gameDetail: renderGameDetail,
     about: renderAboutPage,
+    iframe: renderIframePage,
     kungfu: renderKungfuPage,
     jsonEditor: renderJsonEditorPage
   };

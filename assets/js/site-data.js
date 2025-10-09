@@ -547,6 +547,13 @@
       description: '即开即玩的浏览器小游戏清单，直接点击即可游玩或了解详情。',
       url: '/browsergame/',
       tags: ['browser games', '精选', '中文页面']
+    },
+    {
+      type: 'page',
+      title: 'IFRAME 游戏目录',
+      description: '收录 10 个提供 iframe/embed 代码的小游戏站点，涵盖收益化、教育与休闲等多种场景。',
+      url: '/iframe/',
+      tags: ['iframe', 'embed', '游戏资源']
     }
   ];
 
