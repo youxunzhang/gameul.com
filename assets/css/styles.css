@@ -616,6 +616,13 @@ img {
   object-fit: cover;
 }
 
+.tool-card__thumb {
+  border-radius: 12px;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  width: 100%;
+}
+
 .game-card__meta,
 .tool-card__meta {
   display: flex;
