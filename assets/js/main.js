@@ -4,6 +4,7 @@
   const gameMap = new Map((data.games || []).map((game) => [game.slug, game]));
   let directoryCache = null;
   let browserGamesCache = null;
+  let popLibraryCache = null;
 
   async function loadGameDirectory() {
     if (directoryCache) {
@@ -58,6 +59,51 @@
     }
   }
 
+  async function loadPopLibrary() {
+    if (popLibraryCache) {
+      return popLibraryCache;
+    }
+    try {
+      const response = await fetch('/game-library%20(1).json', { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error(`Failed to fetch pop library: ${response.status}`);
+      }
+      const raw = await response.text();
+      let payload;
+      try {
+        payload = JSON.parse(raw);
+      } catch (parseError) {
+        console.error('Failed to parse game-library (1).json', parseError);
+        throw parseError;
+      }
+      const games = Array.isArray(payload?.games)
+        ? payload.games
+            .map((item) => {
+              const resolvedImage = resolvePopImage(item);
+              if (!resolvedImage) {
+                return null;
+              }
+              return { ...item, _resolvedImage: resolvedImage };
+            })
+            .filter(Boolean)
+        : [];
+      popLibraryCache = {
+        raw,
+        payload,
+        games,
+        title: typeof payload?.title === 'string' ? payload.title : 'Pop 热门速玩',
+        subtitle:
+          typeof payload?.subtitle === 'string'
+            ? payload.subtitle
+            : '来自全球休闲站点的高人气小游戏，点击缩略图即可马上开玩。'
+      };
+      return popLibraryCache;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
   function byId(id) {
     return document.getElementById(id);
   }
@@ -88,6 +134,24 @@
     } catch (error) {
       return /^https?:/i.test(url);
     }
+  }
+
+  function resolvePopImage(game) {
+    if (!game) {
+      return '';
+    }
+    const source =
+      game.thumbnail || game.image || game.cover || game.img || game.thumbnailUrl || game.thumb;
+    if (!source || typeof source !== 'string') {
+      return '';
+    }
+    if (/^(?:https?:)?\/\//i.test(source) || source.startsWith('data:')) {
+      return source;
+    }
+    if (source.startsWith('/')) {
+      return source;
+    }
+    return `/${source}`;
   }
 
   function fuzzyContains(text, term) {
@@ -519,6 +583,70 @@
     return article;
   }
 
+  function createPopCard(game) {
+    const article = document.createElement('article');
+    article.className = 'pop-card';
+    article.setAttribute('role', 'listitem');
+
+    const imageUrl = game._resolvedImage || resolvePopImage(game);
+    if (!imageUrl) {
+      throw new Error('Missing Pop image source');
+    }
+
+    const link = document.createElement('a');
+    link.href = game.url || '#';
+    link.className = 'pop-card__link';
+    if (isExternalUrl(game.url)) {
+      link.target = '_blank';
+      link.rel = 'noopener';
+    } else if (game.url) {
+      link.rel = 'bookmark';
+    }
+    if (game.title) {
+      link.setAttribute('aria-label', `立即开始 ${game.title}`);
+    }
+
+    const media = document.createElement('div');
+    media.className = 'pop-card__media';
+
+    const image = document.createElement('img');
+    image.src = imageUrl;
+    image.alt = game.title || 'Pop 游戏缩略图';
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    image.className = 'pop-card__img';
+    media.appendChild(image);
+
+    const overlay = document.createElement('div');
+    overlay.className = 'pop-card__overlay';
+
+    const tag = document.createElement('span');
+    tag.className = 'pop-card__tag';
+    tag.textContent = game.category || 'Game';
+
+    const info = document.createElement('div');
+    info.className = 'pop-card__info';
+
+    const title = document.createElement('span');
+    title.className = 'pop-card__title';
+    title.textContent = game.title || 'Play now';
+
+    const cta = document.createElement('span');
+    cta.className = 'pop-card__cta';
+    cta.textContent = '立即开玩';
+
+    info.appendChild(title);
+    info.appendChild(cta);
+
+    overlay.appendChild(tag);
+    overlay.appendChild(info);
+
+    link.appendChild(media);
+    link.appendChild(overlay);
+    article.appendChild(link);
+    return article;
+  }
+
   function renderHome() {
     setActiveNav('home');
     setFooterYear();
@@ -541,6 +669,37 @@
         });
       featuredContainer.innerHTML = '';
       items.forEach((game) => featuredContainer.appendChild(createGameCard(game)));
+    }
+
+    const popContainer = byId('pop-grid');
+    const popTitle = byId('pop-heading');
+    const popSubtitle = byId('pop-subtitle');
+    if (popContainer) {
+      popContainer.innerHTML = '<div class="pop-grid__status">正在加载热门小游戏…</div>';
+      loadPopLibrary()
+        .then((library) => {
+          if (popTitle) {
+            popTitle.textContent = library.title;
+          }
+          if (popSubtitle) {
+            popSubtitle.textContent = library.subtitle;
+          }
+          popContainer.innerHTML = '';
+          if (!library.games.length) {
+            popContainer.innerHTML = '<div class="pop-grid__status pop-grid__status--error">暂无可展示的 Pop 游戏。</div>';
+            return;
+          }
+          library.games.forEach((game) => {
+            try {
+              popContainer.appendChild(createPopCard(game));
+            } catch (error) {
+              console.error('Failed to render pop card', error, game);
+            }
+          });
+        })
+        .catch(() => {
+          popContainer.innerHTML = '<div class="pop-grid__status pop-grid__status--error">Pop 板块加载失败，请稍后重试。</div>';
+        });
     }
 
     const categoryContainer = byId('category-grid');
