@@ -2631,8 +2631,104 @@
     }
   }
 
+  function initMobileMenu() {
+    const header = document.querySelector('.site-header');
+    const topBar = header?.querySelector('.top-bar');
+    const nav = header?.querySelector('.main-nav');
+
+    if (!header || !topBar || !nav) {
+      return;
+    }
+
+    if (topBar.querySelector('.menu-toggle')) {
+      return;
+    }
+
+    const navId = nav.id || 'primary-navigation';
+    if (!nav.id) {
+      nav.id = navId;
+    }
+
+    const toggle = document.createElement('button');
+    toggle.className = 'menu-toggle';
+    toggle.type = 'button';
+    toggle.setAttribute('aria-controls', navId);
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.innerHTML = `
+      <span class="menu-toggle__icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+      <span class="menu-toggle__label">Menu</span>
+    `;
+
+    topBar.insertBefore(toggle, nav);
+    header.classList.add('has-menu-toggle');
+
+    const closeMenu = () => {
+      nav.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      header.classList.remove('menu-open');
+    };
+
+    const openMenu = () => {
+      nav.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      header.classList.add('menu-open');
+    };
+
+    const toggleMenu = () => {
+      if (nav.classList.contains('is-open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    };
+
+    toggle.addEventListener('click', toggleMenu);
+
+    nav.addEventListener('click', (event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (target?.closest('.nav-link')) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (target && !header.contains(target)) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        const wasOpen = nav.classList.contains('is-open');
+        closeMenu();
+        if (wasOpen) {
+          toggle.focus();
+        }
+      }
+    });
+
+    const mediaQuery = window.matchMedia('(min-width: 961px)');
+    const handleMediaChange = (event) => {
+      if (event.matches) {
+        closeMenu();
+      }
+    };
+
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', handleMediaChange);
+    } else if (typeof mediaQuery.addListener === 'function') {
+      mediaQuery.addListener(handleMediaChange);
+    }
+  }
+
   function init() {
     initSearch();
+    initMobileMenu();
   }
 
   init();
