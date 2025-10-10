@@ -65,6 +65,56 @@ img {
   padding: 1.1rem 0;
 }
 
+.menu-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(19, 31, 53, 0.6);
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.menu-toggle:focus-visible,
+.menu-toggle:hover {
+  outline: none;
+  background: rgba(108, 99, 255, 0.16);
+  border-color: rgba(108, 99, 255, 0.35);
+  color: #fff;
+}
+
+.menu-toggle__icon {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.menu-toggle__icon span {
+  display: block;
+  width: 1.2rem;
+  height: 2px;
+  background: currentColor;
+  border-radius: 999px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.menu-toggle[aria-expanded='true'] .menu-toggle__icon span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded='true'] .menu-toggle__icon span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle[aria-expanded='true'] .menu-toggle__icon span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
 .brand {
   font-weight: 700;
   font-size: 1.45rem;
@@ -1115,10 +1165,51 @@ img {
 }
 
 @media (max-width: 960px) {
-  .main-nav {
+  .site-header.has-menu-toggle .menu-toggle {
+    display: inline-flex;
+  }
+
+  .site-header.has-menu-toggle .main-nav {
+    order: 3;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+    background: rgba(11, 18, 32, 0.94);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.75rem;
+    box-shadow: var(--shadow);
+  }
+
+  .site-header.has-menu-toggle .main-nav.is-open {
+    display: flex;
+  }
+
+  .site-header.has-menu-toggle .nav-link {
+    display: block;
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border-radius: 12px;
+  }
+
+  .site-header.has-menu-toggle .nav-link.active,
+  .site-header.has-menu-toggle .nav-link:focus-visible,
+  .site-header.has-menu-toggle .nav-link:hover {
+    background: rgba(108, 99, 255, 0.22);
+  }
+
+  .site-header:not(.has-menu-toggle) .main-nav {
     order: 3;
     width: 100%;
     justify-content: space-between;
+  }
+
+  .menu-toggle__label {
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .search-form {
