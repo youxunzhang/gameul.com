@@ -730,6 +730,50 @@
     }
   }
 
+  function renderPopPortalPage() {
+    setActiveNav();
+    setFooterYear();
+
+    const titleNode = byId('pop-portal-title');
+    const subtitleNode = byId('pop-portal-subtitle');
+    const grid = byId('pop-portal-grid');
+
+    if (!grid) {
+      return;
+    }
+
+    grid.innerHTML = '<div class="pop-grid__status">正在加载热门小游戏…</div>';
+
+    loadPopLibrary()
+      .then((library) => {
+        if (titleNode) {
+          titleNode.textContent = library.title;
+        }
+        if (subtitleNode) {
+          subtitleNode.textContent = library.subtitle;
+        }
+
+        grid.innerHTML = '';
+
+        if (!library.games.length) {
+          grid.innerHTML = '<div class="pop-grid__status pop-grid__status--error">暂无可展示的 Pop 游戏。</div>';
+          return;
+        }
+
+        library.games.forEach((game) => {
+          try {
+            grid.appendChild(createPopCard(game));
+          } catch (error) {
+            console.error('Failed to render pop card on portal page', error, game);
+          }
+        });
+      })
+      .catch((error) => {
+        console.error('Failed to load pop portal data', error);
+        grid.innerHTML = '<div class="pop-grid__status pop-grid__status--error">Pop 板块加载失败，请稍后重试。</div>';
+      });
+  }
+
   function renderGamesPage() {
     setActiveNav('games');
     setFooterYear();
@@ -2595,6 +2639,7 @@
 
   window.PageInit = {
     home: renderHome,
+    popPortal: renderPopPortalPage,
     games: renderGamesPage,
     newGames: renderNewGamesPage,
     browsergame: renderBrowserGamesPage,
