@@ -467,6 +467,145 @@ img {
   max-width: 28rem;
 }
 
+.section__subtitle {
+  margin: 0.35rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.pop-section {
+  background: linear-gradient(180deg, rgba(19, 31, 53, 0.65), rgba(11, 18, 32, 0.95));
+  padding-top: 3.5rem;
+  padding-bottom: 3.2rem;
+}
+
+.pop-section__header {
+  align-items: flex-start;
+}
+
+.pop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.15rem;
+}
+
+.pop-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--surface-light);
+  aspect-ratio: 16 / 10;
+  box-shadow: 0 12px 30px rgba(6, 12, 28, 0.38);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pop-card__link {
+  display: block;
+  height: 100%;
+  position: relative;
+  color: inherit;
+}
+
+.pop-card__media,
+.pop-card__overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.pop-card__media {
+  overflow: hidden;
+  z-index: 0;
+}
+
+.pop-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.pop-card__overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background: linear-gradient(180deg, rgba(7, 12, 26, 0.05) 0%, rgba(7, 12, 26, 0.85) 82%);
+  transition: background 0.3s ease;
+  z-index: 1;
+}
+
+.pop-card__tag {
+  align-self: flex-start;
+  background: rgba(8, 13, 28, 0.78);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  box-shadow: 0 10px 22px rgba(4, 6, 18, 0.35);
+}
+
+.pop-card__info {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.pop-card__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #fff;
+  text-shadow: 0 10px 25px rgba(6, 8, 22, 0.6);
+}
+
+.pop-card__cta {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(108, 99, 255, 0.22);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background 0.25s ease, color 0.25s ease;
+  box-shadow: 0 8px 20px rgba(13, 16, 40, 0.45);
+}
+
+.pop-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 42px rgba(8, 14, 35, 0.45);
+}
+
+.pop-card:hover .pop-card__img {
+  transform: scale(1.08);
+}
+
+.pop-card:hover .pop-card__overlay {
+  background: linear-gradient(180deg, rgba(7, 12, 26, 0.2) 0%, rgba(7, 12, 26, 0.95) 88%);
+}
+
+.pop-card:hover .pop-card__cta {
+  background: var(--accent);
+}
+
+.pop-grid__status {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.pop-grid__status--error {
+  color: #ff8080;
+}
+
 .section__link {
   font-size: 0.9rem;
   color: var(--accent-2);
