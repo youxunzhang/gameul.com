@@ -143,8 +143,14 @@ img {
   color: #fff;
 }
 
-.search-form {
+.header-actions {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.search-form {
   position: relative;
   flex: 1;
   max-width: 320px;
@@ -165,6 +171,38 @@ img {
   outline: none;
   border-color: rgba(108, 99, 255, 0.6);
   background: rgba(255, 255, 255, 0.12);
+}
+
+.bookmark-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(108, 99, 255, 0.16);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.bookmark-button:hover {
+  background: rgba(108, 99, 255, 0.28);
+  border-color: rgba(108, 99, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+.bookmark-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.bookmark-button__icon {
+  width: 1.1rem;
+  height: 1.1rem;
 }
 
 .search-close {
@@ -1212,9 +1250,18 @@ img {
     text-transform: uppercase;
   }
 
-  .search-form {
+  .header-actions {
     order: 2;
+    width: 100%;
     margin-left: 0;
+  }
+
+  .header-actions .search-form {
+    flex: 1;
+  }
+
+  .header-actions .bookmark-button {
+    flex-shrink: 0;
   }
 
   .search-panel {
@@ -1226,6 +1273,17 @@ img {
   .top-bar {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .header-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+
+  .header-actions .bookmark-button {
+    width: 100%;
+    justify-content: center;
   }
 
   .hero {

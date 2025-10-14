@@ -66,11 +66,19 @@
         <a class="nav-link" data-nav="rankings" href="/rankings/">Rankings</a>
         <a class="nav-link" data-nav="about" href="/about/">About</a>
       </nav>
-      <form class="search-form" id="global-search-form" role="search">
-        <label class="sr-only" for="global-search">Search the site</label>
-        <input id="global-search" name="q" type="search" autocomplete="off" placeholder="Search games, tools, portals...">
-        <button type="button" id="search-close" class="search-close" aria-label="Close search results">×</button>
-      </form>
+      <div class="header-actions">
+        <form class="search-form" id="global-search-form" role="search">
+          <label class="sr-only" for="global-search">Search the site</label>
+          <input id="global-search" name="q" type="search" autocomplete="off" placeholder="Search games, tools, portals...">
+          <button type="button" id="search-close" class="search-close" aria-label="Close search results">×</button>
+        </form>
+        <button class="bookmark-button" type="button" aria-label="收藏 GameUL">
+          <svg class="bookmark-button__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M6 3a2 2 0 0 0-2 2v16l8-4.5 8 4.5V5a2 2 0 0 0-2-2H6z" fill="currentColor"/>
+          </svg>
+          <span>收藏</span>
+        </button>
+      </div>
     </div>
   </header>
 
