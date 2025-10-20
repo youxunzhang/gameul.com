@@ -424,47 +424,6 @@
     return link;
   }
 
-  function createTrendingItem(game, index) {
-    const li = document.createElement('li');
-    li.className = 'trending-item';
-
-    const rank = document.createElement('span');
-    rank.className = 'trending-item__rank';
-    rank.textContent = `#${index + 1}`;
-    li.appendChild(rank);
-
-    const body = document.createElement('div');
-
-    const title = document.createElement('a');
-    title.className = 'trending-item__title';
-    title.href = `/games/${game.slug}/`;
-    title.textContent = game.title;
-    body.appendChild(title);
-
-    const meta = document.createElement('div');
-    meta.className = 'trending-item__meta';
-
-    if (game.categories?.length) {
-      const category = document.createElement('span');
-      category.textContent = game.categories[0];
-      meta.appendChild(category);
-    }
-
-    if (typeof game.rating === 'number') {
-      const rating = document.createElement('span');
-      rating.className = 'rating';
-      rating.textContent = game.rating.toFixed(1);
-      meta.appendChild(rating);
-    }
-
-    if (meta.childElementCount) {
-      body.appendChild(meta);
-    }
-
-    li.appendChild(body);
-    return li;
-  }
-
   function createDirectoryCard(game) {
     const article = document.createElement('article');
     article.className = 'directory-card';
@@ -776,32 +735,6 @@
         }
       });
       lastUpdateEl.textContent = latest ? formatDate(latest.toISOString()) : '—';
-    }
-
-    const trendingList = byId('hero-trending');
-    if (trendingList) {
-      trendingList.innerHTML = '';
-      const trendingSlugs = Array.isArray(data.rankings?.trending) ? data.rankings.trending : [];
-      const fallbackGames = data.games
-        .slice()
-        .sort((a, b) => (typeof b.rating === 'number' ? b.rating : 0) - (typeof a.rating === 'number' ? a.rating : 0));
-      const combined = trendingSlugs.map((slug) => gameMap.get(slug)).filter(Boolean).concat(fallbackGames);
-      const seen = new Set();
-      let index = 0;
-      combined.forEach((game) => {
-        if (!game || seen.has(game.slug) || index >= 5) {
-          return;
-        }
-        trendingList.appendChild(createTrendingItem(game, index));
-        seen.add(game.slug);
-        index += 1;
-      });
-      if (!trendingList.childElementCount) {
-        const empty = document.createElement('li');
-        empty.className = 'trending-item trending-item--empty';
-        empty.textContent = '暂无热度数据，敬请期待更新。';
-        trendingList.appendChild(empty);
-      }
     }
 
     const categoryCounts = data.games.reduce((map, game) => {
