@@ -359,6 +359,71 @@
     return article;
   }
 
+  function parseDate(value) {
+    if (!value) return null;
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+      return null;
+    }
+    return date;
+  }
+
+  function formatDate(value) {
+    const date = parseDate(value);
+    if (!date) return '';
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
+  }
+
+  function createMiniGameCard(game) {
+    const link = document.createElement('a');
+    link.className = 'mini-card';
+    link.href = `/games/${game.slug}/`;
+
+    const title = document.createElement('div');
+    title.className = 'mini-card__title';
+    title.textContent = game.title;
+    link.appendChild(title);
+
+    const meta = document.createElement('div');
+    meta.className = 'mini-card__meta';
+
+    const dateLabel = formatDate(game.releaseDate);
+    if (dateLabel) {
+      const dateSpan = document.createElement('span');
+      dateSpan.textContent = dateLabel;
+      meta.appendChild(dateSpan);
+    }
+
+    if (game.categories?.length) {
+      const categorySpan = document.createElement('span');
+      categorySpan.textContent = game.categories[0];
+      meta.appendChild(categorySpan);
+    }
+
+    if (typeof game.rating === 'number') {
+      const ratingSpan = document.createElement('span');
+      ratingSpan.className = 'rating';
+      ratingSpan.textContent = game.rating.toFixed(1);
+      meta.appendChild(ratingSpan);
+    }
+
+    if (meta.childElementCount) {
+      link.appendChild(meta);
+    }
+
+    if (game.shortDescription) {
+      const desc = document.createElement('p');
+      desc.className = 'mini-card__desc';
+      desc.textContent = game.shortDescription;
+      link.appendChild(desc);
+    }
+
+    return link;
+  }
+
   function createDirectoryCard(game) {
     const article = document.createElement('article');
     article.className = 'directory-card';
@@ -650,83 +715,90 @@
   function renderHome() {
     setActiveNav('home');
     setFooterYear();
-
-    const featuredContainer = byId('featured-games');
-    if (featuredContainer) {
-      const trending = data.rankings?.trending || [];
-      const fallback = data.games.slice(0, 6);
-      const seen = new Set();
-      const items = [];
-      trending
-        .map((slug) => gameMap.get(slug))
-        .concat(fallback)
-        .filter(Boolean)
-        .forEach((game) => {
-          if (!seen.has(game.slug) && items.length < 6) {
-            seen.add(game.slug);
-            items.push(game);
-          }
-        });
-      featuredContainer.innerHTML = '';
-      items.forEach((game) => featuredContainer.appendChild(createGameCard(game)));
+    const totalGamesEl = byId('total-games-count');
+    if (totalGamesEl) {
+      totalGamesEl.textContent = String(data.games.length);
     }
 
-    const popContainer = byId('pop-grid');
-    const popTitle = byId('pop-heading');
-    const popSubtitle = byId('pop-subtitle');
-    if (popContainer) {
-      popContainer.innerHTML = '<div class="pop-grid__status">正在加载热门小游戏…</div>';
-      loadPopLibrary()
-        .then((library) => {
-          if (popTitle) {
-            popTitle.textContent = library.title;
-          }
-          if (popSubtitle) {
-            popSubtitle.textContent = library.subtitle;
-          }
-          popContainer.innerHTML = '';
-          if (!library.games.length) {
-            popContainer.innerHTML = '<div class="pop-grid__status pop-grid__status--error">暂无可展示的 Pop 游戏。</div>';
-            return;
-          }
-          library.games.forEach((game) => {
-            try {
-              popContainer.appendChild(createPopCard(game));
-            } catch (error) {
-              console.error('Failed to render pop card', error, game);
-            }
-          });
+    const totalCategoriesEl = byId('total-categories-count');
+    if (totalCategoriesEl) {
+      totalCategoriesEl.textContent = String(data.categories.length);
+    }
+
+    const lastUpdateEl = byId('last-update');
+    if (lastUpdateEl) {
+      let latest = null;
+      data.games.forEach((game) => {
+        const parsed = parseDate(game.releaseDate);
+        if (parsed && (!latest || parsed > latest)) {
+          latest = parsed;
+        }
+      });
+      lastUpdateEl.textContent = latest ? formatDate(latest.toISOString()) : '—';
+    }
+
+    const categoryCounts = data.games.reduce((map, game) => {
+      (game.categories || []).forEach((category) => {
+        if (!category) return;
+        const key = category.trim();
+        if (!key) return;
+        map.set(key, (map.get(key) || 0) + 1);
+      });
+      return map;
+    }, new Map());
+
+    document.querySelectorAll('[data-category-count]').forEach((node) => {
+      const categories = (node.dataset.categoryCount || '')
+        .split(',')
+        .map((value) => value.trim())
+        .filter(Boolean);
+      const unique = Array.from(new Set(categories));
+      const total = unique.reduce((sum, key) => sum + (categoryCounts.get(key) || 0), 0);
+      const badge = node.querySelector('.nav-card__badge');
+      if (badge) {
+        badge.textContent = total ? `${total} 款游戏` : '敬请期待';
+      }
+    });
+
+    const newGamesCountEl = byId('new-games-count');
+    const now = new Date();
+    const ninetyDays = 1000 * 60 * 60 * 24 * 90;
+    const recentGames = data.games.filter((game) => {
+      const date = parseDate(game.releaseDate);
+      return date ? now - date <= ninetyDays : false;
+    });
+    if (newGamesCountEl) {
+      newGamesCountEl.textContent = recentGames.length ? `${recentGames.length} 款新作` : '持续更新中';
+    }
+
+    const newGrid = byId('new-grid');
+    if (newGrid) {
+      newGrid.innerHTML = '';
+      const sortedByDate = data.games
+        .slice()
+        .sort((a, b) => {
+          const dateA = parseDate(a.releaseDate);
+          const dateB = parseDate(b.releaseDate);
+          const timeA = dateA ? dateA.getTime() : 0;
+          const timeB = dateB ? dateB.getTime() : 0;
+          return timeB - timeA;
         })
-        .catch(() => {
-          popContainer.innerHTML = '<div class="pop-grid__status pop-grid__status--error">Pop 板块加载失败，请稍后重试。</div>';
+        .slice(0, 6);
+
+      if (!sortedByDate.length) {
+        const empty = document.createElement('p');
+        empty.className = 'mini-card__desc';
+        empty.textContent = '暂无最新游戏，敬请期待新内容上线。';
+        newGrid.appendChild(empty);
+      } else {
+        sortedByDate.forEach((game) => {
+          try {
+            newGrid.appendChild(createMiniGameCard(game));
+          } catch (error) {
+            console.error('Failed to render mini card', error, game);
+          }
         });
-    }
-
-    const categoryContainer = byId('category-grid');
-    if (categoryContainer) {
-      categoryContainer.innerHTML = '';
-      data.categories.forEach((category) => {
-        const count = data.games.filter((game) => game.categories.includes(category)).length;
-        categoryContainer.appendChild(createCategoryTile(category, count));
-      });
-    }
-
-    const toolContainer = byId('featured-tools');
-    if (toolContainer) {
-      toolContainer.innerHTML = '';
-      data.tools.slice(0, 6).forEach((tool) => toolContainer.appendChild(createToolCard(tool)));
-    }
-
-    const rankingsPreview = byId('rankings-preview');
-    if (rankingsPreview) {
-      rankingsPreview.innerHTML = '';
-      (data.rankings?.top || []).slice(0, 5).forEach((slug, index) => {
-        const game = gameMap.get(slug);
-        if (!game) return;
-        const li = document.createElement('li');
-        li.innerHTML = `<span class="chip">#${index + 1}</span> <a href="/games/${game.slug}/">${game.title}</a>`;
-        rankingsPreview.appendChild(li);
-      });
+      }
     }
   }
 

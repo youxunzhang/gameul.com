@@ -95,281 +95,438 @@
     </div>
   </section>
 
-  <main>
-    <section class="section pop-section">
-      <div class="container">
-        <div class="pop-grid" id="pop-grid" role="list"></div>
-      </div>
-    </section>
-
-    <section class="hero">
-      <div class="container hero__content">
+    <main>
+    <section class="hero hero--navigator">
+      <div class="container hero__content hero__layout">
         <div class="hero__text">
-          <p class="eyebrow">Playable in your browser</p>
-          <h1>Discover mini games &amp; creator tools built for the next generation.</h1>
-          <p class="lead">Browse bite-sized racing, puzzle and action hits, then supercharge your workflow with AI art generators, game engines and publishing portals.</p>
+          <p class="eyebrow">GameUL 游戏导航</p>
+          <h1>找到下一款上头的小游戏。</h1>
+          <p class="lead">我们把动作、竞速、益智、策略等类型的网页游戏整理成清晰导航，让你像浏览 AI 工具站一样，快速锁定想玩的玩法与站点。</p>
           <div class="hero__actions">
-            <a class="btn btn-primary" href="/games/">Explore games</a>
-            <a class="btn btn-secondary" href="/tools/">Browse creator tools</a>
+            <a class="btn btn-primary" href="#overview">按分类浏览</a>
+            <a class="btn btn-secondary" href="/games/new-game/">查看最新上架</a>
           </div>
-          <dl class="hero-stats">
-            <div>
-              <dt>14 curated games</dt>
-              <dd>Playable instantly, no install required.</dd>
-            </div>
-            <div>
-              <dt>12+ pro resources</dt>
-              <dd>AI assistants, engines and asset hubs.</dd>
-            </div>
-          </dl>
+          <ul class="hero__metrics">
+            <li>
+              <strong id="total-games-count">0</strong>
+              <span>可即时游玩</span>
+            </li>
+            <li>
+              <strong id="total-categories-count">0</strong>
+              <span>热门分类</span>
+            </li>
+            <li>
+              <strong id="last-update">—</strong>
+              <span>最近更新</span>
+            </li>
+          </ul>
         </div>
-        <div class="hero__media" aria-hidden="true">
-          <div class="hero-card">
-            <strong>Now trending</strong>
-            <p>Galactic Runner · Puzzle Nexus · Shadow Arena</p>
-            <span class="tag">Updated daily</span>
-          </div>
-          <div class="hero-card">
-            <strong>Creator spotlight</strong>
-            <p>Build faster with Scenario, GDevelop, Phaser, and more hand-picked tools.</p>
-            <span class="tag tag--outline">For designers &amp; devs</span>
+        <div class="hero__media hero__media--navigator">
+          <div class="hero-card hero-card--highlight" aria-hidden="true">
+            <strong>分类导航面板</strong>
+            <p>左侧目录收纳 5 大类型、20+ 子分类，一次浏览所有玩法入口。</p>
+            <span class="tag">持续更新</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="featured-games-heading">
-      <div class="container section__header">
-        <h2 id="featured-games-heading">Featured games</h2>
-        <a class="section__link" href="/games/">View all</a>
-      </div>
-      <div class="container">
-        <div class="card-grid" id="featured-games"></div>
-        <div class="classic-spotlight">
-          <div class="classic-spotlight__intro">
-            <p class="eyebrow">Retro classics spotlight</p>
-            <h3>Dive into three timeless mini games</h3>
-            <p>Jump straight into Super Mario Bros., 3D Cube Puzzle, and Free Rider HD: Carbon with instant browser play, full descriptions, and quick controls.</p>
+    <section class="navigator" aria-labelledby="navigator-heading">
+      <div class="container navigator__grid">
+        <aside class="navigator__sidebar" aria-label="Game categories">
+          <div class="category-nav">
+            <h2 id="navigator-heading">浏览全部分类</h2>
+            <p>按玩法和节奏筛选小游戏，点击卡片即可跳转到详情或专属清单。</p>
+            <nav class="category-nav__list" aria-label="Category anchors">
+              <a class="category-nav__link" href="#overview">核心热门</a>
+              <a class="category-nav__link" href="#action">动作 &amp; 冒险</a>
+              <a class="category-nav__link" href="#strategy">策略 &amp; 模拟</a>
+              <a class="category-nav__link" href="#puzzle">益智 &amp; 休闲</a>
+              <a class="category-nav__link" href="#racing">竞速 &amp; 音乐</a>
+              <a class="category-nav__link" href="#creative">创意 &amp; 工具</a>
+            </nav>
           </div>
-          <div class="card-grid classic-spotlight__grid">
-            <article class="game-card">
-              <a href="/games/super-mario-bros/" aria-label="Super Mario Bros. details">
-                <img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92eee?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Pixel art cover of Super Mario Bros." loading="lazy">
-                <div class="game-card__meta">
-                  <span class="chip">Platformer</span>
-                  <span class="chip">⭐ 4.9</span>
+          <div class="category-nav__note">
+            <h3>快速提示</h3>
+            <ul>
+              <li>所有分类都来自 GameUL 精选，直接点击即可开始探索。</li>
+              <li>带有“敬请期待”的分类会随着新作上线自动更新。</li>
+              <li>想要订阅更新，可收藏本站或查看 <a href="/sitemap.xml">Sitemap</a>。</li>
+            </ul>
+          </div>
+        </aside>
+
+        <div class="navigator__content">
+          <section class="nav-group" id="overview" aria-labelledby="overview-heading">
+            <div class="nav-group__header">
+              <div>
+                <h2 id="overview-heading">核心热门分类</h2>
+                <p>覆盖最多玩家关注的 4 大主流类型，适合快速试水。</p>
+              </div>
+              <a class="nav-group__cta" href="/games/">查看全部游戏</a>
+            </div>
+            <div class="nav-group__grid">
+              <a class="nav-card nav-card--accent" href="/games/?category=Action" data-category-count="Action,Platformer,Adventure">
+                <span class="nav-card__icon" aria-hidden="true">⚔️</span>
+                <div class="nav-card__body">
+                  <h3>动作冒险</h3>
+                  <p>快速切换英雄、节奏紧凑的战斗与跑酷，适合想要热血体验的玩家。</p>
                 </div>
-                <h3>Super Mario Bros.</h3>
-                <p>Run, jump, and stomp through Bowser's army while hunting hidden warp pipes across the Mushroom Kingdom.</p>
-              </a>
-            </article>
-            <article class="game-card">
-              <a href="/games/magic-cube-plus/" aria-label="3D Cube Puzzle details">
-                <img src="https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Colorful Rubik's cube against a soft backdrop" loading="lazy">
-                <div class="game-card__meta">
-                  <span class="chip">Puzzle</span>
-                  <span class="chip">⭐ 4.2</span>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">进入分类</span>
                 </div>
-                <h3>3D Cube Puzzle</h3>
-                <p>Spin and solve the 3D cube, swap in playful sticker themes, and enjoy a relaxing brain teaser session.</p>
               </a>
-            </article>
-            <article class="game-card">
-              <a href="/games/freerider-carbon/" aria-label="Free Rider HD: Carbon details">
-                <img src="https://images.unsplash.com/photo-1525104698733-6d38ce80f729?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Rider catching air on a mountain track" loading="lazy">
-                <div class="game-card__meta">
-                  <span class="chip">Racing</span>
-                  <span class="chip">⭐ 4.6</span>
+              <a class="nav-card" href="/games/?category=Strategy" data-category-count="Strategy,Simulation">
+                <span class="nav-card__icon" aria-hidden="true">🧠</span>
+                <div class="nav-card__body">
+                  <h3>策略模拟</h3>
+                  <p>从战术布局到经营养成，用思考与规划赢得胜利。</p>
                 </div>
-                <h3>Free Rider HD: Carbon</h3>
-                <p>Control a stick-figure biker across community-built tracks, balance mid-air, and nail stylish flips.</p>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">进入分类</span>
+                </div>
               </a>
-            </article>
-          </div>
+              <a class="nav-card" href="/games/?category=Puzzle" data-category-count="Puzzle,Logic,Relaxing">
+                <span class="nav-card__icon" aria-hidden="true">🧩</span>
+                <div class="nav-card__body">
+                  <h3>益智解谜</h3>
+                  <p>旋转魔方、连接光束、推箱子，适合喜欢慢节奏动脑的你。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">进入分类</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/games/?category=Racing" data-category-count="Racing,Time Attack,Physics,Rhythm">
+                <span class="nav-card__icon" aria-hidden="true">🏁</span>
+                <div class="nav-card__body">
+                  <h3>竞速音乐</h3>
+                  <p>漂移、冲刺、跟随节奏冲线，感受手速与音乐的双重刺激。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">进入分类</span>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <section class="nav-group" id="action" aria-labelledby="action-heading">
+            <div class="nav-group__header">
+              <div>
+                <h2 id="action-heading">动作 &amp; 冒险扩展</h2>
+                <p>深度拆解动作类的热门分支，选择你钟意的节奏与难度。</p>
+              </div>
+              <a class="nav-group__cta" href="/games/?category=Action">浏览更多动作类</a>
+            </div>
+            <div class="nav-group__grid">
+              <a class="nav-card" href="/games/?category=Arcade" data-category-count="Action,Arcade">
+                <span class="nav-card__icon" aria-hidden="true">🎮</span>
+                <div class="nav-card__body">
+                  <h3>街机快打</h3>
+                  <p>轻量操作、快速上手的街机体验，随时随地开一局。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">立即跳转</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/games/?category=Rhythm" data-category-count="Rhythm,Platformer">
+                <span class="nav-card__icon" aria-hidden="true">🎵</span>
+                <div class="nav-card__body">
+                  <h3>节奏挑战</h3>
+                  <p>跟随音乐节拍躲避机关，适合喜爱手眼协调与反应的玩家。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">立即跳转</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/games/?category=Multiplayer" data-category-count="Multiplayer,Action">
+                <span class="nav-card__icon" aria-hidden="true">🛡️</span>
+                <div class="nav-card__body">
+                  <h3>多人竞技</h3>
+                  <p>团队协作或对抗赛制，呼朋唤友一起冲榜。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">立即跳转</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/games/?category=Platformer" data-category-count="Platformer,Adventure,Retro">
+                <span class="nav-card__icon" aria-hidden="true">🦘</span>
+                <div class="nav-card__body">
+                  <h3>平台跳跃</h3>
+                  <p>经典横版与现代跑酷并存，考验节奏与记忆。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">立即跳转</span>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <section class="nav-group" id="strategy" aria-labelledby="strategy-heading">
+            <div class="nav-group__header">
+              <div>
+                <h2 id="strategy-heading">策略 &amp; 模拟玩法</h2>
+                <p>规划资源、调配单位或经营你的虚拟事业。</p>
+              </div>
+              <a class="nav-group\__cta" href="/games/?category=Strategy">查看策略清单</a>
+            </div>
+            <div class="nav-group__grid">
+              <a class="nav-card" href="/games/?category=Strategy" data-category-count="Strategy,Puzzle">
+                <span class="nav-card__icon" aria-hidden="true">♟️</span>
+                <div class="nav-card__body">
+                  <h3>战术解谜</h3>
+                  <p>每一步都至关重要，利用有限行动解决难题或击败敌人。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">查看列表</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/games/?category=Simulation" data-category-count="Simulation,Casual">
+                <span class="nav-card__icon" aria-hidden="true">🏙️</span>
+                <div class="nav-card__body">
+                  <h3>模拟经营</h3>
+                  <p>经营农场、餐厅或太空站，享受建设与成长的节奏。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">查看列表</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/games/?category=Action" data-category-count="Action,Strategy">
+                <span class="nav-card__icon" aria-hidden="true">🛡</span>
+                <div class="nav-card__body">
+                  <h3>塔防守护</h3>
+                  <p>部署防线、升级技能，让敌人止步于阵线之外。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">查看列表</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/games/?category=Casual" data-category-count="Casual,Simulation">
+                <span class="nav-card__icon" aria-hidden="true">🌿</span>
+                <div class="nav-card__body">
+                  <h3>轻松养成</h3>
+                  <p>放松节奏的养成类玩法，在碎片时间慢慢升级。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">查看列表</span>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <section class="nav-group" id="puzzle" aria-labelledby="puzzle-heading">
+            <div class="nav-group__header">
+              <div>
+                <h2 id="puzzle-heading">益智 &amp; 休闲精选</h2>
+                <p>脑洞谜题到解压小游戏，让放松与挑战兼得。</p>
+              </div>
+              <a class="nav-group__cta" href="/games/?category=Puzzle">探索益智玩法</a>
+            </div>
+            <div class="nav-group__grid">
+              <a class="nav-card" href="/games/?category=Logic" data-category-count="Puzzle,Logic">
+                <span class="nav-card__icon" aria-hidden="true">🧠</span>
+                <div class="nav-card__body">
+                  <h3>脑洞谜题</h3>
+                  <p>复杂的逻辑谜题与推理挑战，考验你的思维能力。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">马上体验</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/games/?category=Relaxing" data-category-count="Relaxing,Casual">
+                <span class="nav-card__icon" aria-hidden="true">☁️</span>
+                <div class="nav-card__body">
+                  <h3>休闲放松</h3>
+                  <p>舒缓的视觉与音乐，让你在忙碌间隙重获专注。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">马上体验</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/games/?category=Physics" data-category-count="Physics,Puzzle">
+                <span class="nav-card__icon" aria-hidden="true">🪐</span>
+                <div class="nav-card__body">
+                  <h3>物理益智</h3>
+                  <p>利用重力、惯性与弹跳，解决独特的太空与轨道难题。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">马上体验</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/games/?category=Rhythm" data-category-count="Rhythm,Puzzle">
+                <span class="nav-card__icon" aria-hidden="true">🔮</span>
+                <div class="nav-card__body">
+                  <h3>节奏解谜</h3>
+                  <p>在音乐引导下完成拼图或机关，享受节奏与逻辑的结合。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">马上体验</span>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <section class="nav-group" id="racing" aria-labelledby="racing-heading">
+            <div class="nav-group__header">
+              <div>
+                <h2 id="racing-heading">竞速 &amp; 音乐跑酷</h2>
+                <p>想追求速度与节奏？这里是最热血的赛道集合。</p>
+              </div>
+              <a class="nav-group__cta" href="/games/?category=Racing">查看竞速排行</a>
+            </div>
+            <div class="nav-group__grid">
+              <a class="nav-card" href="/games/?category=Racing" data-category-count="Racing,Time Attack">
+                <span class="nav-card__icon" aria-hidden="true">🚀</span>
+                <div class="nav-card__body">
+                  <h3>极速竞速</h3>
+                  <p>短时间高强度的赛道冲刺，争夺最佳圈速。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">开启竞速</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/games/?category=Rhythm" data-category-count="Racing,Rhythm">
+                <span class="nav-card__icon" aria-hidden="true">🎧</span>
+                <div class="nav-card__body">
+                  <h3>音乐跑酷</h3>
+                  <p>跟随节拍切换赛道、收集节奏点，享受音浪飙升。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">开启竞速</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/games/?category=Retro" data-category-count="Retro,Arcade">
+                <span class="nav-card__icon" aria-hidden="true">🕹️</span>
+                <div class="nav-card__body">
+                  <h3>复古街机</h3>
+                  <p>像素美术与怀旧音效，重温经典赛车街机魅力。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">开启竞速</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/games/?category=Physics" data-category-count="Physics,Racing">
+                <span class="nav-card__icon" aria-hidden="true">🪂</span>
+                <div class="nav-card__body">
+                  <h3>特技挑战</h3>
+                  <p>控制物理引擎完成翻转和空中特技，考验操控技巧。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__badge"></span>
+                  <span class="nav-card__cta">开启竞速</span>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <section class="nav-group" id="creative" aria-labelledby="creative-heading">
+            <div class="nav-group__header">
+              <div>
+                <h2 id="creative-heading">创意 &amp; 工具拓展</h2>
+                <p>为玩家和创作者准备的资源集合，打造属于你的小游戏宇宙。</p>
+              </div>
+              <a class="nav-group__cta" href="/tools/">进入工具中心</a>
+            </div>
+            <div class="nav-group__grid">
+              <a class="nav-card" href="/tools/?category=AI%20Tools">
+                <span class="nav-card__icon" aria-hidden="true">🤖</span>
+                <div class="nav-card__body">
+                  <h3>AI 美术工具</h3>
+                  <p>快速生成角色与场景素材，加速你的创意落地。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__cta">查看工具</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/tools/?category=Game%20Tools">
+                <span class="nav-card__icon" aria-hidden="true">🧰</span>
+                <div class="nav-card__body">
+                  <h3>开发引擎</h3>
+                  <p>零代码或脚本驱动的游戏引擎，支持快速导出 Web 版本。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__cta">查看工具</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/browsergame/">
+                <span class="nav-card__icon" aria-hidden="true">🪄</span>
+                <div class="nav-card__body">
+                  <h3>浏览器游戏平台</h3>
+                  <p>收录高质量 iframe 站点，一键嵌入或即玩。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__cta">打开入口</span>
+                </div>
+              </a>
+              <a class="nav-card" href="/rankings/">
+                <span class="nav-card__icon" aria-hidden="true">📊</span>
+                <div class="nav-card__body">
+                  <h3>榜单 &amp; 趋势</h3>
+                  <p>查看 Top、新品与热度榜，了解玩家偏好动向。</p>
+                </div>
+                <div class="nav-card__meta">
+                  <span class="nav-card__cta">查看榜单</span>
+                </div>
+              </a>
+            </div>
+          </section>
         </div>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="categories-heading">
-      <div class="container section__header">
-        <h2 id="categories-heading">Browse by vibe</h2>
-        <p>Pick a category to jump into specific styles of play.</p>
-      </div>
-      <div class="container">
-        <div class="category-grid" id="category-grid"></div>
-      </div>
-    </section>
-
-    <section class="section section--alt" aria-labelledby="math-games-heading">
-      <div class="container section__header">
-        <h2 id="math-games-heading">Math games spotlight</h2>
-        <p>Sharpen logic and number sense with interactive puzzles, mazes, and hands-on problem solving.</p>
-      </div>
-      <div class="container">
-        <div class="card-grid">
-          <article class="tool-card">
-            <strong>Math Playground</strong>
-            <p>Discover curated addition, subtraction, logic, and geometry mini games with interactive lessons and practice stages.</p>
-            <div class="tool-card__meta">
-              <span class="chip">Math Skills</span>
-              <span class="chip">Puzzle</span>
-            </div>
-            <a href="https://www.mathplayground.com/" target="_blank" rel="noopener">Visit Math Playground →</a>
-          </article>
-          <article class="tool-card">
-            <strong>Coolmath Games</strong>
-            <p>Mix strategy, reflex, and numeric challenges in a classic collection that fits both classroom breaks and casual play.</p>
-            <div class="tool-card__meta">
-              <span class="chip">Brain Training</span>
-              <span class="chip">Arcade</span>
-            </div>
-            <a href="https://www.coolmathgames.com" target="_blank" rel="noopener">Enter Coolmath Games →</a>
-          </article>
-          <article class="tool-card">
-            <img class="tool-card__thumb" src="https://images.unsplash.com/photo-1584697964192-9a9ff0d0ae42?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Colorful coding blocks in close-up" loading="lazy">
-            <strong>Blockly Games</strong>
-            <p>Google's visual coding mini games teach logic by dragging blocks to solve mazes, draw with turtles, and more.</p>
-            <div class="tool-card__meta">
-              <span class="chip">Coding basics</span>
-              <span class="chip">Logic training</span>
-            </div>
-            <a href="https://blockly.games/" target="_blank" rel="noopener">Go to Blockly Games →</a>
-          </article>
+    <section class="home-updates" aria-labelledby="home-updates-heading">
+      <div class="container home-updates__grid">
+        <div class="home-updates__panel">
+          <div class="home-updates__header">
+            <h2 id="home-updates-heading">最新上线</h2>
+            <span class="chip chip--soft" id="new-games-count"></span>
+          </div>
+          <div id="new-grid" class="mini-card-grid"></div>
         </div>
-      </div>
-    </section>
-
-    <section class="section section--alt iframe-hub" aria-labelledby="iframe-hub-heading">
-      <div class="container iframe-hub__header">
-        <div>
-          <p class="eyebrow">Global iframe game hubs</p>
-          <h2 id="iframe-hub-heading">Launch major game portals instantly</h2>
-          <p>Explore highly rated iframe game sites spanning action, puzzle, and simulation hits. Copy official embed codes to turn your page into a ready-to-play arcade.</p>
-        </div>
-        <a class="btn btn-outline" href="/browsergame/">Browse the Browsergame hub</a>
-      </div>
-      <div class="container iframe-hub__grid" role="list">
-        <article class="iframe-hub-card iframe-hub-card--violet" role="listitem">
-          <span class="iframe-hub-card__rank" aria-hidden="true">TOP 1</span>
-          <div class="iframe-hub-card__header">
-            <div class="iframe-hub-card__icon" aria-hidden="true">1G</div>
-            <div>
-              <h3>1Games.io</h3>
-              <p class="iframe-hub-card__subtitle">Indie mini game showcase</p>
-            </div>
-          </div>
-          <p class="iframe-hub-card__description">A gathering place for indie developers with ad-free iframe embeds and inventive, lightweight gameplay.</p>
-          <ul class="iframe-hub-card__tags">
-            <li>Indie gems</li>
-            <li>Mobile ready</li>
-            <li>Fast loading</li>
+        <div class="home-updates__panel">
+          <h2>专题推荐</h2>
+          <p>利用以下合集快速切换不同氛围的小游戏站点。</p>
+          <ul class="collection-list">
+            <li>
+              <a href="/games/directory/">合集目录：站点导航</a>
+              <span>一次性浏览全部收录页面，适合想要批量挖掘资源的玩家。</span>
+            </li>
+            <li>
+              <a href="/iframe/">iframe 嵌入站</a>
+              <span>适合站长、UP 主，复制嵌入代码即可搭建自己的小游戏区。</span>
+            </li>
+            <li>
+              <a href="/tools/?category=Game%20Portals">全球游戏门户</a>
+              <span>寻找新的小游戏来源渠道，保持站点内容常青。</span>
+            </li>
+            <li>
+              <a href="/tools/?category=Gaming%20Resources">资源素材</a>
+              <span>浏览音效、贴图与 UI 素材，为自制项目添砖加瓦。</span>
+            </li>
           </ul>
-          <a class="iframe-hub-card__cta" href="https://1games.io/" target="_blank" rel="noopener">
-            Visit platform <span aria-hidden="true">→</span>
-          </a>
-        </article>
-        <article class="iframe-hub-card iframe-hub-card--teal" role="listitem">
-          <span class="iframe-hub-card__rank" aria-hidden="true">TOP 2</span>
-          <div class="iframe-hub-card__header">
-            <div class="iframe-hub-card__icon" aria-hidden="true">CG</div>
-            <div>
-              <h3>CrazyGames</h3>
-              <p class="iframe-hub-card__subtitle">Global traffic heavyweight</p>
-            </div>
-          </div>
-          <p class="iframe-hub-card__description">A world-renowned HTML5 library with deep iframe integration guides and countless categories.</p>
-          <ul class="iframe-hub-card__tags">
-            <li>High concurrency</li>
-            <li>Multiplayer ready</li>
-            <li>Licensed content</li>
-          </ul>
-          <a class="iframe-hub-card__cta" href="https://www.crazygames.com/" target="_blank" rel="noopener">
-            Visit platform <span aria-hidden="true">→</span>
-          </a>
-        </article>
-        <article class="iframe-hub-card iframe-hub-card--amber" role="listitem">
-          <span class="iframe-hub-card__rank" aria-hidden="true">TOP 3</span>
-          <div class="iframe-hub-card__header">
-            <div class="iframe-hub-card__icon" aria-hidden="true">GM</div>
-            <div>
-              <h3>GameMonetize</h3>
-              <p class="iframe-hub-card__subtitle">Top choice for site monetization</p>
-            </div>
-          </div>
-          <p class="iframe-hub-card__description">A revenue-focused platform for site owners with iframe embeds, ad sharing, and 2,000+ titles.</p>
-          <ul class="iframe-hub-card__tags">
-            <li>Monetization plans</li>
-            <li>Plug-and-play ads</li>
-            <li>Daily updates</li>
-          </ul>
-          <a class="iframe-hub-card__cta" href="https://www.gamemonetize.com/" target="_blank" rel="noopener">
-            Visit platform <span aria-hidden="true">→</span>
-          </a>
-        </article>
-        <article class="iframe-hub-card iframe-hub-card--pink" role="listitem">
-          <span class="iframe-hub-card__rank" aria-hidden="true">TOP 4</span>
-          <div class="iframe-hub-card__header">
-            <div class="iframe-hub-card__icon" aria-hidden="true">GD</div>
-            <div>
-              <h3>GameDistribution</h3>
-              <p class="iframe-hub-card__subtitle">Distribution network and SDK</p>
-            </div>
-          </div>
-          <p class="iframe-hub-card__description">A distribution network in 30+ languages with an iframe SDK and detailed analytics reports.</p>
-          <ul class="iframe-hub-card__tags">
-            <li>Official SDK</li>
-            <li>Multilingual</li>
-            <li>Achievement system</li>
-          </ul>
-          <a class="iframe-hub-card__cta" href="https://gamedistribution.com/" target="_blank" rel="noopener">
-            Visit platform <span aria-hidden="true">→</span>
-          </a>
-        </article>
-        <article class="iframe-hub-card iframe-hub-card--blue" role="listitem">
-          <span class="iframe-hub-card__rank" aria-hidden="true">TOP 5</span>
-          <div class="iframe-hub-card__header">
-            <div class="iframe-hub-card__icon" aria-hidden="true">SC</div>
-            <div>
-              <h3>Scratch</h3>
-              <p class="iframe-hub-card__subtitle">Creative education hub</p>
-            </div>
-          </div>
-          <p class="iframe-hub-card__description">An MIT-built creative coding community that lets you embed player projects anywhere via iframe.</p>
-          <ul class="iframe-hub-card__tags">
-            <li>Classroom friendly</li>
-            <li>Maker community</li>
-            <li>Open source spirit</li>
-          </ul>
-          <a class="iframe-hub-card__cta" href="https://scratch.mit.edu/" target="_blank" rel="noopener">
-            Visit platform <span aria-hidden="true">→</span>
-          </a>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="tools-heading">
-      <div class="container section__header">
-        <h2 id="tools-heading">Creator toolbox</h2>
-        <a class="section__link" href="/tools/">See all tools</a>
-      </div>
-      <div class="container">
-        <div class="tool-grid" id="featured-tools"></div>
-      </div>
-    </section>
-
-    <section class="section section--alt" aria-labelledby="rankings-preview-heading">
-      <div class="container rankings-preview">
-        <div>
-          <h2 id="rankings-preview-heading">Daily rankings</h2>
-          <p>Check the Top, New and Trending charts to see what the community is playing.</p>
-          <a class="btn btn-outline" href="/rankings/">View rankings</a>
-        </div>
-        <div class="rankings-preview__list">
-          <ol id="rankings-preview"></ol>
         </div>
       </div>
     </section>
   </main>
+
 
   <footer class="site-footer">
     <div class="container footer__grid">
