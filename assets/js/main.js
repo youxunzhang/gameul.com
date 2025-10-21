@@ -1316,7 +1316,7 @@
 
   function renderToolFilters(container, activeCategory, onChange) {
     container.innerHTML = '';
-    const categories = ['All', 'AI Tools', 'Game Tools', 'Game Portals', 'Gaming Resources'];
+    const categories = ['All', 'AI Tools', 'Game Tools', 'Game Platform', 'Game Portals', 'Gaming Resources'];
     categories.forEach((category) => {
       const button = document.createElement('button');
       button.type = 'button';

@@ -441,15 +441,6 @@
       tags: ['marketplace', 'jams']
     },
     {
-      slug: 'crazygames',
-      title: 'CrazyGames',
-      description: 'Massive discovery portal for casual browser games with global reach and creator analytics.',
-      url: 'https://www.crazygames.com/',
-      icon: 'https://www.crazygames.com/favicon-32x32.png',
-      category: 'Game Portals',
-      tags: ['portal', 'analytics']
-    },
-    {
       slug: 'poki',
       title: 'Poki',
       description: 'Mobile-friendly browser arcade featuring curated indie titles and cross-platform publishing.',
@@ -457,6 +448,159 @@
       icon: 'https://images.poki.com/favicon-32x32.png',
       category: 'Game Portals',
       tags: ['portal', 'mobile']
+    },
+    {
+      slug: 'battlenet',
+      title: 'Battle.net',
+      description: 'Blizzard Entertainment’s official platform for World of Warcraft, Overwatch and more premium PC titles.',
+      url: 'https://shop.battlenet.com.cn/zh-cn/family/world-of-warcraft',
+      icon: 'https://shop.battlenet.com.cn/favicon.ico',
+      category: 'Game Platform',
+      tags: ['pc', 'publisher']
+    },
+    {
+      slug: 'ovagames',
+      title: 'Ova Games',
+      description: 'Community-driven release tracker providing mirrors, patches and crack status updates for PC games.',
+      url: 'https://www.ovagames.com/',
+      icon: 'https://www.ovagames.com/favicon.ico',
+      category: 'Game Platform',
+      tags: ['pc', 'tracker']
+    },
+    {
+      slug: 'blacknut',
+      title: 'Blacknut',
+      description: 'Cloud gaming subscription with family profiles and a curated library playable across TVs, mobile and PC.',
+      url: 'https://www.blacknut.com/en',
+      icon: 'https://www.blacknut.com/favicon-32x32.png',
+      category: 'Game Platform',
+      tags: ['cloud', 'subscription']
+    },
+    {
+      slug: 'crazygames',
+      title: 'CrazyGames',
+      description: 'Massive discovery portal for casual browser games with global reach and creator analytics.',
+      url: 'https://www.crazygames.com/',
+      icon: 'https://www.crazygames.com/favicon-32x32.png',
+      category: 'Game Platform',
+      tags: ['browser', 'analytics']
+    },
+    {
+      slug: 'eurogamer',
+      title: 'Eurogamer',
+      description: 'European-focused editorial platform covering game reviews, previews and industry reporting.',
+      url: 'https://www.eurogamer.net/',
+      icon: 'https://www.eurogamer.net/favicon-32x32.png',
+      category: 'Game Platform',
+      tags: ['news', 'reviews']
+    },
+    {
+      slug: 'gamefaqs',
+      title: 'GameFAQs',
+      description: 'Long-running community wiki hosting walkthroughs, cheats, FAQs and message boards for every genre.',
+      url: 'https://gamefaqs.gamespot.com/',
+      icon: 'https://gamefaqs.gamespot.com/favicon.ico',
+      category: 'Game Platform',
+      tags: ['guides', 'community']
+    },
+    {
+      slug: 'gamespot',
+      title: 'GameSpot',
+      description: 'Global games media destination with breaking news, exclusive interviews and review scores.',
+      url: 'https://www.gamespot.com/',
+      icon: 'https://www.gamespot.com/favicon.ico',
+      category: 'Game Platform',
+      tags: ['news', 'reviews']
+    },
+    {
+      slug: 'gamepedia-lol',
+      title: 'League of Legends Esports Wiki',
+      description: 'Fandom-powered esports wiki cataloguing League rosters, tournament results and historical stats.',
+      url: 'https://lol.fandom.com/wiki/League_of_Legends_Esports_Wiki',
+      icon: 'https://lol.fandom.com/favicon-32x32.png',
+      category: 'Game Platform',
+      tags: ['esports', 'wiki']
+    },
+    {
+      slug: 'gamesradar',
+      title: 'GamesRadar+',
+      description: 'Editorial network offering buying guides, hardware coverage and entertainment crossovers.',
+      url: 'https://www.gamesradar.com/',
+      icon: 'https://www.gamesradar.com/favicon-32x32.png',
+      category: 'Game Platform',
+      tags: ['news', 'guides']
+    },
+    {
+      slug: 'isthereanydeal',
+      title: 'IsThereAnyDeal',
+      description: 'Deal aggregation and wishlist tracker that checks price drops across all major PC stores.',
+      url: 'https://isthereanydeal.com/',
+      icon: 'https://isthereanydeal.com/favicon-32x32.png',
+      category: 'Game Platform',
+      tags: ['deals', 'wishlist']
+    },
+    {
+      slug: 'wordtips',
+      title: 'WordTips',
+      description: 'Word-finder toolbox that solves anagrams, Scrabble racks and daily puzzle challenges.',
+      url: 'https://word.tips/',
+      icon: 'https://word.tips/favicon-32x32.png',
+      category: 'Game Platform',
+      tags: ['word games', 'solver']
+    },
+    {
+      slug: 'kongregate',
+      title: 'Kongregate',
+      description: 'Classic browser portal supporting indie uploads, badges, chat and progress cloud saves.',
+      url: 'https://www.kongregate.com/',
+      icon: 'https://www.kongregate.com/favicon.ico',
+      category: 'Game Platform',
+      tags: ['browser', 'indie']
+    },
+    {
+      slug: 'kotaku',
+      title: 'Kotaku',
+      description: 'Opinionated games journalism covering culture, controversies and in-depth reporting.',
+      url: 'https://kotaku.com/',
+      icon: 'https://kotaku.com/favicon.ico',
+      category: 'Game Platform',
+      tags: ['news', 'culture']
+    },
+    {
+      slug: 'miniclip',
+      title: 'Miniclip',
+      description: 'Mobile-first studio and portal delivering sports hits like 8 Ball Pool alongside casual classics.',
+      url: 'https://www.miniclip.com/',
+      icon: 'https://www.miniclip.com/favicon-32x32.png',
+      category: 'Game Platform',
+      tags: ['mobile', 'sports']
+    },
+    {
+      slug: 'mlg',
+      title: 'MLG',
+      description: 'Major League Gaming’s official X channel for esports highlights, brackets and broadcast schedules.',
+      url: 'https://x.com/mlg',
+      icon: 'https://abs.twimg.com/favicons/twitter.ico',
+      category: 'Game Platform',
+      tags: ['esports', 'news']
+    },
+    {
+      slug: 'liquipedia',
+      title: 'Liquipedia',
+      description: 'Comprehensive esports wiki network documenting tournaments, teams and match histories.',
+      url: 'https://liquipedia.net/',
+      icon: 'https://liquipedia.net/favicon.ico',
+      category: 'Game Platform',
+      tags: ['esports', 'wiki']
+    },
+    {
+      slug: 'polygon',
+      title: 'Polygon',
+      description: 'Feature-rich games and entertainment magazine with longform reporting and critical reviews.',
+      url: 'https://www.polygon.com/',
+      icon: 'https://www.polygon.com/favicon.ico',
+      category: 'Game Platform',
+      tags: ['news', 'reviews']
     },
     {
       slug: 'kenney',
