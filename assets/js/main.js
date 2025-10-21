@@ -1561,6 +1561,55 @@
     setFooterYear();
   }
 
+  function renderMarketingPage() {
+    setActiveNav('marketing');
+    setFooterYear();
+
+    const copyButtons = document.querySelectorAll('[data-role="share-copy"]');
+    copyButtons.forEach((button) => {
+      button.addEventListener('click', async () => {
+        const url = button.dataset.shareUrl || window.location.href;
+        const subtitle = button.querySelector('[data-role="share-subtitle"]');
+
+        if (subtitle && !subtitle.dataset.originalText) {
+          subtitle.dataset.originalText = subtitle.textContent.trim();
+        }
+
+        const resetSubtitle = (message) => {
+          if (!subtitle) {
+            return;
+          }
+          subtitle.textContent = message;
+          if (subtitle.dataset.resetTimeout) {
+            clearTimeout(Number(subtitle.dataset.resetTimeout));
+          }
+          const timeoutId = window.setTimeout(() => {
+            subtitle.textContent = subtitle.dataset.originalText || '';
+            subtitle.dataset.resetTimeout = '';
+          }, 3000);
+          subtitle.dataset.resetTimeout = String(timeoutId);
+        };
+
+        try {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(url);
+            resetSubtitle('链接已复制 ✅');
+            return;
+          }
+        } catch (error) {
+          console.error('Failed to copy share url', error);
+        }
+
+        const fallback = window.prompt('复制以下链接推广 GameUL：', url);
+        if (fallback !== null) {
+          resetSubtitle('已复制或手动复制链接 ✅');
+        } else {
+          resetSubtitle('复制失败，请手动复制链接');
+        }
+      });
+    });
+  }
+
   function renderIframePage() {
     setActiveNav('iframe');
     setFooterYear();
@@ -2816,6 +2865,7 @@
     rankings: renderRankingsPage,
     gameDetail: renderGameDetail,
     about: renderAboutPage,
+    marketing: renderMarketingPage,
     iframe: renderIframePage,
     kungfu: renderKungfuPage,
     jsonEditor: renderJsonEditorPage
