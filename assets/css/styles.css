@@ -249,6 +249,9 @@ img {
   gap: 0.9rem;
   margin-bottom: 1.8rem;
 }
+body[data-page="home"] .nav-hero {
+  display: none;
+}
 .nav-hero {
   position: relative;
   padding: 5rem 0 4rem;
