@@ -89,7 +89,7 @@
     {
       "title": "Sudoku Classic",
       "slug": "sudoku-classic",
-      "url": "https://sudoku.com/",
+      "url": "/games/sudoku-classic/",
       "thumbnail": "img-portal/suduku.png",
       "category": "Numbers"
     },

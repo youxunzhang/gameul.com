@@ -138,6 +138,29 @@
       recommended: ['cosmic-blocks', 'rogue-chef', 'quantum-leap']
     },
     {
+      slug: 'sudoku-classic',
+      title: 'Sudoku Classic Library',
+      shortDescription: 'Fill every 9x9 grid without repeating numbers, with notes, hints and colorful themes.',
+      description:
+        'Sudoku Classic Library brings polished number puzzles with smooth keyboard or tap controls, undo/erase buttons, and a friendly notes system. Choose from daily challenges or quick rounds, and swap between soft candy gradients or clean light modes as you solve.',
+      categories: ['Puzzle', 'Logic'],
+      tags: ['sudoku', 'numbers', 'brain training', 'notes'],
+      releaseDate: '2024-07-12',
+      rating: 4.9,
+      playTime: '3-10 min per grid',
+      cover: '/img-portal/suduku.png',
+      hero: '/img-portal/suduku.png',
+      screenshots: ['/img-portal/suduku.png'],
+      embedUrl: 'https://sudoku.com/',
+      playUrl: 'https://sudoku.com/',
+      controls: ['Tap or press 1-9 to fill cells', 'Use Notes toggle to add pencil marks', 'Erase to clear mistakes instantly'],
+      platforms: ['Web Browser', 'Mobile Friendly'],
+      developer: 'Sudoku.com',
+      languages: ['English', '中文'],
+      features: ['Daily challenges and timed modes', 'Hints, undo and mistake counter', 'Soft candy and light UI themes'],
+      recommended: ['puzzle-nexus', 'cosmic-blocks', 'magic-cube-plus']
+    },
+    {
       slug: 'cosmic-blocks',
       title: 'Cosmic Blocks',
       shortDescription: 'Slide gravity-shifted blocks into orbital slots while managing limited moves.',

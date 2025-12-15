@@ -53,6 +53,19 @@
       "rating": 4.8
     },
     {
+      "slug": "sudoku-classic",
+      "title": "Sudoku Classic Library",
+      "summary": "Write 1-9 into every row, column and block with notes, hints and gentle gradients.",
+      "categories": ["Puzzle", "Logic"],
+      "tags": ["sudoku", "numbers", "brain training"],
+      "thumbnail": "/img-portal/suduku.png",
+      "detailUrl": "/games/sudoku-classic/",
+      "playUrl": "https://sudoku.com/",
+      "developer": "Sudoku.com",
+      "releaseDate": "2024-07-12",
+      "rating": 4.9
+    },
+    {
       "slug": "cosmic-blocks",
       "title": "Cosmic Blocks",
       "summary": "Slide gravity-shifted blocks into orbital slots while managing limited moves.",
