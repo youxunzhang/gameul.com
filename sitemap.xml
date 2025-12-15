@@ -56,6 +56,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://gameul.com/games/sudoku-classic/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://gameul.com/games/cosmic-blocks/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
