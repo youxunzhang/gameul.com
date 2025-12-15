@@ -145,7 +145,7 @@
         'Sudoku Classic Library brings polished number puzzles with smooth keyboard or tap controls, undo/erase buttons, and a friendly notes system. Choose from daily challenges or quick rounds, and swap between soft candy gradients or clean light modes as you solve.',
       categories: ['Puzzle', 'Logic'],
       tags: ['sudoku', 'numbers', 'brain training', 'notes'],
-      releaseDate: '2024-07-12',
+      releaseDate: '2024-12-18',
       rating: 4.9,
       playTime: '3-10 min per grid',
       cover: '/img-portal/suduku.png',
