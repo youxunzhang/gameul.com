@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play the best featured games curated by game studio.">
+    <title>Featured Games - game studio</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8794607118520437" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+            border-radius: 1.25rem;
+            font-size: 1.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18rem;
+            text-decoration: none;
+            background: linear-gradient(120deg, #5f3df7, #05d0f5, #38f5a5);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: logoPulse 8s ease infinite;
+            filter: drop-shadow(0 10px 22px rgba(95, 61, 247, 0.25));
+            transition: transform 0.35s ease, filter 0.35s ease;
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        .logo::before {
+            content: 'GS';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 0.85rem;
+            background: linear-gradient(135deg, rgba(95, 61, 247, 0.95), rgba(5, 208, 245, 0.95));
+            box-shadow: 0 15px 30px rgba(95, 61, 247, 0.4);
+            color: #ffffff;
+            font-size: 1.05rem;
+            letter-spacing: 0.1rem;
+            text-shadow: 0 0 14px rgba(0, 0, 0, 0.35);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            inset: 0.2rem -0.4rem;
+            border-radius: 1.4rem;
+            background: radial-gradient(circle at 0% 0%, rgba(95, 61, 247, 0.28), transparent 60%),
+                        radial-gradient(circle at 100% 100%, rgba(56, 245, 165, 0.3), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 14px 30px rgba(95, 61, 247, 0.35));
+        }
+
+        .logo:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes logoPulse {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .search-box:focus-within {
+            border-color: #667eea;
+        }
+
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 0.5rem;
+            width: 200px;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.95);
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                padding: 1.5rem 2rem;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 120px auto 0;
+            padding: 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .game-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .game-card iframe {
+            width: 100%;
+            min-height: 260px;
+            border: none;
+            border-radius: 12px;
+            background: #e0e0e0;
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            margin-top: 4rem;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements" aria-hidden="true">
+        <div class="floating-element" style="top: 10%; left: 10%; font-size: 3rem;">🎮</div>
+        <div class="floating-element" style="top: 20%; right: 10%; font-size: 2rem;">🕹️</div>
+        <div class="floating-element" style="top: 60%; left: 5%; font-size: 2.5rem;">🎯</div>
+        <div class="floating-element" style="top: 70%; right: 20%; font-size: 2rem;">🏆</div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">game studio</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="featured-games.html">Featured Games</a></li>
+                <li><a href="geometry-dash.html">Geometry Dash</a></li>
+                <li><a href="brain-teasers.html">Brain Teasers</a></li>
+                <li><a href="new-game.html">New Releases</a></li>
+                <li><a href="game-development.html">Game Development</a></li>
+                <li><a href="company-ranking.html">Company Rankings</a></li>
+            </ul>
+            <div class="search-box">
+                <input type="text" placeholder="Search games..." aria-label="Search games">
+                <span aria-hidden="true">🔍</span>
+            </div>
+            <button class="mobile-menu" aria-label="Toggle navigation">☰</button>
+        </div>
+    </nav>
+
+    <main class="content">
+        <section class="section">
+            <h1 class="section-title">🎯 Featured Games</h1>
+            <p class="section-description">Enjoy our spotlight selection of immersive games from trusted partners and creative communities. Click any card to start the game once it loads in view.</p>
+            <div class="games-grid">
+                <div class="game-card">
+                    <iframe data-src="https://scratch.mit.edu/projects/1102118868/embed" allowtransparency="true" allowfullscreen title="Scratch community project" loading="lazy"></iframe>
+                </div>
+                <div class="game-card">
+                    <iframe
+                        data-src="https://games.crazygames.com/en_US/bloxdhop-io/index.html"
+                        allowfullscreen
+                        title="BloxdHop.io"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation allow-gamepad"
+                        loading="lazy"></iframe>
+                </div>
+                <div class="game-card">
+                    <iframe data-src="https://www.crazygames.com/embed/fortzone-battle-royale-xkd" allow="gamepad *;" title="Fortzone Battle Royale" loading="lazy"></iframe>
+                </div>
+                <div class="game-card">
+                    <iframe data-src="https://html5.gamedistribution.com/1b3229bbbf6d4c519e216e8228b5d0a8/?gd_sdk_referrer_url=https://www.example.com/games/{game-path}" title="Gamedistribution Featured Game" loading="lazy"></iframe>
+                </div>
+                <div class="game-card">
+                    <iframe
+                        data-src="https://play.famobi.com/"
+                        allowfullscreen
+                        title="Famobi Selection"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
+                        loading="lazy"></iframe>
+                </div>
+                <div class="game-card">
+                    <iframe
+                        data-src="https://www.twoplayergames.org/gameframe/boxing-random"
+                        allowfullscreen
+                        title="Boxing Random"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
+                        loading="lazy"></iframe>
+                </div>
+                <div class="game-card">
+                    <iframe
+                        data-src="https://19584.cache.armorgames.com/files/games/tortoise-truck-19584/index.html?v=1749056973"
+                        allowfullscreen
+                        title="Tortoise Truck"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
+                        loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 game studio. All rights reserved.</p>
+            <p>Contact Us | About Us | Developer Collaboration</p>
+        </div>
+    </footer>
+
+    <script>
+        function setupIframeLazyLoading() {
+            const iframes = Array.from(document.querySelectorAll('iframe[data-src]'));
+            const loadIframe = (iframe) => {
+                if (!iframe.dataset.src || iframe.getAttribute('src')) {
+                    return;
+                }
+
+                iframe.setAttribute('src', iframe.dataset.src);
+                iframe.setAttribute('loading', 'lazy');
+            };
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            loadIframe(entry.target);
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '200px 0px',
+                    threshold: 0.15
+                });
+
+                iframes.forEach(iframe => observer.observe(iframe));
+            } else {
+                iframes.forEach(loadIframe);
+            }
+        }
+
+        function setupMobileMenu() {
+            const mobileMenuButton = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (!mobileMenuButton || !navLinks) {
+                return;
+            }
+
+            mobileMenuButton.addEventListener('click', () => {
+                const isVisible = navLinks.style.display === 'flex';
+                navLinks.style.display = isVisible ? 'none' : 'flex';
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupIframeLazyLoading();
+            setupMobileMenu();
+        });
+    </script>
+</body>
+</html>

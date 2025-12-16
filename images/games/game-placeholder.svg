@@ -1,0 +1,21 @@
+<svg width="480" height="360" viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#667eea"/>
+      <stop offset="100%" stop-color="#764ba2"/>
+    </linearGradient>
+    <style>
+      .title { font: bold 42px 'Arial', sans-serif; fill: #ffffff; }
+      .subtitle { font: 20px 'Arial', sans-serif; fill: #f7f9fc; }
+      .badge { font: 16px 'Arial', sans-serif; fill: #ffffff; }
+    </style>
+  </defs>
+  <rect width="480" height="360" rx="32" fill="url(#grad)"/>
+  <rect x="70" y="110" width="340" height="180" rx="28" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+  <circle cx="240" cy="200" r="46" fill="rgba(255,255,255,0.22)"/>
+  <polygon points="230,168 286,200 230,232" fill="#ffffff"/>
+  <text x="240" y="90" text-anchor="middle" class="title">Play Popular Games</text>
+  <text x="240" y="310" text-anchor="middle" class="subtitle">Click to load the gameplay instantly</text>
+  <rect x="174" y="132" width="132" height="32" rx="16" fill="rgba(255,255,255,0.28)"/>
+  <text x="240" y="155" text-anchor="middle" class="badge">Lightning Fast</text>
+</svg>

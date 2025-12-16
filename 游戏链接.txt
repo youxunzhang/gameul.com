@@ -1,0 +1,90 @@
+<iframe src="https://scratch.mit.edu/projects/1102118868/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+
+
+
+<iframe 
+    src="https://games.crazygames.com/en_US/bloxdhop-io/index.html"
+    width="740"
+    height="480"
+    frameborder="0"
+    allowfullscreen="true"
+    title="CrazyGames - bloxdhop io"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation allow-gamepad">
+</iframe>
+
+
+<iframe src="https://www.crazygames.com/embed/fortzone-battle-royale-xkd" style="width: 100%; height: 100%;" frameborder="0" allow="gamepad *;"></iframe>
+
+
+
+<iframe src="https://html5.gamedistribution.com/1b3229bbbf6d4c519e216e8228b5d0a8/?gd_sdk_referrer_url=https://www.example.com/games/{game-path}" width="1400" height="875" scrolling="none" frameborder="0"></iframe>
+
+<iframe 
+    src="https://play.famobi.com/"
+    width="700"
+    height="450"
+    frameborder="0"
+    allowfullscreen="true"
+    title="Famobi - om nom run"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation">
+</iframe>
+
+
+
+<iframe 
+    src="https://games.poki.com/458768/a601b558-b49f-46c8-a13e-78b975209c89?tag=pg-86eacb676326848d32234d8634c2a510d77caf37&amp;site_id=73&amp;iso_lang=zh&amp;country=US&amp;poki_url=https://poki.com/zh/g/vortellas-dress-up&amp;hoist=yes&amp;nonPersonalized=n&amp;cloudsavegames=n&amp;familyFriendly=n&amp;categories=4,44,76,93,281,1126,1187,1190&amp;special_condition=landing"
+    width="650"
+    height="450"
+    frameborder="0"
+    allowfullscreen="true"
+    title="Poki - vortellas dress up"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation">
+</iframe>
+
+
+<iframe 
+    src="https://games.poki.com/458768/0322484b-7a58-4454-9667-f805afffded5?tag=pg-c269b0a890a4cfe1c499188409a9240669a68214&amp;site_id=73&amp;iso_lang=zh&amp;country=US&amp;poki_url=https://poki.com/zh/g/brain-test-tricky-puzzles&amp;hoist=yes&amp;nonPersonalized=n&amp;cloudsavegames=n&amp;familyFriendly=n&amp;categories=7,16,72,96,400,843,1150,1190,1206&amp;ab=0908c89d0b583118c6775850e2d29e4bd40cf449&amp;experiment=a-a7ce6afb&amp;special_condition=landing"
+    width="650"
+    height="450"
+    frameborder="0"
+    allowfullscreen="true"
+    title="Poki - brain test tricky puzzles"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation">
+</iframe>
+
+
+<iframe src="https://www.crazygames.com/embed/fortzone-battle-royale-xkd" style="width: 100%; height: 100%;" frameborder="0" allow="gamepad *;"></iframe>
+
+
+<iframe src="https://html5.gamedistribution.com/1b3229bbbf6d4c519e216e8228b5d0a8/?gd_sdk_referrer_url=https://www.example.com/games/{game-path}" width="1400" height="875" scrolling="none" frameborder="0"></iframe>
+
+
+<iframe 
+    src="https://www.twoplayergames.org/gameframe/boxing-random"
+    width="720"
+    height="500"
+    frameborder="0"
+    allowfullscreen="true"
+    title="TwoPlayerGames - boxing random"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation">
+</iframe>
+
+<iframe 
+    src="https://19584.cache.armorgames.com/files/games/tortoise-truck-19584/index.html?v=1749056973"
+    width="640"
+    height="480"
+    frameborder="0"
+    allowfullscreen="true"
+    title="ArmorGames - tortoise truck game"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation">
+</iframe>
+
+<iframe 
+    src="https://games.poki.com/458768/0322484b-7a58-4454-9667-f805afffded5?tag=pg-86eacb676326848d32234d8634c2a510d77caf37&amp;site_id=73&amp;iso_lang=zh&amp;country=US&amp;poki_url=https://poki.com/zh/g/brain-test-tricky-puzzles&amp;hoist=yes&amp;nonPersonalized=n&amp;cloudsavegames=n&amp;familyFriendly=n&amp;categories=7,16,72,96,400,843,1150,1190,1206&amp;special_condition=landing"
+    width="650"
+    height="450"
+    frameborder="0"
+    allowfullscreen="true"
+    title="Poki - brain test tricky puzzles"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation">
+</iframe>

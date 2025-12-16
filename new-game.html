@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover the newest games from Game Studio, including mobile, PC, and indie releases. Explore action, strategy, RPG, adventure, and casual titles with free downloads and helpful guides.">
+    <meta name="keywords" content="new games, latest games, mobile games, PC games, indie games, action games, strategy games, RPG, adventure games, casual games, free games, game downloads, game guides">
+    <meta name="author" content="Game Studio">
+    <meta name="robots" content="index, follow">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8794607118520437"
+     crossorigin="anonymous"></script>
+    <title>Latest Games - Game Studio | New Releases & Downloads</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+            border-radius: 1.25rem;
+            font-size: 1.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18rem;
+            text-decoration: none;
+            background: linear-gradient(120deg, #5f3df7, #05d0f5, #38f5a5);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: logoPulse 8s ease infinite;
+            filter: drop-shadow(0 10px 22px rgba(95, 61, 247, 0.25));
+            transition: transform 0.35s ease, filter 0.35s ease;
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        .logo::before {
+            content: 'GS';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 0.85rem;
+            background: linear-gradient(135deg, rgba(95, 61, 247, 0.95), rgba(5, 208, 245, 0.95));
+            box-shadow: 0 15px 30px rgba(95, 61, 247, 0.4);
+            color: #ffffff;
+            font-size: 1.05rem;
+            letter-spacing: 0.1rem;
+            text-shadow: 0 0 14px rgba(0, 0, 0, 0.35);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            inset: 0.2rem -0.4rem;
+            border-radius: 1.4rem;
+            background: radial-gradient(circle at 0% 0%, rgba(95, 61, 247, 0.28), transparent 60%),
+                        radial-gradient(circle at 100% 100%, rgba(56, 245, 165, 0.3), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 14px 30px rgba(95, 61, 247, 0.35));
+        }
+
+        .logo:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes logoPulse {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .search-box:focus-within {
+            border-color: #667eea;
+        }
+
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 0.5rem;
+            width: 200px;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 100px auto 0;
+            padding: 2rem;
+        }
+
+        .page-title {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Game card styles */
+        .game-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .more-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .more-link:hover {
+            color: #5a67d8;
+        }
+
+        .more-link svg {
+            transition: transform 0.3s;
+        }
+
+        .more-link:hover svg {
+            transform: translateX(3px);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .game-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .game-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .game-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 1rem;
+            color: white;
+        }
+
+        .game-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .search-box input {
+                width: 150px;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+            
+            .game-image {
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .card-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+
+        /* Social media sharing styles */
+        .share-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .share-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .share-btn.facebook {
+            background: linear-gradient(45deg, #1877f2, #0d6efd);
+        }
+
+        .share-btn.twitter {
+            background: linear-gradient(45deg, #1da1f2, #0ea5e9);
+        }
+
+        .share-btn.linkedin {
+            background: linear-gradient(45deg, #0077b5, #0ea5e9);
+        }
+
+        .share-btn.whatsapp {
+            background: linear-gradient(45deg, #25d366, #22c55e);
+        }
+
+        .share-btn.telegram {
+            background: linear-gradient(45deg, #0088cc, #0ea5e9);
+        }
+
+        .share-btn.reddit {
+            background: linear-gradient(45deg, #ff4500, #f97316);
+        }
+
+        .share-btn.pinterest {
+            background: linear-gradient(45deg, #e60023, #ef4444);
+        }
+
+        .share-btn.email {
+            background: linear-gradient(45deg, #ea4335, #ef4444);
+        }
+
+        .share-btn.copy {
+            background: linear-gradient(45deg, #6b7280, #9ca3af);
+        }
+
+        .share-btn .share-icon {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .share-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Game Studio</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="featured-games.html">Featured Games</a></li>
+                <li><a href="geometry-dash.html">Geometry Dash</a></li>
+                <li><a href="brain-teasers.html">Brain Teasers</a></li>
+                <li><a href="new-game.html">New Releases</a></li>
+                <li><a href="top-games.html">Top Games</a></li>
+            </ul>
+            <div class="search-box">
+                <input type="text" placeholder="Search games...">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="content">
+        <h1 class="page-title">New Games</h1>
+
+        <!-- Social share area -->
+        <div class="share-section">
+            <h2 class="share-title">🌐 Share on Social Media</h2>
+            <div class="share-buttons">
+                <a href="#" class="share-btn facebook" onclick="shareToFacebook()">
+                    <span class="share-icon">📘</span>
+                    Facebook
+                </a>
+                <a href="#" class="share-btn twitter" onclick="shareToTwitter()">
+                    <span class="share-icon">🐦</span>
+                    Twitter
+                </a>
+                <a href="#" class="share-btn linkedin" onclick="shareToLinkedIn()">
+                    <span class="share-icon">💼</span>
+                    LinkedIn
+                </a>
+                <a href="#" class="share-btn whatsapp" onclick="shareToWhatsApp()">
+                    <span class="share-icon">📱</span>
+                    WhatsApp
+                </a>
+                <a href="#" class="share-btn telegram" onclick="shareToTelegram()">
+                    <span class="share-icon">📬</span>
+                    Telegram
+                </a>
+                <a href="#" class="share-btn reddit" onclick="shareToReddit()">
+                    <span class="share-icon">🤖</span>
+                    Reddit
+                </a>
+                <a href="#" class="share-btn pinterest" onclick="shareToPinterest()">
+                    <span class="share-icon">📌</span>
+                    Pinterest
+                </a>
+                <a href="#" class="share-btn email" onclick="shareToEmail()">
+                    <span class="share-icon">📧</span>
+                    Email
+                </a>
+                <button class="share-btn copy" onclick="copyPageLink()">
+                    <span class="share-icon">📋</span>
+                    Copy Link
+                </button>
+            </div>
+        </div>
+
+        <!-- Multiplayer section -->
+        <div class="game-card">
+            <div class="card-header">
+                <h2 class="card-title">Multiplayer Games</h2>
+                <a href="#" class="more-link">
+                    See more
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 320 512" height="10px" width="10px" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="games-grid">
+                <div class="game-item">
+                    <img alt="Online Assault" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=11">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Online Assault</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Real Billiards 3D" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=12">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Real Billiards 3D</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Ultimate Stunt Car Challenge" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=13">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Ultimate Stunt Car Challenge</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Zoo Zoom Shapes" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=14">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Zoo Zoom Shapes</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Emerald Isle Solitaire" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=15">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Emerald Isle Solitaire</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Magic Solitaire" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=16">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Magic Solitaire</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Kids Geometry" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=17">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Kids Geometry</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Vegetable Friends" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=18">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Vegetable Friends</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Meet the Birds" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=19">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Meet the Birds</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Good Night My Baby" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=20">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Good Night My Baby</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Color Path In & Out" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=21">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Color Path In & Out</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Billiards Champion" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=22">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Billiards Champion</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Jungle Battle" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=23">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Jungle Battle</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Board King Dice" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=24">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Board King Dice</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Texas Hold'em Poker" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=25">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Texas Hold'em Poker</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Seven Card Showdown" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=26">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Seven Card Showdown</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Balloon Race 3D" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=27">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Balloon Race 3D</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="SEOTDA Card Game" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=28">
+                    <div class="game-overlay">
+                        <h5 class="game-title">SEOTDA Card Game</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional sections can be added here -->
+        <div class="game-card">
+            <div class="card-header">
+                <h2 class="card-title">Trending New Games</h2>
+                <a href="#" class="more-link">
+                    See more
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 320 512" height="10px" width="10px" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="games-grid">
+                <div class="game-item">
+                    <img alt="Racing Rush" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=31">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Racing Rush</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Puzzle Quest" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=32">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Puzzle Quest</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Action Adventure" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=33">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Action Adventure</h5>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <img alt="Strategy Challenge" loading="lazy" width="200" height="200" class="game-image" src="https://picsum.photos/200/200?random=34">
+                    <div class="game-overlay">
+                        <h5 class="game-title">Strategy Challenge</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple search feature
+        document.querySelector('.search-box input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const gameItems = document.querySelectorAll('.game-item');
+            
+            gameItems.forEach(item => {
+                const title = item.querySelector('.game-title').textContent.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Game click handler
+        document.querySelectorAll('.game-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const gameTitle = this.querySelector('.game-title').textContent;
+                alert(`You clicked on: ${gameTitle}`);
+                // Add navigation to the game details page here if needed
+            });
+        });
+
+        // Handle broken images
+        document.addEventListener('DOMContentLoaded', function() {
+            const gameImages = document.querySelectorAll('.game-image');
+            gameImages.forEach(img => {
+                img.addEventListener('error', function() {
+                    this.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
+                    this.style.display = 'flex';
+                    this.style.alignItems = 'center';
+                    this.style.justifyContent = 'center';
+                    this.style.color = 'white';
+                    this.style.fontSize = '1.2rem';
+                    this.style.fontWeight = 'bold';
+                    this.textContent = this.alt || 'Game image';
+                });
+            });
+        });
+
+        // Social media share helpers
+        function shareToFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        function shareToTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            const shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        function shareToLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        function shareToWhatsApp() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            const shareUrl = `https://wa.me/?text=${title}%20${url}`;
+            window.open(shareUrl, '_blank');
+        }
+
+        function shareToTelegram() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            const shareUrl = `https://t.me/share/url?url=${url}&text=${title}`;
+            window.open(shareUrl, '_blank');
+        }
+
+        function shareToReddit() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            const shareUrl = `https://reddit.com/submit?url=${url}&title=${title}`;
+            window.open(shareUrl, '_blank');
+        }
+
+        function shareToPinterest() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            const shareUrl = `https://pinterest.com/pin/create/button/?url=${url}&description=${title}`;
+            window.open(shareUrl, '_blank');
+        }
+
+        function shareToEmail() {
+            const url = window.location.href;
+            const title = document.title;
+            const subject = encodeURIComponent(`Check out this amazing game studio: ${title}`);
+            const body = encodeURIComponent(`I found this great game studio website that you might be interested in:\n\n${title}\n${url}\n\nIt features professional game development services, free online games, and much more!`);
+            const mailtoUrl = `mailto:?subject=${subject}&body=${body}`;
+            window.location.href = mailtoUrl;
+        }
+
+        function copyPageLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(function() {
+                // Show a success message
+                const copyBtn = document.querySelector('.share-btn.copy');
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<span class="share-icon">✅</span>Copied';
+                copyBtn.style.background = 'linear-gradient(45deg, #22c55e, #16a34a)';
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                    copyBtn.style.background = 'linear-gradient(45deg, #6b7280, #9ca3af)';
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Copy failed:', err);
+                alert('Copy failed. Please copy the link manually: ' + url);
+            });
+        }
+    </script>
+</body>
+</html>
+

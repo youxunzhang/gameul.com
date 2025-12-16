@@ -1,0 +1,25 @@
+下方数据插入 youxistudio.com\img-classic\gamedata.json
+image字段 https://youxistudio.com/img-classic/这个地址加上游戏名
+
+
+
+slither http://slither.com/io
+snake https://snake.io/
+Tetris https://play.tetris.com/
+Tetris https://www.goodoldtetris.com/
+2048  https://2048game.com/2048 
+spinthewheel https://spinthewheelofnames.com/
+SuperMario https://supermarioplay.com/
+Minesweeper https://minesweeper.online/
+Onet Connect https://www.crazygames.com/game/onet-connect-classic
+Match Pairs https://dkmgames.com/memory/pairsrun.php
+udoku https://www.websudoku.com/
+Bejeweled https://www.digbejeweled.com/
+happywheels  https://www.crazygames.com/game/happy-wheels
+FlappyBird https://flappybird.org/  
+https://www.crazygames.com/game/run-3
+agar https://agaronline.io/
+FireboyandWatergirl https://www.crazygames.com/game/fireboy-and-watergirl-the-forest-temple
+
+
+数据处理完毕后在https://youxistudio.com/img-classic/目录下面生成一个index.html页面，展示 youxistudio.com\img-classic\gamedata.json文件里面的游戏信息

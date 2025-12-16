@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://youxistudio.online/sitemap.xml
+
+# Allow all search engines to crawl
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Permit crawling of all game pages
+Allow: /games.html
+Allow: /new-game.html
+Allow: /game-development.html
+Allow: /company-ranking.html
+Allow: /top-games.html
+Allow: /Browser.html
+Allow: /IFRAMGAME.html
+
+# Crawl delay (seconds)
+Crawl-delay: 1

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Global game company rankings featuring industry leaders such as Tencent, NetEase, miHoYo, and more. Explore revenue insights, production strengths, and engine expertise.">
+    <meta name="keywords" content="game company rankings, game developers, Tencent, NetEase, miHoYo, game production, game development, game engines, Unity, Unreal">
+    <meta name="author" content="Game Studio">
+    <meta name="robots" content="index, follow">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8794607118520437"
+     crossorigin="anonymous"></script>
+    <title>Game Company Rankings - Global Game Developers & Revenue Comparison</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+            border-radius: 1.25rem;
+            font-size: 1.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18rem;
+            text-decoration: none;
+            background: linear-gradient(120deg, #5f3df7, #05d0f5, #38f5a5);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: logoPulse 8s ease infinite;
+            filter: drop-shadow(0 10px 22px rgba(95, 61, 247, 0.25));
+            transition: transform 0.35s ease, filter 0.35s ease;
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        .logo::before {
+            content: 'GS';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 0.85rem;
+            background: linear-gradient(135deg, rgba(95, 61, 247, 0.95), rgba(5, 208, 245, 0.95));
+            box-shadow: 0 15px 30px rgba(95, 61, 247, 0.4);
+            color: #ffffff;
+            font-size: 1.05rem;
+            letter-spacing: 0.1rem;
+            text-shadow: 0 0 14px rgba(0, 0, 0, 0.35);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            inset: 0.2rem -0.4rem;
+            border-radius: 1.4rem;
+            background: radial-gradient(circle at 0% 0%, rgba(95, 61, 247, 0.28), transparent 60%),
+                        radial-gradient(circle at 100% 100%, rgba(56, 245, 165, 0.3), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 14px 30px rgba(95, 61, 247, 0.35));
+        }
+
+        .logo:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes logoPulse {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .search-box:focus-within {
+            border-color: #667eea;
+        }
+
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 0.5rem;
+            width: 200px;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 100px auto 0;
+            padding: 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ranking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .company-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid #667eea;
+            position: relative;
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            background: white;
+            padding: 0.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: block;
+        }
+
+        .company-logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .company-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .company-rank {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-name-en {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .company-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .company-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .company-country {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .company-revenue {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .company-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .company-link:hover {
+            background: #764ba2;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .category-tab:hover, .category-tab.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: #333;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            .ranking-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-tabs {
+                justify-content: center;
+            }
+
+            .company-logo {
+                width: 60px;
+                height: 60px;
+            }
+
+            .company-header {
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">game studio</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="featured-games.html">Featured Games</a></li>
+                <li><a href="geometry-dash.html">Geometry Dash</a></li>
+                <li><a href="brain-teasers.html">Brain Teasers</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#new">New</a></li>
+                <li><a href="#popular">Popular</a></li>
+                <li><a href="Browser.html">Browser Game</a></li>
+                <li><a href="IFRAMGAME.html">IFRAMGAME</a></li>
+                <li><a href="company-ranking.html">Company Ranking</a></li>
+            </ul>
+            <div class="search-box">
+                <input type="text" placeholder="Search companies..." id="searchInput">
+                <span>🔍</span>
+            </div>
+            <button class="mobile-menu">☰</button>
+        </div>
+    </nav>
+
+    <div class="content">
+        <section class="section">
+            <h2 class="section-title">🏆 Global Game Company Rankings</h2>
+            <div class="category-tabs">
+                <button class="category-tab active" onclick="filterCompanies('all')">All Companies</button>
+                <button class="category-tab" onclick="filterCompanies('chinese')">Chinese Companies</button>
+                <button class="category-tab" onclick="filterCompanies('international')">International Companies</button>
+            </div>
+
+            <div class="ranking-grid" id="companiesGrid">
+                <!-- Chinese companies -->
+                <div class="company-card" data-category="chinese">
+                    <div class="company-header">
+                        <img src="https://picsum.photos/80/80?random=1" alt="Tencent Games logo" class="company-logo">
+                        <div>
+                            <div class="company-rank">#1</div>
+                            <div class="company-name">Tencent Games</div>
+                            <div class="company-name-en">Global leader in mobile and online gaming</div>
+                        </div>
+                    </div>
+                    <div class="company-description">Tencent operates blockbuster franchises such as Honor of Kings and PUBG Mobile, and invests in studios worldwide.</div>
+                    <div class="company-info">
+                        <span class="company-country">🇨🇳 China</span>
+                        <span class="company-revenue">Annual revenue: $27.3B</span>
+                    </div>
+                    <a href="https://game.qq.com/" class="company-link" target="_blank">Visit Website</a>
+                </div>
+
+                <div class="company-card" data-category="chinese">
+                    <div class="company-header">
+                        <img src="https://picsum.photos/80/80?random=2" alt="NetEase Games logo" class="company-logo">
+                        <div>
+                            <div class="company-rank">#2</div>
+                            <div class="company-name">NetEase Games</div>
+                            <div class="company-name-en">Creators of Fantasy Westward Journey and Onmyoji</div>
+                        </div>
+                    </div>
+                    <div class="company-description">NetEase focuses on premium MMORPG and mobile experiences, expanding globally with self-developed and licensed titles.</div>
+                    <div class="company-info">
+                        <span class="company-country">🇨🇳 China</span>
+                        <span class="company-revenue">Annual revenue: $9.7B</span>
+                    </div>
+                    <a href="https://game.163.com/" class="company-link" target="_blank">Visit Website</a>
+                </div>
+
+                <div class="company-card" data-category="chinese">
+                    <div class="company-header">
+                        <img src="https://picsum.photos/80/80?random=3" alt="miHoYo logo" class="company-logo">
+                        <div>
+                            <div class="company-rank">#3</div>
+                            <div class="company-name">miHoYo</div>
+                            <div class="company-name-en">Makers of Genshin Impact and Honkai</div>
+                        </div>
+                    </div>
+                    <div class="company-description">miHoYo delivers anime-inspired open worlds and live-service storytelling that resonate with players worldwide.</div>
+                    <div class="company-info">
+                        <span class="company-country">🇨🇳 China</span>
+                        <span class="company-revenue">Annual revenue: $3.8B</span>
+                    </div>
+                    <a href="https://www.mihoyo.com/" class="company-link" target="_blank">Visit Website</a>
+                </div>
+
+                <!-- International companies -->
+                <div class="company-card" data-category="international">
+                    <div class="company-header">
+                        <img src="https://picsum.photos/80/80?random=4" alt="Sony Interactive Entertainment logo" class="company-logo">
+                        <div>
+                            <div class="company-rank">#4</div>
+                            <div class="company-name">Sony Interactive Entertainment</div>
+                            <div class="company-name-en">PlayStation studios and services</div>
+                        </div>
+                    </div>
+                    <div class="company-description">Sony operates the PlayStation ecosystem and award-winning franchises like God of War and The Last of Us.</div>
+                    <div class="company-info">
+                        <span class="company-country">🇯🇵 Japan</span>
+                        <span class="company-revenue">Annual revenue: $24.4B</span>
+                    </div>
+                    <a href="https://www.playstation.com/" class="company-link" target="_blank">Visit Website</a>
+                </div>
+
+                <div class="company-card" data-category="international">
+                    <div class="company-header">
+                        <img src="https://picsum.photos/80/80?random=5" alt="Microsoft Gaming logo" class="company-logo">
+                        <div>
+                            <div class="company-rank">#5</div>
+                            <div class="company-name">Microsoft Gaming</div>
+                            <div class="company-name-en">Xbox studios, Bethesda, and Activision Blizzard</div>
+                        </div>
+                    </div>
+                    <div class="company-description">Microsoft drives the Xbox ecosystem with titles like Minecraft, Halo, and Call of Duty following the Activision Blizzard acquisition.</div>
+                    <div class="company-info">
+                        <span class="company-country">🇺🇸 United States</span>
+                        <span class="company-revenue">Annual revenue: $15.5B</span>
+                    </div>
+                    <a href="https://www.xbox.com/" class="company-link" target="_blank">Visit Website</a>
+                </div>
+
+                <div class="company-card" data-category="international">
+                    <div class="company-header">
+                        <img src="https://picsum.photos/80/80?random=6" alt="Nintendo logo" class="company-logo">
+                        <div>
+                            <div class="company-rank">#6</div>
+                            <div class="company-name">Nintendo</div>
+                            <div class="company-name-en">Creators of Mario, Zelda, and Pokémon</div>
+                        </div>
+                    </div>
+                    <div class="company-description">Nintendo blends hardware and software innovation across the Switch platform with beloved family-friendly franchises.</div>
+                    <div class="company-info">
+                        <span class="company-country">🇯🇵 Japan</span>
+                        <span class="company-revenue">Annual revenue: $12.1B</span>
+                    </div>
+                    <a href="https://www.nintendo.com/" class="company-link" target="_blank">Visit Website</a>
+                </div>
+
+                <div class="company-card" data-category="international">
+                    <div class="company-header">
+                        <img src="https://picsum.photos/80/80?random=7" alt="Activision Blizzard logo" class="company-logo">
+                        <div>
+                            <div class="company-rank">#7</div>
+                            <div class="company-name">Activision Blizzard</div>
+                            <div class="company-name-en">Call of Duty, World of Warcraft, Overwatch</div>
+                        </div>
+                    </div>
+                    <div class="company-description">Activision Blizzard delivers blockbuster shooters and MMOs with ongoing live-service support and esports communities.</div>
+                    <div class="company-info">
+                        <span class="company-country">🇺🇸 United States</span>
+                        <span class="company-revenue">Annual revenue: $7.5B</span>
+                    </div>
+                    <a href="https://www.activisionblizzard.com/" class="company-link" target="_blank">Visit Website</a>
+                </div>
+
+                <div class="company-card" data-category="international">
+                    <div class="company-header">
+                        <img src="https://picsum.photos/80/80?random=8" alt="Electronic Arts logo" class="company-logo">
+                        <div>
+                            <div class="company-rank">#8</div>
+                            <div class="company-name">Electronic Arts</div>
+                            <div class="company-name-en">FIFA, Battlefield, The Sims</div>
+                        </div>
+                    </div>
+                    <div class="company-description">EA produces live-service sports games and story franchises, spanning EA SPORTS FC, Apex Legends, The Sims, and more.</div>
+                    <div class="company-info">
+                        <span class="company-country">🇺🇸 United States</span>
+                        <span class="company-revenue">Annual revenue: $7.4B</span>
+                    </div>
+                    <a href="https://www.ea.com/" class="company-link" target="_blank">Visit Website</a>
+                </div>
+
+                <div class="company-card" data-category="chinese">
+                    <div class="company-header">
+                        <img src="https://picsum.photos/80/80?random=9" alt="Perfect World logo" class="company-logo">
+                        <div>
+                            <div class="company-rank">#9</div>
+                            <div class="company-name">Perfect World</div>
+                            <div class="company-name-en">MMORPG specialist behind Perfect World and Jade Dynasty</div>
+                        </div>
+                    </div>
+                    <div class="company-description">Perfect World builds expansive MMO worlds for PC and mobile players, with strong publishing reach in Asia.</div>
+                    <div class="company-info">
+                        <span class="company-country">🇨🇳 China</span>
+                        <span class="company-revenue">Annual revenue: $1.2B</span>
+                    </div>
+                    <a href="http://www.wanmei.com/" class="company-link" target="_blank">Visit Website</a>
+                </div>
+
+                <div class="company-card" data-category="international">
+                    <div class="company-header">
+                        <img src="https://picsum.photos/80/80?random=10" alt="Ubisoft logo" class="company-logo">
+                        <div>
+                            <div class="company-rank">#10</div>
+                            <div class="company-name">Ubisoft</div>
+                            <div class="company-name-en">Assassin's Creed, Rainbow Six, Far Cry</div>
+                        </div>
+                    </div>
+                    <div class="company-description">Ubisoft develops open-world adventures and cooperative shooters with global teams across Europe, North America, and Asia.</div>
+                    <div class="company-info">
+                        <span class="company-country">🇫🇷 France</span>
+                        <span class="company-revenue">Annual revenue: $2.3B</span>
+                    </div>
+                    <a href="https://www.ubisoft.com/" class="company-link" target="_blank">Visit Website</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 game studio. All rights reserved.</p>
+            <p>Contact Us | About Us | Developer Collaboration</p>
+        </div>
+    </footer>
+
+    <script>
+        function filterCompanies(category) {
+            const companies = document.querySelectorAll('.company-card');
+            const tabs = document.querySelectorAll('.category-tab');
+            
+            // Update tab active state
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter companies by category
+            companies.forEach(company => {
+                if (category === 'all' || company.dataset.category === category) {
+                    company.style.display = 'block';
+                } else {
+                    company.style.display = 'none';
+                }
+            });
+        }
+
+        // Search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const companies = document.querySelectorAll('.company-card');
+                
+                companies.forEach(company => {
+                    const name = company.querySelector('.company-name').textContent.toLowerCase();
+                    const nameEn = company.querySelector('.company-name-en').textContent.toLowerCase();
+                    const description = company.querySelector('.company-description').textContent.toLowerCase();
+                    
+                    if (name.includes(searchTerm) || nameEn.includes(searchTerm) || description.includes(searchTerm)) {
+                        company.style.display = 'block';
+                    } else {
+                        company.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Mobile navigation toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Handle image loading errors
+        document.addEventListener('DOMContentLoaded', function() {
+            const logos = document.querySelectorAll('.company-logo');
+            logos.forEach(logo => {
+                logo.addEventListener('error', function() {
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.marginLeft = '0';
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

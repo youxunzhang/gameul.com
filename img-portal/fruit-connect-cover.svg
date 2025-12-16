@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Fruit Connect vibrant cover art</title>
+  <desc id="desc">A bright tropical scene with a grid of fruit tiles and island drinks inspired by Fruit Connect 3.</desc>
+  <defs>
+    <linearGradient id="bgGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8fd8ff" />
+      <stop offset="65%" stop-color="#2ab0ff" />
+      <stop offset="100%" stop-color="#0670ff" />
+    </linearGradient>
+    <linearGradient id="roofGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffce63" />
+      <stop offset="50%" stop-color="#ffb347" />
+      <stop offset="100%" stop-color="#f7812e" />
+    </linearGradient>
+    <linearGradient id="tileShadow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#d5ddf2" stop-opacity="1" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#004e95" flood-opacity="0.35" />
+    </filter>
+    <radialGradient id="juiceGradient" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#ffed9a" />
+      <stop offset="55%" stop-color="#ff9a3d" />
+      <stop offset="100%" stop-color="#ff5b2c" />
+    </radialGradient>
+    <radialGradient id="blueDrink" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#caffff" />
+      <stop offset="55%" stop-color="#3ed1ff" />
+      <stop offset="100%" stop-color="#007de4" />
+    </radialGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#bgGradient)" />
+  <g filter="url(#shadow)" transform="translate(0 -10)">
+    <path d="M0 110 L70 60 L140 100 L210 60 L280 105 L350 55 L420 105 L490 60 L560 110 L640 60 L640 0 L0 0 Z" fill="url(#roofGradient)" />
+  </g>
+  <rect x="40" y="110" width="560" height="230" rx="28" fill="#ffffff" opacity="0.18" />
+  <g transform="translate(110 140)">
+    <rect x="-40" y="180" width="90" height="120" rx="18" fill="#fdf1d7" filter="url(#shadow)" />
+    <path d="M-10 183 h30 v95 h-30 z" fill="#ffe7ad" />
+    <ellipse cx="5" cy="255" rx="32" ry="32" fill="url(#juiceGradient)" />
+    <path d="M-18 178 l8 -18 h6 l-8 18 z" fill="#d44c00" />
+    <rect x="-20" y="176" width="48" height="6" rx="3" fill="#ffffff" opacity="0.7" />
+    <circle cx="35" cy="210" r="9" fill="#ffb84d" />
+  </g>
+  <g transform="translate(530 150)">
+    <rect x="-30" y="120" width="70" height="110" rx="16" fill="#fdf1d7" filter="url(#shadow)" />
+    <rect x="-20" y="125" width="50" height="90" rx="12" fill="#ffffff" opacity="0.85" />
+    <path d="M-5 120 h20 v-50" stroke="#ff6ec7" stroke-width="6" stroke-linecap="round" />
+    <ellipse cx="5" cy="170" rx="22" ry="40" fill="url(#blueDrink)" />
+    <circle cx="18" cy="135" r="8" fill="#ff3f7f" />
+    <circle cx="-5" cy="210" r="10" fill="#ffce63" />
+  </g>
+  <g filter="url(#shadow)" transform="translate(110 120)">
+    <rect x="0" y="0" width="420" height="220" rx="26" fill="#fff" />
+    <rect x="12" y="12" width="396" height="196" rx="20" fill="#f2f4ff" />
+  </g>
+  <g transform="translate(130 145)">
+    <g transform="translate(0 0)">
+      <rect width="90" height="90" rx="16" fill="url(#tileShadow)" />
+      <circle cx="45" cy="45" r="28" fill="#ff5252" />
+      <circle cx="45" cy="45" r="14" fill="#ffe066" />
+    </g>
+    <g transform="translate(100 0)">
+      <rect width="90" height="90" rx="16" fill="url(#tileShadow)" />
+      <circle cx="45" cy="45" r="28" fill="#6bc549" />
+      <ellipse cx="45" cy="45" rx="16" ry="26" fill="#ffe66d" />
+    </g>
+    <g transform="translate(200 0)">
+      <rect width="90" height="90" rx="16" fill="url(#tileShadow)" />
+      <circle cx="45" cy="45" r="28" fill="#6c3cff" />
+      <circle cx="45" cy="45" r="16" fill="#ffd6ff" />
+    </g>
+    <g transform="translate(300 0)">
+      <rect width="90" height="90" rx="16" fill="url(#tileShadow)" />
+      <circle cx="45" cy="45" r="28" fill="#ffeb3b" />
+      <path d="M45 20 C20 40 20 50 45 70 C70 50 70 40 45 20 Z" fill="#f06f00" />
+    </g>
+    <g transform="translate(0 100)">
+      <rect width="90" height="90" rx="16" fill="url(#tileShadow)" />
+      <ellipse cx="45" cy="55" rx="28" ry="22" fill="#ffcf5a" />
+      <path d="M45 30 C20 48 20 72 45 90 C70 72 70 48 45 30 Z" fill="#ea5412" />
+    </g>
+    <g transform="translate(100 100)">
+      <rect width="90" height="90" rx="16" fill="url(#tileShadow)" />
+      <circle cx="40" cy="40" r="24" fill="#ffef70" />
+      <circle cx="52" cy="48" r="20" fill="#7ad957" />
+      <circle cx="35" cy="32" r="12" fill="#b6f2ff" />
+    </g>
+    <g transform="translate(200 100)">
+      <rect width="90" height="90" rx="16" fill="url(#tileShadow)" />
+      <ellipse cx="45" cy="45" rx="26" ry="32" fill="#8c1aff" />
+      <ellipse cx="45" cy="45" rx="12" ry="18" fill="#ffedff" />
+    </g>
+    <g transform="translate(300 100)">
+      <rect width="90" height="90" rx="16" fill="url(#tileShadow)" />
+      <rect x="25" y="18" width="18" height="54" rx="9" fill="#ffa726" />
+      <circle cx="34" cy="50" r="8" fill="#fff" opacity="0.4" />
+      <path d="M55 36 C65 26 74 26 78 36 C82 46 75 56 60 60" fill="#ff4f81" />
+    </g>
+  </g>
+  <g font-family="'Baloo 2', 'Fredoka One', 'Comic Sans MS', sans-serif" font-weight="700" text-anchor="middle" fill="#fffbcb" filter="url(#shadow)">
+    <text x="320" y="105" font-size="64" letter-spacing="2">FRUIT CONNECT</text>
+    <text x="320" y="145" font-size="44" fill="#fff37b">3</text>
+  </g>
+</svg>

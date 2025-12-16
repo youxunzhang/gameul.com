@@ -1,0 +1,84 @@
+{
+  "games": [
+    {
+      "name": "Paper Minecraft",
+      "image": "img-portal/Paper.jpg",
+      "url": "https://paper-2.io/?utm_source=chatgpt.com"
+    },
+    {
+      "name": "sudoku",
+      "image": "img-portal/suduku.png",
+      "url": "https://sudokufun.org/"
+    },
+    {
+      "name": "blockpuzzle3d",
+      "image": "img-portal/blockpuzzle3d.jpg",
+      "url": "https://html5.gamedistribution.com/50581d05ea344baea7d8f62991d18e4c/?gd_sdk_referrer_url=https://gamedistribution.com/games/block-puzzle-3d/"
+    },
+    {
+      "name": "crazymotorcycle",
+      "image": "img-portal/crazymotorcycle.jpg",
+      "url": "https://html5.gamedistribution.com/30637801603e46ec82b342b77f539cf3/?gd_sdk_referrer_url=https://gamedistribution.com/games/crazy-motorcycle/"
+    },
+    {
+      "name": "hawaiimatch5",
+      "image": "img-portal/hawaiimatch5.jpg",
+      "url": "https://wellgames.com/free_online/hawaii-match-5/"
+    },
+    {
+      "name": "blockdroppingmerge",
+      "image": "img-portal/blockdroppingmerge.jpg",
+      "url": "https://yandex.com/games/app/295183"
+    },
+    {
+      "name": "parkingfury3d:nightcity",
+      "image": "img-portal/parkingfury3dn.jpg",
+      "url": "https://webcatalog.io/en/games/poki-parking-fury-3d-night-thief"
+    },
+    {
+      "name": "mylittlecity",
+      "image": "img-portal/mylittlecity.jpg",
+      "url": "https://www.1001games.com/puzzle/my-little-city"
+    },
+    {
+      "name": "matchfind3d",
+      "image": "img-portal/matchfind3d.jpg",
+      "url": "https://html5.gamedistribution.com/6c4fe446a74944b38e523353a00f396b/?gd_sdk_referrer_url=https://gamedistribution.com/games/match-find-3d/"
+    },
+    {
+      "name": "highschoolmeangirls3",
+      "image": "img-portal/highschoolmeangirls3.jpg",
+      "url": "https://html5.gamedistribution.com/a984996102294d858432e9cdef2ced61/?gd_sdk_referrer_url=https://gamedistribution.com/games/highschool-mean-girls-3/"
+    },
+    {
+      "name": "fallbean2",
+      "image": "img-portal/fallbean2.jpeg",
+      "url": "https://html5.gamedistribution.com/e7f83b256f13489889f900907073acf7/?gd_sdk_referrer_url=https://gamedistribution.com/games/fall-bean-2/"
+    },
+    {
+      "name": "bubbleshooterpop",
+      "image": "img-portal/bubbleshooterpop.jpg",
+      "url": "https://www.hotspotgame.online/Bubble-Shooter-Pop/Bubble-Shooter-Pop"
+    },
+    {
+      "name": "emojimatch",
+      "image": "img-portal/emojimatch.jpeg",
+      "url": "https://famobi.com/emoji-match/?locale=en"
+    },
+    {
+      "name": "vexx3m",
+      "image": "img-portal/vexx3m.jpg",
+      "url": "https://www.coolmathgames.com/0-vex-3"
+    },
+    {
+      "name": "magicsolitaire",
+      "image": "img-portal/magicsolitaire.jpg",
+      "url": "https://html5.gamedistribution.com/8960e51fca4740e9b3fe072022c22c18/?gd_sdk_referrer_url=https://gamedistribution.com/games/magic-solitaire/"
+    },
+    {
+      "name": "farmblockpuzzle",
+      "image": "img-portal/farmblockpuzzle.jpg",
+      "url": "https://html5.gamedistribution.com/c238c0eb3cef4df9933678270bd989ae/?gd_sdk_referrer_url=https://gamedistribution.com/games/farm-block-puzzle/"
+    }
+  ]
+}

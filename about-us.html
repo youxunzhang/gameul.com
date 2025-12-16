@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 | Hotspot Game Online</title>
+    <meta name="description" content="了解 Hotspot Game Online——一个无需下载、随时畅玩的免费浏览器游戏平台。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #5f3df7;
+            --secondary: #05d0f5;
+            --accent: #ff7a7a;
+            --text-dark: #1a1a2e;
+            --text-light: #555;
+            --bg: #f5f7ff;
+            --card-bg: #ffffff;
+            --shadow: 0 18px 45px rgba(31, 38, 135, 0.12);
+            --radius-xl: 28px;
+            --radius-lg: 22px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, rgba(95, 61, 247, 0.08), rgba(5, 208, 245, 0.1));
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 12px 35px rgba(95, 61, 247, 0.12);
+        }
+
+        .nav-container {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 0.12rem;
+        }
+
+        .logo-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a {
+            padding: 10px 18px;
+            border-radius: 999px;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus {
+            background: rgba(95, 61, 247, 0.12);
+            color: var(--primary);
+        }
+
+        main {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 64px 24px 120px;
+        }
+
+        .hero {
+            background: var(--card-bg);
+            padding: 48px;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: -120px -60px auto auto;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle at 30% 30%, rgba(5, 208, 245, 0.15), transparent 60%),
+                        radial-gradient(circle at 80% 20%, rgba(95, 61, 247, 0.12), transparent 65%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: 18px;
+        }
+
+        .hero h1 {
+            font-size: 2.25rem;
+            margin: 0;
+            color: var(--text-dark);
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            max-width: 640px;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .hero-cta a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 22px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 12px 28px rgba(95, 61, 247, 0.28);
+        }
+
+        .sections {
+            margin-top: 64px;
+            display: grid;
+            gap: 36px;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card::before {
+            content: "";
+            position: absolute;
+            inset: -80px auto auto -120px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle at 20% 20%, rgba(95, 61, 247, 0.16), transparent 65%);
+            z-index: 0;
+        }
+
+        .section-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: 18px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(95, 61, 247, 0.12);
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.08rem;
+        }
+
+        .section-title {
+            font-size: 1.65rem;
+            margin: 0;
+            color: var(--text-dark);
+        }
+
+        .section-text {
+            line-height: 1.65;
+            color: var(--text-light);
+            white-space: pre-line;
+        }
+
+        .share-toolbar {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .share-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .share-buttons {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .share-button {
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(5, 208, 245, 0.16);
+            color: var(--primary);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .share-button:hover,
+        .share-button:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(95, 61, 247, 0.18);
+            outline: none;
+        }
+
+        footer {
+            margin-top: 96px;
+            padding: 32px 24px 48px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 36px 28px;
+            }
+
+            .hero h1 {
+                font-size: 1.85rem;
+            }
+
+            .section-card {
+                padding: 28px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            main {
+                padding: 48px 20px 96px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a class="logo" href="index.html" aria-label="返回首页">
+                <span class="logo-badge">HG</span>
+                Hotspot Game Online
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="games.html">全部游戏</a>
+                <a href="featured-games.html">精选推荐</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>关于 Hotspot Game Online</h1>
+                <p>我们致力于打造一个无需下载、随时随地都能畅玩的免费小游戏平台。无论是碎片时间的轻松娱乐，还是与朋友同乐的激情挑战，在这里你都能找到心仪的玩法。</p>
+                <div class="hero-cta">
+                    <a href="https://youxistudio.online" target="_blank" rel="noopener">立即进入平台 🎮</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="sections">
+            <article class="section-card" data-share-title="文案 A" data-share-text="想找游戏打发空闲时间？来 Hotspot Game Online！🎮\n\n无需下载，打开浏览器立刻开玩，随时随地畅快享受。\n热点游戏\n\n收录拼图、动作、赛车、街机等多种类型，想动脑、想刺激、想轻松都能满足。\n热点游戏\n\n每周更新新游戏，永远不会玩腻。\n快来挑战吧，叫上朋友一起比比谁分数更高！\n\n👉 点击立刻开玩： youxistudio.online\n\n#免费小游戏 #即点即玩 #浏览器游戏">
+                <div class="section-content">
+                    <span class="section-label">文案 A · 社交媒体推荐</span>
+                    <h2 class="section-title">轻松活泼的社交分享</h2>
+                    <p class="section-text">想找游戏打发空闲时间？来 Hotspot Game Online！🎮
+
+无需下载，打开浏览器立刻开玩，随时随地畅快享受。
+热点游戏
+
+收录拼图、动作、赛车、街机等多种类型，想动脑、想刺激、想轻松都能满足。
+热点游戏
+
+每周更新新游戏，永远不会玩腻。
+快来挑战吧，叫上朋友一起比比谁分数更高！
+
+👉 点击立刻开玩： youxistudio.online
+
+#免费小游戏 #即点即玩 #浏览器游戏</p>
+                    <div class="share-toolbar">
+                        <span class="share-label">分享到：</span>
+                        <div class="share-buttons">
+                            <button class="share-button" data-platform="twitter" type="button">🐦 Twitter</button>
+                            <button class="share-button" data-platform="facebook" type="button">📘 Facebook</button>
+                            <button class="share-button" data-platform="linkedin" type="button">💼 LinkedIn</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="section-card" data-share-title="文案 B" data-share-text="【免费小游戏推荐】\n最近发现一个超方便的新平台：Hotspot Game Online\n\n全部游戏 免费，完全不用花一分钱。\n热点游戏\n\n无需下载，浏览器直接玩，手机电脑都支持。\n热点游戏\n\n类型多样：解谜、动作、赛车、街机……想玩什么就玩什么。\n热点游戏\n\n碎片时间神器：等公交、开会前、午休，都能快速娱乐。\n试试看～地址：youxistudio.online\n，喜欢的话分享给朋友一起玩！">
+                <div class="section-content">
+                    <span class="section-label">文案 B · 群聊/朋友圈推荐</span>
+                    <h2 class="section-title">免费无门槛的便捷体验</h2>
+                    <p class="section-text">【免费小游戏推荐】
+最近发现一个超方便的新平台：Hotspot Game Online
+
+全部游戏 免费，完全不用花一分钱。
+热点游戏
+
+无需下载，浏览器直接玩，手机电脑都支持。
+热点游戏
+
+类型多样：解谜、动作、赛车、街机……想玩什么就玩什么。
+热点游戏
+
+碎片时间神器：等公交、开会前、午休，都能快速娱乐。
+试试看～地址：youxistudio.online
+，喜欢的话分享给朋友一起玩！</p>
+                    <div class="share-toolbar">
+                        <span class="share-label">分享到：</span>
+                        <div class="share-buttons">
+                            <button class="share-button" data-platform="twitter" type="button">🐦 Twitter</button>
+                            <button class="share-button" data-platform="facebook" type="button">📘 Facebook</button>
+                            <button class="share-button" data-platform="whatsapp" type="button">🟢 WhatsApp</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="section-card" data-share-title="文案 C" data-share-text="主题：提升团队休息时光的娱乐选择——Hotspot Game Online\n正文：\n尊敬的 [姓名／团队]，\n在忙碌的工作与生活节奏中，适度的放松能够提升整体效率与活力。我们推荐 Hotspot Game Online，这是一款专为浏览器打造的免费游戏平台，特点如下：\n\n无门槛进入：无需繁琐安装，打开浏览器即可畅玩。\n\n免费无付费陷阱：平台所有游戏均为免费内容。\n\n丰富多样的游戏类型：包括拼图、赛车、动作、街机等多种选择，适合不同偏好。\n\n适合碎片时间使用：几分钟即可开始游戏，便利快捷。\n若您希望为团队／朋友／自己引入一个轻松娱乐的渠道，Hotspot Game Online 是一个值得考虑的选择。\n如需进一步了解或推广素材，欢迎随时联系。\n祝好，">
+                <div class="section-content">
+                    <span class="section-label">文案 C · 邮件/正式推广</span>
+                    <h2 class="section-title">专业正式的推广稿</h2>
+                    <p class="section-text">主题：提升团队休息时光的娱乐选择——Hotspot Game Online
+正文：
+尊敬的 [姓名／团队]，
+在忙碌的工作与生活节奏中，适度的放松能够提升整体效率与活力。我们推荐 Hotspot Game Online，这是一款专为浏览器打造的免费游戏平台，特点如下：
+
+无门槛进入：无需繁琐安装，打开浏览器即可畅玩。
+
+免费无付费陷阱：平台所有游戏均为免费内容。
+
+丰富多样的游戏类型：包括拼图、赛车、动作、街机等多种选择，适合不同偏好。
+
+适合碎片时间使用：几分钟即可开始游戏，便利快捷。
+若您希望为团队／朋友／自己引入一个轻松娱乐的渠道，Hotspot Game Online 是一个值得考虑的选择。
+如需进一步了解或推广素材，欢迎随时联系。
+祝好，</p>
+                    <div class="share-toolbar">
+                        <span class="share-label">分享到：</span>
+                        <div class="share-buttons">
+                            <button class="share-button" data-platform="twitter" type="button">🐦 Twitter</button>
+                            <button class="share-button" data-platform="facebook" type="button">📘 Facebook</button>
+                            <button class="share-button" data-platform="email" type="button">✉️ Email</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        © <span id="year"></span> Hotspot Game Online. All rights reserved.
+    </footer>
+
+    <script>
+        const currentYear = new Date().getFullYear();
+        document.getElementById('year').textContent = currentYear;
+
+        const pageUrl = encodeURIComponent('https://youxistudio.online/about-us');
+
+        function buildShareUrl(platform, text, title) {
+            const encodedText = encodeURIComponent(text);
+            const encodedTitle = encodeURIComponent(title || 'Hotspot Game Online');
+
+            switch (platform) {
+                case 'twitter':
+                    return `https://twitter.com/intent/tweet?text=${encodedText}&url=${pageUrl}`;
+                case 'facebook':
+                    return `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}&quote=${encodedText}`;
+                case 'linkedin':
+                    return `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${encodedTitle}&summary=${encodedText}`;
+                case 'whatsapp':
+                    return `https://api.whatsapp.com/send?text=${encodedText}%20${pageUrl}`;
+                case 'email':
+                    return `mailto:?subject=${encodedTitle}&body=${encodedText}%0D%0A%0D%0A${pageUrl}`;
+                default:
+                    return pageUrl;
+            }
+        }
+
+        document.querySelectorAll('.section-card').forEach((card) => {
+            const shareText = card.dataset.shareText || '';
+            const shareTitle = card.dataset.shareTitle || 'Hotspot Game Online';
+
+            card.querySelectorAll('.share-button').forEach((button) => {
+                button.addEventListener('click', () => {
+                    const platform = button.dataset.platform;
+                    const shareUrl = buildShareUrl(platform, shareText, shareTitle);
+                    window.open(shareUrl, '_blank', 'noopener,noreferrer');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

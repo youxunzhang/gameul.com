@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8794607118520437"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>game studio - Free Online Gaming Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+            border-radius: 1.25rem;
+            font-size: 1.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18rem;
+            text-decoration: none;
+            background: linear-gradient(120deg, #5f3df7, #05d0f5, #38f5a5);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: logoPulse 8s ease infinite;
+            filter: drop-shadow(0 10px 22px rgba(95, 61, 247, 0.25));
+            transition: transform 0.35s ease, filter 0.35s ease;
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        .logo::before {
+            content: 'GS';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 0.85rem;
+            background: linear-gradient(135deg, rgba(95, 61, 247, 0.95), rgba(5, 208, 245, 0.95));
+            box-shadow: 0 15px 30px rgba(95, 61, 247, 0.4);
+            color: #ffffff;
+            font-size: 1.05rem;
+            letter-spacing: 0.1rem;
+            text-shadow: 0 0 14px rgba(0, 0, 0, 0.35);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            inset: 0.2rem -0.4rem;
+            border-radius: 1.4rem;
+            background: radial-gradient(circle at 0% 0%, rgba(95, 61, 247, 0.28), transparent 60%),
+                        radial-gradient(circle at 100% 100%, rgba(56, 245, 165, 0.3), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 14px 30px rgba(95, 61, 247, 0.35));
+        }
+
+        .logo:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes logoPulse {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .search-box:focus-within {
+            border-color: #667eea;
+        }
+
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 0.5rem;
+            width: 200px;
+        }
+
+
+
+
+
+        .content {
+            max-width: 1200px;
+            margin: 100px auto 0;
+            padding: 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .game-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .game-image {
+            height: 160px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .game-image::after {
+            content: '▶';
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .game-card:hover .game-image::after {
+            opacity: 0.8;
+        }
+
+        .game-info {
+            padding: 1rem;
+        }
+
+        .game-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .game-category {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ff6b35;
+        }
+
+        .categories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .game-card iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            border-radius: 15px;
+            background: #f0f0f0;
+        }
+
+        .game-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            height: 350px;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: #333;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .categories {
+                justify-content: center;
+            }
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+	
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F9DEFKMPM5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F9DEFKMPM5');
+</script>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element" style="top: 10%; left: 10%; font-size: 3rem;">🎮</div>
+        <div class="floating-element" style="top: 20%; right: 10%; font-size: 2rem;">🕹️</div>
+        <div class="floating-element" style="top: 60%; left: 5%; font-size: 2.5rem;">🎯</div>
+        <div class="floating-element" style="top: 70%; right: 20%; font-size: 2rem;">🏆</div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">game studio</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="geometry-dash.html">Geometry Dash</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#new">New</a></li>
+                <li><a href="#popular">Popular</a></li>
+                <li><a href="Browser.html">Browser Game</a></li>
+            </ul>
+            <div class="search-box">
+                <input type="text" placeholder="Search games..." id="searchInput">
+                <span>🔍</span>
+            </div>
+            <button class="mobile-menu">☰</button>
+        </div>
+    </nav>
+
+
+
+    <div class="content">
+
+
+        <section class="section">
+            <h2 class="section-title">🔥 Popular Games</h2>
+            <div class="games-grid" id="gamesGrid">
+                <div class="game-card">
+                    <iframe src="https://html5.gamedistribution.com/e1e32230bdf040d69f4e367015e1c527/?gd_sdk_referrer_url=https://crazycattle3d.com/games/snow-rush-3d&amp;gdpr-tracking=1&amp;gdpr-targeting=1&amp;gdpr-third-party=1" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen" title="Snow Rush 3D Online Game" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-fullscreen" style="height: 100%; position: relative; inset: 0px; z-index: 1;"></iframe>
+                </div>
+                <div class="game-card">
+                    <iframe src="https://html5.gamedistribution.com/b375b05ea29b40abaaf3606a2ff215ad/?gd_sdk_referrer_url=https://crazycattle3d.com/games/tower-crash-3d&amp;gdpr-tracking=1&amp;gdpr-targeting=1&amp;gdpr-third-party=1" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen" title="Tower Crash 3D Online Game" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-fullscreen" style="height: 100%; position: relative; inset: 0px; z-index: 1;"></iframe>
+                </div>
+                <div class="game-card">
+                    <iframe src="https://html5.gamedistribution.com/14e87fab0cbf44b6b3e57ddb77af5941/?gd_sdk_referrer_url=https://crazycattle3d.com/games/tunnel-road&amp;gdpr-tracking=1&amp;gdpr-targeting=1&amp;gdpr-third-party=1" class="w-full h-full border-0" style="height:100%;position:relative;top:0;left:0;right:0;bottom:0;z-index:1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen" title="Tunnel Road Online Game" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-fullscreen"></iframe>
+                </div>
+                <div class="game-card">
+                    <iframe src="https://html5.gamedistribution.com/2e5863b7cc10444a88f72c81e74502f1/?gd_sdk_referrer_url=https://crazycattle3d.com/games/merge-flowers&amp;gdpr-tracking=1&amp;gdpr-targeting=1&amp;gdpr-third-party=1" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen" title="Merge Flowers Online Game" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-fullscreen" style="height: 100%; position: relative; inset: 0px; z-index: 1;"></iframe>
+                </div>
+                <div class="game-card">
+                    <iframe src="https://html5.gamedistribution.com/bc2f52c2d9d04e41aee48bef01075d22/?gd_sdk_referrer_url=https://crazycattle3d.com/games/obby-on-a-bike&amp;gdpr-tracking=1&amp;gdpr-targeting=1&amp;gdpr-third-party=1" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen" title="Obby On a Bike Online Game" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-fullscreen" style="height: 100%; position: relative; inset: 0px; z-index: 1;"></iframe>
+                </div>
+                <div class="game-card">
+                    <iframe src="https://html5.gamedistribution.com/427f3a980dfc48e69e4329acdb5b9d8b/?gd_sdk_referrer_url=https://crazycattle3d.com/games/cat-chaos-simulator&amp;gdpr-tracking=1&amp;gdpr-targeting=1&amp;gdpr-third-party=1" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen" title="Cat Chaos Simulator Online Game" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-fullscreen" style="height: 100%; position: relative; inset: 0px; z-index: 1;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">🎯 Featured Games</h2>
+            <div class="games-grid" id="featuredGamesGrid">
+                <div class="game-card">
+                    <iframe src="https://scratch.mit.edu/projects/1102118868/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                </div>
+                <div class="game-card">
+                    <iframe 
+                        src="https://games.crazygames.com/en_US/bloxdhop-io/index.html"
+                        width="740"
+                        height="480"
+                        frameborder="0"
+                        allowfullscreen="true"
+                        title="CrazyGames - bloxdhop io"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation allow-gamepad">
+                    </iframe>
+                </div>
+                <div class="game-card">
+                    <iframe src="https://www.crazygames.com/embed/fortzone-battle-royale-xkd" style="width: 100%; height: 100%;" frameborder="0" allow="gamepad *;"></iframe>
+                </div>
+                <div class="game-card">
+                    <iframe src="https://html5.gamedistribution.com/1b3229bbbf6d4c519e216e8228b5d0a8/?gd_sdk_referrer_url=https://www.example.com/games/{game-path}" width="1400" height="875" scrolling="none" frameborder="0"></iframe>
+                </div>
+                <div class="game-card">
+                    <iframe 
+                        src="https://play.famobi.com/"
+                        width="700"
+                        height="450"
+                        frameborder="0"
+                        allowfullscreen="true"
+                        title="Famobi - om nom run"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation">
+                    </iframe>
+                </div>
+                <div class="game-card">
+                    <iframe 
+                        src="https://www.twoplayergames.org/gameframe/boxing-random"
+                        width="720"
+                        height="500"
+                        frameborder="0"
+                        allowfullscreen="true"
+                        title="TwoPlayerGames - boxing random"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation">
+                    </iframe>
+                </div>
+                <div class="game-card">
+                    <iframe 
+                        src="https://19584.cache.armorgames.com/files/games/tortoise-truck-19584/index.html?v=1749056973"
+                        width="640"
+                        height="480"
+                        frameborder="0"
+                        allowfullscreen="true"
+                        title="ArmorGames - tortoise truck game"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">🆕 New Games</h2>
+            <div class="games-grid" id="newGamesGrid">
+                <div class="game-card">
+                    <div class="game-title">Wacky Flip</div>
+                    <a class="game-link" href="https://html5.gamedistribution.com/e1e32230bdf040d69f4e367015e1c527/" target="_blank">https://html5.gamedistribution.com/e1e32230bdf040d69f4e367015e1c527/</a>
+                    <iframe class="game-iframe" src="https://html5.gamedistribution.com/e1e32230bdf040d69f4e367015e1c527/" allowfullscreen></iframe>
+                </div>
+                <div class="game-card">
+                    <div class="game-title">Tower Crash 3D</div>
+                    <a class="game-link" href="https://html5.gamedistribution.com/b375b05ea29b40abaaf3606a2ff215ad/" target="_blank">https://html5.gamedistribution.com/b375b05ea29b40abaaf3606a2ff215ad/</a>
+                    <iframe class="game-iframe" src="https://html5.gamedistribution.com/b375b05ea29b40abaaf3606a2ff215ad/" allowfullscreen></iframe>
+                </div>
+                <div class="game-card">
+                    <div class="game-title">Tunnel Road</div>
+                    <a class="game-link" href="https://html5.gamedistribution.com/14e87fab0cbf44b6b3e57ddb77af5941/" target="_blank">https://html5.gamedistribution.com/14e87fab0cbf44b6b3e57ddb77af5941/</a>
+                    <iframe class="game-iframe" src="https://html5.gamedistribution.com/14e87fab0cbf44b6b3e57ddb77af5941/" allowfullscreen></iframe>
+                </div>
+                <div class="game-card">
+                    <div class="game-title">Merge Flowers</div>
+                    <a class="game-link" href="https://html5.gamedistribution.com/2e5863b7cc10444a88f72c81e74502f1/" target="_blank">https://html5.gamedistribution.com/2e5863b7cc10444a88f72c81e74502f1/</a>
+                    <iframe class="game-iframe" src="https://html5.gamedistribution.com/2e5863b7cc10444a88f72c81e74502f1/" allowfullscreen></iframe>
+                </div>
+                <div class="game-card">
+                    <div class="game-title">Obby On a Bike</div>
+                    <a class="game-link" href="https://html5.gamedistribution.com/bc2f52c2d9d04e41aee48bef01075d22/" target="_blank">https://html5.gamedistribution.com/bc2f52c2d9d04e41aee48bef01075d22/</a>
+                    <iframe class="game-iframe" src="https://html5.gamedistribution.com/bc2f52c2d9d04e41aee48bef01075d22/" allowfullscreen></iframe>
+                </div>
+                <div class="game-card">
+                    <div class="game-title">Cat Chaos Simulator</div>
+                    <a class="game-link" href="https://html5.gamedistribution.com/427f3a980dfc48e69e4329acdb5b9d8b/" target="_blank">https://html5.gamedistribution.com/427f3a980dfc48e69e4329acdb5b9d8b/</a>
+                    <iframe class="game-iframe" src="https://html5.gamedistribution.com/427f3a980dfc48e69e4329acdb5b9d8b/" allowfullscreen></iframe>
+                </div>
+                <div class="game-card">
+                    <div class="game-title">Snow Rush 3D</div>
+                    <a class="game-link" href="https://html5.gamedistribution.com/e1e32230bdf040d69f4e367015e1c527/" target="_blank">https://html5.gamedistribution.com/e1e32230bdf040d69f4e367015e1c527/</a>
+                    <iframe class="game-iframe" src="https://html5.gamedistribution.com/e1e32230bdf040d69f4e367015e1c527/" allowfullscreen></iframe>
+                </div>
+                <div class="game-card">
+                    <div class="game-title">Example: Custom Game</div>
+                    <a class="game-link" href="https://html5.gamedistribution.com/10f0beef65fe40ccae23194fd95782a8/" target="_blank">https://html5.gamedistribution.com/10f0beef65fe40ccae23194fd95782a8/</a>
+                    <iframe class="game-iframe" src="https://html5.gamedistribution.com/10f0beef65fe40ccae23194fd95782a8/" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 game studio. All rights reserved.</p>
+            <p>Contact Us | About Us | Developer Collaboration</p>
+        </div>
+    </footer>
+
+    <script>
+        // Game data
+        const games = [
+            { title: "Football Master", category: "Sports Games", rating: 4.5, icon: "⚽" },
+            { title: "Space Shooter", category: "Shooting Games", rating: 4.8, icon: "🚀" },
+            { title: "City Builder", category: "Strategy Games", rating: 4.7, icon: "🏙️" },
+            { title: "Magic Match", category: "Puzzle Games", rating: 4.6, icon: "✨" },
+            { title: "Ninja Jump", category: "Action Games", rating: 4.4, icon: "🥷" },
+            { title: "Gem Puzzle", category: "Puzzle Games", rating: 4.5, icon: "💎" },
+            { title: "Speed Motor", category: "Racing Games", rating: 4.7, icon: "🏍️" },
+            { title: "King Duel", category: "Strategy Games", rating: 4.8, icon: "👑" }
+        ];
+
+        const newGames = [
+        ];
+
+        // Generate game cards
+        function createGameCard(game) {
+            return `
+                <div class="game-card" onclick="playGame('${game.title}')">
+                    <div class="game-image">${game.icon}</div>
+                    <div class="game-info">
+                        <div class="game-title">${game.title}</div>
+                        <div class="game-category">${game.category}</div>
+                        <div class="game-rating">
+                            <span>⭐</span>
+                            <span>${game.rating}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render game list
+        function renderGames() {
+            const gamesGrid = document.getElementById('gamesGrid');
+            const newGamesGrid = document.getElementById('newGamesGrid');
+            
+            newGamesGrid.innerHTML = newGames.map(createGameCard).join('');
+        }
+
+        // Game click event
+        function playGame(gameTitle) {
+            alert(`Starting game: ${gameTitle}\n\nThis will redirect to the game page!`);
+        }
+
+        // Search functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const gameCards = document.querySelectorAll('.game-card');
+                
+                gameCards.forEach(card => {
+                    const title = card.querySelector('.game-title').textContent.toLowerCase();
+                    const category = card.querySelector('.game-category').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || category.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+
+
+        // Initialize after page load
+        document.addEventListener('DOMContentLoaded', function() {
+            renderGames();
+            setupSearch();
+        });
+
+        // Mobile menu
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

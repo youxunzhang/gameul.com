@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>经典游戏分类大全 | YouxiStudio</title>
+    <meta name="description" content="精选 100 款跨时代经典游戏，覆盖街机、平台动作、冒险、解谜、赛车、射击、策略、体育、角色扮演与沙盒独立十个分类，快速了解每款作品的亮点特色。">
+    <meta name="keywords" content="经典游戏, 街机游戏, 平台动作, 冒险游戏, 解谜游戏, 赛车游戏, 射击游戏, 策略游戏, 体育游戏, RPG, 沙盒游戏, 独立游戏, 游戏推荐">
+    <meta name="author" content="YouxiStudio">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://youxistudio.online/classicgames.html">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #00cec9;
+            --background: #0f172a;
+            --surface: rgba(15, 23, 42, 0.75);
+            --text-light: #f8fafc;
+            --text-muted: #cbd5f5;
+            --accent: #fdcb6e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+            background: radial-gradient(circle at top, rgba(76, 201, 240, 0.1), transparent 40%),
+                        radial-gradient(circle at bottom, rgba(108, 92, 231, 0.2), transparent 45%),
+                        var(--background);
+            color: var(--text-light);
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        header {
+            padding: 4rem 1.5rem 3rem;
+            text-align: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 999px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .brand strong {
+            color: var(--accent);
+            letter-spacing: 0.08em;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 4vw, 3rem);
+            margin: 1.5rem 0 1rem;
+            letter-spacing: 0.04em;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            max-width: 780px;
+            margin: 0 auto;
+            color: var(--text-muted);
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: 2rem auto 0;
+            padding: 0 1.5rem;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .category-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            border-radius: 16px;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+        }
+
+        .category-link span {
+            font-size: 1.6rem;
+        }
+
+        .category-link:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(79, 70, 229, 0.25);
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 3rem auto 4rem;
+            padding: 0 1.5rem 3rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background: var(--surface);
+            border-radius: 28px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.3);
+        }
+
+        section header {
+            margin: 0 0 1.5rem;
+            padding: 0;
+            text-align: left;
+        }
+
+        section header h2 {
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        section header h2 span {
+            font-size: 2.2rem;
+        }
+
+        .section-intro {
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            max-width: 780px;
+        }
+
+        .game-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .game-card {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 22px;
+            padding: 1.5rem;
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 32px rgba(15, 23, 42, 0.45);
+        }
+
+        .game-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+            color: var(--accent);
+        }
+
+        .game-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem 3rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 1rem 2rem;
+            }
+
+            section {
+                padding: 1.75rem 1.5rem;
+            }
+
+            .game-list {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand"><strong>YouxiStudio</strong> · 经典游戏档案馆</div>
+        <h1>100 款经典游戏分类速览</h1>
+        <p class="subtitle">从街机黄金时代到现代独立佳作，我们将 100 款横跨四十年的标志性作品按 10 大类型整理成册，帮助你快速发现值得重温与收藏的传奇游戏。</p>
+    </header>
+
+    <nav aria-label="分类快速导航">
+        <div class="category-grid">
+            <a class="category-link" href="#arcade"><span>🕹️</span>街机经典</a>
+            <a class="category-link" href="#platform"><span>👟</span>平台动作</a>
+            <a class="category-link" href="#adventure"><span>⚔️</span>冒险 / 动作</a>
+            <a class="category-link" href="#puzzle"><span>🧠</span>解谜益智</a>
+            <a class="category-link" href="#racing"><span>🚗</span>赛车竞速</a>
+            <a class="category-link" href="#shooters"><span>💣</span>射击游戏</a>
+            <a class="category-link" href="#strategy"><span>🪖</span>策略模拟</a>
+            <a class="category-link" href="#sports"><span>⚽</span>体育 / 格斗</a>
+            <a class="category-link" href="#rpg"><span>🧙‍♂️</span>角色扮演</a>
+            <a class="category-link" href="#sandbox"><span>🌍</span>沙盒 / 独立</a>
+        </div>
+    </nav>
+
+    <main>
+        <section id="arcade">
+            <header>
+                <h2><span>🕹️</span>经典街机（Arcade Classics）</h2>
+                <p class="section-intro">街机厅的霓虹灯下，这些游戏定义了互动娱乐的起点。从简单的像素图形到无穷的关卡循环，它们为后来者奠定了玩法与设计的根基。</p>
+            </header>
+            <div class="game-list">
+                <article class="game-card">
+                    <h3>Pac-Man（吃豆人）</h3>
+                    <p>绕行迷宫、躲避幽灵并吃掉豆子的玩法成为街机文化的标志，衍生出无数版本与周边。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Space Invaders（太空侵略者）</h3>
+                    <p>以逐渐加快的外星侵略者队列制造紧张节奏，是固定射击的经典模板。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Donkey Kong（大金刚）</h3>
+                    <p>首次引入多层平台与剧情背景，马力欧在此完成初登场并迅速走红。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Tetris（俄罗斯方块）</h3>
+                    <p>旋转方块并消行的规则经久不衰，被公认为最易上手却难以精通的益智街机。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Pong（乒乓）</h3>
+                    <p>两根挡板反弹像素球的简洁玩法，让无数玩家第一次体验到电子游戏的魅力。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Galaga（小蜜蜂）</h3>
+                    <p>通过编队攻击与俘虏机制提升深度，被誉为纵版固定射击的巅峰之作。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Asteroids（小行星）</h3>
+                    <p>开放空间中操控飞船射击岩石，惯性移动的设定带来独特的操作手感。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Frogger（青蛙过河）</h3>
+                    <p>穿越车流与河道的节奏挑战兼具幽默与紧张感，成为街机厅常青树。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Centipede（蜈蚣大战）</h3>
+                    <p>多段蜈蚣与随机蘑菇增加了射击策略，适合快速体验的高分竞赛。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Breakout（打砖块）</h3>
+                    <p>反弹小球击碎砖块的简单规则启发了后续无数休闲与街机变体。</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="platform">
+            <header>
+                <h2><span>👟</span>平台动作类（Platformers）</h2>
+                <p class="section-intro">跳跃、冲刺与精准操作的舞台，平台动作游戏以流畅手感与关卡设计见长，考验玩家对节奏的掌握。</p>
+            </header>
+            <div class="game-list">
+                <article class="game-card">
+                    <h3>Super Mario Bros.（超级玛丽）</h3>
+                    <p>奠定横版平台的结构范式，流畅的跳跃与隐藏内容让其成为家喻户晓的经典。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Sonic the Hedgehog（索尼克）</h3>
+                    <p>以高速冲刺与环形轨道著称，强调速度感的关卡设计令人热血沸腾。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Mega Man（洛克人）</h3>
+                    <p>选择关卡顺序并吸收 boss 武器的机制打造了策略性与挑战性兼备的体验。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Donkey Kong Country（大金刚国度）</h3>
+                    <p>精致的预渲染图像与双角色协作玩法，让 SNES 时代的动作平台达到新高度。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Rayman（雷曼）</h3>
+                    <p>独特的艺术风格与灵巧动作结合，创造出奇幻且富有挑战的冒险旅程。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Castlevania（恶魔城）</h3>
+                    <p>哥特式美术与鞭子战斗，开创“银河恶魔城”类型的基石之一。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Metroid（银河战士）</h3>
+                    <p>开放探索与能力解锁交织，让玩家在迷宫般的星球上逐步成长。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Cuphead（茶杯头）</h3>
+                    <p>1930 年代卡通风格与严苛 boss 战结合，带来复古又紧张的动作挑战。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Celeste（蔚蓝）</h3>
+                    <p>精准跳跃与动人剧情相辅相成，传递克服自我与坚持前行的主题。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Ori and the Blind Forest（精灵与森林）</h3>
+                    <p>流畅的动作系统与唯美手绘场景融合，打造情感充沛的冒险体验。</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="adventure">
+            <header>
+                <h2><span>⚔️</span>冒险 / 动作冒险（Adventure &amp; Action）</h2>
+                <p class="section-intro">探索未知世界、解开谜题并体验宏大叙事的冒险旅程，动作与剧情在此完美结合。</p>
+            </header>
+            <div class="game-list">
+                <article class="game-card">
+                    <h3>The Legend of Zelda（塞尔达传说）</h3>
+                    <p>以开放探索和道具解谜闻名，每一作都重新定义动作冒险的自由度与沉浸感。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Tomb Raider（古墓丽影）</h3>
+                    <p>劳拉·克劳馥的考古冒险融合平台、射击与解谜，塑造了女性动作英雄的典范。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Uncharted（神秘海域）</h3>
+                    <p>电影化叙事与惊险场景齐飞，打造现代动作冒险的互动大片体验。</p>
+                </article>
+                <article class="game-card">
+                    <h3>God of War（战神）</h3>
+                    <p>神话题材的史诗战斗与情感故事交织，展示次世代动作表现力。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Prince of Persia（波斯王子）</h3>
+                    <p>流畅跑墙与时间倒流机制影响深远，为动作冒险加入独特的策略维度。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Shadow of the Colossus（巨像之影）</h3>
+                    <p>与巨像的单挑构成史诗式战斗，极简叙事却充满哲思与情感冲击。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Resident Evil（生化危机）</h3>
+                    <p>将恐怖氛围与资源管理相结合，开创生存恐怖分支的动作冒险体验。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Silent Hill（寂静岭）</h3>
+                    <p>心理恐怖与象征意象构建出独特世界观，让玩家深入人性的阴暗面。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Devil May Cry（鬼泣）</h3>
+                    <p>炫酷连招与评分系统奠定风格化动作的标准，鼓励玩家追求华丽操作。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Assassin’s Creed（刺客信条）</h3>
+                    <p>历史与虚构交织的开放世界，跑酷潜行与史诗叙事共塑刺客传说。</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="puzzle">
+            <header>
+                <h2><span>🧠</span>解谜 / 益智（Puzzle）</h2>
+                <p class="section-intro">动脑与动手并重的作品，让逻辑、观察与灵感成为通关关键，适合随时随地挑战自我。</p>
+            </header>
+            <div class="game-list">
+                <article class="game-card">
+                    <h3>Snake（贪吃蛇）</h3>
+                    <p>灵活移动并避免自我碰撞的简单规则，成为手机早期最受欢迎的益智小游戏。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Minesweeper（扫雷）</h3>
+                    <p>数字提示引导推理的经典桌面游戏，训练逻辑推断与风险管理。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Sudoku（数独）</h3>
+                    <p>填入 1-9 数字的格子挑战，需要严谨的逻辑推理与耐心。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Bejeweled（宝石迷阵）</h3>
+                    <p>三消匹配的闪耀演绎，引领休闲益智风潮并催生众多同类游戏。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Candy Crush Saga（糖果粉碎传奇）</h3>
+                    <p>多样关卡目标与社交竞争，让三消玩法持续进化并长期吸引玩家。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Portal（传送门）</h3>
+                    <p>利用传送枪进行空间解谜，富含幽默与脑洞，被誉为物理解谜巅峰。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Lemmings（旅鼠）</h3>
+                    <p>指挥旅鼠安全到达终点的任务，考验调度与时机掌握。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Angry Birds（愤怒的小鸟）</h3>
+                    <p>弹弓物理射击结合关卡解谜，在移动平台掀起全民热潮。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Monument Valley（纪念碑谷）</h3>
+                    <p>利用视觉错觉的建筑解谜，加上唯美音乐，带来冥想般的体验。</p>
+                </article>
+                <article class="game-card">
+                    <h3>2048</h3>
+                    <p>滑动数字方块合成 2048，简单操作却让人难以停手的数学益智。</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="racing">
+            <header>
+                <h2><span>🚗</span>赛车类（Racing）</h2>
+                <p class="section-intro">燃烧轮胎与肾上腺素，在赛道上追求速度与技巧，从街机到模拟，应有尽有。</p>
+            </header>
+            <div class="game-list">
+                <article class="game-card">
+                    <h3>Mario Kart（马里奥赛车）</h3>
+                    <p>道具乱斗与家庭派对的最佳选择，易上手又充满逆转惊喜。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Need for Speed（极品飞车）</h3>
+                    <p>融合街头竞速与视觉冲击力，塑造追求速度的街机式赛车体验。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Gran Turismo（跑车浪漫旅）</h3>
+                    <p>真实模拟驾驶与车辆细节，被誉为“真实驾驶模拟器”。</p>
+                </article>
+                <article class="game-card">
+                    <h3>F-Zero（零式赛车）</h3>
+                    <p>科幻悬浮赛车与高速赛道，挑战玩家的反应极限。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Out Run（超级赛车）</h3>
+                    <p>开放路线与阳光海岸风景，让街机赛车拥有度假般的浪漫气息。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Forza Horizon（极限竞速：地平线）</h3>
+                    <p>开放世界与季节变化打造活力十足的汽车文化嘉年华。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Asphalt（狂野飙车）</h3>
+                    <p>移动端高画质街机赛车，以华丽漂移与集气冲刺著称。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Burnout（火爆狂飙）</h3>
+                    <p>高速撞击与慢动作破坏效果让飙车更刺激，鼓励冒险驾驶。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Crazy Taxi（疯狂出租车）</h3>
+                    <p>计时接客的街机快感与摇滚配乐，塑造自由奔放的都市飞驰体验。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Daytona USA</h3>
+                    <p>SEGA 经典街机 NASCAR 竞速，以爽快操控与多人对战闻名。</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="shooters">
+            <header>
+                <h2><span>💣</span>射击类（Shooters）</h2>
+                <p class="section-intro">从单人战役到在线对战，射击游戏以精准瞄准与战术协作为核心，呈现激烈战场。</p>
+            </header>
+            <div class="game-list">
+                <article class="game-card">
+                    <h3>Doom（毁灭战士）</h3>
+                    <p>快节奏第一人称射击鼻祖，地狱恶魔与重金属音乐带来爽快杀敌体验。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Counter-Strike（反恐精英）</h3>
+                    <p>强调团队战术与经济管理的竞技 FPS，长期占据电竞舞台。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Half-Life（半条命）</h3>
+                    <p>结合叙事与射击解谜的创新之作，推动 FPS 走向更沉浸的剧情表现。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Call of Duty（使命召唤）</h3>
+                    <p>电影化战役与多样多人模式，使其成为最具影响力的现代战争系列。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Halo（光环）</h3>
+                    <p>科幻宇宙与主机 FPS 的操作革新，奠定多人对战和合作的标准。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Overwatch（守望先锋）</h3>
+                    <p>融合团队英雄技能与目标控制，开创团队射击新潮流。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Battlefield（战地）</h3>
+                    <p>大规模载具战斗与可破坏场景，提供史诗级战争体验。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Fortnite（堡垒之夜）</h3>
+                    <p>建造机制与大逃杀模式结合，成为全球现象级在线射击。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Apex Legends（Apex 英雄）</h3>
+                    <p>小队英雄技能与流畅移动打造快节奏战术竞技体验。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Splatoon（喷射战士）</h3>
+                    <p>色彩喷涂取代传统击杀，带来适合全龄的创意对战方式。</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="strategy">
+            <header>
+                <h2><span>🪖</span>策略 / 模拟（Strategy / Simulation）</h2>
+                <p class="section-intro">思考与规划的舞台，从建造城市到排兵布阵，策略模拟让玩家化身指挥官或经营大师。</p>
+            </header>
+            <div class="game-list">
+                <article class="game-card">
+                    <h3>SimCity（模拟城市）</h3>
+                    <p>规划道路、公共设施与税收，见证都市从无到有的成长。</p>
+                </article>
+                <article class="game-card">
+                    <h3>The Sims（模拟人生）</h3>
+                    <p>模拟日常生活与社交关系，让玩家体验虚拟家庭的喜怒哀乐。</p>
+                </article>
+                <article class="game-card">
+                    <h3>StarCraft（星际争霸）</h3>
+                    <p>三大种族平衡与即时操作被奉为 RTS 经典，在电竞舞台上持续闪耀。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Age of Empires（帝国时代）</h3>
+                    <p>跨越历史文明的建造与战斗，将策略与历史教育完美结合。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Civilization（文明）</h3>
+                    <p>“再来一回合”的回合制策略典范，引导文明走向科技或文化胜利。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Command &amp; Conquer（命令与征服）</h3>
+                    <p>以快节奏与过场动画著称的 RTS 系列，影响了军武题材策略游戏的发展。</p>
+                </article>
+                <article class="game-card">
+                    <h3>RollerCoaster Tycoon（过山车大亨）</h3>
+                    <p>规划游乐园与过山车轨道，兼顾经营与创意设计的乐趣。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Plants vs Zombies（植物大战僵尸）</h3>
+                    <p>塔防策略与幽默风格结合，亲民玩法让各年龄层都能轻松上手。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Clash of Clans（部落冲突）</h3>
+                    <p>移动端策略对战代表作，以社交部落与资源争夺形成长期黏性。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Stardew Valley（星露谷物语）</h3>
+                    <p>农场经营与社交冒险融合，传递慢节奏生活的治愈魅力。</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="sports">
+            <header>
+                <h2><span>⚽</span>体育 / 竞赛类（Sports &amp; Fighting）</h2>
+                <p class="section-intro">从球场到拳台，体育与格斗游戏让玩家在虚拟舞台上感受竞技的热血与技巧。</p>
+            </header>
+            <div class="game-list">
+                <article class="game-card">
+                    <h3>FIFA / EA FC（国际足联）</h3>
+                    <p>真实授权与线上联赛，让足球迷在主机与 PC 上随时开赛。</p>
+                </article>
+                <article class="game-card">
+                    <h3>NBA 2K</h3>
+                    <p>高度还原 NBA 赛场与球星数据，是篮球游戏的权威代表。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Wii Sports</h3>
+                    <p>体感操作引发全民运动热潮，成为家庭娱乐的必备之选。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Punch-Out!!（拳击）</h3>
+                    <p>节奏把握与对手观察的拳击游戏，历史悠久且充满个性。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Street Fighter（街头霸王）</h3>
+                    <p>格斗游戏标准制定者，六键操作与必杀技构成深度对战系统。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Tekken（铁拳）</h3>
+                    <p>3D 格斗动作与丰富连段，使其成为电子竞技舞台的常驻项目。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Mortal Kombat（真人快打）</h3>
+                    <p>以暴力华丽的终结技闻名，将黑暗风格带入格斗游戏主流。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Super Smash Bros.（任天堂明星大乱斗）</h3>
+                    <p>多角色乱斗与场景互动，将派对乐趣与竞技深度融合。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Tony Hawk’s Pro Skater</h3>
+                    <p>滑板技巧与连招系统，引领极限运动游戏的潮流。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Rocket League（火箭联盟）</h3>
+                    <p>飞车撞球的奇思妙想，团队合作与物理技巧完美结合。</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="rpg">
+            <header>
+                <h2><span>🧙‍♂️</span>角色扮演（RPG）</h2>
+                <p class="section-intro">故事、成长与角色塑造的乐园，RPG 让玩家沉浸于长篇冒险与深度养成。</p>
+            </header>
+            <div class="game-list">
+                <article class="game-card">
+                    <h3>Final Fantasy（最终幻想）</h3>
+                    <p>宏大叙事与召唤兽战斗构建 JRPG 天花板，持续革新系列传统。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Dragon Quest（勇者斗恶龙）</h3>
+                    <p>王道勇者故事与经典回合制战斗，深受各年龄层玩家喜爱。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Pokémon（精灵宝可梦）</h3>
+                    <p>捕捉与培育宝可梦的旅程，成为全球最具影响力的 RPG 系列之一。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Chrono Trigger（时空之轮）</h3>
+                    <p>穿越时空的冒险与多重结局，被誉为 RPG 黄金时代的巅峰。</p>
+                </article>
+                <article class="game-card">
+                    <h3>The Elder Scrolls V: Skyrim（上古卷轴 5）</h3>
+                    <p>广阔开放世界与自由职业路线，让玩家随心所欲塑造龙裔传奇。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Diablo（暗黑破坏神）</h3>
+                    <p>刷宝与职业构筑的暗黑幻想，定义动作角色扮演的核心循环。</p>
+                </article>
+                <article class="game-card">
+                    <h3>World of Warcraft（魔兽世界）</h3>
+                    <p>大型多人在线的世界观与团队副本，让 MMO RPG 成为长期社区。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Dark Souls（黑暗之魂）</h3>
+                    <p>高难度战斗与世界叙事相互交织，开启“魂类”潮流。</p>
+                </article>
+                <article class="game-card">
+                    <h3>The Witcher 3（巫师 3）</h3>
+                    <p>成熟剧情与道德抉择交织的开放世界奇幻史诗。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Persona 5（女神异闻录 5）</h3>
+                    <p>校园生活与异世界冒险双线并进，风格化演出令人难忘。</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="sandbox">
+            <header>
+                <h2><span>🌍</span>沙盒 / 独立热门（Sandbox &amp; Indie）</h2>
+                <p class="section-intro">自由创造与创新玩法的集合，沙盒与独立游戏带来多样化的世界观与叙事风格。</p>
+            </header>
+            <div class="game-list">
+                <article class="game-card">
+                    <h3>Minecraft（我的世界）</h3>
+                    <p>方块世界中的无限创造力，生存与建造玩法吸引全球玩家。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Terraria（泰拉瑞亚）</h3>
+                    <p>2D 像素探索与挖掘冒险，融合战斗、建造与收集元素。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Roblox（罗布乐思）</h3>
+                    <p>玩家自制游戏平台，让创意社区持续迸发无数玩法。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Among Us（我们之中）</h3>
+                    <p>太空船上的社交推理派对，强调沟通与伪装的独特体验。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Fall Guys（糖豆人）</h3>
+                    <p>综艺式乱斗闯关，Q 萌角色带来轻松欢乐的竞争乐趣。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Undertale（传说之下）</h3>
+                    <p>玩家选择决定剧情走向的 RPG，颠覆传统战斗与叙事方式。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Limbo（地狱边境）</h3>
+                    <p>黑白剪影风格与物理解谜结合，营造压抑又引人深思的氛围。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Inside</h3>
+                    <p>延续 Limbo 的极简叙事与氛围恐怖，剧情反转令人震撼。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Hotline Miami（迈阿密热线）</h3>
+                    <p>快节奏自上而下射击与复古合成器音乐，展现暴力美学。</p>
+                </article>
+                <article class="game-card">
+                    <h3>Hades（黑帝斯）</h3>
+                    <p>Rogue-like 连招与叙事融合，凭借极佳手感与配音成为独立佳作。</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2024 YouxiStudio · 精选经典游戏目录，欢迎收藏与分享。
+    </footer>
+</body>
+</html>

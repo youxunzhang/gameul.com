@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mancala Online | GameUL</title>
+  <title>Mancala – Play Online</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      color-scheme: light dark;
-      --bg-gradient: linear-gradient(135deg, #281a5a, #3b136f 35%, #68186b);
-      --text-color: #fdf7ff;
-      --card-bg: rgba(15, 10, 40, 0.65);
+      --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       --accent: #ffd166;
-      --accent-soft: rgba(255, 209, 102, 0.25);
+      --accent-dark: #f6ae2d;
+      --text-primary: #f4f9ff;
+      --text-secondary: #d8e1e9;
+      --card-bg: rgba(15, 32, 39, 0.8);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
     }
 
     * {
@@ -24,194 +26,232 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
       background: var(--bg-gradient);
-      color: var(--text-color);
+      color: var(--text-primary);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
     }
 
     header {
-      width: min(1100px, 90vw);
-      padding: 4rem 1.5rem 2rem;
+      padding: 2.5rem 8vw 1.5rem;
       text-align: center;
     }
 
     header h1 {
-      font-size: clamp(2.8rem, 4vw + 1rem, 3.5rem);
-      margin: 0 0 1rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      margin: 0;
+      letter-spacing: 1px;
     }
 
     header p {
-      font-size: clamp(1rem, 1.2vw + 0.9rem, 1.25rem);
-      margin: 0 auto;
-      max-width: 48ch;
+      margin: 1rem auto 0;
+      max-width: 650px;
+      font-size: 1.05rem;
+      color: var(--text-secondary);
       line-height: 1.6;
-      color: rgba(255, 255, 255, 0.85);
     }
 
     main {
-      width: min(1100px, 92vw);
+      flex: 1;
       display: grid;
-      grid-template-columns: 1fr;
       gap: 2.5rem;
-      padding-bottom: 4rem;
+      padding: 0 8vw 4rem;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      align-items: start;
     }
 
-    .iframe-card {
+    .game-frame,
+    .rules-card {
       background: var(--card-bg);
-      border-radius: 28px;
-      padding: clamp(1rem, 1.5vw + 1rem, 2.5rem);
-      box-shadow: 0 20px 60px rgba(10, 4, 28, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
       backdrop-filter: blur(12px);
     }
 
-    .iframe-card h2 {
-      margin-top: 0;
-      font-size: 1.5rem;
-      letter-spacing: 0.02em;
+    .game-frame header {
+      padding: 1.25rem 1.75rem 0.75rem;
+      text-align: left;
     }
 
-    .game-frame {
-      position: relative;
-      width: 100%;
-      padding-top: min(65%, 600px);
-      border-radius: 20px;
-      overflow: hidden;
-      background: radial-gradient(circle at top, rgba(255, 209, 102, 0.2), rgba(104, 24, 107, 0.6));
-    }
-
-    .game-frame iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .content-card {
-      background: var(--card-bg);
-      border-radius: 28px;
-      padding: clamp(1.5rem, 2vw + 1rem, 3rem);
-      box-shadow: 0 20px 60px rgba(10, 4, 28, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px);
-      display: grid;
-      gap: 1.8rem;
-    }
-
-    .rule-section h3 {
-      font-size: 1.35rem;
-      margin-bottom: 0.7rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .rule-section p,
-    .rule-section ul {
+    .game-frame h2 {
       margin: 0;
-      line-height: 1.7;
-      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.75rem;
     }
 
-    .rule-section ul {
-      list-style: none;
-      padding-left: 0;
-      display: grid;
-      gap: 0.45rem;
+    .game-wrapper {
+      padding: 0 1.75rem 1.75rem;
     }
 
-    .rule-section li::before {
-      content: '•';
+    .game-wrapper iframe {
+      width: 100%;
+      min-height: 540px;
+      border: none;
+      border-radius: 18px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .rules-card {
+      padding: 2.25rem;
+    }
+
+    .rules-card h2 {
+      margin-top: 0;
+      font-size: 1.65rem;
+    }
+
+    .rules-section + .rules-section {
+      margin-top: 1.75rem;
+    }
+
+    .rules-section h3 {
+      font-size: 1.2rem;
+      letter-spacing: 0.03em;
+      margin: 0 0 0.6rem;
+      text-transform: uppercase;
       color: var(--accent);
-      margin-right: 0.6rem;
     }
 
-    .cta {
+    .rules-section p,
+    .rules-section ul {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .rules-section ul {
+      padding-left: 1.2rem;
+    }
+
+    .play-now {
+      margin-top: 2.5rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .play-now a {
       display: inline-flex;
       align-items: center;
       gap: 0.65rem;
-      background: linear-gradient(135deg, var(--accent), #f77f00);
-      color: #2d0a38;
-      font-weight: 700;
-      text-decoration: none;
-      padding: 0.85rem 1.8rem;
+      padding: 0.9rem 1.9rem;
       border-radius: 999px;
-      box-shadow: 0 18px 35px rgba(255, 140, 0, 0.35);
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #2c1608;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .cta:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 22px 38px rgba(255, 140, 0, 0.45);
-    }
-
-    .tips-grid {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-
-    .tip {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--accent-soft);
-      border-radius: 18px;
-      padding: 1rem 1.2rem;
-      color: rgba(255, 255, 255, 0.9);
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    .play-now a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.28);
     }
 
     footer {
       text-align: center;
-      color: rgba(255, 255, 255, 0.6);
-      padding: 2rem 1.5rem 3rem;
-      font-size: 0.9rem;
+      padding: 2rem 1rem 3rem;
+      color: rgba(244, 249, 255, 0.6);
+      font-size: 0.95rem;
+    }
+
+    .more-games-section {
+      margin: 3rem 8vw 0;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: 2.5rem 1.5rem;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .more-games-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .more-games-section p {
+      max-width: 540px;
+      margin: 0 auto 1.75rem;
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .more-games-section a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #2c1608;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .more-games-section a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.28);
     }
 
     @media (max-width: 768px) {
       header {
-        padding-top: 3rem;
+        padding: 2.5rem 6vw 1.5rem;
       }
 
-      .iframe-card,
-      .content-card {
-        padding: 1.25rem;
+      main {
+        padding: 0 6vw 3rem;
       }
 
-      .game-frame {
-        padding-top: 70%;
+      .rules-card {
+        padding: 2rem 1.75rem;
+      }
+
+      .more-games-section {
+        margin: 2.5rem 6vw 0;
+        padding: 2rem 1.25rem;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Mancala Mastery</h1>
-    <p>Strategize, sow, and capture in this modern take on the classic Mancala board game. Dive into a beautifully crafted 3D experience that brings every move to life.</p>
+    <h1>Mancala</h1>
+    <p>Rediscover the timeless strategy of Mancala with a polished 3D presentation. Challenge a clever AI, plan your perfect capture, and enjoy a serene tabletop experience wherever you are.</p>
   </header>
+
   <main>
-    <section class="iframe-card" aria-label="Play Mancala online">
-      <h2>Play the Game</h2>
-      <div class="game-frame">
-        <iframe src="https://html5.gamedistribution.com/a2f973472a0f48668039ed366e2a26e8/?gd_sdk_referrer_url=https://www.example.com/games/{game-path}" width="900" height="600" scrolling="no" frameborder="0" allowfullscreen title="Mancala Game"></iframe>
+    <section class="game-frame">
+      <header>
+        <h2>Play in Your Browser</h2>
+        <p>Drop stones, earn extra turns, and capture your opponent&rsquo;s pieces in this immersive digital classic.</p>
+      </header>
+      <div class="game-wrapper">
+        <iframe src="https://html5.gamedistribution.com/a2f973472a0f48668039ed366e2a26e8/?gd_sdk_referrer_url=https://www.example.com/games/{game-path}" width="900" height="600" scrolling="none" frameborder="0" allowfullscreen></iframe>
       </div>
     </section>
 
-    <section class="content-card" aria-labelledby="rules-title">
-      <div class="rule-section">
-        <h3 id="rules-title">DESCRIPTION</h3>
-        <p>Experience the timeless strategy of Mancala in a sleek digital setting. Smooth animations, intuitive controls, and atmospheric soundscapes make every match immersive.</p>
-      </div>
-      <div class="rule-section">
+    <section class="rules-card">
+      <h2>Mancala Game Rules</h2>
+
+      <div class="rules-section">
         <h3>🎯 Objective</h3>
         <p>The goal of Mancala is to collect more stones in your store (the large pit on your right) than your opponent by the end of the game.</p>
       </div>
-      <div class="rule-section">
+
+      <div class="rules-section">
         <h3>🧩 Game Setup</h3>
         <ul>
           <li>The board has two rows of six pits each.</li>
@@ -220,7 +260,8 @@
           <li>You control the six pits on your side and the store on your right.</li>
         </ul>
       </div>
-      <div class="rule-section">
+
+      <div class="rules-section">
         <h3>🔄 Gameplay</h3>
         <ul>
           <li>On your turn, pick up all stones from one of your pits.</li>
@@ -230,30 +271,44 @@
           <li>If your last stone lands in an empty pit on your side, you capture that stone and any stones in the opposite pit, placing them in your store.</li>
         </ul>
       </div>
-      <div class="rule-section">
+
+      <div class="rules-section">
         <h3>🛑 Game End</h3>
-        <p>The game ends when one side’s six pits are empty. The player with stones remaining on their side collects them into their store. The winner is the one with the most stones in their store.</p>
+        <ul>
+          <li>The game ends when one side’s six pits are empty.</li>
+          <li>The player with stones remaining on their side collects them into their store.</li>
+          <li>The winner is the one with the most stones in their store.</li>
+        </ul>
       </div>
-      <div class="rule-section">
+
+      <div class="rules-section">
         <h3>💡 Tips for Winning</h3>
-        <div class="tips-grid">
-          <div class="tip">Try to end your turn in your store to earn an extra move.</div>
-          <div class="tip">Watch your opponent’s moves to avoid letting them capture.</div>
-          <div class="tip">Plan ahead — sometimes skipping a big capture now leads to a better one later.</div>
-        </div>
+        <ul>
+          <li>Try to end your turn in your store to earn an extra move.</li>
+          <li>Watch your opponent’s moves to avoid letting them capture.</li>
+          <li>Plan ahead — sometimes skipping a big capture now leads to a better one later.</li>
+        </ul>
       </div>
-      <div class="rule-section">
+
+      <div class="rules-section">
         <h3>🎮 Play Now</h3>
-        <p>Experience this classic game in full 3D — beautiful visuals, smart AI, and endless strategy fun.</p>
-        <a class="cta" href="https://mancala.online" target="_blank" rel="noopener">👉 Play free at Mancala.online</a>
+        <p>Experience this classic game in full 3D — beautiful visuals, smart AI, and endless strategy fun. 👉 Play free at Mancala.online</p>
       </div>
     </section>
   </main>
+
+  <div class="play-now">
+    <a href="https://mancala.online" target="_blank" rel="noopener">Start a Match</a>
+  </div>
+
+  <section class="more-games-section">
+    <h2>More Games You May Like</h2>
+    <p>Keep the fun going with more strategy, puzzle, and arcade experiences from our growing library.</p>
+    <a href="/games/">Explore All Games →</a>
+  </section>
+
   <footer>
-    © <span id="year"></span> GameUL · Mancala Online Experience
+    Crafted with ❤️ for strategy lovers everywhere.
   </footer>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>

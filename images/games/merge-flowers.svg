@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="mf-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffafbd" />
+      <stop offset="100%" stop-color="#ffc3a0" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#mf-gradient)" rx="40" ry="40" />
+  <g>
+    <circle cx="320" cy="220" r="110" fill="rgba(255,255,255,0.55)" />
+    <circle cx="440" cy="310" r="140" fill="rgba(255,255,255,0.4)" />
+    <circle cx="720" cy="240" r="120" fill="rgba(255,255,255,0.6)" />
+    <circle cx="880" cy="320" r="150" fill="rgba(255,255,255,0.35)" />
+  </g>
+  <g opacity="0.9">
+    <g transform="translate(240 420)">
+      <circle cx="0" cy="0" r="65" fill="#ff6f91" />
+      <circle cx="60" cy="-10" r="50" fill="#ff9671" />
+      <circle cx="30" cy="50" r="45" fill="#ffd166" />
+    </g>
+    <g transform="translate(880 420)">
+      <circle cx="0" cy="0" r="65" fill="#845ec2" />
+      <circle cx="-60" cy="-10" r="50" fill="#ffc75f" />
+      <circle cx="-30" cy="50" r="45" fill="#f9f871" />
+    </g>
+  </g>
+  <text x="600" y="360" font-family="'Montserrat', 'Arial', sans-serif" font-size="88" font-weight="700" text-anchor="middle" fill="#a23358">Merge Flowers</text>
+  <text x="600" y="435" font-family="'Montserrat', 'Arial', sans-serif" font-size="34" font-weight="500" text-anchor="middle" fill="#713b48" opacity="0.85">Combine blossoms and grow a vibrant garden.</text>
+</svg>

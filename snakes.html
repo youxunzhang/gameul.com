@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play the best snake games online with colorful puzzles, arcade classics, and modern twists.">
+    <title>Snakes - Play Colorful Snake Games | Game Studio</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8794607118520437" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1f2242;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+            border-radius: 1.25rem;
+            font-size: 1.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18rem;
+            text-decoration: none;
+            background: linear-gradient(120deg, #5f3df7, #05d0f5, #38f5a5);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: logoPulse 8s ease infinite;
+            filter: drop-shadow(0 10px 22px rgba(95, 61, 247, 0.25));
+            transition: transform 0.35s ease, filter 0.35s ease;
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        .logo::before {
+            content: 'GS';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 0.85rem;
+            background: linear-gradient(135deg, rgba(95, 61, 247, 0.95), rgba(5, 208, 245, 0.95));
+            box-shadow: 0 15px 30px rgba(95, 61, 247, 0.4);
+            color: #ffffff;
+            font-size: 1.05rem;
+            letter-spacing: 0.1rem;
+            text-shadow: 0 0 14px rgba(0, 0, 0, 0.35);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            inset: 0.2rem -0.4rem;
+            border-radius: 1.4rem;
+            background: radial-gradient(circle at 0% 0%, rgba(95, 61, 247, 0.28), transparent 60%),
+                        radial-gradient(circle at 100% 100%, rgba(56, 245, 165, 0.3), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 14px 30px rgba(95, 61, 247, 0.35));
+        }
+
+        .logo:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes logoPulse {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .search-box:focus-within {
+            border-color: #667eea;
+        }
+
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 0.5rem;
+            width: 200px;
+        }
+
+        .content {
+            max-width: 1300px;
+            margin: 110px auto 60px;
+            padding: 0 2rem 3rem;
+        }
+
+        .page-header {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 2.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.6rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .page-header p {
+            color: #e9e9ff;
+            font-size: 1.05rem;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .snake-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .snake-card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 18px 35px rgba(20, 20, 43, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .snake-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 24px 45px rgba(20, 20, 43, 0.12);
+        }
+
+        .card-thumb {
+            position: relative;
+            padding-top: 65%;
+            overflow: hidden;
+        }
+
+        .card-thumb img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 1rem 1.1rem 1.2rem;
+            display: grid;
+            gap: 0.4rem;
+        }
+
+        .card-body h3 {
+            font-size: 1.05rem;
+            color: #1f2242;
+        }
+
+        .card-body p {
+            color: #5b5b7a;
+            font-size: 0.95rem;
+        }
+
+        .card-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: 0.2rem;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(102, 126, 234, 0.12);
+            color: #4a4fd4;
+            text-decoration: none;
+            font-weight: 600;
+            width: fit-content;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .card-action:hover {
+            background: linear-gradient(120deg, #667eea, #764ba2);
+            color: #ffffff;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: #fff;
+            margin: 2rem 0 0.8rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .search-box {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">game studio</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="featured-games.html">Featured</a></li>
+                <li><a href="brain-teasers.html">Brain Teasers</a></li>
+                <li><a href="snakes.html">Snakes</a></li>
+                <li><a href="marketing-hub.html">Marketing</a></li>
+                <li><a href="about-us.html">About</a></li>
+            </ul>
+            <div class="search-box">
+                <input type="text" placeholder="Search games..." aria-label="Search games">
+                <span>🔍</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content">
+        <header class="page-header">
+            <h1>Snakes Collection</h1>
+            <p>Slide into colorful puzzle adventures, arcade races, and relaxing snake quests inspired by the playful gallery above.</p>
+        </header>
+
+        <section aria-label="Snake games grid">
+            <div class="snake-grid">
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/616/616554.png" alt="Cartoon snake puzzle icon">
+                    </div>
+                    <div class="card-body">
+                        <h3>Snakes Puzzle</h3>
+                        <p>Wind through colorful tiles and solve vibrant brain teasers.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/188/188987.png" alt="Retro snake game logo">
+                    </div>
+                    <div class="card-body">
+                        <h3>Classic Snake</h3>
+                        <p>Retro arcade loops with slick controls and neon skins.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/616/616430.png" alt="Green snake character smiling">
+                    </div>
+                    <div class="card-body">
+                        <h3>Monster Arena</h3>
+                        <p>Grow your serpent and outmaneuver rivals in the arena.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/188/188996.png" alt="Fire themed snake icon">
+                    </div>
+                    <div class="card-body">
+                        <h3>Fire Snake</h3>
+                        <p>Dash past hazards with blazing boosts and sharp turns.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/616/616569.png" alt="Cute snake in rescue adventure">
+                    </div>
+                    <div class="card-body">
+                        <h3>Cat Rescue</h3>
+                        <p>Guide a friendly snake through cozy puzzles to save kittens.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/616/616504.png" alt="Candy snake trail icon">
+                    </div>
+                    <div class="card-body">
+                        <h3>Yummy Trails</h3>
+                        <p>Collect sweets and avoid traps across tasty pastel boards.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/188/188985.png" alt="Dragon guarding gems icon">
+                    </div>
+                    <div class="card-body">
+                        <h3>Dragon Out</h3>
+                        <p>Weave past dragons, grab gems, and escape the dungeon.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/616/616417.png" alt="Zig zagging snake icon">
+                    </div>
+                    <div class="card-body">
+                        <h3>Zig Snake</h3>
+                        <p>Sharp turns, neon colors, and upbeat endless runner vibes.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/188/188988.png" alt="Hunter snake icon">
+                    </div>
+                    <div class="card-body">
+                        <h3>Snake Hunter</h3>
+                        <p>Track glowing orbs, grow fast, and hunt for leaderboard glory.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/188/188993.png" alt="Tangled snakes illustration">
+                    </div>
+                    <div class="card-body">
+                        <h3>Tangled Snakes</h3>
+                        <p>Untie colorful serpents without blocking your own path.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/616/616561.png" alt="Pixel snake icon for arena">
+                    </div>
+                    <div class="card-body">
+                        <h3>Snake.io Arena</h3>
+                        <p>Slide into quick multiplayer matches and become the biggest.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/616/616535.png" alt="Snake puzzle blocks icon">
+                    </div>
+                    <div class="card-body">
+                        <h3>Snake Puzzle</h3>
+                        <p>Shift numbered blocks, merge tails, and clear the board.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/616/616444.png" alt="Cute 3D snake model">
+                    </div>
+                    <div class="card-body">
+                        <h3>Snake 3D</h3>
+                        <p>Navigate a glossy 3D world packed with colorful surprises.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/188/188981.png" alt="Panda resting on snake coil icon">
+                    </div>
+                    <div class="card-body">
+                        <h3>Sleepy Snake</h3>
+                        <p>Cozy visuals and calm pacing make this maze a zen escape.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/616/616436.png" alt="Octopus with snake friend icon">
+                    </div>
+                    <div class="card-body">
+                        <h3>Snake & Octopus</h3>
+                        <p>Swap between water and land routes to clear clever puzzles.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/616/616449.png" alt="Puzzle beast icon">
+                    </div>
+                    <div class="card-body">
+                        <h3>Beast Puzzle</h3>
+                        <p>Rotate winding beasts so every segment locks perfectly.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/188/188979.png" alt="Legendary snake icon">
+                    </div>
+                    <div class="card-body">
+                        <h3>Legend Snake</h3>
+                        <p>Quest through portals, unlock skins, and master sharp turns.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/616/616503.png" alt="Pink snake icon for pop adventure">
+                    </div>
+                    <div class="card-body">
+                        <h3>Snake Pop</h3>
+                        <p>Bubble-popping meets slithering routes in a vibrant mix.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/188/188989.png" alt="Labyrinth maze icon">
+                    </div>
+                    <div class="card-body">
+                        <h3>Maze Snake</h3>
+                        <p>Find the quickest exit while gathering stars along the way.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+                <article class="snake-card">
+                    <div class="card-thumb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" alt="Purple dragon snake icon">
+                    </div>
+                    <div class="card-body">
+                        <h3>Dragon Snake</h3>
+                        <p>Collect crystals, breathe fire, and soar through sky loops.</p>
+                        <a class="card-action" href="#">Play now →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

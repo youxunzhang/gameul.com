@@ -1,547 +1,1706 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FMXRXC30DC"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8794607118520437"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Game Studio - Professional game development, publishing, and design services. Discover mobile, PC, and web games alongside the latest news, featured releases, and gameplay tips.">
+    <meta name="keywords" content="game studio, game development, game production, indie games, game design, mobile games, PC games, single-player games, online games, RPG, strategy games, action games, adventure games, casual games, free games, latest games, popular games, game recommendations, game guides, game reviews, game news, game engine, Unity development, Unreal development, game programming, game art, game planning">
+    <meta name="author" content="Game Studio">
+    <meta name="robots" content="index, follow">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+    <title>Game Studio - Professional Game Development & Indie Game Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --nav-height: 56px;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #ffffff;
+            color: #333;
+            min-height: 100vh;
+            padding-top: var(--nav-height);
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12), rgba(118, 75, 162, 0.12));
+            border-radius: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before,
+        .hero::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(102, 126, 234, 0.18);
+            filter: blur(0.5px);
+            z-index: -1;
+        }
+
+        .hero::before {
+            width: 280px;
+            height: 280px;
+            top: -120px;
+            left: -80px;
+        }
+
+        .hero::after {
+            width: 320px;
+            height: 320px;
+            bottom: -150px;
+            right: -100px;
+            background: rgba(56, 245, 165, 0.18);
+        }
+
+        .hero h1 {
+            font-size: 2.75rem;
+            line-height: 1.2;
+            color: #1a1f4d;
+        }
+
+        .hero p {
+            max-width: 680px;
+            margin: 1rem auto 2rem;
+            font-size: 1.1rem;
+            color: #4a4a6a;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2.6rem;
+            border-radius: 999px;
+            background: linear-gradient(120deg, #667eea, #764ba2);
+            color: #ffffff;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.35);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 22px 38px rgba(102, 126, 234, 0.45);
+        }
+
+        .hot-games-section {
+            margin-top: 3.5rem;
+        }
+
+        .hot-games-section h2 {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 2rem;
+        }
+
+        .hot-games-intro {
+            max-width: 680px;
+            margin: 0.75rem auto 2rem;
+            text-align: center;
+            color: #4a4a6a;
+        }
+
+        .hot-games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .hot-game-card {
+            background: #ffffff;
+            border-radius: 22px;
+            box-shadow: 0 18px 35px rgba(20, 20, 43, 0.08);
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .hot-game-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 24px 45px rgba(20, 20, 43, 0.12);
+        }
+
+        .hot-game-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .hot-game-card h3 {
+            font-size: 1.15rem;
+            margin: 1.25rem 1.25rem 0.35rem;
+            color: #1f2242;
+        }
+
+        .hot-game-card p {
+            margin: 0 1.25rem 1.5rem;
+            color: #5b5b7a;
+            font-size: 0.95rem;
+        }
+
+        .hot-game-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin: 0 1.25rem 1.4rem;
+            padding: 0.55rem 1.1rem;
+            border-radius: 999px;
+            background: rgba(102, 126, 234, 0.12);
+            color: #4a4fd4;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .hot-game-link:hover {
+            background: linear-gradient(120deg, #667eea, #764ba2);
+            color: #ffffff;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            min-height: var(--nav-height);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+            border-radius: 1.25rem;
+            font-size: 1.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18rem;
+            text-decoration: none;
+            background: linear-gradient(120deg, #5f3df7, #05d0f5, #38f5a5);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: logoPulse 8s ease infinite;
+            filter: drop-shadow(0 10px 22px rgba(95, 61, 247, 0.25));
+            transition: transform 0.35s ease, filter 0.35s ease;
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        .logo::before {
+            content: 'GS';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 0.85rem;
+            background: linear-gradient(135deg, rgba(95, 61, 247, 0.95), rgba(5, 208, 245, 0.95));
+            box-shadow: 0 15px 30px rgba(95, 61, 247, 0.4);
+            color: #ffffff;
+            font-size: 1.05rem;
+            letter-spacing: 0.1rem;
+            text-shadow: 0 0 14px rgba(0, 0, 0, 0.35);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            inset: 0.2rem -0.4rem;
+            border-radius: 1.4rem;
+            background: radial-gradient(circle at 0% 0%, rgba(95, 61, 247, 0.28), transparent 60%),
+                        radial-gradient(circle at 100% 100%, rgba(56, 245, 165, 0.3), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 14px 30px rgba(95, 61, 247, 0.35));
+        }
+
+        .logo:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes logoPulse {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .dropdown > a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .dropdown > a::after {
+            content: '▾';
+            font-size: 0.75rem;
+            color: #667eea;
+            transition: transform 0.2s ease;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 0.75rem);
+            left: 0;
+            background: #ffffff;
+            list-style: none;
+            padding: 0.75rem 0;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.15);
+            min-width: 220px;
+            z-index: 10;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 0.6rem 1.5rem;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu li a:hover {
+            background: rgba(102, 126, 234, 0.08);
+            color: #667eea;
+        }
+
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu,
+        .dropdown.open .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown:hover > a::after,
+        .dropdown:focus-within > a::after,
+        .dropdown.open > a::after {
+            transform: rotate(180deg);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .search-box:focus-within {
+            border-color: #667eea;
+        }
+
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 0.5rem;
+            width: 200px;
+        }
+
+        .favorite-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 0.7rem 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .favorite-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .favorite-btn.favorited {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        }
+
+        .favorite-btn .bookmark-icon {
+            font-size: 1rem;
+        }
+
+        .section-link-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .section-link-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Social media sharing styles */
+        .share-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .share-title {
+            font-size: 1.35rem;
+            margin-bottom: 1.1rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .classic-gallery-section {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2.5rem 3vw 3rem;
+            margin: 2.5rem auto 3rem;
+            box-shadow: 0 35px 60px rgba(15, 23, 42, 0.08);
+            border: 1px solid #e2e8f0;
+            max-width: 1240px;
+            display: flex;
+            flex-direction: column;
+            gap: 2.25rem;
+        }
+
+        .classic-gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .classic-gallery-header h2 {
+            font-size: 2.1rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 0;
+        }
+
+        .classic-gallery-view-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #2563eb;
+            text-decoration: none;
+            padding: 0.4rem 0.85rem;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, 0.08);
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .classic-gallery-view-more::after {
+            content: '→';
+            font-size: 1rem;
+        }
+
+        .classic-gallery-view-more:hover,
+        .classic-gallery-view-more:focus-visible {
+            background: rgba(37, 99, 235, 0.16);
+            transform: translateX(2px);
+        }
+
+        .classic-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .classic-gallery-card {
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            border-radius: 18px;
+            overflow: hidden;
+            text-decoration: none;
+            color: #0f172a;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            box-shadow: 0 18px 30px rgba(15, 23, 42, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .classic-gallery-card:hover,
+        .classic-gallery-card:focus-visible {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 40px rgba(15, 23, 42, 0.14);
+        }
+
+        .classic-gallery-card:focus-visible {
+            outline: 3px solid rgba(37, 99, 235, 0.35);
+            outline-offset: 3px;
+        }
+
+        .classic-gallery-image-wrapper {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            background: #f1f5f9;
+        }
+
+        .classic-gallery-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .classic-gallery-card:hover .classic-gallery-image-wrapper img,
+        .classic-gallery-card:focus-visible .classic-gallery-image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .classic-gallery-badge {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            background: #22c55e;
+            color: #ffffff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.3rem 0.6rem;
+            border-radius: 999px;
+            box-shadow: 0 10px 20px rgba(34, 197, 94, 0.35);
+        }
+
+        .classic-gallery-info {
+            padding: 1rem 1.1rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .classic-game-title {
+            margin: 0;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0f172a;
+            line-height: 1.35;
+        }
+
+        .classic-gallery-arrow {
+            font-size: 1rem;
+            color: #2563eb;
+            transition: transform 0.3s ease;
+        }
+
+        .classic-gallery-card:hover .classic-gallery-arrow,
+        .classic-gallery-card:focus-visible .classic-gallery-arrow {
+            transform: translateX(4px);
+        }
+
+        .classic-gallery-placeholder {
+            grid-column: 1 / -1;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            background: rgba(37, 99, 235, 0.06);
+            border-radius: 18px;
+            color: #1d4ed8;
+            font-weight: 600;
+        }
+
+        @media (max-width: 992px) {
+            .classic-gallery-section {
+                margin: 2rem 1.5rem 2.5rem;
+                padding: 2rem 1.75rem 2.5rem;
+            }
+
+            .classic-gallery-grid {
+                gap: 1.5rem;
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .classic-gallery-section {
+                margin: 1.5rem 1rem 2rem;
+                padding: 1.75rem 1.25rem 2rem;
+                border-radius: 20px;
+            }
+
+            .classic-gallery-header h2 {
+                font-size: 1.7rem;
+            }
+
+            .classic-gallery-info {
+                padding: 0.9rem 1rem 1.1rem;
+            }
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 22px;
+            color: white;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.82rem;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .share-btn.facebook {
+            background: linear-gradient(45deg, #1877f2, #0d6efd);
+        }
+
+        .share-btn.twitter {
+            background: linear-gradient(45deg, #1da1f2, #0ea5e9);
+        }
+
+        .share-btn.linkedin {
+            background: linear-gradient(45deg, #0077b5, #0ea5e9);
+        }
+
+        .share-btn.whatsapp {
+            background: linear-gradient(45deg, #25d366, #22c55e);
+        }
+
+        .share-btn.telegram {
+            background: linear-gradient(45deg, #0088cc, #0ea5e9);
+        }
+
+        .share-btn.reddit {
+            background: linear-gradient(45deg, #ff4500, #f97316);
+        }
+
+        .share-btn.pinterest {
+            background: linear-gradient(45deg, #e60023, #ef4444);
+        }
+
+        .share-btn.email {
+            background: linear-gradient(45deg, #ea4335, #ef4444);
+        }
+
+        .share-btn.copy {
+            background: linear-gradient(45deg, #6b7280, #9ca3af);
+        }
+
+        .share-btn .share-icon {
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .share-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+        }
+
+
+
+
+
+        .content {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content > section:not(.classic-gallery-section) {
+            max-width: 1200px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .game-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            padding: 1.5rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .game-thumbnail {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #d1d5db, #9ca3af);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .game-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #4c51bf;
+            text-align: center;
+        }
+
+        .categories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .game-card iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            border-radius: 15px;
+            background: #f0f0f0;
+        }
+
+        .popular-game-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .popular-game-card .game-iframe {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .game-placeholder {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12), rgba(118, 75, 162, 0.12));
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        .game-placeholder img {
+            max-width: 220px;
+            width: 100%;
+            height: auto;
+        }
+
+        .game-placeholder p {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        .game-placeholder.is-hidden {
+            display: none;
+        }
+
+        .popular-game-card:focus-visible {
+            outline: 3px solid #667eea;
+            outline-offset: 4px;
+        }
+
+        .popular-game-card.game-loaded {
+            cursor: default;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                padding: 1rem 1.5rem;
+                border-radius: 18px;
+                box-shadow: 0 15px 35px rgba(102, 126, 234, 0.18);
+                margin-top: 1rem;
+            }
+
+            .mobile-menu {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: #333;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .dropdown-menu {
+                position: static;
+                padding: 0.5rem 0;
+                margin-top: 0.5rem;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            .dropdown-menu li a {
+                padding: 0.45rem 0;
+            }
+
+            .hero {
+                padding: 3rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .content {
+                padding: 0;
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .hot-games-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            }
+
+            .categories {
+                justify-content: center;
+            }
+        }
+
+        .floating-elements {
+            display: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+	
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F9DEFKMPM5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-FMXRXC30DC');
+  gtag('config', 'G-F9DEFKMPM5');
 </script>
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8794607118520437"
-     crossorigin="anonymous"></script>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GameUL | Discover Web Games, Rankings & Creator Tools</title>
-  <meta name="description" content="GameUL is a curated arcade of instant-play web games plus AI and development tools for creators. Dive into racing, puzzles, action hits, rankings, and resources tailored for modern players.">
-  <meta name="keywords" content="web games, browser games, indie games, ai game tools, racing games, puzzle games, game rankings">
-  <link rel="canonical" href="https://gameul.com/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="GameUL | Discover Web Games, Rankings & Creator Tools">
-  <meta property="og:description" content="Find trending browser games, explore creator resources, and launch AI-powered game tools on GameUL.">
-  <meta property="og:url" content="https://gameul.com/">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GameUL | Discover Web Games, Rankings & Creator Tools">
-  <meta name="twitter:description" content="A discovery hub for playable web games, rankings and creator tools.">
-  <meta name="twitter:image" content="https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=1200&q=80">
-  <link rel="stylesheet" href="/assets/css/styles.css">
-  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "GameUL",
-    "url": "https://gameul.com/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://gameul.com/games?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
 </head>
-<body data-page="home">
-  <header class="site-header">
-    <div class="container top-bar">
-      <a class="brand" href="/">GameUL</a>
-      <nav class="main-nav" aria-label="Primary">
-        <a class="nav-link" data-nav="home" href="/">Home</a>
-        <a class="nav-link" data-nav="games" href="/games/">Games</a>
-        <a class="nav-link" data-nav="geometry-dash" href="/games/geometry-dash/">Geometry Dash</a>
-        <a class="nav-link" data-nav="hot-games" href="https://hotspotgame.online/" target="_blank" rel="noopener">Hot Games</a>
-        <a class="nav-link" data-nav="browsergame" href="/browsergame/">Browsergame</a>
-        <a class="nav-link" data-nav="game-directory" href="/games/directory/">Game Directory</a>
-        <a class="nav-link" data-nav="new-games" href="/games/new-game/">New Games</a>
-        <a class="nav-link" data-nav="tools" href="/tools/">Tools</a>
-        <a class="nav-link" data-nav="ai-tools-external" href="https://seodog.cn/" target="_blank" rel="noopener">AI 工具</a>
-        <a class="nav-link" data-nav="iframe" href="/iframe/">IFRAME</a>
-        <a class="nav-link" data-nav="ai-tools" href="/tools/?category=AI%20Tools">AI Tools</a>
-        <a class="nav-link" data-nav="game-tools" href="/tools/?category=Game%20Tools">Game Tools</a>
-        <a class="nav-link" data-nav="game-platform" href="/tools/?category=Game%20Platform">Game Platform</a>
-        <a class="nav-link" data-nav="game-portals" href="/tools/?category=Game%20Portals">Game Portals</a>
-        <a class="nav-link" data-nav="gaming-resources" href="/tools/?category=Gaming%20Resources">Gaming Resources</a>
-        <a class="nav-link" data-nav="rankings" href="/rankings/">Rankings</a>
-        <a class="nav-link" data-nav="marketing" href="/marketing/">全网推广</a>
-        <a class="nav-link" data-nav="about" href="/about/">About</a>
-      </nav>
-      <div class="header-actions">
-        <form class="search-form" id="global-search-form" role="search">
-          <label class="sr-only" for="global-search">Search the site</label>
-          <input id="global-search" name="q" type="search" autocomplete="off" placeholder="Search games, tools, portals...">
-          <button type="button" id="search-close" class="search-close" aria-label="Close search results">×</button>
-        </form>
-        <button class="bookmark-button" type="button" aria-label="收藏 GameUL">
-          <svg class="bookmark-button__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M6 3a2 2 0 0 0-2 2v16l8-4.5 8 4.5V5a2 2 0 0 0-2-2H6z" fill="currentColor"/>
-          </svg>
-          <span>收藏</span>
-        </button>
-      </div>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element" style="top: 10%; left: 10%; font-size: 3rem;">🎮</div>
+        <div class="floating-element" style="top: 20%; right: 10%; font-size: 2rem;">🕹️</div>
+        <div class="floating-element" style="top: 60%; left: 5%; font-size: 2.5rem;">🎯</div>
+        <div class="floating-element" style="top: 70%; right: 20%; font-size: 2rem;">🏆</div>
     </div>
-  </header>
 
-  <section class="search-panel" id="search-panel" hidden>
-    <div class="container">
-      <div class="search-panel__header">
-        <h2>Search results</h2>
-        <p id="search-summary">Start typing to search the entire site.</p>
-      </div>
-      <ul class="search-results" id="search-results" aria-live="polite"></ul>
-      <div class="search-empty" id="search-empty" hidden>
-        <p>No results yet. Try different keywords such as <strong>racing</strong>, <strong>puzzle</strong> or <strong>AI art</strong>.</p>
-      </div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">game studio</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="games.html" aria-expanded="false">Games</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="games.html">All Games</a></li>
+                        <li><a href="geometry-dash.html">Geometry Dash</a></li>
+                        <li><a href="extremepamplona.html">Extreme Pamplona</a></li>
+                        <li><a href="brain-teasers.html">Brain Teasers</a></li>
+                        <li><a href="snakes.html">Snakes</a></li>
+                        <li><a href="new-game.html">New Releases</a></li>
+                        <li><a href="game-development.html">Game Development</a></li>
+                        <li><a href="company-ranking.html">Company Rankings</a></li>
+                    </ul>
+                </li>
+                <li><a href="featured-games.html">Featured Games</a></li>
+                <li><a href="marketing-hub.html">Marketing Hub</a></li>
+                <li><a href="https://seodog.cn/" target="_blank" rel="noopener">AI Tools</a></li>
+                <li><a href="about-us.html">About</a></li>
+            </ul>
+            <div class="search-box">
+                <input type="text" placeholder="Search games..." id="searchInput">
+                <span>🔍</span>
+            </div>
+            <button class="mobile-menu">☰</button>
+        </div>
+    </nav>
+
+
+
+    <div class="content">
+
+
+        <section class="hero" aria-labelledby="heroTitle">
+            <h1 id="heroTitle">Play the Best Free Games Online — No Download Needed!</h1>
+            <p>Discover arcade hits, strategy classics, and bite-sized favorites curated to keep you playing longer. Fresh releases and timeless adventures are ready whenever you are.</p>
+            <a href="#hot-games" class="hero-cta">Start Playing Now</a>
+        </section>
+
+
+        <section class="section hot-games-section" id="hot-games" aria-labelledby="hotGamesTitle">
+            <h2 id="hotGamesTitle">🔥 Hot Games This Week</h2>
+            <p class="hot-games-intro">Jump into the titles players are loving right now. Each pick is optimized for instant play so you can explore, compete, and keep your streak going.</p>
+            <div class="hot-games-grid">
+                <article class="hot-game-card">
+                    <img src="img-portal/extreme-pamplona-cover.svg" alt="Extreme Pamplona official promo art" loading="lazy">
+                    <h3>Extreme Pamplona</h3>
+                    <p>Dodge charging bulls and race through vibrant city streets in this adrenaline-packed runner.</p>
+                    <a class="hot-game-link" href="https://extremepamplona.org/Extreme Pamplona">Play Extreme Pamplona →</a>
+                </article>
+                <article class="hot-game-card">
+                    <img src="img-portal/magicsolitaire.jpg" alt="Mancala Classic board view" loading="lazy">
+                    <h3>Mancala Classic</h3>
+                    <p>Master the timeless strategy puzzle with polished visuals and intuitive touch controls.</p>
+                    <a class="hot-game-link" href="games/Mancala/index.html">Play Mancala →</a>
+                </article>
+                <article class="hot-game-card">
+                    <img src="img-portal/fruit-connect-cover.svg" alt="Fruit Connect 3 tropical tile board" loading="lazy">
+                    <h3>Fruit Connect</h3>
+                    <p>Match colorful fruits before the timer ends in this fast-paced logic challenge.</p>
+                    <a class="hot-game-link" href="https://fruitconnect.online/" target="_blank" rel="noopener">Play Fruit Connect →</a>
+                </article>
+                <article class="hot-game-card">
+                    <img src="img-portal/blockdroppingmerge.jpg" alt="Block Breaker neon arcade blocks" loading="lazy">
+                    <h3>Block Breaker</h3>
+                    <p>Smash through cascading blocks, trigger combos, and chase high scores in neon arenas.</p>
+                    <a class="hot-game-link" href="https://gamedistribution.com/games/koko-loco-block-blast/">Play Block Breaker →</a>
+                </article>
+            </div>
+        </section>
+
+
+        <section class="classic-gallery-section" id="classicGallerySection" aria-labelledby="classicGalleryTitle">
+            <div class="classic-gallery-header">
+                <h2 id="classicGalleryTitle">Classic Game Wall</h2>
+                <a class="classic-gallery-view-more" href="games.html">View more</a>
+            </div>
+            <div class="classic-gallery-grid" id="classicGalleryGrid" role="list"></div>
+        </section>
+
+
+        
+
+        <section class="section" id="popularGamesSection" hidden>
+            <h2 class="section-title">🔥 Popular Games</h2>
+            <div class="games-grid" id="gamesGrid">
+                <div class="game-card" data-game-name="Snow Rush 3D">
+                    <div class="game-thumbnail">
+                        <img src="images/games/game-placeholder.svg" alt="Snow Rush 3D game cover" loading="lazy">
+                    </div>
+                    <div class="game-title">Snow Rush 3D</div>
+                    <iframe data-src="https://html5.gamedistribution.com/e1e32230bdf040d69f4e367015e1c527/?gd_sdk_referrer_url=https://crazycattle3d.com/games/snow-rush-3d&amp;gdpr-tracking=1&amp;gdpr-targeting=1&amp;gdpr-third-party=1" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen" title="Snow Rush 3D Online Game" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-fullscreen" style="height: 100%; position: relative; inset: 0px; z-index: 1;"></iframe>
+                </div>
+                <div class="game-card" data-game-name="Tower Crash 3D">
+                    <div class="game-thumbnail">
+                        <img src="images/games/game-placeholder.svg" alt="Tower Crash 3D game cover" loading="lazy">
+                    </div>
+                    <div class="game-title">Tower Crash 3D</div>
+                    <iframe data-src="https://html5.gamedistribution.com/b375b05ea29b40abaaf3606a2ff215ad/?gd_sdk_referrer_url=https://crazycattle3d.com/games/tower-crash-3d&amp;gdpr-tracking=1&amp;gdpr-targeting=1&amp;gdpr-third-party=1" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen" title="Tower Crash 3D Online Game" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-fullscreen" style="height: 100%; position: relative; inset: 0px; z-index: 1;"></iframe>
+                </div>
+                <div class="game-card" data-game-name="Tunnel Road">
+                    <div class="game-thumbnail">
+                        <img src="images/games/game-placeholder.svg" alt="Tunnel Road game cover" loading="lazy">
+                    </div>
+                    <div class="game-title">Tunnel Road</div>
+                    <iframe data-src="https://html5.gamedistribution.com/14e87fab0cbf44b6b3e57ddb77af5941/?gd_sdk_referrer_url=https://crazycattle3d.com/games/tunnel-road&amp;gdpr-tracking=1&amp;gdpr-targeting=1&amp;gdpr-third-party=1" class="w-full h-full border-0" style="height:100%;position:relative;top:0;left:0;right:0;bottom:0;z-index:1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen" title="Tunnel Road Online Game" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-fullscreen"></iframe>
+                </div>
+                <div class="game-card" data-game-name="Merge Flowers">
+                    <div class="game-thumbnail">
+                        <img src="images/games/game-placeholder.svg" alt="Merge Flowers game cover" loading="lazy">
+                    </div>
+                    <div class="game-title">Merge Flowers</div>
+                    <iframe data-src="https://html5.gamedistribution.com/2e5863b7cc10444a88f72c81e74502f1/?gd_sdk_referrer_url=https://crazycattle3d.com/games/merge-flowers&amp;gdpr-tracking=1&amp;gdpr-targeting=1&amp;gdpr-third-party=1" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen" title="Merge Flowers Online Game" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-fullscreen" style="height: 100%; position: relative; inset: 0px; z-index: 1;"></iframe>
+                </div>
+                <div class="game-card" data-game-name="Obby On a Bike">
+                    <div class="game-thumbnail">
+                        <img src="images/games/game-placeholder.svg" alt="Obby On a Bike game cover" loading="lazy">
+                    </div>
+                    <div class="game-title">Obby On a Bike</div>
+                    <iframe data-src="https://html5.gamedistribution.com/bc2f52c2d9d04e41aee48bef01075d22/?gd_sdk_referrer_url=https://crazycattle3d.com/games/obby-on-a-bike&amp;gdpr-tracking=1&amp;gdpr-targeting=1&amp;gdpr-third-party=1" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen" title="Obby On a Bike Online Game" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-fullscreen" style="height: 100%; position: relative; inset: 0px; z-index: 1;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social media share area -->
+        <section class="share-section">
+            <h2 class="share-title">🌐 Share on Social Media</h2>
+            <div class="share-buttons">
+                <a href="#" class="share-btn facebook" onclick="shareToFacebook()">
+                    <span class="share-icon">📘</span>
+                    Facebook
+                </a>
+                <a href="#" class="share-btn twitter" onclick="shareToTwitter()">
+                    <span class="share-icon">🐦</span>
+                    Twitter
+                </a>
+                <a href="#" class="share-btn linkedin" onclick="shareToLinkedIn()">
+                    <span class="share-icon">💼</span>
+                    LinkedIn
+                </a>
+                <a href="#" class="share-btn whatsapp" onclick="shareToWhatsApp()">
+                    <span class="share-icon">📱</span>
+                    WhatsApp
+                </a>
+                <a href="#" class="share-btn telegram" onclick="shareToTelegram()">
+                    <span class="share-icon">📬</span>
+                    Telegram
+                </a>
+                <a href="#" class="share-btn reddit" onclick="shareToReddit()">
+                    <span class="share-icon">🤖</span>
+                    Reddit
+                </a>
+                <a href="#" class="share-btn pinterest" onclick="shareToPinterest()">
+                    <span class="share-icon">📌</span>
+                    Pinterest
+                </a>
+                <a href="#" class="share-btn email" onclick="shareToEmail()">
+                    <span class="share-icon">📧</span>
+                    Email
+                </a>
+                <button class="share-btn copy" onclick="copyPageLink()">
+                    <span class="share-icon">📋</span>
+                    Copy Link
+                </button>
+            </div>
+        </section>
+
+        <!-- SEO content area -->
+        <section class="section">
+            <h2 class="section-title">🎮 Game Studio - Professional Game Development Services</h2>
+            <div style="line-height: 1.8; color: #555; margin-bottom: 2rem; font-size: 0.95rem;">
+                <p><strong>Game Studio</strong> specializes in <strong>game development</strong>, <strong>production</strong>, and <strong>indie game</strong> design. We deliver end-to-end <strong>game design</strong> services for <strong>mobile</strong>, <strong>PC</strong>, <strong>single-player</strong>, and <strong>online</strong> experiences.</p>
+
+                <p>Our <strong>development team</strong> builds a wide range of genres, including <strong>role-playing (RPG)</strong>, <strong>strategy</strong>, <strong>action</strong>, <strong>adventure</strong>, and <strong>casual</strong> games. Every project focuses on polished gameplay so players can enjoy premium experiences for free.</p>
+
+                <p>As a dedicated <strong>game development company</strong>, we use modern <strong>game engines</strong> such as <strong>Unity</strong> and <strong>Unreal Engine</strong>. Our <strong>programmers</strong>, <strong>artists</strong>, and <strong>designers</strong> collaborate to ship the <strong>latest</strong> and most <strong>popular games</strong>.</p>
+
+                <p>We also share <strong>game recommendations</strong>, <strong>guides</strong>, <strong>reviews</strong>, and <strong>industry news</strong> so fans stay informed about trends. From <strong>indie productions</strong> to large-scale launches, we support a complete <strong>game development pipeline</strong>.</p>
+            </div>
+        </section>
+
+        
+
+        <section class="section">
+            <h2 class="section-title">🧩 Brain Teasers - Puzzle Games</h2>
+            <p class="section-description">Keep your mind sharp with puzzles, word challenges, and relaxing logic experiences. Jump to the dedicated Brain Teasers hub to find every brain-bending game in one place.</p>
+            <a class="section-link-button" href="brain-teasers.html">Play Brain Teasers <span aria-hidden="true">🧠</span></a>
+        </section>
     </div>
-  </section>
 
-    <main>
-    <section class="nav-hero">
-      <div class="container nav-hero__layout">
-        <div class="nav-hero__content">
-          <p class="eyebrow nav-hero__eyebrow">GameUL 游戏导航</p>
-          <h1>直达想玩的网页小游戏</h1>
-          <p class="lead nav-hero__lead">把热门玩法分成清晰分类，像浏览导航站一样快速切换动作、益智、竞速等小游戏入口。</p>
-          <div class="nav-hero__actions">
-            <a class="btn btn-primary" href="#popular">浏览热门分类</a>
-            <a class="btn btn-secondary" href="/games/new-game/">查看最新上架</a>
-          </div>
-          <ul class="nav-hero__stats">
-            <li>
-              <strong id="total-games-count">0</strong>
-              <span>可即时游玩</span>
-            </li>
-            <li>
-              <strong id="total-categories-count">0</strong>
-              <span>热门分类</span>
-            </li>
-            <li>
-              <strong id="last-update">—</strong>
-              <span>最近更新</span>
-            </li>
-          </ul>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 game studio. All rights reserved.</p>
+            <p>Contact Us | About Us | Developer Collaboration</p>
         </div>
-        <div class="nav-hero__panel" aria-labelledby="quick-links-heading">
-          <div class="nav-hero__panel-header">
-            <h2 id="quick-links-heading">快速直达</h2>
-            <p>挑选一个分类即可跳转到对应的游戏清单。</p>
-          </div>
-          <div class="nav-hero__links" role="navigation" aria-label="快速分类导航">
-            <a class="nav-hero__link" href="#popular">核心热门</a>
-            <a class="nav-hero__link" href="#action">动作冒险</a>
-            <a class="nav-hero__link" href="#strategy">策略模拟</a>
-            <a class="nav-hero__link" href="#puzzle">益智休闲</a>
-            <a class="nav-hero__link" href="#racing">竞速音乐</a>
-            <a class="nav-hero__link" href="#creative">创意工具</a>
-          </div>
-          <p class="nav-hero__hint">收藏或分享本页，随时打开就能定位到想玩的玩法。</p>
-        </div>
-      </div>
-    </section>
+    </footer>
 
-    <section class="nav-sections" aria-label="GameUL 游戏分类导航">
-      <div class="container nav-sections__stack">
-        <section class="nav-group" id="popular" aria-labelledby="popular-heading">
-          <div class="nav-group__header">
-            <div>
-              <h2 id="popular-heading">热门分类推荐</h2>
-              <p>四大常玩类型，点开就能直接进入精选小游戏列表。</p>
-            </div>
-            <a class="nav-group__cta" href="/games/">查看全部游戏</a>
-          </div>
-          <div class="nav-group__grid">
-            <a class="nav-card nav-card--accent" href="/games/?category=Action" data-category-count="Action,Platformer,Adventure">
-              <span class="nav-card__icon" aria-hidden="true">⚔️</span>
-              <div class="nav-card__body">
-                <h3>动作冒险</h3>
-                <p>紧凑的战斗与跑酷节奏，热血玩家的首选分类。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">打开分类</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Strategy" data-category-count="Strategy,Simulation">
-              <span class="nav-card__icon" aria-hidden="true">🧠</span>
-              <div class="nav-card__body">
-                <h3>策略模拟</h3>
-                <p>调度资源、布置单位，享受规划赢下关卡的满足感。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">打开分类</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Puzzle" data-category-count="Puzzle,Logic,Relaxing">
-              <span class="nav-card__icon" aria-hidden="true">🧩</span>
-              <div class="nav-card__body">
-                <h3>益智解谜</h3>
-                <p>轻松动脑的拼图与机关设计，适合专注与放松兼顾。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">打开分类</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Racing" data-category-count="Racing,Time Attack,Physics,Rhythm">
-              <span class="nav-card__icon" aria-hidden="true">🏁</span>
-              <div class="nav-card__body">
-                <h3>竞速音乐</h3>
-                <p>速度与节奏并行，漂移、冲刺或跟拍音乐任你挑。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">打开分类</span>
-              </div>
-            </a>
-          </div>
-        </section>
+    <script>
+        const CLASSIC_IMAGE_BASE_PATH = 'img-classic/';
+        const CLASSIC_IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp'];
+        const CLASSIC_IMAGE_FALLBACKS = {
+            'paper minecraft': 'img-portal/Paper.jpg',
+            'paperminecraft': 'img-portal/Paper.jpg',
+            'sudoku': 'img-portal/suduku.png',
+            'suduku': 'img-portal/suduku.png',
+            'blockpuzzle3d': 'img-portal/blockpuzzle3d.jpg',
+            'block puzzle 3d': 'img-portal/blockpuzzle3d.jpg',
+            'blockdroppingmerge': 'img-portal/blockdroppingmerge.jpg',
+            'block dropping merge': 'img-portal/blockdroppingmerge.jpg',
+            'crazymotorcycle': 'img-portal/crazymotorcycle.jpg',
+            'crazy motorcycle': 'img-portal/crazymotorcycle.jpg',
+            'hawaiimatch5': 'img-portal/hawaiimatch5.jpg',
+            'hawaii match 5': 'img-portal/hawaiimatch5.jpg',
+            'parkingfury3d:nightcity': 'img-portal/parkingfury3dn.jpg',
+            'parkingfury3d nightcity': 'img-portal/parkingfury3dn.jpg',
+            'parking fury 3d night city': 'img-portal/parkingfury3dn.jpg',
+            'mylittlecity': 'img-portal/mylittlecity.jpg',
+            'my little city': 'img-portal/mylittlecity.jpg',
+            'matchfind3d': 'img-portal/matchfind3d.jpg',
+            'match find 3d': 'img-portal/matchfind3d.jpg',
+            'highschoolmeangirls3': 'img-portal/highschoolmeangirls3.jpg',
+            'highschool mean girls 3': 'img-portal/highschoolmeangirls3.jpg',
+            'fallbean2': 'img-portal/fallbean2.jpeg',
+            'fall bean 2': 'img-portal/fallbean2.jpeg',
+            'bubbleshooterpop': 'img-portal/bubbleshooterpop.jpg',
+            'bubble shooter pop': 'img-portal/bubbleshooterpop.jpg',
+            'emojimatch': 'img-portal/emojimatch.jpeg',
+            'emoji match': 'img-portal/emojimatch.jpeg',
+            'vexx3m': 'img-portal/vexx3m.jpg',
+            'vex x3m': 'img-portal/vexx3m.jpg',
+            'magicsolitaire': 'img-portal/magicsolitaire.jpg',
+            'magic solitaire': 'img-portal/magicsolitaire.jpg',
+            'farmblockpuzzle': 'img-portal/farmblockpuzzle.jpg',
+            'farm block puzzle': 'img-portal/farmblockpuzzle.jpg'
+        };
 
-        <section class="nav-group" id="action" aria-labelledby="action-heading">
-          <div class="nav-group__header">
-            <div>
-              <h2 id="action-heading">动作 &amp; 冒险延伸</h2>
-              <p>根据操作节奏拆分子分类，快速锁定你的热血玩法。</p>
-            </div>
-            <a class="nav-group__cta" href="/games/?category=Action">浏览动作类</a>
-          </div>
-          <div class="nav-group__grid">
-            <a class="nav-card" href="/games/?category=Arcade" data-category-count="Action,Arcade">
-              <span class="nav-card__icon" aria-hidden="true">🎮</span>
-              <div class="nav-card__body">
-                <h3>街机快打</h3>
-                <p>快速上手的街机关卡，随时可以开一局热身。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">马上查看</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Rhythm" data-category-count="Rhythm,Platformer">
-              <span class="nav-card__icon" aria-hidden="true">🎵</span>
-              <div class="nav-card__body">
-                <h3>节奏挑战</h3>
-                <p>跟着音乐走位或跳跃，考验反应与操作节奏。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">马上查看</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Multiplayer" data-category-count="Multiplayer,Action">
-              <span class="nav-card__icon" aria-hidden="true">🛡️</span>
-              <div class="nav-card__body">
-                <h3>多人竞技</h3>
-                <p>合作或对抗模式，与好友一起冲榜更带感。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">马上查看</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Platformer" data-category-count="Platformer,Adventure,Retro">
-              <span class="nav-card__icon" aria-hidden="true">🦘</span>
-              <div class="nav-card__body">
-                <h3>平台跳跃</h3>
-                <p>横版闯关与跑酷组合，适合喜欢节奏与记忆的玩家。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">马上查看</span>
-              </div>
-            </a>
-          </div>
-        </section>
+        function normalizeClassicImageUrl(url) {
+            if (!url || typeof url !== 'string') {
+                return url;
+            }
 
-        <section class="nav-group" id="strategy" aria-labelledby="strategy-heading">
-          <div class="nav-group__header">
-            <div>
-              <h2 id="strategy-heading">策略 &amp; 模拟玩法</h2>
-              <p>喜欢思考或经营？这些类别提供从战术到养成的不同节奏。</p>
-            </div>
-            <a class="nav-group__cta" href="/games/?category=Strategy">查看策略清单</a>
-          </div>
-          <div class="nav-group__grid">
-            <a class="nav-card" href="/games/?category=Strategy" data-category-count="Strategy,Puzzle">
-              <span class="nav-card__icon" aria-hidden="true">♟️</span>
-              <div class="nav-card__body">
-                <h3>战术解谜</h3>
-                <p>每一回合都至关重要，利用有限行动逆转局势。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">查看分类</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Simulation" data-category-count="Simulation,Casual">
-              <span class="nav-card__icon" aria-hidden="true">🏙️</span>
-              <div class="nav-card__body">
-                <h3>模拟经营</h3>
-                <p>建设农场、城市或太空站，体验稳步成长。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">查看分类</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Action" data-category-count="Action,Strategy">
-              <span class="nav-card__icon" aria-hidden="true">🛡</span>
-              <div class="nav-card__body">
-                <h3>塔防守护</h3>
-                <p>排兵布阵、升级防线，把敌人挡在门外。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">查看分类</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Casual" data-category-count="Casual,Simulation">
-              <span class="nav-card__icon" aria-hidden="true">🌿</span>
-              <div class="nav-card__body">
-                <h3>轻松养成</h3>
-                <p>慢节奏升级或收集玩法，让碎片时间更惬意。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">查看分类</span>
-              </div>
-            </a>
-          </div>
-        </section>
+            const trimmed = url.trim();
 
-        <section class="nav-group" id="puzzle" aria-labelledby="puzzle-heading">
-          <div class="nav-group__header">
-            <div>
-              <h2 id="puzzle-heading">益智 &amp; 休闲精选</h2>
-              <p>动脑或放空都可以，这些小游戏节奏轻松又耐玩。</p>
-            </div>
-            <a class="nav-group__cta" href="/games/?category=Puzzle">探索益智玩法</a>
-          </div>
-          <div class="nav-group__grid">
-            <a class="nav-card" href="/games/?category=Logic" data-category-count="Puzzle,Logic">
-              <span class="nav-card__icon" aria-hidden="true">🧠</span>
-              <div class="nav-card__body">
-                <h3>脑洞谜题</h3>
-                <p>逻辑、推理与数字挑战，适合喜欢挑战思维的玩家。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">立即体验</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Relaxing" data-category-count="Relaxing,Casual">
-              <span class="nav-card__icon" aria-hidden="true">☁️</span>
-              <div class="nav-card__body">
-                <h3>休闲放松</h3>
-                <p>柔和的色调与配乐，让你短暂抽离快节奏的一天。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">立即体验</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Physics" data-category-count="Physics,Puzzle">
-              <span class="nav-card__icon" aria-hidden="true">🪐</span>
-              <div class="nav-card__body">
-                <h3>物理益智</h3>
-                <p>借助重力、弹跳或连锁反应，让关卡顺利通关。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">立即体验</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Rhythm" data-category-count="Rhythm,Puzzle">
-              <span class="nav-card__icon" aria-hidden="true">🔮</span>
-              <div class="nav-card__body">
-                <h3>节奏解谜</h3>
-                <p>跟着音乐提示完成机关，边听边玩更有氛围。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">立即体验</span>
-              </div>
-            </a>
-          </div>
-        </section>
+            if (!trimmed) {
+                return trimmed;
+            }
 
-        <section class="nav-group" id="racing" aria-labelledby="racing-heading">
-          <div class="nav-group__header">
-            <div>
-              <h2 id="racing-heading">竞速 &amp; 音乐跑酷</h2>
-              <p>速度党与音乐党的集合地，马上开跑冲击排行榜。</p>
-            </div>
-            <a class="nav-group__cta" href="/games/?category=Racing">查看竞速列表</a>
-          </div>
-          <div class="nav-group__grid">
-            <a class="nav-card" href="/games/?category=Racing" data-category-count="Racing,Time Attack">
-              <span class="nav-card__icon" aria-hidden="true">🚀</span>
-              <div class="nav-card__body">
-                <h3>极速竞速</h3>
-                <p>短赛道拼反应，追求极限圈速的玩家必看。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">立即查看</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Rhythm" data-category-count="Racing,Rhythm">
-              <span class="nav-card__icon" aria-hidden="true">🎧</span>
-              <div class="nav-card__body">
-                <h3>音乐跑酷</h3>
-                <p>踩着节拍切换赛道，手眼协调的极限挑战。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">立即查看</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Retro" data-category-count="Retro,Arcade">
-              <span class="nav-card__icon" aria-hidden="true">🕹️</span>
-              <div class="nav-card__body">
-                <h3>复古街机</h3>
-                <p>像素与复古音效结合，重温街机厅的飙车记忆。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">立即查看</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/games/?category=Physics" data-category-count="Physics,Racing">
-              <span class="nav-card__icon" aria-hidden="true">🪂</span>
-              <div class="nav-card__body">
-                <h3>特技挑战</h3>
-                <p>控制物理特性完成翻转与腾空，追求炫技表现。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__badge"></span>
-                <span class="nav-card__cta">立即查看</span>
-              </div>
-            </a>
-          </div>
-        </section>
+            try {
+                if (/^https?:\/\//i.test(trimmed)) {
+                    const parsed = new URL(trimmed);
 
-        <section class="nav-group" id="creative" aria-labelledby="creative-heading">
-          <div class="nav-group__header">
-            <div>
-              <h2 id="creative-heading">创意 &amp; 工具拓展</h2>
-              <p>除了玩游戏，也能找到创作素材、门户与嵌入站点。</p>
-            </div>
-            <a class="nav-group__cta" href="/tools/">进入工具中心</a>
-          </div>
-          <div class="nav-group__grid">
-            <a class="nav-card" href="/tools/?category=AI%20Tools">
-              <span class="nav-card__icon" aria-hidden="true">🤖</span>
-              <div class="nav-card__body">
-                <h3>AI 美术工具</h3>
-                <p>生成角色与场景灵感，让项目素材更快到位。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__cta">查看工具</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/tools/?category=Game%20Tools">
-              <span class="nav-card__icon" aria-hidden="true">🧰</span>
-              <div class="nav-card__body">
-                <h3>开发引擎</h3>
-                <p>低门槛的创作平台，支持直接导出网页版本。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__cta">查看工具</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/browsergame/">
-              <span class="nav-card__icon" aria-hidden="true">🪄</span>
-              <div class="nav-card__body">
-                <h3>浏览器游戏平台</h3>
-                <p>汇总 iframe 小游戏站点，复制链接即可嵌入。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__cta">打开入口</span>
-              </div>
-            </a>
-            <a class="nav-card" href="/rankings/">
-              <span class="nav-card__icon" aria-hidden="true">📊</span>
-              <div class="nav-card__body">
-                <h3>榜单 &amp; 趋势</h3>
-                <p>查看热度排行与新品榜，掌握玩家正在玩的内容。</p>
-              </div>
-              <div class="nav-card__meta">
-                <span class="nav-card__cta">查看榜单</span>
-              </div>
-            </a>
-          </div>
-        </section>
-      </div>
-    </section>
-    <section class="home-updates" aria-labelledby="home-updates-heading">
-      <div class="container home-updates__grid">
-        <div class="home-updates__panel">
-          <div class="home-updates__header">
-            <h2 id="home-updates-heading">最新上线</h2>
-            <span class="chip chip--soft" id="new-games-count"></span>
-          </div>
-          <div id="new-grid" class="mini-card-grid"></div>
-        </div>
-        <div class="home-updates__panel">
-          <h2>专题推荐</h2>
-          <p>利用以下合集快速切换不同氛围的小游戏站点。</p>
-          <ul class="collection-list">
-            <li>
-              <a href="/games/directory/">合集目录：站点导航</a>
-              <span>一次性浏览全部收录页面，适合想要批量挖掘资源的玩家。</span>
-            </li>
-            <li>
-              <a href="/iframe/">iframe 嵌入站</a>
-              <span>适合站长、UP 主，复制嵌入代码即可搭建自己的小游戏区。</span>
-            </li>
-            <li>
-              <a href="/tools/?category=Game%20Portals">全球游戏门户</a>
-              <span>寻找新的小游戏来源渠道，保持站点内容常青。</span>
-            </li>
-            <li>
-              <a href="/tools/?category=Gaming%20Resources">资源素材</a>
-              <span>浏览音效、贴图与 UI 素材，为自制项目添砖加瓦。</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </main>
+                    if (parsed.pathname.startsWith('/img-classic') && !parsed.pathname.startsWith('/img-classic/')) {
+                        parsed.pathname = parsed.pathname.replace('/img-classic', '/img-classic/');
+                    }
+
+                    return parsed.toString();
+                }
+
+                if (trimmed.startsWith('img-classic') && !trimmed.startsWith('img-classic/')) {
+                    return trimmed.replace(/^img-classic/, 'img-classic/');
+                }
+
+                return trimmed;
+            } catch (_) {
+                return trimmed;
+            }
+        }
+
+        function buildClassicImageSources(game) {
+            const sources = [];
+
+            if (game && typeof game.image === 'string' && game.image.trim()) {
+                sources.push(normalizeClassicImageUrl(game.image));
+            }
+
+            if (game && typeof game.name === 'string' && game.name.trim()) {
+                const rawName = game.name.trim();
+                const normalizedName = rawName.toLowerCase();
+
+                if (Object.prototype.hasOwnProperty.call(CLASSIC_IMAGE_FALLBACKS, normalizedName)) {
+                    sources.push(normalizeClassicImageUrl(CLASSIC_IMAGE_FALLBACKS[normalizedName]));
+                }
+
+                const baseCandidates = new Set([
+                    rawName,
+                    rawName.replace(/\s+/g, ''),
+                    rawName.toLowerCase().replace(/\s+/g, ''),
+                ]);
+
+                baseCandidates.forEach(candidate => {
+                    const encodedCandidate = encodeURIComponent(candidate);
+                    CLASSIC_IMAGE_EXTENSIONS.forEach(ext => {
+                        sources.push(`${CLASSIC_IMAGE_BASE_PATH}${encodedCandidate}${ext}`);
+                    });
+                });
+            }
+
+            sources.push('images/games/game-placeholder.svg');
+
+            return Array.from(new Set(sources));
+        }
+
+        function loadClassicGallery() {
+            const grid = document.getElementById('classicGalleryGrid');
+
+            if (!grid) {
+                return;
+            }
+
+            const placeholder = document.createElement('div');
+            placeholder.className = 'classic-gallery-placeholder';
+            placeholder.textContent = 'Loading classic games...';
+            grid.innerHTML = '';
+            grid.appendChild(placeholder);
+
+            fetch('img-classic/youxistudiodata.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to load classic games (${response.status})`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const games = Array.isArray(data.games) ? data.games : [];
+                    grid.innerHTML = '';
+
+                    if (!games.length) {
+                        const emptyState = document.createElement('div');
+                        emptyState.className = 'classic-gallery-placeholder';
+                        emptyState.textContent = 'No classic games are available right now. Please check back soon!';
+                        grid.appendChild(emptyState);
+                        return;
+                    }
+
+                    const fragment = document.createDocumentFragment();
+
+                    games.forEach(game => {
+                        const card = document.createElement('a');
+                        card.className = 'classic-gallery-card';
+                        card.href = game.url || '#';
+                        card.target = '_blank';
+                        card.rel = 'noopener noreferrer';
+                        card.setAttribute('role', 'listitem');
+                        card.setAttribute('aria-label', game.name ? `Play ${game.name}` : 'Play classic game');
+
+                        const imageWrapper = document.createElement('div');
+                        imageWrapper.className = 'classic-gallery-image-wrapper';
+
+                        const img = document.createElement('img');
+                        img.loading = 'lazy';
+                        img.decoding = 'async';
+                        img.alt = game.name ? `${game.name} cover art` : 'Classic game cover art';
+
+                        const candidateSources = buildClassicImageSources(game);
+                        let sourceIndex = 0;
+                        let lastAssignedSource = null;
+
+                        const assignNextSource = () => {
+                            while (sourceIndex < candidateSources.length) {
+                                const nextSource = candidateSources[sourceIndex++];
+
+                                if (!nextSource || nextSource === lastAssignedSource) {
+                                    continue;
+                                }
+
+                                lastAssignedSource = nextSource;
+                                img.src = nextSource;
+                                return;
+                            }
+                        };
+
+                        img.addEventListener('error', assignNextSource);
+                        assignNextSource();
+                        imageWrapper.appendChild(img);
+
+                        if (game.isNew !== false) {
+                            const badge = document.createElement('span');
+                            badge.className = 'classic-gallery-badge';
+                            badge.textContent = 'NEW';
+                            imageWrapper.appendChild(badge);
+                        }
+
+                        const info = document.createElement('div');
+                        info.className = 'classic-gallery-info';
+
+                        const title = document.createElement('span');
+                        title.className = 'classic-game-title';
+                        title.textContent = game.name || 'Play Now';
+
+                        const arrow = document.createElement('span');
+                        arrow.className = 'classic-gallery-arrow';
+                        arrow.textContent = '→';
+                        arrow.setAttribute('aria-hidden', 'true');
+
+                        info.appendChild(title);
+                        info.appendChild(arrow);
+
+                        card.appendChild(imageWrapper);
+                        card.appendChild(info);
+                        fragment.appendChild(card);
+                    });
+
+                    grid.appendChild(fragment);
+                })
+                .catch(error => {
+                    console.error(error);
+                    grid.innerHTML = '';
+                    const errorState = document.createElement('div');
+                    errorState.className = 'classic-gallery-placeholder';
+                    errorState.textContent = 'Unable to load the classic game gallery. Please try again later.';
+                    grid.appendChild(errorState);
+                });
+        }
+
+        // Search functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const gameCards = document.querySelectorAll('.game-card');
+
+                gameCards.forEach(card => {
+                    const titleElement = card.querySelector('.game-title');
+                    const categoryElement = card.querySelector('.game-category');
+                    const title = titleElement ? titleElement.textContent.toLowerCase() : '';
+                    const category = categoryElement ? categoryElement.textContent.toLowerCase() : '';
+                    const match = title.includes(searchTerm) || category.includes(searchTerm) || searchTerm === '';
+                    card.style.display = match ? '' : 'none';
+                });
+            });
+        }
+
+        function initializePopularGameImages() {
+            const fallbackImage = 'images/games/game-placeholder.svg';
+            const extensions = ['webp', 'jpg', 'jpeg', 'png', 'svg'];
+
+            document.querySelectorAll('#gamesGrid .game-card').forEach(card => {
+                const imgElement = card.querySelector('.game-thumbnail img');
+                if (!imgElement) {
+                    return;
+                }
+
+                const manualImage = card.dataset.image;
+                const gameName = card.dataset.gameName ? card.dataset.gameName.trim() : '';
+                const slug = gameName
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+
+                const candidates = manualImage
+                    ? [`images/games/${manualImage}`]
+                    : slug
+                        ? extensions.map(ext => `images/games/${slug}.${ext}`)
+                        : [];
+
+                let index = 0;
+
+                const handleError = () => {
+                    if (index < candidates.length) {
+                        imgElement.src = candidates[index++];
+                    } else {
+                        imgElement.removeEventListener('error', handleError);
+                        imgElement.src = fallbackImage;
+                    }
+                };
+
+                imgElement.addEventListener('error', handleError);
+
+                if (candidates.length > 0) {
+                    imgElement.src = candidates[index++];
+                } else {
+                    imgElement.removeEventListener('error', handleError);
+                    imgElement.src = fallbackImage;
+                }
+            });
+        }
+
+        function initializePopularGamePlaceholders() {
+            const placeholderImage = 'images/games/game-placeholder.svg';
+            const popularCards = document.querySelectorAll('#gamesGrid .game-card');
+
+            popularCards.forEach(card => {
+                const iframe = card.querySelector('iframe');
+                const dataSrc = iframe ? iframe.dataset.src : null;
+
+                if (!iframe || !dataSrc) {
+                    return;
+                }
+
+                card.classList.add('popular-game-card');
+                card.setAttribute('role', 'button');
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('aria-label', 'Click to load the game content');
+                iframe.classList.add('game-iframe');
+
+                const placeholder = document.createElement('div');
+                placeholder.className = 'game-placeholder';
+                placeholder.innerHTML = `
+                    <img src="${placeholderImage}" alt="Click to start the game" loading="lazy">
+                    <p>Click the card to load the game instantly</p>
+                `;
+                card.insertBefore(placeholder, iframe);
+
+                const loadGame = () => {
+                    if (card.classList.contains('game-loaded')) {
+                        return;
+                    }
+
+                    card.classList.add('game-loaded');
+                    placeholder.classList.add('is-hidden');
+                    iframe.style.display = 'block';
+                    iframe.setAttribute('src', dataSrc);
+                    iframe.setAttribute('loading', 'lazy');
+                    card.removeAttribute('role');
+                    card.removeAttribute('tabindex');
+                    card.removeAttribute('aria-label');
+                };
+
+                card.addEventListener('click', loadGame);
+                placeholder.addEventListener('click', event => {
+                    event.stopPropagation();
+                    loadGame();
+                });
+
+                card.addEventListener('keydown', event => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        loadGame();
+                    }
+                });
+            });
+        }
+
+        function setupIframeLazyLoading() {
+            const popularIframes = new Set(Array.from(document.querySelectorAll('#gamesGrid .game-card iframe')));
+            const lazyIframes = Array.from(document.querySelectorAll('iframe')).filter(iframe => !popularIframes.has(iframe));
+
+            const loadIframe = (iframe) => {
+                if (!iframe.dataset.src || iframe.getAttribute('src')) {
+                    return;
+                }
+
+                iframe.setAttribute('src', iframe.dataset.src);
+                iframe.setAttribute('loading', 'lazy');
+            };
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries, observerInstance) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            loadIframe(entry.target);
+                            observerInstance.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '200px 0px',
+                    threshold: 0.15
+                });
+
+                lazyIframes.forEach(iframe => observer.observe(iframe));
+            } else {
+                // Fallback: load after short delay
+                setTimeout(() => lazyIframes.forEach(loadIframe), 500);
+            }
+        }
 
 
-  <footer class="site-footer">
-    <div class="container footer__grid">
-      <div>
-        <strong>GameUL</strong>
-        <p>Your curated shortcut to web games, AI tools and gaming resources. Made for casual players, streamers and indie creators.</p>
-      </div>
-      <div>
-        <h3>Explore</h3>
-        <ul>
-          <li><a href="/games/">Game library</a></li>
-          <li><a href="/tools/">Tool hub</a></li>
-          <li><a href="/rankings/">Rankings</a></li>
-          <li><a href="/marketing/">推广 GameUL</a></li>
-          <li><a href="/about/">About &amp; contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Stay updated</h3>
-        <p>New games and tools are added regularly. Bookmark us or follow the RSS-style sitemap to keep track.</p>
-        <a class="footer-link" href="/sitemap.xml">Sitemap</a>
-      </div>
-    </div>
-    <p class="footer__note">© <span id="footer-year"></span> GameUL. Built for the global gaming community.</p>
-  </footer>
 
-  <script src="/assets/js/site-data.js"></script>
-  <script src="/assets/js/main.js"></script>
-  <script>
-    window.PageInit.home();
-  </script>
+        // Initialize after page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadClassicGallery();
+            setupSearch();
+            initializePopularGameImages();
+            initializePopularGamePlaceholders();
+            setupIframeLazyLoading();
+        });
+
+        // Navigation interactions
+        const mobileMenuButton = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        dropdowns.forEach(dropdown => {
+            const toggleLink = dropdown.querySelector('a');
+            if (!toggleLink) return;
+
+            toggleLink.setAttribute('aria-expanded', 'false');
+
+            toggleLink.addEventListener('click', function(event) {
+                if (window.innerWidth <= 768) {
+                    event.preventDefault();
+                    const isOpen = dropdown.classList.toggle('open');
+                    toggleLink.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                }
+            });
+        });
+
+        function closeDropdowns() {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('open');
+                const toggleLink = dropdown.querySelector('a');
+                if (toggleLink) {
+                    toggleLink.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+        if (mobileMenuButton && navLinks) {
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
+
+            mobileMenuButton.addEventListener('click', function() {
+                const isOpen = navLinks.style.display === 'flex';
+                if (isOpen) {
+                    navLinks.style.display = 'none';
+                    closeDropdowns();
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                } else {
+                    navLinks.style.display = 'flex';
+                    mobileMenuButton.setAttribute('aria-expanded', 'true');
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navLinks.style.display = 'flex';
+                    closeDropdowns();
+                } else {
+                    navLinks.style.display = 'none';
+                    closeDropdowns();
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+        // Social media share helpers
+        function shareToFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        function shareToTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            const shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        function shareToLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        function shareToWhatsApp() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            const shareUrl = `https://wa.me/?text=${title}%20${url}`;
+            window.open(shareUrl, '_blank');
+        }
+
+        function shareToTelegram() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            const shareUrl = `https://t.me/share/url?url=${url}&text=${title}`;
+            window.open(shareUrl, '_blank');
+        }
+
+        function shareToReddit() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            const shareUrl = `https://reddit.com/submit?url=${url}&title=${title}`;
+            window.open(shareUrl, '_blank');
+        }
+
+        function shareToPinterest() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            const shareUrl = `https://pinterest.com/pin/create/button/?url=${url}&description=${title}`;
+            window.open(shareUrl, '_blank');
+        }
+
+        function shareToEmail() {
+            const url = window.location.href;
+            const title = document.title;
+            const subject = encodeURIComponent(`Check out this amazing game studio: ${title}`);
+            const body = encodeURIComponent(`I found this great game studio website that you might be interested in:\n\n${title}\n${url}\n\nIt features professional game development services, free online games, and much more!`);
+            const mailtoUrl = `mailto:?subject=${subject}&body=${body}`;
+            window.location.href = mailtoUrl;
+        }
+
+        function copyPageLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(function() {
+                // Show a success message
+                const copyBtn = document.querySelector('.share-btn.copy');
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<span class="share-icon">✅</span>Copied';
+                copyBtn.style.background = 'linear-gradient(45deg, #22c55e, #16a34a)';
+
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                    copyBtn.style.background = 'linear-gradient(45deg, #6b7280, #9ca3af)';
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Copy failed:', err);
+                alert('Copy failed. Please copy the link manually: ' + url);
+            });
+        }
+    </script>
 </body>
 </html>

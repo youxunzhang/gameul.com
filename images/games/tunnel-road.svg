@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="tr-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141e30" />
+      <stop offset="100%" stop-color="#243b55" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#tr-gradient)" rx="40" ry="40" />
+  <g opacity="0.3" fill="none" stroke="#5dade2" stroke-width="6">
+    <path d="M200 600 C 300 400, 900 400, 1000 600" />
+    <path d="M160 600 C 280 350, 920 350, 1040 600" opacity="0.6" />
+    <path d="M120 600 C 260 300, 940 300, 1080 600" opacity="0.3" />
+  </g>
+  <g fill="#1abc9c" opacity="0.4">
+    <circle cx="200" cy="160" r="40" />
+    <circle cx="420" cy="120" r="55" />
+    <circle cx="720" cy="180" r="45" />
+    <circle cx="960" cy="140" r="50" />
+  </g>
+  <path d="M0 520 L1200 520 L1200 675 L0 675 Z" fill="rgba(0,0,0,0.35)" />
+  <path d="M420 520 L600 150 L780 520 Z" fill="rgba(255,255,255,0.08)" />
+  <text x="600" y="360" font-family="'Montserrat', 'Arial', sans-serif" font-size="92" font-weight="700" text-anchor="middle" fill="#ecf0f1">Tunnel Road</text>
+  <text x="600" y="435" font-family="'Montserrat', 'Arial', sans-serif" font-size="34" font-weight="500" text-anchor="middle" fill="#a9c5ff" opacity="0.85">Glide through neon tunnels and dodge every twist.</text>
+</svg>

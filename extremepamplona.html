@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play Extreme Pamplona online in your browser. Sprint through the streets, dodge obstacles, and master the art of the chase with guides, tips, and community insights from Game Studio.">
+    <meta name="keywords" content="Extreme Pamplona, browser game, running game, free online game, arcade game, action game, minigame, chase game">
+    <meta name="author" content="Game Studio">
+    <meta name="robots" content="index, follow">
+    <title>Extreme Pamplona - Play the Classic Bull Running Game | Game Studio</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8794607118520437" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #1f2933;
+            min-height: 100vh;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+            border-radius: 1.25rem;
+            font-size: 1.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18rem;
+            text-decoration: none;
+            background: linear-gradient(120deg, #5f3df7, #05d0f5, #38f5a5);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: logoPulse 8s ease infinite;
+            filter: drop-shadow(0 10px 22px rgba(95, 61, 247, 0.25));
+            transition: transform 0.35s ease, filter 0.35s ease;
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        .logo::before {
+            content: 'GS';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 0.85rem;
+            background: linear-gradient(135deg, rgba(95, 61, 247, 0.95), rgba(5, 208, 245, 0.95));
+            box-shadow: 0 15px 30px rgba(95, 61, 247, 0.4);
+            color: #ffffff;
+            font-size: 1.05rem;
+            letter-spacing: 0.1rem;
+            text-shadow: 0 0 14px rgba(0, 0, 0, 0.35);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            inset: 0.2rem -0.4rem;
+            border-radius: 1.4rem;
+            background: radial-gradient(circle at 0% 0%, rgba(95, 61, 247, 0.28), transparent 60%),
+                        radial-gradient(circle at 100% 100%, rgba(56, 245, 165, 0.3), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 14px 30px rgba(95, 61, 247, 0.35));
+        }
+
+        .logo:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes logoPulse {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1f2933;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #5f3df7;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .search-box:focus-within {
+            border-color: #5f3df7;
+        }
+
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 0.5rem;
+            width: 200px;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #1f2933;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 120px auto 0;
+            padding: 2rem;
+        }
+
+        .hero {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 28px;
+            padding: 2.75rem;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            z-index: 0;
+        }
+
+        .hero h1 {
+            font-size: 2.9rem;
+            margin-bottom: 1rem;
+            color: #1f2933;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: #475569;
+            position: relative;
+            z-index: 1;
+            line-height: 1.8;
+        }
+
+        .stage-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.1);
+            margin-bottom: 2.5rem;
+        }
+
+        .tip-landscape {
+            background: rgba(255, 193, 7, 0.15);
+            color: #a16207;
+            padding: 0.85rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .stage {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .frame-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 960px;
+            height: 600px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.15);
+            background: #000;
+        }
+
+        #wrap {
+            width: 100% !important;
+            max-width: 960px;
+            height: 600px;
+        }
+
+        .frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 20px;
+        }
+
+        .loading {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 23, 42, 0.6);
+            transition: opacity 0.3s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 56px;
+            height: 56px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #38f5a5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .fullscreen-button {
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(120deg, #5f3df7, #05d0f5);
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .fullscreen-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 22px rgba(95, 61, 247, 0.3);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            color: #1f2933;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.4rem;
+            width: 60px;
+            height: 4px;
+            border-radius: 2px;
+            background: linear-gradient(120deg, #5f3df7, #05d0f5);
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+            line-height: 1.7;
+            color: #475569;
+        }
+
+        .faq-item + .faq-item {
+            margin-top: 1rem;
+        }
+
+        details {
+            background: rgba(99, 102, 241, 0.08);
+            border-radius: 16px;
+            padding: 1rem 1.25rem;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 700;
+            color: #3730a3;
+        }
+
+        summary::marker {
+            color: #5f3df7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            border-radius: 18px;
+            background: rgba(99, 102, 241, 0.08);
+            color: #1f2933;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .tips-list li,
+        .storyline p,
+        .compatibility-list li,
+        .updates li {
+            margin-bottom: 0.6rem;
+            color: #475569;
+        }
+
+        .compatibility-list {
+            list-style: none;
+        }
+
+        .compatibility-list li::before {
+            content: '✔';
+            color: #38f5a5;
+            margin-right: 0.5rem;
+            font-weight: 700;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.15);
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 20px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            border-radius: 18px;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.15);
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .rating-stars {
+            display: flex;
+            gap: 0.25rem;
+            font-size: 1.5rem;
+            color: #f59e0b;
+        }
+
+        .rating-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2933;
+        }
+
+        .updates {
+            list-style: none;
+        }
+
+        .updates li strong {
+            display: block;
+            color: #1f2933;
+            margin-bottom: 0.25rem;
+        }
+
+        .reviews {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .review-card {
+            background: rgba(99, 102, 241, 0.08);
+            border-radius: 18px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .review-card strong {
+            color: #1f2933;
+            font-size: 1.05rem;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .related-card {
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 16px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .related-card a {
+            text-decoration: none;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0 3rem;
+            color: #64748b;
+        }
+
+        @media (max-width: 1100px) {
+            .frame-wrap {
+                width: 100%;
+                max-width: 960px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 72px;
+                right: 2rem;
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                gap: 1.25rem;
+                padding: 1.5rem;
+                border-radius: 18px;
+                box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            main {
+                padding: 1.5rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            #wrap {
+                height: 520px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+
+            .hero {
+                padding: 2.1rem;
+            }
+
+            #wrap {
+                height: 420px;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">game studio</a>
+            <ul class="nav-links" id="primaryNav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="featured-games.html">Featured Games</a></li>
+                <li><a href="geometry-dash.html">Geometry Dash</a></li>
+                <li><a href="brain-teasers.html">Brain Teasers</a></li>
+                <li><a href="new-game.html">New Releases</a></li>
+                <li><a href="game-development.html">Game Development</a></li>
+                <li><a href="company-ranking.html">Company Rankings</a></li>
+                <li><a href="extremepamplona.html">Extreme Pamplona</a></li>
+            </ul>
+            <div class="search-box">
+                <input type="text" placeholder="Search games..." aria-label="Search games">
+                <span>🔍</span>
+            </div>
+            <button class="mobile-menu" id="mobileMenu" aria-label="Toggle navigation">☰</button>
+        </div>
+    </nav>
+
+    <main>
+        <header class="hero">
+            <h1>Extreme Pamplona</h1>
+            <p>Dash through the Running of the Bulls in this fast-paced arcade classic. Leap over market stalls, slide under barricades, and outsmart the charging bull while you sprint across cities worldwide. Play instantly in your browser and master the art of the chase with our in-depth guides and community strategies.</p>
+        </header>
+
+        <section class="stage-section" aria-labelledby="play-extreme-pamplona">
+            <h2 id="play-extreme-pamplona">Play Extreme Pamplona</h2>
+            <!-- Orientation tip -->
+            <div class="tip-landscape" id="tipLandscape" hidden>For the best experience, rotate your device to landscape or tap Fullscreen.</div>
+
+            <!-- Stage & Iframe Wrapper -->
+            <div class="stage" id="stage">
+                <div class="frame-wrap" id="wrap" style="width:960px;height:600px;">
+                    <iframe
+                        id="frame"
+                        class="frame"
+                        title="Extreme Pamplona"
+                        src="https://sipragio06.github.io/extreme-pamplona/"
+                        loading="eager"
+                        allowfullscreen
+                        sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-downloads allow-storage-access-by-user-activation">
+                    </iframe>
+
+                    <!-- Loading animation -->
+                    <div class="loading" id="loading"><div class="spinner" aria-label="Loading"></div></div>
+                </div>
+            </div>
+            <button class="fullscreen-button" id="fullscreenButton" type="button">⛶ Fullscreen</button>
+        </section>
+
+        <section class="section" aria-labelledby="game-description">
+            <h2 id="game-description">Game Description</h2>
+            <div class="two-column">
+                <p>Extreme Pamplona is a beloved Flash-era running game that puts you in the shoes of an adventurous traveler who keeps accidentally provoking bulls in each country he visits. Your mission is simple—run faster than the furious bull while leaping over obstacles, mastering precise timing, and chaining parkour moves to stay ahead.</p>
+                <p>Each stage introduces new cultural backdrops, interactive props, and slapstick moments. Whether you are racing through the streets of Spain, dodging ninja in Japan, or escaping icy hazards in the Arctic, the game blends cartoon humor with tight, responsive controls that reward quick reflexes.</p>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="controls">
+            <h2 id="controls">Controls</h2>
+            <div class="two-column">
+                <ul class="tips-list">
+                    <li><strong>Arrow Keys / WASD:</strong> Move forward, jump, and duck obstacles.</li>
+                    <li><strong>Spacebar:</strong> Trigger special context moves like wall jumps or vaulting.</li>
+                    <li><strong>Shift (hold):</strong> Sprint for a burst of speed on straightaways.</li>
+                    <li><strong>P:</strong> Pause the chase and adjust audio settings.</li>
+                    <li><strong>Enter:</strong> Quickly restart the stage after a crash.</li>
+                </ul>
+                <p>Gamepad-friendly mapping is also supported through most modern browsers. Plug in a controller, map the buttons to movement and jump, and enjoy a console-like experience without downloads.</p>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="faq">
+            <h2 id="faq">FAQ - Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <details>
+                    <summary>Is Extreme Pamplona free to play?</summary>
+                    <p>Yes! The game runs entirely in your browser with no fees or registrations required.</p>
+                </details>
+            </div>
+            <div class="faq-item">
+                <details>
+                    <summary>Do I need Flash Player?</summary>
+                    <p>No. This version is rebuilt for modern HTML5 browsers, so you can play on desktop and mobile without Flash.</p>
+                </details>
+            </div>
+            <div class="faq-item">
+                <details>
+                    <summary>Can I save my progress?</summary>
+                    <p>Progress is tracked per session. Keep the tab open to continue your run or use the level select menu to revisit finished areas.</p>
+                </details>
+            </div>
+            <div class="faq-item">
+                <details>
+                    <summary>Why is my game lagging?</summary>
+                    <p>Lower the graphics quality in the pause menu or switch to a desktop browser. Closing unused tabs and disabling other heavy apps can also help.</p>
+                </details>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="features">
+            <h2 id="features">Game Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <strong>Worldwide Chase</strong>
+                    <p>Race through Spain, the Netherlands, England, Italy, and beyond with each country offering new comedy set pieces.</p>
+                </div>
+                <div class="feature-card">
+                    <strong>Reactive Obstacles</strong>
+                    <p>Interact with trampolines, barrels, ziplines, and rooftops that reward timing-based tricks.</p>
+                </div>
+                <div class="feature-card">
+                    <strong>Speedrunner Friendly</strong>
+                    <p>Track your best completion times and discover shortcuts that shave seconds off every course.</p>
+                </div>
+                <div class="feature-card">
+                    <strong>Modern HTML5 Port</strong>
+                    <p>Play in any modern browser without additional plugins or downloads.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="tips">
+            <h2 id="tips">Tips &amp; Strategy</h2>
+            <ul class="tips-list">
+                <li>Tap jump instead of holding to vault over crates quickly; hold the button to clear wide gaps.</li>
+                <li>Use slides to maintain speed under low-hanging signage instead of jumping, which slows momentum.</li>
+                <li>Memorize hazard placements—each crash teaches you the perfect route for flawless future runs.</li>
+                <li>Trigger contextual moves whenever the prompt flashes to trigger cinematic time-saves.</li>
+                <li>Save your sprint boost for straight roads or after landing from a big jump.</li>
+            </ul>
+        </section>
+
+        <section class="section storyline" aria-labelledby="storyline">
+            <h2 id="storyline">Storyline / Lore</h2>
+            <p>Our hero is a thrill-seeking traveler who cannot resist the excitement of local festivals. After unwittingly angering the legendary bull at the Running of the Bulls in Pamplona, he is chased from one destination to the next. Each level showcases exaggerated tourist attractions, comedic caricatures of local residents, and slapstick gags inspired by the cities he sprints through.</p>
+            <p>While the narrative stays lighthearted, the escalating chase keeps tension high as the bull closes the distance with every mistake. Completing all stages earns you a cinematic finale that proves quick thinking—and quicker legs—are a universal language.</p>
+        </section>
+
+        <section class="section" aria-labelledby="compatibility">
+            <h2 id="compatibility">Device Compatibility</h2>
+            <ul class="compatibility-list">
+                <li>Desktop browsers (Chrome, Edge, Firefox, Safari) with keyboard support.</li>
+                <li>Android tablets and phones running Chrome 90+.</li>
+                <li>iOS devices running Safari 14+.</li>
+                <li>Chromebooks with keyboard or connected controllers.</li>
+                <li>Gamepad support through browser mapping tools (Xbox, PlayStation, generic USB).</li>
+            </ul>
+        </section>
+
+        <section class="section" aria-labelledby="video">
+            <h2 id="video">Gameplay Video</h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/RMu38rTJfjE" title="Extreme Pamplona Gameplay" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="gallery">
+            <h2 id="gallery">Gallery / Screenshots</h2>
+            <div class="gallery-grid">
+                <img src="https://images.unsplash.com/photo-1526413232644-8a3684aa8b06?auto=format&fit=crop&w=600&q=80" alt="Runner leaping over market stalls in a vibrant street scene" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80" alt="City rooftops at sunset representing an Extreme Pamplona level" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1529408570181-92fc3c7e3526?auto=format&fit=crop&w=600&q=80" alt="Crowded festival square echoing the Pamplona chase" loading="lazy">
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="rating">
+            <h2 id="rating">Game Rating</h2>
+            <div class="rating">
+                <div class="rating-stars" aria-label="4.6 out of 5 stars">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+                </div>
+                <div>
+                    <div class="rating-score">4.6</div>
+                    <p>Community score based on 5,200+ web arcade players.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="updates">
+            <h2 id="updates">Update Log</h2>
+            <ul class="updates">
+                <li>
+                    <strong>May 2024</strong>
+                    <span>Improved input responsiveness and added support for gamepad remapping.</span>
+                </li>
+                <li>
+                    <strong>February 2024</strong>
+                    <span>Optimized graphics pipeline for smoother 60 FPS gameplay on mid-range devices.</span>
+                </li>
+                <li>
+                    <strong>November 2023</strong>
+                    <span>Released HTML5 port with stage select, performance presets, and bug fixes.</span>
+                </li>
+            </ul>
+        </section>
+
+        <section class="section" aria-labelledby="reviews">
+            <h2 id="reviews">Player Reviews / Comments</h2>
+            <div class="reviews">
+                <div class="review-card">
+                    <strong>Mia</strong>
+                    <p>“I grew up playing this game on Miniclip. The new browser version feels smoother and the timing challenges are still as thrilling as ever.”</p>
+                </div>
+                <div class="review-card">
+                    <strong>Rafael</strong>
+                    <p>“Love the cultural backdrops and slapstick humor. Perfect for a quick adrenaline rush during breaks.”</p>
+                </div>
+                <div class="review-card">
+                    <strong>Nova</strong>
+                    <p>“Works surprisingly well with my Xbox controller. The sprint mechanic makes high-score runs super addictive.”</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="related">
+            <h2 id="related">Related Games</h2>
+            <div class="related-grid">
+                <div class="related-card">
+                    <span>Endless Runner</span>
+                    <a href="geometry-dash.html">Geometry Dash</a>
+                    <p>Rhythm-based platforming with tight jumps and high-speed reactions.</p>
+                </div>
+                <div class="related-card">
+                    <span>Parkour Challenge</span>
+                    <a href="https://www.crazygames.com/game/subway-surfers" target="_blank" rel="noopener">Subway Surfers</a>
+                    <p>Surf the subways, dodge trains, and collect coins in a global street chase.</p>
+                </div>
+                <div class="related-card">
+                    <span>Arcade Classic</span>
+                    <a href="https://www.crazygames.com/game/temple-run-2" target="_blank" rel="noopener">Temple Run 2</a>
+                    <p>Escape the cursed temple with tilt controls, power-ups, and deadly traps.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © <span id="year"></span> Game Studio. All rights reserved.
+    </footer>
+
+    <script>
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('primaryNav');
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+
+        const frame = document.getElementById('frame');
+        const loadingOverlay = document.getElementById('loading');
+        frame.addEventListener('load', () => {
+            setTimeout(() => loadingOverlay.classList.add('hidden'), 150);
+        });
+
+        const fullscreenButton = document.getElementById('fullscreenButton');
+        fullscreenButton.addEventListener('click', () => {
+            const iframe = document.getElementById('frame');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
+        });
+
+        const tipLandscape = document.getElementById('tipLandscape');
+        const mediaQuery = window.matchMedia('(orientation: portrait)');
+
+        function updateTipVisibility() {
+            if (mediaQuery.matches && window.innerWidth < 900) {
+                tipLandscape.hidden = false;
+            } else {
+                tipLandscape.hidden = true;
+            }
+        }
+
+        if (typeof mediaQuery.addEventListener === 'function') {
+            mediaQuery.addEventListener('change', updateTipVisibility);
+        } else if (typeof mediaQuery.addListener === 'function') {
+            mediaQuery.addListener(updateTipVisibility);
+        }
+        window.addEventListener('resize', updateTipVisibility);
+        updateTipVisibility();
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

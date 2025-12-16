@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8794607118520437"
+     crossorigin="anonymous"></script>
+    <title>Top Games</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5e6d3, #e8d5c0);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            color: #ff6b35;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            max-width: 100%;
+        }
+
+        .game-card {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .game-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            z-index: 1;
+        }
+
+        .game-title {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            z-index: 2;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            line-height: 1.2;
+        }
+
+        /* Individual game styles */
+        .game-1 { background: linear-gradient(135deg, #2c3e50, #34495e); }
+        .game-2 { background: linear-gradient(135deg, #e91e63, #f8bbd9); }
+        .game-3 { background: linear-gradient(135deg, #1a237e, #3949ab); }
+        .game-4 { background: linear-gradient(135deg, #00796b, #4db6ac); }
+        .game-5 { background: linear-gradient(135deg, #558b2f, #8bc34a); }
+        .game-6 { background: linear-gradient(135deg, #212121, #424242); }
+        .game-7 { background: linear-gradient(135deg, #0097a7, #26c6da); }
+        .game-8 { background: linear-gradient(135deg, #7b1fa2, #ba68c8); }
+        .game-9 { background: linear-gradient(135deg, #689f38, #9ccc65); }
+        .game-10 { background: linear-gradient(135deg, #1976d2, #42a5f5); }
+        .game-11 { background: linear-gradient(135deg, #303f9f, #5c6bc0); }
+        .game-12 { background: linear-gradient(135deg, #f57c00, #ffb74d); }
+        .game-13 { background: linear-gradient(135deg, #388e3c, #66bb6a); }
+        .game-14 { background: linear-gradient(135deg, #f06292, #f8bbd9); }
+        .game-15 { background: linear-gradient(135deg, #5d4037, #8d6e63); }
+        .game-16 { background: linear-gradient(135deg, #455a64, #78909c); }
+        .game-17 { background: linear-gradient(135deg, #00acc1, #4dd0e1); }
+        .game-18 { background: linear-gradient(135deg, #8e24aa, #ab47bc); }
+        .game-19 { background: linear-gradient(135deg, #d32f2f, #ef5350); }
+        .game-20 { background: linear-gradient(135deg, #512da8, #7e57c2); }
+
+        /* Remove the emoji placeholder since we now have actual thumbnails */
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .games-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 12px;
+            }
+            
+            .game-title {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .games-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">TOP GAMES</div>
+        <div class="games-grid">
+            <div class="game-card game-1" data-url="https://gamestudio.online/game/noobwars-red-and-blue">
+                <img src="https://via.placeholder.com/300x200/3b82f6/white?text=Noobwars" alt="Noobwars Red and Blue" class="game-thumbnail">
+                <div class="game-title">Noobwars Red and Blue</div>
+            </div>
+            <div class="game-card game-2" data-url="https://gamestudio.online/game/baby-bella-braid-hair-salon">
+                <img src="https://via.placeholder.com/300x200/ec4899/white?text=Baby+Bella" alt="Baby Bella Braid Hair Salon" class="game-thumbnail">
+                <div class="game-title">Baby Bella Braid Hair Salon</div>
+            </div>
+            <div class="game-card game-3" data-url="https://gamestudio.online/game/kids-dentist-asmr-salon">
+                <img src="https://via.placeholder.com/300x200/10b981/white?text=Dentist" alt="Kids Dentist Asmr Salon" class="game-thumbnail">
+                <div class="game-title">Kids Dentist Asmr Salon</div>
+            </div>
+            <div class="game-card game-4" data-url="https://gamestudio.online/game/hippo-good-morning">
+                <img src="https://via.placeholder.com/300x200/f59e0b/white?text=Hippo" alt="Hippo Good Morning" class="game-thumbnail">
+                <div class="game-title">Hippo Good Morning</div>
+            </div>
+            <div class="game-card game-5" data-url="https://gamestudio.online/game/zombie-mission-survivor">
+                <img src="https://via.placeholder.com/300x200/8b5cf6/white?text=Zombie" alt="Zombie Mission Survivor" class="game-thumbnail">
+                <div class="game-title">Zombie Mission Survivor</div>
+            </div>
+            <div class="game-card game-6" data-url="https://gamestudio.online/game/retro-jack">
+                <img src="https://via.placeholder.com/300x200/06b6d4/white?text=Retro+Jack" alt="Retro Jack" class="game-thumbnail">
+                <div class="game-title">Retro Jack</div>
+            </div>
+            <div class="game-card game-7" data-url="https://gamestudio.online/game/monster-of-garage-storage">
+                <img src="https://via.placeholder.com/300x200/ef4444/white?text=Monster" alt="Monster of Garage Storage" class="game-thumbnail">
+                <div class="game-title">Monster of Garage Storage</div>
+            </div>
+            <div class="game-card game-8" data-url="https://gamestudio.online/game/gta-new-york">
+                <img src="https://via.placeholder.com/300x200/6366f1/white?text=GTA+NY" alt="GTA New York" class="game-thumbnail">
+                <div class="game-title">GTA New York</div>
+            </div>
+            <div class="game-card game-9" data-url="https://gamestudio.online/game/screw-jam">
+                <img src="https://via.placeholder.com/300x200/84cc16/white?text=Screw+Jam" alt="Screw Jam" class="game-thumbnail">
+                <div class="game-title">Screw Jam</div>
+            </div>
+            <div class="game-card game-10" data-url="https://gamestudio.online/game/steal-eggs-age-of-guns">
+                <img src="https://via.placeholder.com/300x200/f97316/white?text=Steal+Eggs" alt="Steal Eggs: Age of Guns" class="game-thumbnail">
+                <div class="game-title">Steal Eggs: Age of Guns</div>
+            </div>
+            <div class="game-card game-11" data-url="https://gamestudio.online/game/hexa-dots">
+                <img src="https://via.placeholder.com/300x200/a855f7/white?text=Hexa+Dots" alt="Hexa Dots" class="game-thumbnail">
+                <div class="game-title">Hexa Dots</div>
+            </div>
+            <div class="game-card game-12" data-url="https://gamestudio.online/game/cubble-on-top">
+                <img src="https://via.placeholder.com/300x200/14b8a6/white?text=Cubble" alt="Cubble on top" class="game-thumbnail">
+                <div class="game-title">Cubble on top</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add click handlers to open game links
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const gameUrl = card.getAttribute('data-url');
+                if (gameUrl) {
+                    window.open(gameUrl, '_blank');
+                }
+            });
+        });
+
+        // Add random color animation
+        function animateCards() {
+            const cards = document.querySelectorAll('.game-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.animation = `pulse 0.6s ease-in-out`;
+                }, index * 50);
+            });
+        }
+
+        // Add CSS animation class
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Apply entrance animation after the page loads
+        window.addEventListener('load', () => {
+            setTimeout(animateCards, 500);
+        });
+    </script>
+</body>
+</html> 

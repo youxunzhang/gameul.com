@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional game development services from Game Studio, covering Unity and Unreal projects, programming, art, design, and full production support for indie, mobile, and PC titles.">
+    <meta name="keywords" content="game development, game production, indie games, game design, Unity development, Unreal development, game programming, game art, game planning, indie game production, game development process, game tutorials, mobile game studio, PC game development, indie game developers">
+    <meta name="author" content="Game Studio">
+    <meta name="robots" content="index, follow">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8794607118520437"
+     crossorigin="anonymous"></script>
+    <title>Game Development Services - Unity, Unreal & Indie Production</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+            border-radius: 1.25rem;
+            font-size: 1.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18rem;
+            text-decoration: none;
+            background: linear-gradient(120deg, #5f3df7, #05d0f5, #38f5a5);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: logoPulse 8s ease infinite;
+            filter: drop-shadow(0 10px 22px rgba(95, 61, 247, 0.25));
+            transition: transform 0.35s ease, filter 0.35s ease;
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        .logo::before {
+            content: 'GS';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 0.85rem;
+            background: linear-gradient(135deg, rgba(95, 61, 247, 0.95), rgba(5, 208, 245, 0.95));
+            box-shadow: 0 15px 30px rgba(95, 61, 247, 0.4);
+            color: #ffffff;
+            font-size: 1.05rem;
+            letter-spacing: 0.1rem;
+            text-shadow: 0 0 14px rgba(0, 0, 0, 0.35);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            inset: 0.2rem -0.4rem;
+            border-radius: 1.4rem;
+            background: radial-gradient(circle at 0% 0%, rgba(95, 61, 247, 0.28), transparent 60%),
+                        radial-gradient(circle at 100% 100%, rgba(56, 245, 165, 0.3), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 14px 30px rgba(95, 61, 247, 0.35));
+        }
+
+        .logo:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes logoPulse {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 100px auto 0;
+            padding: 2rem;
+        }
+
+        .hero-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .seo-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .seo-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .seo-text {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .keyword-highlight {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Game Studio</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="featured-games.html">Featured Games</a></li>
+                <li><a href="geometry-dash.html">Geometry Dash</a></li>
+                <li><a href="brain-teasers.html">Brain Teasers</a></li>
+                <li><a href="new-game.html">New Releases</a></li>
+                <li><a href="game-development.html">Game Development</a></li>
+                <li><a href="company-ranking.html">Company Rankings</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="hero-section">
+            <h1 class="hero-title">Professional <span class="keyword-highlight">Game Development</span> Services</h1>
+            <p class="hero-subtitle">Comprehensive support for <span class="keyword-highlight">game production</span>, <span class="keyword-highlight">indie games</span>, and <span class="keyword-highlight">game design</span></p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🎮</div>
+                <h3 class="service-title">Unity Game Development</h3>
+                <p class="service-description">Professional <span class="keyword-highlight">game development</span> powered by Unity, supporting <span class="keyword-highlight">mobile games</span>, <span class="keyword-highlight">PC games</span>, and <span class="keyword-highlight">single-player</span> releases.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3 class="service-title">Unreal Game Development</h3>
+                <p class="service-description">High-end <span class="keyword-highlight">game production</span> with Unreal Engine, ideal for <span class="keyword-highlight">online games</span> and large-scale <span class="keyword-highlight">indie</span> projects.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3 class="service-title">Game Programming</h3>
+                <p class="service-description">Specialized <span class="keyword-highlight">game programming</span> across major <span class="keyword-highlight">game engines</span> and platforms to guarantee performance and stability.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3 class="service-title">Game Art</h3>
+                <p class="service-description">High-quality <span class="keyword-highlight">game art</span> for <span class="keyword-highlight">role-playing (RPG)</span>, <span class="keyword-highlight">strategy</span>, and other experiences with memorable visuals.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">📋</div>
+                <h3 class="service-title">Game Design & Planning</h3>
+                <p class="service-description">Complete <span class="keyword-highlight">game design</span> solutions for <span class="keyword-highlight">action</span>, <span class="keyword-highlight">adventure</span>, and <span class="keyword-highlight">casual</span> games.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🏢</div>
+                <h3 class="service-title">Mobile Game Studio</h3>
+                <p class="service-description">Dedicated <span class="keyword-highlight">mobile game</span> expertise focused on <span class="keyword-highlight">smartphone</span> development and engaging <span class="keyword-highlight">free-to-play</span> content.</p>
+            </div>
+        </div>
+
+        <div class="seo-content">
+            <h2 class="seo-title">🎯 Game Development Service Overview</h2>
+            <p class="seo-text">
+                As a specialized <span class="keyword-highlight">game development studio</span>, we provide an end-to-end <span class="keyword-highlight">production pipeline</span>. From <span class="keyword-highlight">indie concepts</span> to large commercial launches, our experienced producers guide every milestone.
+            </p>
+
+            <p class="seo-text">
+                Our <span class="keyword-highlight">development services</span> span <span class="keyword-highlight">PC</span>, <span class="keyword-highlight">mobile</span>, <span class="keyword-highlight">single-player</span>, and <span class="keyword-highlight">online</span> games. Whether you need an <span class="keyword-highlight">RPG</span>, <span class="keyword-highlight">strategy</span>, <span class="keyword-highlight">action</span>, or <span class="keyword-highlight">adventure</span> title, we have the hands-on experience to deliver.
+            </p>
+
+            <p class="seo-text">
+                We build with leading <span class="keyword-highlight">game engines</span> such as <span class="keyword-highlight">Unity</span> and <span class="keyword-highlight">Unreal Engine</span>. Our <span class="keyword-highlight">programming team</span> masters multiple languages and tools to keep projects optimized and stable.
+            </p>
+
+            <p class="seo-text">
+                Supporting <span class="keyword-highlight">indie developers</span> is core to our mission. We share <span class="keyword-highlight">tutorials</span>, technical mentorship, and publishing guidance to help creative teams bring their ideas to life.
+            </p>
+
+            <p class="seo-text">
+                The <span class="keyword-highlight">art team</span> crafts character, environment, and UI assets tailored to each genre, while our <span class="keyword-highlight">designers</span> ensure gameplay depth and accessibility.
+            </p>
+
+            <p class="seo-text">
+                Looking for a trusted <span class="keyword-highlight">game studio partner</span>? Reach out to collaborate on <span class="keyword-highlight">development</span> or <span class="keyword-highlight">production</span>, or explore our <span class="keyword-highlight">career opportunities</span> for talented creators.</p>
+        </div>
+    </div>
+
+    <script>
+        // Add simple interaction effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceCards = document.querySelectorAll('.service-card');
+            
+            serviceCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-5px)';
+                    }, 200);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
