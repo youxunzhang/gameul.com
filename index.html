@@ -1261,17 +1261,15 @@
             </div>
         </section>
 
-        <!-- SEO content area -->
-        <section class="section">
-            <h2 class="section-title">🎮 Game Studio - Professional Game Development Services</h2>
+        <!-- Helpful, search-focused homepage copy -->
+        <section class="section" aria-labelledby="aboutGamesTitle">
+            <h2 class="section-title" id="aboutGamesTitle">Free Browser Games for Every Player</h2>
             <div style="line-height: 1.8; color: #555; margin-bottom: 2rem; font-size: 0.95rem;">
-                <p><strong>Game Studio</strong> specializes in <strong>game development</strong>, <strong>production</strong>, and <strong>indie game</strong> design. We deliver end-to-end <strong>game design</strong> services for <strong>mobile</strong>, <strong>PC</strong>, <strong>single-player</strong>, and <strong>online</strong> experiences.</p>
+                <p>YouxiStudio brings together <strong>free online games</strong> that work directly in a modern web browser. Explore quick arcade challenges, relaxing puzzle games, racing adventures, strategy favorites, and timeless classics without installing an app.</p>
 
-                <p>Our <strong>development team</strong> builds a wide range of genres, including <strong>role-playing (RPG)</strong>, <strong>strategy</strong>, <strong>action</strong>, <strong>adventure</strong>, and <strong>casual</strong> games. Every project focuses on polished gameplay so players can enjoy premium experiences for free.</p>
+                <p>Our popular collection is updated with fresh picks and easy ways to discover games by genre. Whether you have a few minutes or want to chase a high score, every section is designed to help you find something fun quickly.</p>
 
-                <p>As a dedicated <strong>game development company</strong>, we use modern <strong>game engines</strong> such as <strong>Unity</strong> and <strong>Unreal Engine</strong>. Our <strong>programmers</strong>, <strong>artists</strong>, and <strong>designers</strong> collaborate to ship the <strong>latest</strong> and most <strong>popular games</strong>.</p>
-
-                <p>We also share <strong>game recommendations</strong>, <strong>guides</strong>, <strong>reviews</strong>, and <strong>industry news</strong> so fans stay informed about trends. From <strong>indie productions</strong> to large-scale launches, we support a complete <strong>game development pipeline</strong>.</p>
+                <p>Start with the <a href="#popularGamesSection">popular games</a> above, browse the complete <a href="games.html">online games library</a>, or visit our <a href="brain-teasers.html">brain teasers</a> collection for logic and puzzle challenges.</p>
             </div>
         </section>
 
@@ -1286,8 +1284,8 @@
 
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2024 game studio. All rights reserved.</p>
-            <p>Contact Us | About Us | Developer Collaboration</p>
+            <p>&copy; 2026 YouxiStudio. All rights reserved.</p>
+            <p><a href="about-us.html">About Us</a> | <a href="games.html">All Games</a> | <a href="featured-games.html">Featured Games</a></p>
         </div>
     </footer>
 
@@ -1531,7 +1529,7 @@
             const fallbackImage = 'images/games/game-placeholder.svg';
             const extensions = ['webp', 'jpg', 'jpeg', 'png', 'svg'];
 
-            document.querySelectorAll('#gamesGrid .game-card').forEach(card => {
+            document.querySelectorAll('#gamesGrid .game-card:not(.game-link-card)').forEach(card => {
                 const imgElement = card.querySelector('.game-thumbnail img');
                 if (!imgElement) {
                     return;
