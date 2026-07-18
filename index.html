@@ -5,12 +5,51 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Game Studio - Professional game development, publishing, and design services. Discover mobile, PC, and web games alongside the latest news, featured releases, and gameplay tips.">
-    <meta name="keywords" content="game studio, game development, game production, indie games, game design, mobile games, PC games, single-player games, online games, RPG, strategy games, action games, adventure games, casual games, free games, latest games, popular games, game recommendations, game guides, game reviews, game news, game engine, Unity development, Unreal development, game programming, game art, game planning">
-    <meta name="author" content="Game Studio">
-    <meta name="robots" content="index, follow">
+    <meta name="description" content="Play free online games instantly at YouxiStudio. Discover popular action, puzzle, racing, arcade, strategy, and classic browser games with no download required.">
+    <meta name="author" content="YouxiStudio">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://youxistudio.online/">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-    <title>Game Studio - Professional Game Development & Indie Game Design</title>
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="YouxiStudio">
+    <meta property="og:title" content="Free Online Games - Play Popular Browser Games | YouxiStudio">
+    <meta property="og:description" content="Play popular action, puzzle, racing, arcade, strategy, and classic browser games for free. No download required.">
+    <meta property="og:url" content="https://youxistudio.online/">
+    <meta property="og:image" content="https://youxistudio.online/img-portal/bubbleshooterpop.jpg">
+    <meta property="og:image:alt" content="Popular free online games on YouxiStudio">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Online Games - Play Popular Browser Games | YouxiStudio">
+    <meta name="twitter:description" content="Play popular browser games online for free with no download required.">
+    <meta name="twitter:image" content="https://youxistudio.online/img-portal/bubbleshooterpop.jpg">
+    <title>Free Online Games - Play Popular Browser Games | YouxiStudio</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "YouxiStudio",
+      "url": "https://youxistudio.online/",
+      "description": "Free online action, puzzle, racing, arcade, strategy, and classic browser games.",
+      "inLanguage": "en"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Popular Free Online Games",
+      "numberOfItems": 8,
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Snow Rush 3D","url":"https://youxistudio.online/#popularGamesSection"},
+        {"@type":"ListItem","position":2,"name":"Tower Crash 3D","url":"https://youxistudio.online/#popularGamesSection"},
+        {"@type":"ListItem","position":3,"name":"Tunnel Road","url":"https://youxistudio.online/#popularGamesSection"},
+        {"@type":"ListItem","position":4,"name":"Merge Flowers","url":"https://youxistudio.online/#popularGamesSection"},
+        {"@type":"ListItem","position":5,"name":"Obby On a Bike","url":"https://youxistudio.online/#popularGamesSection"},
+        {"@type":"ListItem","position":6,"name":"Bubble Shooter Pop","url":"https://www.hotspotgame.online/Bubble-Shooter-Pop/Bubble-Shooter-Pop"},
+        {"@type":"ListItem","position":7,"name":"Crazy Motorcycle","url":"https://gamedistribution.com/games/crazy-motorcycle/"},
+        {"@type":"ListItem","position":8,"name":"Vex 3","url":"https://www.coolmathgames.com/0-vex-3"}
+      ]
+    }
+    </script>
     <style>
         * {
             margin: 0;
@@ -802,6 +841,38 @@
             text-align: center;
         }
 
+        .popular-games-intro {
+            max-width: 760px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .game-link-card {
+            color: inherit;
+            text-decoration: none;
+            align-items: stretch;
+        }
+
+        .game-link-card .game-title {
+            text-align: left;
+        }
+
+        .game-category {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .game-card-description {
+            color: #4b5563;
+            line-height: 1.55;
+            font-size: 0.95rem;
+        }
+
+        .play-game-label {
+            color: #4c51bf;
+            font-weight: 700;
+        }
+
         .categories {
             display: flex;
             gap: 1rem;
@@ -1028,6 +1099,11 @@
 
     <div class="content">
 
+        <header class="hero">
+            <h1>Play Free Online Games Instantly</h1>
+            <p>Explore popular browser games across action, puzzle, racing, arcade, strategy, and classic categories. Start playing in your browser with no download required.</p>
+            <a class="hero-cta" href="#popularGamesSection">Explore Popular Games</a>
+        </header>
 
         <section class="section hot-games-section" id="hot-games" aria-labelledby="hotGamesTitle">
             <h2 id="hotGamesTitle">🔥 Hot Games This Week</h2>
@@ -1073,8 +1149,9 @@
 
         
 
-        <section class="section" id="popularGamesSection" hidden>
-            <h2 class="section-title">🔥 Popular Games</h2>
+        <section class="section" id="popularGamesSection" aria-labelledby="popularGamesTitle">
+            <h2 class="section-title" id="popularGamesTitle">Popular Online Games</h2>
+            <p class="popular-games-intro">Discover this week's most-played browser games, including fast 3D challenges and three new community favorites. Choose a game below and start playing for free.</p>
             <div class="games-grid" id="gamesGrid">
                 <div class="game-card" data-game-name="Snow Rush 3D">
                     <div class="game-thumbnail">
@@ -1111,6 +1188,33 @@
                     <div class="game-title">Obby On a Bike</div>
                     <iframe data-src="https://html5.gamedistribution.com/bc2f52c2d9d04e41aee48bef01075d22/?gd_sdk_referrer_url=https://crazycattle3d.com/games/obby-on-a-bike&amp;gdpr-tracking=1&amp;gdpr-targeting=1&amp;gdpr-third-party=1" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen" title="Obby On a Bike Online Game" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-fullscreen" style="height: 100%; position: relative; inset: 0px; z-index: 1;"></iframe>
                 </div>
+                <a class="game-card game-link-card" data-game-name="Bubble Shooter Pop" href="https://www.hotspotgame.online/Bubble-Shooter-Pop/Bubble-Shooter-Pop" target="_blank" rel="noopener noreferrer">
+                    <div class="game-thumbnail">
+                        <img src="img-portal/bubbleshooterpop.jpg" alt="Bubble Shooter Pop colorful bubble puzzle game" loading="lazy" width="640" height="360">
+                    </div>
+                    <h3 class="game-title">Bubble Shooter Pop</h3>
+                    <span class="game-category">Puzzle</span>
+                    <p class="game-card-description">Match colorful bubbles, clear the board, and chase a new high score.</p>
+                    <span class="play-game-label">Play free online →</span>
+                </a>
+                <a class="game-card game-link-card" data-game-name="Crazy Motorcycle" href="https://gamedistribution.com/games/crazy-motorcycle/" target="_blank" rel="noopener noreferrer">
+                    <div class="game-thumbnail">
+                        <img src="img-portal/crazymotorcycle.jpg" alt="Crazy Motorcycle block-style racing game" loading="lazy" width="640" height="360">
+                    </div>
+                    <h3 class="game-title">Crazy Motorcycle</h3>
+                    <span class="game-category">Racing</span>
+                    <p class="game-card-description">Race across tricky platforms and master every obstacle on two wheels.</p>
+                    <span class="play-game-label">Play free online →</span>
+                </a>
+                <a class="game-card game-link-card" data-game-name="Vex 3" href="https://www.coolmathgames.com/0-vex-3" target="_blank" rel="noopener noreferrer">
+                    <div class="game-thumbnail">
+                        <img src="img-portal/vexx3m.jpg" alt="Vex 3 platform obstacle course game" loading="lazy" width="640" height="360">
+                    </div>
+                    <h3 class="game-title">Vex 3</h3>
+                    <span class="game-category">Platform</span>
+                    <p class="game-card-description">Run, jump, slide, and survive precision obstacle courses.</p>
+                    <span class="play-game-label">Play free online →</span>
+                </a>
             </div>
         </section>
 
