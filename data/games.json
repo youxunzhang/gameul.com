@@ -176,5 +176,37 @@
     "faqs": [
       {"question": "Can words appear backwards?", "answer": "Yes. Hidden words may run in either direction horizontally, vertically or diagonally."}
     ]
+  },
+  {
+    "id": "gamedistribution-ellie-and-friends-pre-fall-outfit",
+    "slug": "ellie-and-friends-pre-fall-outfit",
+    "title": "Ellie and Friends Pre Fall Outfit",
+    "description": "Create cozy pre-fall looks for Ellie and her friends by combining seasonal outfits, layered styles and colorful accessories.",
+    "category": "Dress Up",
+    "tags": ["fashion", "outfit", "girls", "casual", "dress-up"],
+    "thumbnail": "/assets/images/games/ellie-and-friends-pre-fall-outfit.jpg",
+    "gameType": "external-iframe",
+    "gameUrl": "/games/ellie-and-friends-pre-fall-outfit/",
+    "embedId": "7d54d0e73da4434598ae46744e37456f",
+    "embedUrl": "https://html5.gamedistribution.com/7d54d0e73da4434598ae46744e37456f/?gd_sdk_referrer_url=https://gameul.com/games/ellie-and-friends-pre-fall-outfit/",
+    "embedWidth": 800,
+    "embedHeight": 600,
+    "controls": ["Use the left mouse button on desktop", "Tap clothing and accessories on mobile", "Follow the in-game prompts to complete each look"],
+    "mobileSupported": true,
+    "sourceProvider": "GameDistribution",
+    "developer": "Cutedressup",
+    "sourcePage": "https://gamedistribution.com/games/ellie-and-friends-pre-fall-outfit/",
+    "licenseStatus": "authorized-provider-embed",
+    "featured": false,
+    "status": "published",
+    "seoTitle": "Play Ellie and Friends Pre Fall Outfit Online | Gameul",
+    "seoDescription": "Play Ellie and Friends Pre Fall Outfit online for free. Style seasonal looks with cozy layers and accessories on desktop or mobile at Gameul.",
+    "about": "Ellie and Friends Pre Fall Outfit is a casual fashion game from Cutedressup. Build seasonal looks for Ellie and her friends using layered clothing, accessories and warm pre-fall colors.",
+    "howToPlay": ["Choose a character to style.", "Select clothing, hairstyles and accessories using the on-screen controls.", "Mix different pieces until you complete a pre-fall look you like."],
+    "tips": ["Start with one color palette before adding accessories.", "Combine lighter layers with one bold seasonal item.", "Try each category to discover all available outfit pieces."],
+    "faqs": [
+      {"question": "Is Ellie and Friends Pre Fall Outfit free to play?", "answer": "Yes. The game is free to play in your browser through the official GameDistribution embed."},
+      {"question": "Can I play on a phone or tablet?", "answer": "Yes. The publisher lists the game as compatible with iOS and Android mobile browsers."}
+    ]
   }
 ]

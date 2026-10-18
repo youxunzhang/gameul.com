@@ -60,7 +60,7 @@ function header(current = '') {
 <a class="skip-link" href="#main-content">Skip to content</a>
 <header class="site-header${current === 'home' ? ' portal-header' : ''}">
   <div class="nav-shell${current === 'home' ? ' portal-nav-shell' : ''}">
-    <a class="brand" href="/" aria-label="Gameul home"><span class="brand-mark" aria-hidden="true">G</span><span>Gameul</span></a>
+    <a class="brand" href="/" aria-label="gameul.com home"><span class="brand-mark" aria-hidden="true">G</span><span>gameul.com</span></a>
 ${homeSearch}    <nav class="primary-nav${current === 'home' ? ' portal-primary-nav' : ''}" data-primary-nav aria-label="Main navigation">
       ${navItem('home', '/', 'Home')}
       ${navItem('puzzle', '/categories/puzzle-games/', 'Puzzle')}
@@ -87,7 +87,7 @@ function footer() {
     <div class="footer-bottom"><span>© <span data-current-year>2026</span> Gameul. All rights reserved.</span><span>Games run directly in your browser.</span></div>
   </div>
 </footer>
-<script defer src="/assets/js/site.js"></script>`;
+<script defer src="/assets/js/site.js?v=20261018-3"></script>`;
 }
 
 function card(game) {
@@ -144,6 +144,9 @@ const itemListSchema = {
 const featured = games.filter(game => game.featured);
 const puzzleGames = games.filter(game => game.category === 'Puzzle');
 const wordGames = games.filter(game => game.category === 'Word');
+const gameBySlug = slug => games.find(game => game.slug === slug);
+const puzzleShowcase = ['2048', 'minesweeper', 'sudoku', 'sliding-puzzle'].map(gameBySlug).filter(Boolean);
+const quickShowcase = ['memory-match', 'tic-tac-toe', 'word-search', 'ellie-and-friends-pre-fall-outfit'].map(gameBySlug).filter(Boolean);
 
 write('index.html', documentPage({
   title: 'Free Online Games – Play Instantly | Gameul',
@@ -151,33 +154,26 @@ write('index.html', documentPage({
   canonical: '/', current: 'home', schemas: [websiteSchema, itemListSchema], bodyClass: 'home-page',
   body: `
   <div class="home-layout">
-    <aside class="game-sidebar" aria-label="Game categories">
-      <nav>
-        <a class="active" href="/" aria-label="Home"><span aria-hidden="true">⌂</span><small>Home</small></a>
-        <a href="#popular-games" aria-label="Popular games"><span aria-hidden="true">★</span><small>Popular</small></a>
-        <a href="/categories/puzzle-games/" aria-label="Puzzle games"><span aria-hidden="true">◆</span><small>Puzzle</small></a>
-        <a href="/categories/word-games/" aria-label="Word games"><span aria-hidden="true">A</span><small>Word</small></a>
-        <a href="/games.html" aria-label="All games"><span aria-hidden="true">▦</span><small>All</small></a>
-      </nav>
-    </aside>
     <div class="home-content">
       <header class="home-intro">
-        <div><p>Play a little, every day</p><h1 id="home-title">Play free games online</h1></div>
+        <div><p>Play a little, every day</p><h1 id="home-title">Free games, ready to play</h1></div>
         <a href="/games.html">View all ${games.length} games <span aria-hidden="true">→</span></a>
       </header>
 
-      <section class="mood-strip" aria-label="Quick game collections">
-        <a class="mood-card mood-brain" href="/games/sudoku/"><span aria-hidden="true">🧠</span><strong>Train your brain</strong><small>Sudoku &amp; logic</small></a>
-        <a class="mood-card mood-quick" href="/games/tic-tac-toe/"><span aria-hidden="true">⚡</span><strong>5-minute fun</strong><small>Quick classics</small></a>
-        <a class="mood-card mood-number" href="/games/2048/"><span aria-hidden="true">🔢</span><strong>Number games</strong><small>Merge &amp; solve</small></a>
-        <a class="mood-card mood-word" href="/games/word-search/"><span aria-hidden="true">🔤</span><strong>Word play</strong><small>Find every word</small></a>
+      <section class="home-collection" aria-labelledby="puzzle-collection-title">
+        <a class="collection-lead collection-puzzle" href="/categories/puzzle-games/">
+          <div><span>6 games</span><h2 id="puzzle-collection-title">Puzzle &amp;<br>Brain Games</h2><strong>Explore category <span aria-hidden="true">→</span></strong></div>
+          <img src="/assets/images/games/2048.svg" alt="" width="640" height="400">
+        </a>
+        ${puzzleShowcase.map((game, index) => portalCard(game, index === 0 ? 'is-priority' : '')).join('')}
       </section>
 
-      <section class="portal-section" id="popular-games" aria-labelledby="popular-title">
-        <div class="portal-section-header"><div><span class="section-icon" aria-hidden="true">🔥</span><div><p>Ready when you are</p><h2 id="popular-title">Popular games</h2></div></div><a href="/games.html">All games <span aria-hidden="true">→</span></a></div>
-        <div class="portal-game-grid">
-          ${games.map((game, index) => portalCard(game, index === 0 ? 'is-featured' : (index === 5 ? 'is-wide' : ''))).join('')}
-        </div>
+      <section class="home-collection" id="popular-games" aria-labelledby="quick-collection-title">
+        <a class="collection-lead collection-quick" href="/games.html">
+          <div><span>Quick picks</span><h2 id="quick-collection-title">Casual &amp;<br>Creative Games</h2><strong>See all games <span aria-hidden="true">→</span></strong></div>
+          <img src="/assets/images/games/ellie-and-friends-pre-fall-outfit.jpg" alt="" width="640" height="400" loading="lazy">
+        </a>
+        ${quickShowcase.map(game => portalCard(game)).join('')}
       </section>
 
       <section class="home-seo-panel" aria-labelledby="why-gameul-title">
@@ -199,7 +195,7 @@ write('games.html', documentPage({
     <section class="section compact" aria-labelledby="library-title" data-game-library>
       <h2 id="library-title" class="visually-hidden">Search and filter the game library</h2>
       <form class="search-form" id="game-search" data-game-search-form role="search"><input data-library-search type="search" name="q" aria-label="Search the game library" placeholder="Search by game, category or tag"><button type="submit">Search</button></form>
-      <div class="filter-bar" style="margin-top:1rem"><button class="filter-button" type="button" data-category-filter="all" aria-pressed="true">All</button><button class="filter-button" type="button" data-category-filter="puzzle" aria-pressed="false">Puzzle</button><button class="filter-button" type="button" data-category-filter="word" aria-pressed="false">Word</button><span class="chip" data-results-count>${games.length} games</span></div>
+      <div class="filter-bar" style="margin-top:1rem"><button class="filter-button" type="button" data-category-filter="all" aria-pressed="true">All</button><button class="filter-button" type="button" data-category-filter="puzzle" aria-pressed="false">Puzzle</button><button class="filter-button" type="button" data-category-filter="word" aria-pressed="false">Word</button><button class="filter-button" type="button" data-category-filter="dress up" aria-pressed="false">Dress Up</button><span class="chip" data-results-count>${games.length} games</span></div>
       <div class="game-grid" style="margin-top:1.2rem">${games.map(card).join('')}</div>
       <div class="empty-state" data-empty-state hidden><strong>No games found.</strong><br>Try a shorter title or choose another category.</div>
     </section>
@@ -225,6 +221,14 @@ write('categories/puzzle-games/index.html', categoryPage('Puzzle', 'puzzle-games
 write('categories/word-games/index.html', categoryPage('Word', 'word-games', 'Free Online Word Games', 'Find hidden words, scan letter grids and enjoy relaxed vocabulary challenges on desktop or mobile.', 'word'));
 
 function gamePage(game) {
+  const isExternal = game.gameType === 'external-iframe';
+  const developerName = game.developer || (isExternal ? game.sourceProvider : 'Gameul');
+  const gameSurface = isExternal
+    ? `<div class="game-stage external-game-stage" data-external-game="${escapeHtml(game.slug)}"><iframe src="${escapeHtml(game.embedUrl)}" data-gd-embed data-gd-game-id="${escapeHtml(game.embedId)}" title="Play ${escapeHtml(game.title)}" width="${game.embedWidth || 800}" height="${game.embedHeight || 600}" scrolling="no" frameborder="0" allow="autoplay; fullscreen; gamepad" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>`
+    : `<div class="game-stage" data-game-runtime="${game.slug}"><p>Loading ${escapeHtml(game.title)}…</p></div>`;
+  const providerDetails = isExternal
+    ? `<p><strong>Developer:</strong> ${escapeHtml(developerName)}</p><p><strong>Distribution:</strong> <a href="${escapeHtml(game.sourcePage)}" rel="noopener noreferrer">${escapeHtml(game.sourceProvider)}</a></p>`
+    : `<p><strong>Developer:</strong> Gameul</p>`;
   const related = games.filter(candidate => candidate.slug !== game.slug)
     .sort((a, b) => Number(b.category === game.category) - Number(a.category === game.category))
     .slice(0, 4);
@@ -233,7 +237,7 @@ function gamePage(game) {
     '@context': 'https://schema.org', '@type': 'VideoGame', name: game.title, description: game.description,
     url: `${siteUrl}${canonical}`, image: `${siteUrl}${game.thumbnail}`, genre: [game.category, ...game.tags],
     gamePlatform: 'Web Browser', playMode: 'SinglePlayer', applicationCategory: 'Game', inLanguage: 'en',
-    author: { '@type': 'Organization', name: 'Gameul', url: `${siteUrl}/` }
+    author: { '@type': 'Organization', name: developerName, url: isExternal ? game.sourcePage : `${siteUrl}/` }
   };
   const breadcrumbSchema = {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -253,12 +257,12 @@ ${header('')}
   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/games.html">All Games</a> / ${escapeHtml(game.title)}</nav>
   <header class="game-heading"><p class="eyebrow">${escapeHtml(game.category)} game</p><h1>${escapeHtml(game.title)}</h1><p>${escapeHtml(game.description)}</p><div class="game-badges"><span class="game-badge">Free to play</span><span class="game-badge">No download</span><span class="game-badge">Mobile friendly</span></div></header>
   <section class="game-shell" data-game-shell aria-label="Play ${escapeHtml(game.title)}">
-    <div class="game-toolbar"><span>Gameul original · runs in your browser</span><div class="game-toolbar-actions"><button type="button" data-fullscreen>Full screen</button></div></div>
-    <div class="game-stage" data-game-runtime="${game.slug}"><p>Loading ${escapeHtml(game.title)}…</p></div>
+    <div class="game-toolbar"><span>${isExternal ? `${escapeHtml(game.sourceProvider)} game` : 'Gameul original'} · runs in your browser</span><div class="game-toolbar-actions"><button type="button" data-fullscreen>Full screen</button></div></div>
+    ${gameSurface}
   </section>
-  <section class="section"><div class="prose-layout"><article class="content-card"><section><h2>About This Game</h2><p>${escapeHtml(game.about)}</p></section><section><h2>How to Play</h2><ol>${game.howToPlay.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ol></section><section><h2>Controls</h2><ul>${game.controls.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section><section><h2>Tips and Strategies</h2><ul>${game.tips.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section><section><h2>Frequently Asked Questions</h2>${game.faqs.map(faq => `<h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p>`).join('')}</section></article><aside class="content-card"><h2>Game details</h2><p><strong>Category:</strong> ${escapeHtml(game.category)}</p><p><strong>Device support:</strong> Desktop, tablet and mobile</p><p><strong>Sign-up:</strong> Not required</p><p><strong>Developer:</strong> Gameul</p><a class="button secondary" href="/games.html">Browse all games</a></aside></div></section>
+  <section class="section"><div class="prose-layout"><article class="content-card"><section><h2>About This Game</h2><p>${escapeHtml(game.about)}</p></section><section><h2>How to Play</h2><ol>${game.howToPlay.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ol></section><section><h2>Controls</h2><ul>${game.controls.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section><section><h2>Tips and Strategies</h2><ul>${game.tips.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section><section><h2>Frequently Asked Questions</h2>${game.faqs.map(faq => `<h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p>`).join('')}</section></article><aside class="content-card"><h2>Game details</h2><p><strong>Category:</strong> ${escapeHtml(game.category)}</p><p><strong>Device support:</strong> Desktop, tablet and mobile</p><p><strong>Sign-up:</strong> Not required</p>${providerDetails}<a class="button secondary" href="/games.html">Browse all games</a></aside></div></section>
   <section class="section" aria-labelledby="related-title"><div class="section-header"><div><p class="eyebrow">Keep playing</p><h2 id="related-title">More Games Like This</h2></div></div><div class="game-grid">${related.map(card).join('')}</div></section>
-</div></main>${footer()}<script defer src="/assets/js/game-runtime.js"></script></body></html>`;
+</div></main>${footer()}${isExternal ? '' : '<script defer src="/assets/js/game-runtime.js"></script>'}</body></html>`;
 }
 
 games.forEach(game => write(`games/${game.slug}/index.html`, gamePage(game)));

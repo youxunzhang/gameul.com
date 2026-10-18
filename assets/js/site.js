@@ -30,6 +30,13 @@
     node.textContent = String(new Date().getFullYear());
   });
 
+  document.querySelectorAll('[data-gd-embed]').forEach(frame => {
+    const gameId = frame.dataset.gdGameId;
+    if (!gameId || !/^https?:$/.test(window.location.protocol)) return;
+    const pageUrl = `${window.location.origin}${window.location.pathname}`;
+    frame.src = `https://html5.gamedistribution.com/${gameId}/?gd_sdk_referrer_url=${encodeURIComponent(pageUrl)}`;
+  });
+
   const searchForms = document.querySelectorAll('[data-game-search-form]');
   searchForms.forEach(form => {
     form.addEventListener('submit', event => {

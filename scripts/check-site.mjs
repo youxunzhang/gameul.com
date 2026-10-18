@@ -10,6 +10,13 @@ const requiredFields = ['id','slug','title','description','category','tags','thu
 
 for (const game of games) {
   for (const field of requiredFields) if (game[field] === undefined || game[field] === '') failures.push(`${game.slug}: missing ${field}`);
+  if (game.gameType === 'external-iframe') {
+    for (const field of ['embedId', 'embedUrl', 'embedWidth', 'embedHeight', 'developer', 'sourcePage']) {
+      if (game[field] === undefined || game[field] === '') failures.push(`${game.slug}: missing external game field ${field}`);
+    }
+    const expectedReferrer = `gd_sdk_referrer_url=https://gameul.com${game.gameUrl}`;
+    if (!String(game.embedUrl || '').includes(expectedReferrer)) failures.push(`${game.slug}: embed URL must use the exact Gameul game page as gd_sdk_referrer_url`);
+  }
   const page = path.join(root, game.gameUrl.replace(/^\//, ''), 'index.html');
   if (!fs.existsSync(page)) failures.push(`${game.slug}: missing generated game page`);
   const image = path.join(root, game.thumbnail.replace(/^\//, ''));
