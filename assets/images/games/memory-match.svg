@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Memory Match cards</title><desc id="desc">Pairs of colorful symbol cards.</desc>
+  <rect width="640" height="400" rx="32" fill="#eaf8f2"/>
+  <g transform="translate(120 76)" font-family="Arial,sans-serif" text-anchor="middle" font-size="48" font-weight="800">
+    <rect x="0" y="0" width="88" height="110" rx="15" fill="#4559dc"/><text x="44" y="72" fill="#fff">◆</text>
+    <rect x="104" y="0" width="88" height="110" rx="15" fill="#fff" stroke="#cbd5e1" stroke-width="4"/><text x="148" y="72" fill="#7c3aed">★</text>
+    <rect x="208" y="0" width="88" height="110" rx="15" fill="#4559dc"/><text x="252" y="72" fill="#fff">◆</text>
+    <rect x="312" y="0" width="88" height="110" rx="15" fill="#fff" stroke="#cbd5e1" stroke-width="4"/><text x="356" y="72" fill="#7c3aed">★</text>
+    <rect x="0" y="130" width="88" height="110" rx="15" fill="#fff" stroke="#cbd5e1" stroke-width="4"/><text x="44" y="202" fill="#16845b">♥</text>
+    <rect x="104" y="130" width="88" height="110" rx="15" fill="#4559dc"/><text x="148" y="202" fill="#fff">?</text>
+    <rect x="208" y="130" width="88" height="110" rx="15" fill="#fff" stroke="#cbd5e1" stroke-width="4"/><text x="252" y="202" fill="#16845b">♥</text>
+    <rect x="312" y="130" width="88" height="110" rx="15" fill="#4559dc"/><text x="356" y="202" fill="#fff">?</text>
+  </g>
+</svg>

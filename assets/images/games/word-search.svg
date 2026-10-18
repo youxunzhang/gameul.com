@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Word Search puzzle</title><desc id="desc">A letter grid with the word PLAY highlighted.</desc>
+  <rect width="640" height="400" rx="32" fill="#eef1ff"/>
+  <g transform="translate(130 62)" font-family="Arial,sans-serif" font-weight="800" font-size="28" text-anchor="middle">
+    <rect width="380" height="276" rx="22" fill="#fff" stroke="#d5ddeb" stroke-width="4"/>
+    <g fill="#17264a"><text x="48" y="58">G</text><text x="118" y="58">A</text><text x="188" y="58">M</text><text x="258" y="58">E</text><text x="328" y="58">S</text><text x="48" y="116">B</text><text x="118" y="116">R</text><text x="188" y="116">A</text><text x="258" y="116">I</text><text x="328" y="116">N</text><text x="48" y="232">S</text><text x="118" y="232">C</text><text x="188" y="232">O</text><text x="258" y="232">R</text><text x="328" y="232">E</text></g>
+    <rect x="20" y="138" width="340" height="57" rx="12" fill="#c8f1df"/>
+    <g fill="#075a3e"><text x="48" y="176">P</text><text x="118" y="176">L</text><text x="188" y="176">A</text><text x="258" y="176">Y</text><text x="328" y="176">!</text></g>
+  </g>
+</svg>

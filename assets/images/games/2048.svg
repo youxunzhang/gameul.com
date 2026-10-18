@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">2048 number puzzle</title><desc id="desc">Number tiles arranged on a purple game board.</desc>
+  <rect width="640" height="400" rx="32" fill="#eef1ff"/><circle cx="550" cy="70" r="105" fill="#dfe5ff"/>
+  <g transform="translate(118 78)"><rect width="404" height="244" rx="26" fill="#9aa6bc"/>
+    <g font-family="Arial,sans-serif" font-weight="800" text-anchor="middle" font-size="46">
+      <rect x="18" y="18" width="82" height="82" rx="13" fill="#fff"/><text x="59" y="73" fill="#3346c8">2</text>
+      <rect x="112" y="18" width="82" height="82" rx="13" fill="#dfe5ff"/><text x="153" y="73" fill="#3346c8">4</text>
+      <rect x="206" y="18" width="82" height="82" rx="13" fill="#8b73e6"/><text x="247" y="73" fill="#fff">8</text>
+      <rect x="300" y="18" width="86" height="82" rx="13" fill="#4559dc"/><text x="343" y="73" fill="#fff">16</text>
+      <rect x="18" y="112" width="176" height="114" rx="14" fill="#8754d9"/><text x="106" y="185" fill="#fff" font-size="52">128</text>
+      <rect x="206" y="112" width="180" height="114" rx="14" fill="#5c2da8"/><text x="296" y="185" fill="#fff" font-size="52">2048</text>
+    </g>
+  </g>
+</svg>

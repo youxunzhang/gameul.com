@@ -1,18 +1,44 @@
-# YouxiStudio.online
+# Gameul
 
-## Previewing the site locally
-The pages in this repository (including `index.html`) fetch JSON assets with `fetch()`. Opening the HTML file directly in a browser (`file://` protocol) blocks those requests, so you will only see loading errors.
+Gameul is an English-language static HTML5 game site for `https://gameul.com`.
+The public catalogue currently contains seven self-hosted games and does not
+publish third-party titles without documented commercial permission.
 
-Run a small static server from the project root instead:
+## Local development
+
+The project has no third-party runtime dependencies. Node.js is used only to
+generate and validate static pages.
 
 ```bash
-cd youxistudio.online
-python3 -m http.server 8000
+npm run build
+npm run check
 ```
 
-Then browse to <http://localhost:8000/index.html> (or any other page) to see the Classic Game Wall and the rest of the content with data loading correctly.
+To preview the generated site:
 
-> **Tip:** If port `8000` is occupied, replace it with any free port and update the URL accordingly.
+```bash
+python -m http.server 8000
+```
 
-## Remote asset hosting
-The gallery artwork and JSON used by the Classic Game Wall reference the production CDN at `https://youxistudio.online/img-classic/`. When previewing locally, the browser still loads those images over the network, so ensure you have an internet connection during testing.
+Then open `http://127.0.0.1:8000/`.
+
+## Content architecture
+
+- `data/games.json` is the canonical game catalogue.
+- `scripts/build.mjs` generates the homepage, catalogue, category pages, game
+  detail pages, redirects, `robots.txt`, and `sitemap.xml`.
+- `assets/js/game-runtime.js` contains the self-hosted game engines.
+- `assets/css/site.css` contains the shared responsive design system.
+- `scripts/check-site.mjs` validates required metadata, structured data, local
+  links, thumbnails, JavaScript syntax, `ads.txt`, and sitemap coverage.
+
+Add or update games in `data/games.json`, then run the build and check commands.
+Only records with `status: "published"` are included on public pages.
+
+## Advertising and privacy
+
+The AdSense publisher record is stored in `ads.txt`. The shared page template
+loads the existing AdSense and Google Analytics identifiers once per page.
+Before serving personalized ads in regulated regions, enable a suitable
+Google-certified consent management platform in the AdSense account and keep
+the public privacy policy aligned with the live configuration.
