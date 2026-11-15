@@ -147,7 +147,7 @@ const wordGames = games.filter(game => game.category === 'Word');
 const gameBySlug = slug => games.find(game => game.slug === slug);
 const puzzleShowcase = ['2048', 'minesweeper', 'sudoku', 'sliding-puzzle'].map(gameBySlug).filter(Boolean);
 const bloxdShowcase = ['bloxd-survival', 'bloxd-one-block', 'bloxd-bedwars', 'bloxd-skyblock'].map(gameBySlug).filter(Boolean);
-const quickShowcase = ['panda-bubble-shooter', 'onet-master', 'memory-match', 'ellie-and-friends-pre-fall-outfit'].map(gameBySlug).filter(Boolean);
+const quickShowcase = ['crazy-motorcycle', 'panda-bubble-shooter', 'onet-master', 'ellie-and-friends-pre-fall-outfit'].map(gameBySlug).filter(Boolean);
 
 write('index.html', documentPage({
   title: 'Free Online Games – Play Instantly | Gameul',
@@ -179,7 +179,7 @@ write('index.html', documentPage({
 
       <section class="home-collection" id="popular-games" aria-labelledby="quick-collection-title">
         <a class="collection-lead collection-quick" href="/games.html">
-          <div><span>Quick picks</span><h2 id="quick-collection-title">Casual &amp;<br>Creative Games</h2><strong>See all games <span aria-hidden="true">→</span></strong></div>
+          <div><span>Quick picks</span><h2 id="quick-collection-title">Popular &amp;<br>Creative Games</h2><strong>See all games <span aria-hidden="true">→</span></strong></div>
           <img src="/assets/images/games/ellie-and-friends-pre-fall-outfit.jpg" alt="" width="640" height="400" loading="lazy">
         </a>
         ${quickShowcase.map(game => portalCard(game)).join('')}

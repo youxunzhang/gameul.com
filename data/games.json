@@ -431,5 +431,38 @@
       {"question": "Can I play Onet Master directly on Gameul?", "answer": "No. Poki restricts its game page from being embedded on third-party domains, so the play button opens the official Poki page."},
       {"question": "Who made Onet Master?", "answer": "Onet Master is developed by Potato Jam and is available on Poki."}
     ]
+  },
+  {
+    "id": "external-crazygames-crazy-motorcycle",
+    "slug": "crazy-motorcycle",
+    "title": "Crazy Motorcycle",
+    "description": "Guide a block-style rider across floating motorcycle courses, clear dangerous gaps and reach the finish line in this arcade driving game by AM.",
+    "category": "Action",
+    "tags": ["motorcycle", "driving", "obstacle", "arcade", "bike", "3d", "voxel"],
+    "thumbnail": "/assets/images/games/crazy-motorcycle.svg",
+    "gameType": "external-link",
+    "gameUrl": "/games/crazy-motorcycle/",
+    "externalUrl": "https://www.crazygames.com/game/crazy-motorcycle",
+    "controls": ["Use WASD or the arrow keys to steer and control the motorcycle", "Press Space to jump across gaps", "Use the left mouse button to interact with menus"],
+    "mobileSupported": true,
+    "sourceProvider": "CrazyGames",
+    "developer": "AM",
+    "sourcePage": "https://www.crazygames.com/game/crazy-motorcycle",
+    "licenseStatus": "external-link",
+    "playMode": "SinglePlayer",
+    "outboundHeading": "Play Crazy Motorcycle on CrazyGames",
+    "outboundDescription": "CrazyGames only permits this game page to run on its own domain. Open the official CrazyGames page to play safely.",
+    "outboundCta": "Play on CrazyGames",
+    "featured": true,
+    "status": "published",
+    "seoTitle": "Crazy Motorcycle – Play on CrazyGames | Gameul",
+    "seoDescription": "Discover Crazy Motorcycle by AM. Ride across floating obstacle courses, jump dangerous gaps and reach the finish, then play on CrazyGames.",
+    "about": "Crazy Motorcycle is an arcade driving game developed by AM and published on CrazyGames. Steer a block-style motorcycle rider along narrow floating tracks, avoid moving hazards, collect rewards and use checkpoints while working through multiple worlds. Gameul provides this guide and links to the official CrazyGames page.",
+    "howToPlay": ["Open Crazy Motorcycle on the official CrazyGames website.", "Steer carefully along the track and line up the motorcycle before each jump.", "Cross gaps, avoid obstacles, collect rewards and reach the finish line to complete the stage."],
+    "tips": ["Use small steering movements near narrow edges instead of turning sharply.", "Build enough speed before a wide gap, then jump from the center of the ramp.", "Slow down around moving obstacles and use checkpoints to protect your progress."],
+    "faqs": [
+      {"question": "Can I play Crazy Motorcycle directly on Gameul?", "answer": "No. CrazyGames sends a SAMEORIGIN frame restriction, so the Play on CrazyGames button opens the official game page."},
+      {"question": "Who developed Crazy Motorcycle?", "answer": "Crazy Motorcycle is developed by AM and is available on CrazyGames."}
+    ]
   }
 ]
