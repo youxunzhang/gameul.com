@@ -17,6 +17,12 @@ for (const game of games) {
     const expectedReferrer = `gd_sdk_referrer_url=https://gameul.com${game.gameUrl}`;
     if (!String(game.embedUrl || '').includes(expectedReferrer)) failures.push(`${game.slug}: embed URL must use the exact Gameul game page as gd_sdk_referrer_url`);
   }
+  if (game.gameType === 'external-link') {
+    for (const field of ['externalUrl', 'developer', 'sourcePage']) {
+      if (game[field] === undefined || game[field] === '') failures.push(`${game.slug}: missing external link field ${field}`);
+    }
+    if (!/^https:\/\//.test(String(game.externalUrl || ''))) failures.push(`${game.slug}: externalUrl must use HTTPS`);
+  }
   const page = path.join(root, game.gameUrl.replace(/^\//, ''), 'index.html');
   if (!fs.existsSync(page)) failures.push(`${game.slug}: missing generated game page`);
   const image = path.join(root, game.thumbnail.replace(/^\//, ''));
