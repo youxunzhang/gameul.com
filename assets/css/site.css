@@ -613,6 +613,24 @@ a {
   border: 0;
 }
 
+.bloxd-game-stage iframe {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.third-party-game-note {
+  margin: 0.85rem 0 0;
+  padding: 0.85rem 1rem;
+  color: #4f5c6d;
+  background: #f5f7fa;
+  border: 1px solid #e1e6ec;
+  border-radius: 12px;
+  font-size: 0.86rem;
+}
+
+.third-party-game-note a { font-weight: 800; }
+
 .outbound-game-stage {
   position: relative;
   min-height: clamp(430px, 58vw, 650px);
@@ -1749,6 +1767,14 @@ a {
 }
 
 .collection-puzzle { background: linear-gradient(135deg, #09a9c7, #087eae); }
+.collection-bloxd { background: linear-gradient(135deg, #334a92, #18234e); }
+.collection-bloxd img {
+  width: 78%;
+  object-position: 88% center;
+  mix-blend-mode: normal;
+  opacity: 0.7;
+  clip-path: inset(0 0 0 38%);
+}
 .collection-quick { background: linear-gradient(135deg, #ef5aa8, #d93580); }
 .collection-quick img { mix-blend-mode: normal; opacity: 0.58; }
 

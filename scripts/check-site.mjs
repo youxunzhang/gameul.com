@@ -23,6 +23,16 @@ for (const game of games) {
     }
     if (!/^https:\/\//.test(String(game.externalUrl || ''))) failures.push(`${game.slug}: externalUrl must use HTTPS`);
   }
+  if (game.gameType === 'official-site-iframe') {
+    for (const field of ['embedUrl', 'embedWidth', 'embedHeight', 'developer', 'sourcePage']) {
+      if (game[field] === undefined || game[field] === '') failures.push(`${game.slug}: missing official iframe field ${field}`);
+    }
+    for (const field of ['embedUrl', 'sourcePage']) {
+      let parsed;
+      try { parsed = new URL(String(game[field] || '')); } catch { failures.push(`${game.slug}: ${field} must be a valid URL`); }
+      if (parsed && (parsed.protocol !== 'https:' || !/(^|\.)bloxd\.io$/i.test(parsed.hostname))) failures.push(`${game.slug}: ${field} must use an official Bloxd.io HTTPS URL`);
+    }
+  }
   const page = path.join(root, game.gameUrl.replace(/^\//, ''), 'index.html');
   if (!fs.existsSync(page)) failures.push(`${game.slug}: missing generated game page`);
   const image = path.join(root, game.thumbnail.replace(/^\//, ''));

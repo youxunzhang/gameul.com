@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Bloxd BedWars original Gameul cover</title><desc id="desc">Red and blue block islands connected by a bridge with a bed at each end.</desc>
+  <defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#2f79ed"/><stop offset="1" stop-color="#ff5064"/></linearGradient></defs><rect width="1200" height="750" fill="url(#bg)"/>
+  <path d="M0 560h355l102 70H0z" fill="#284c9c"/><path d="M1200 560H845l-102 70h457z" fill="#a62e40"/><path d="m341 505 518 0-55 86H396z" fill="#d4a46b"/><g fill="#f2c993"><rect x="400" y="517" width="74" height="60"/><rect x="493" y="517" width="74" height="60"/><rect x="586" y="517" width="74" height="60"/><rect x="679" y="517" width="74" height="60"/></g>
+  <g stroke="#182443" stroke-width="12" stroke-linejoin="round"><path d="M92 417h246v100H92z" fill="#fff"/><path d="M92 417h152v74H92z" fill="#2e71e0"/><path d="M862 417h246v100H862z" fill="#fff"/><path d="M956 417h152v74H956z" fill="#ef4554"/></g>
+  <g transform="translate(505 260)"><rect width="82" height="126" rx="8" fill="#2f70df"/><rect x="113" width="82" height="126" rx="8" fill="#ed4655"/><path d="M80 28h35v18H80zm0 54h35v18H80z" fill="#ffdd58"/></g>
+  <rect x="52" y="52" width="490" height="154" rx="28" fill="#182443" opacity=".92"/><text x="90" y="120" fill="#ffdc5e" font-family="Arial,sans-serif" font-size="34" font-weight="800">BLOXD.IO MODE</text><text x="90" y="180" fill="#fff" font-family="Arial,sans-serif" font-size="64" font-weight="900">BEDWARS</text>
+</svg>

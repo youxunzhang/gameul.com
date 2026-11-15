@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Bloxd Survival original Gameul cover</title>
+  <desc id="desc">A block landscape with trees, a small shelter and a rising sun.</desc>
+  <defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#6fd7ff"/><stop offset="1" stop-color="#d9f8ff"/></linearGradient><linearGradient id="grass" x2="0" y2="1"><stop stop-color="#5fce62"/><stop offset="1" stop-color="#218f45"/></linearGradient></defs>
+  <rect width="1200" height="750" fill="url(#sky)"/><circle cx="965" cy="142" r="74" fill="#ffd95a"/>
+  <path d="M0 430 160 350 320 428 515 300 720 415 910 320 1200 410V750H0Z" fill="#4aa35c" opacity=".45"/>
+  <path d="M0 505 185 440 360 492 550 395 760 478 960 405 1200 468V750H0Z" fill="url(#grass)"/>
+  <g stroke="#173b2b" stroke-width="12" stroke-linejoin="round"><path d="M150 414h132v184H150z" fill="#8a552f"/><path d="m122 420 94-105 94 105z" fill="#ca7138"/><path d="M200 507h38v91h-38z" fill="#372d33"/></g>
+  <g><rect x="764" y="308" width="54" height="202" fill="#825233"/><rect x="694" y="245" width="194" height="104" rx="8" fill="#277b3d"/><rect x="725" y="196" width="130" height="98" rx="8" fill="#38a64d"/></g>
+  <g transform="translate(495 465)"><rect width="118" height="118" rx="10" fill="#315baf"/><rect x="20" y="25" width="30" height="30" fill="#fff"/><rect x="68" y="25" width="30" height="30" fill="#fff"/><rect x="31" y="35" width="12" height="12" fill="#16264a"/><rect x="75" y="35" width="12" height="12" fill="#16264a"/><path d="M31 78h56" stroke="#fff" stroke-width="12"/></g>
+  <rect x="54" y="54" width="425" height="154" rx="28" fill="#12264a" opacity=".92"/><text x="92" y="122" fill="#8cff9f" font-family="Arial,sans-serif" font-size="34" font-weight="800">BLOXD.IO MODE</text><text x="92" y="180" fill="#fff" font-family="Arial,sans-serif" font-size="66" font-weight="900">SURVIVAL</text>
+</svg>

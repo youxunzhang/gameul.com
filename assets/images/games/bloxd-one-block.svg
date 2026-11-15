@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Bloxd One Block original Gameul cover</title><desc id="desc">A single floating grass block growing into a small island.</desc>
+  <defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#7755ff"/><stop offset="1" stop-color="#ef59da"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="24" stdDeviation="18" flood-opacity=".28"/></filter></defs>
+  <rect width="1200" height="750" fill="url(#bg)"/><g fill="#fff" opacity=".32"><circle cx="148" cy="142" r="18"/><circle cx="1030" cy="162" r="24"/><circle cx="960" cy="585" r="14"/><circle cx="242" cy="615" r="12"/></g>
+  <g filter="url(#s)" stroke="#382b69" stroke-width="12" stroke-linejoin="round"><path d="m410 317 188-108 192 108-192 110z" fill="#62d95c"/><path d="m410 317 188 110v226L410 543z" fill="#9a613e"/><path d="m790 317-192 110v226l192-110z" fill="#6d452f"/></g>
+  <g transform="translate(554 90)"><rect x="26" y="95" width="38" height="93" fill="#765033"/><rect width="90" height="75" rx="8" fill="#2c9c4b"/><rect x="-30" y="45" width="150" height="73" rx="8" fill="#3fc65b"/></g>
+  <g transform="translate(860 305) rotate(10)"><rect width="142" height="70" rx="14" fill="#ffcf45"/><text x="71" y="49" text-anchor="middle" fill="#553b17" font-family="Arial,sans-serif" font-size="46" font-weight="900">1</text></g>
+  <rect x="52" y="52" width="495" height="154" rx="28" fill="#22174d" opacity=".92"/><text x="90" y="120" fill="#ffdc5e" font-family="Arial,sans-serif" font-size="34" font-weight="800">BLOXD.IO MODE</text><text x="90" y="180" fill="#fff" font-family="Arial,sans-serif" font-size="64" font-weight="900">ONE BLOCK</text>
+</svg>

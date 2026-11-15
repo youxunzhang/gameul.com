@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Bloxd Skyblock original Gameul cover</title><desc id="desc">A floating green island with a tree, stone and waterfall above the clouds.</desc>
+  <defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#28b8ff"/><stop offset="1" stop-color="#c8f4ff"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="24" stdDeviation="18" flood-opacity=".25"/></filter></defs><rect width="1200" height="750" fill="url(#sky)"/>
+  <g fill="#fff" opacity=".75"><ellipse cx="160" cy="590" rx="180" ry="65"/><ellipse cx="1010" cy="600" rx="220" ry="74"/><ellipse cx="720" cy="690" rx="260" ry="62"/></g>
+  <g filter="url(#s)"><path d="m358 326 244-121 250 121-250 126z" fill="#50c95a"/><path d="m358 326 244 126-93 224-83-191z" fill="#8d5a37"/><path d="m852 326-250 126-93 224 180-172z" fill="#60422e"/><path d="m706 399 78-39-16 226-70 66z" fill="#4fcbff"/></g>
+  <g transform="translate(505 103)"><rect x="72" y="133" width="48" height="118" fill="#785036"/><rect x="25" y="55" width="144" height="118" rx="8" fill="#2e9d49"/><rect x="55" width="88" height="90" rx="8" fill="#43bf59"/></g>
+  <g fill="#6d7181"><rect x="405" y="323" width="72" height="64"/><rect x="450" y="281" width="66" height="76"/></g>
+  <rect x="52" y="52" width="480" height="154" rx="28" fill="#123257" opacity=".92"/><text x="90" y="120" fill="#9dffa7" font-family="Arial,sans-serif" font-size="34" font-weight="800">BLOXD.IO MODE</text><text x="90" y="180" fill="#fff" font-family="Arial,sans-serif" font-size="64" font-weight="900">SKYBLOCK</text>
+</svg>

@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const games = JSON.parse(fs.readFileSync(path.join(root, 'data', 'games.json'), 'utf8'))
   .filter(game => game.status === 'published');
-const today = '2026-11-04';
+const today = '2026-11-15';
 const siteUrl = 'https://gameul.com';
 
 const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({
@@ -146,6 +146,7 @@ const puzzleGames = games.filter(game => game.category === 'Puzzle');
 const wordGames = games.filter(game => game.category === 'Word');
 const gameBySlug = slug => games.find(game => game.slug === slug);
 const puzzleShowcase = ['2048', 'minesweeper', 'sudoku', 'sliding-puzzle'].map(gameBySlug).filter(Boolean);
+const bloxdShowcase = ['bloxd-survival', 'bloxd-one-block', 'bloxd-bedwars', 'bloxd-skyblock'].map(gameBySlug).filter(Boolean);
 const quickShowcase = ['puffer-party', 'memory-match', 'tic-tac-toe', 'ellie-and-friends-pre-fall-outfit'].map(gameBySlug).filter(Boolean);
 
 write('index.html', documentPage({
@@ -166,6 +167,14 @@ write('index.html', documentPage({
           <img src="/assets/images/games/2048.svg" alt="" width="640" height="400">
         </a>
         ${puzzleShowcase.map((game, index) => portalCard(game, index === 0 ? 'is-priority' : '')).join('')}
+      </section>
+
+      <section class="home-collection" aria-labelledby="bloxd-collection-title">
+        <a class="collection-lead collection-bloxd" href="/games/bloxd-survival/">
+          <div><span>Official Bloxd.io modes</span><h2 id="bloxd-collection-title">Voxel Worlds &amp;<br>Team Battles</h2><strong>Play Survival <span aria-hidden="true">→</span></strong></div>
+          <img src="/assets/images/games/bloxd-survival.svg" alt="" width="640" height="400" loading="lazy">
+        </a>
+        ${bloxdShowcase.map(game => portalCard(game)).join('')}
       </section>
 
       <section class="home-collection" id="popular-games" aria-labelledby="quick-collection-title">
@@ -195,7 +204,7 @@ write('games.html', documentPage({
     <section class="section compact" aria-labelledby="library-title" data-game-library>
       <h2 id="library-title" class="visually-hidden">Search and filter the game library</h2>
       <form class="search-form" id="game-search" data-game-search-form role="search"><input data-library-search type="search" name="q" aria-label="Search the game library" placeholder="Search by game, category or tag"><button type="submit">Search</button></form>
-      <div class="filter-bar" style="margin-top:1rem"><button class="filter-button" type="button" data-category-filter="all" aria-pressed="true">All</button><button class="filter-button" type="button" data-category-filter="puzzle" aria-pressed="false">Puzzle</button><button class="filter-button" type="button" data-category-filter="word" aria-pressed="false">Word</button><button class="filter-button" type="button" data-category-filter="party" aria-pressed="false">Party</button><button class="filter-button" type="button" data-category-filter="dress up" aria-pressed="false">Dress Up</button><span class="chip" data-results-count>${games.length} games</span></div>
+      <div class="filter-bar" style="margin-top:1rem"><button class="filter-button" type="button" data-category-filter="all" aria-pressed="true">All</button><button class="filter-button" type="button" data-category-filter="puzzle" aria-pressed="false">Puzzle</button><button class="filter-button" type="button" data-category-filter="word" aria-pressed="false">Word</button><button class="filter-button" type="button" data-category-filter="adventure" aria-pressed="false">Adventure</button><button class="filter-button" type="button" data-category-filter="action" aria-pressed="false">Action</button><button class="filter-button" type="button" data-category-filter="party" aria-pressed="false">Party</button><button class="filter-button" type="button" data-category-filter="dress up" aria-pressed="false">Dress Up</button><span class="chip" data-results-count>${games.length} games</span></div>
       <div class="game-grid" style="margin-top:1.2rem">${games.map(card).join('')}</div>
       <div class="empty-state" data-empty-state hidden><strong>No games found.</strong><br>Try a shorter title or choose another category.</div>
     </section>
@@ -222,17 +231,23 @@ write('categories/word-games/index.html', categoryPage('Word', 'word-games', 'Fr
 
 function gamePage(game) {
   const isExternal = game.gameType === 'external-iframe';
+  const isOfficialSiteIframe = game.gameType === 'official-site-iframe';
   const isExternalLink = game.gameType === 'external-link';
-  const isThirdParty = isExternal || isExternalLink;
+  const isThirdParty = isExternal || isOfficialSiteIframe || isExternalLink;
   const developerName = game.developer || (isThirdParty ? game.sourceProvider : 'Gameul');
   const gameSurface = isExternal
     ? `<div class="game-stage external-game-stage" data-external-game="${escapeHtml(game.slug)}"><iframe src="${escapeHtml(game.embedUrl)}" data-gd-embed data-gd-game-id="${escapeHtml(game.embedId)}" title="Play ${escapeHtml(game.title)}" width="${game.embedWidth || 800}" height="${game.embedHeight || 600}" scrolling="no" frameborder="0" allow="autoplay; fullscreen; gamepad" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>`
+    : isOfficialSiteIframe
+      ? `<div class="game-stage external-game-stage bloxd-game-stage" data-external-game="${escapeHtml(game.slug)}"><iframe src="${escapeHtml(game.embedUrl)}" title="Play ${escapeHtml(game.title)} on the official Bloxd.io service" width="${game.embedWidth || 1440}" height="${game.embedHeight || 810}" scrolling="no" frameborder="0" allow="autoplay; fullscreen; gamepad" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>`
     : isExternalLink
       ? `<div class="game-stage outbound-game-stage"><img src="${game.thumbnail}" alt="${escapeHtml(game.title)} preview" width="1200" height="750"><div class="outbound-game-copy"><span>Official game website</span><h2>Ready for Puffer Party?</h2><p>This game runs on Krillion. Open the official page to create a room, join other players and start playing.</p><a class="button outbound-play-button" href="${escapeHtml(game.externalUrl)}" target="_blank" rel="noopener noreferrer external">Play on Krillion <span aria-hidden="true">↗</span></a></div></div>`
     : `<div class="game-stage" data-game-runtime="${game.slug}"><p>Loading ${escapeHtml(game.title)}…</p></div>`;
   const providerDetails = isThirdParty
     ? `<p><strong>Developer:</strong> ${escapeHtml(developerName)}</p><p><strong>Distribution:</strong> <a href="${escapeHtml(game.sourcePage)}" rel="noopener noreferrer">${escapeHtml(game.sourceProvider)}</a></p>`
     : `<p><strong>Developer:</strong> Gameul</p>`;
+  const thirdPartyNotice = isOfficialSiteIframe
+    ? `<p class="third-party-game-note">This multiplayer game is loaded from the official Bloxd.io website. Bloxd.io provides the game, accounts, privacy choices and online services. <a href="${escapeHtml(game.sourcePage)}" target="_blank" rel="noopener noreferrer external">Open the official mode page</a>.</p>`
+    : '';
   const related = games.filter(candidate => candidate.slug !== game.slug)
     .sort((a, b) => Number(b.category === game.category) - Number(a.category === game.category))
     .slice(0, 4);
@@ -240,9 +255,10 @@ function gamePage(game) {
   const videoGameSchema = {
     '@context': 'https://schema.org', '@type': 'VideoGame', name: game.title, description: game.description,
     url: `${siteUrl}${canonical}`, image: `${siteUrl}${game.thumbnail}`, genre: [game.category, ...game.tags],
-    gamePlatform: 'Web Browser', playMode: isExternalLink ? 'MultiPlayer' : 'SinglePlayer', applicationCategory: 'Game', inLanguage: 'en',
+    gamePlatform: 'Web Browser', playMode: game.playMode || (isExternalLink ? 'MultiPlayer' : 'SinglePlayer'), applicationCategory: 'Game', inLanguage: 'en',
     author: { '@type': 'Organization', name: developerName, url: isThirdParty ? game.sourcePage : `${siteUrl}/` },
-    ...(isExternalLink ? { sameAs: game.externalUrl } : {})
+    ...(isExternalLink ? { sameAs: game.externalUrl } : {}),
+    ...(isOfficialSiteIframe ? { sameAs: game.sourcePage } : {})
   };
   const breadcrumbSchema = {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -262,9 +278,10 @@ ${header('')}
   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/games.html">All Games</a> / ${escapeHtml(game.title)}</nav>
   <header class="game-heading"><p class="eyebrow">${escapeHtml(game.category)} game</p><h1>${escapeHtml(game.title)}</h1><p>${escapeHtml(game.description)}</p><div class="game-badges"><span class="game-badge">Free to play</span><span class="game-badge">No download</span><span class="game-badge">Mobile friendly</span></div></header>
   <section class="game-shell" data-game-shell aria-label="Play ${escapeHtml(game.title)}">
-    <div class="game-toolbar"><span>${isExternalLink ? `${escapeHtml(game.sourceProvider)} game · opens on the official website` : `${isExternal ? `${escapeHtml(game.sourceProvider)} game` : 'Gameul original'} · runs in your browser`}</span>${isExternalLink ? '' : '<div class="game-toolbar-actions"><button type="button" data-fullscreen>Full screen</button></div>'}</div>
+    <div class="game-toolbar"><span>${isExternalLink ? `${escapeHtml(game.sourceProvider)} game · opens on the official website` : `${isExternal || isOfficialSiteIframe ? `${escapeHtml(game.sourceProvider)} game` : 'Gameul original'} · runs in your browser`}</span>${isExternalLink ? '' : '<div class="game-toolbar-actions"><button type="button" data-fullscreen>Full screen</button></div>'}</div>
     ${gameSurface}
   </section>
+${thirdPartyNotice}
   <section class="section"><div class="prose-layout"><article class="content-card"><section><h2>About This Game</h2><p>${escapeHtml(game.about)}</p></section><section><h2>How to Play</h2><ol>${game.howToPlay.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ol></section><section><h2>Controls</h2><ul>${game.controls.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section><section><h2>Tips and Strategies</h2><ul>${game.tips.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section><section><h2>Frequently Asked Questions</h2>${game.faqs.map(faq => `<h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p>`).join('')}</section></article><aside class="content-card"><h2>Game details</h2><p><strong>Category:</strong> ${escapeHtml(game.category)}</p><p><strong>Device support:</strong> Desktop, tablet and mobile</p><p><strong>Sign-up:</strong> Not required</p>${providerDetails}<a class="button secondary" href="/games.html">Browse all games</a></aside></div></section>
   <section class="section" aria-labelledby="related-title"><div class="section-header"><div><p class="eyebrow">Keep playing</p><h2 id="related-title">More Games Like This</h2></div></div><div class="game-grid">${related.map(card).join('')}</div></section>
 </div></main>${footer()}${isThirdParty ? '' : '<script defer src="/assets/js/game-runtime.js"></script>'}</body></html>`;
@@ -291,7 +308,7 @@ infoPage({
 infoPage({
   filename: 'privacy-policy.html', title: 'Privacy Policy | Gameul', heading: 'Privacy Policy',
   description: 'Read how Gameul uses browser storage, analytics, advertising services and contact information.',
-  content: `<p><strong>Last updated:</strong> October 18, 2026</p><h2>Overview</h2><p>Gameul provides browser-based games without requiring an account. This policy explains information that may be processed when you use the site.</p><h2>Browser storage</h2><p>Some games use local storage on your device to remember settings, progress or best scores. This information remains in your browser unless you clear it. Gameul does not use this game data to identify you.</p><h2>Analytics</h2><p>Gameul uses Google Analytics to understand general site usage, such as pages viewed, device type and approximate region. Google may process identifiers, IP address and browser information according to its own policies.</p><h2>Advertising</h2><p>Gameul uses Google AdSense. Google and its partners may use cookies, web beacons, IP addresses or similar technologies to deliver, measure and protect advertising. Depending on your location and choices, advertising may be personalized or non-personalized. Learn more about <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">how Google uses information from partner sites</a>.</p><h2>Consent choices</h2><p>Where required, Gameul uses consent controls made available for Google advertising and analytics services. You may also manage or clear cookies and local storage in your browser settings.</p><h2>Contact</h2><p>If you have a privacy request, email <a href="mailto:business@gameul.com">business@gameul.com</a>. Please do not include unnecessary sensitive information.</p><h2>Changes</h2><p>We may update this policy when our services or legal obligations change. The date above shows the latest revision.</p>`
+  content: `<p><strong>Last updated:</strong> November 15, 2026</p><h2>Overview</h2><p>Gameul provides browser-based games without requiring a Gameul account. This policy explains information that may be processed when you use the site.</p><h2>Browser storage</h2><p>Some games use local storage on your device to remember settings, progress or best scores. This information remains in your browser unless you clear it. Gameul does not use this game data to identify you.</p><h2>Embedded third-party games</h2><p>Some game pages embed an official third-party service, such as Bloxd.io or GameDistribution. The provider may process cookies, device information, account details or gameplay data inside its frame under its own privacy policy and consent controls. Gameul identifies the provider on each applicable game page.</p><h2>Analytics</h2><p>Gameul uses Google Analytics to understand general site usage, such as pages viewed, device type and approximate region. Google may process identifiers, IP address and browser information according to its own policies.</p><h2>Advertising</h2><p>Gameul uses Google AdSense. Google and its partners may use cookies, web beacons, IP addresses or similar technologies to deliver, measure and protect advertising. Depending on your location and choices, advertising may be personalized or non-personalized. Learn more about <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">how Google uses information from partner sites</a>.</p><h2>Consent choices</h2><p>Where required, Gameul uses consent controls made available for Google advertising and analytics services. Embedded providers may show their own consent prompts. You may also manage or clear cookies and local storage in your browser settings.</p><h2>Contact</h2><p>If you have a privacy request, email <a href="mailto:business@gameul.com">business@gameul.com</a>. Please do not include unnecessary sensitive information.</p><h2>Changes</h2><p>We may update this policy when our services or legal obligations change. The date above shows the latest revision.</p>`
 });
 
 infoPage({
