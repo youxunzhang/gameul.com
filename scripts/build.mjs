@@ -147,7 +147,7 @@ const wordGames = games.filter(game => game.category === 'Word');
 const gameBySlug = slug => games.find(game => game.slug === slug);
 const puzzleShowcase = ['2048', 'minesweeper', 'sudoku', 'sliding-puzzle'].map(gameBySlug).filter(Boolean);
 const bloxdShowcase = ['bloxd-survival', 'bloxd-one-block', 'bloxd-bedwars', 'bloxd-skyblock'].map(gameBySlug).filter(Boolean);
-const quickShowcase = ['puffer-party', 'memory-match', 'tic-tac-toe', 'ellie-and-friends-pre-fall-outfit'].map(gameBySlug).filter(Boolean);
+const quickShowcase = ['panda-bubble-shooter', 'onet-master', 'memory-match', 'ellie-and-friends-pre-fall-outfit'].map(gameBySlug).filter(Boolean);
 
 write('index.html', documentPage({
   title: 'Free Online Games – Play Instantly | Gameul',
@@ -163,7 +163,7 @@ write('index.html', documentPage({
 
       <section class="home-collection" aria-labelledby="puzzle-collection-title">
         <a class="collection-lead collection-puzzle" href="/categories/puzzle-games/">
-          <div><span>6 games</span><h2 id="puzzle-collection-title">Puzzle &amp;<br>Brain Games</h2><strong>Explore category <span aria-hidden="true">→</span></strong></div>
+          <div><span>${puzzleGames.length} games</span><h2 id="puzzle-collection-title">Puzzle &amp;<br>Brain Games</h2><strong>Explore category <span aria-hidden="true">→</span></strong></div>
           <img src="/assets/images/games/2048.svg" alt="" width="640" height="400">
         </a>
         ${puzzleShowcase.map((game, index) => portalCard(game, index === 0 ? 'is-priority' : '')).join('')}
@@ -240,7 +240,7 @@ function gamePage(game) {
     : isOfficialSiteIframe
       ? `<div class="game-stage external-game-stage bloxd-game-stage" data-external-game="${escapeHtml(game.slug)}"><iframe src="${escapeHtml(game.embedUrl)}" title="Play ${escapeHtml(game.title)} on the official Bloxd.io service" width="${game.embedWidth || 1440}" height="${game.embedHeight || 810}" scrolling="no" frameborder="0" allow="autoplay; fullscreen; gamepad" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>`
     : isExternalLink
-      ? `<div class="game-stage outbound-game-stage"><img src="${game.thumbnail}" alt="${escapeHtml(game.title)} preview" width="1200" height="750"><div class="outbound-game-copy"><span>Official game website</span><h2>Ready for Puffer Party?</h2><p>This game runs on Krillion. Open the official page to create a room, join other players and start playing.</p><a class="button outbound-play-button" href="${escapeHtml(game.externalUrl)}" target="_blank" rel="noopener noreferrer external">Play on Krillion <span aria-hidden="true">↗</span></a></div></div>`
+      ? `<div class="game-stage outbound-game-stage"><img src="${game.thumbnail}" alt="${escapeHtml(game.title)} preview" width="1200" height="750"><div class="outbound-game-copy"><span>Official game website</span><h2>${escapeHtml(game.outboundHeading || `Play ${game.title}`)}</h2><p>${escapeHtml(game.outboundDescription || `This game runs on ${game.sourceProvider}. Open the official page to start playing.`)}</p><a class="button outbound-play-button" href="${escapeHtml(game.externalUrl)}" target="_blank" rel="noopener noreferrer external">${escapeHtml(game.outboundCta || `Play on ${game.sourceProvider}`)} <span aria-hidden="true">↗</span></a></div></div>`
     : `<div class="game-stage" data-game-runtime="${game.slug}"><p>Loading ${escapeHtml(game.title)}…</p></div>`;
   const providerDetails = isThirdParty
     ? `<p><strong>Developer:</strong> ${escapeHtml(developerName)}</p><p><strong>Distribution:</strong> <a href="${escapeHtml(game.sourcePage)}" rel="noopener noreferrer">${escapeHtml(game.sourceProvider)}</a></p>`

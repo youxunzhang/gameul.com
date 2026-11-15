@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Onet Master original Gameul cover</title><desc id="desc">A grid of colorful matching picture tiles joined by a glowing path.</desc>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#5747c8"/><stop offset="1" stop-color="#e85c9b"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="14" stdDeviation="12" flood-opacity=".25"/></filter></defs><rect width="1200" height="750" fill="url(#bg)"/>
+  <g opacity=".14" fill="#fff"><circle cx="1050" cy="120" r="210"/><circle cx="110" cy="700" r="250"/></g>
+  <g filter="url(#s)" transform="translate(385 200)">
+    <g fill="#fff" stroke="#e2e6ff" stroke-width="8"><rect width="130" height="130" rx="25"/><rect x="155" width="130" height="130" rx="25"/><rect x="310" width="130" height="130" rx="25"/><rect y="155" width="130" height="130" rx="25"/><rect x="155" y="155" width="130" height="130" rx="25"/><rect x="310" y="155" width="130" height="130" rx="25"/><rect y="310" width="130" height="130" rx="25"/><rect x="155" y="310" width="130" height="130" rx="25"/><rect x="310" y="310" width="130" height="130" rx="25"/></g>
+    <g fill="#ff735d"><circle cx="65" cy="65" r="32"/><circle cx="375" cy="375" r="32"/></g><g fill="#47bced"><path d="m220 28 13 27 30 4-22 21 5 30-26-14-27 14 6-30-22-21 30-4z"/><path d="m65 183 13 27 30 4-22 21 5 30-26-14-27 14 6-30-22-21 30-4z"/></g><g fill="#ffd14d"><path d="M344 37h62v56h-62z"/><path d="M189 347h62v56h-62z"/></g><g fill="#61c870"><path d="M35 348q30-40 60 0v54H35z"/><path d="M345 193q30-40 60 0v54h-60z"/></g>
+  </g>
+  <path d="M450 265H340V575h420v-85" fill="none" stroke="#fff36a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="28 18"/>
+  <circle cx="450" cy="265" r="18" fill="#fff36a"/><circle cx="760" cy="490" r="18" fill="#fff36a"/>
+  <rect x="52" y="52" width="470" height="154" rx="28" fill="#261e69" opacity=".94"/><text x="90" y="118" fill="#ffd5ef" font-family="Arial,sans-serif" font-size="30" font-weight="800">TILE MATCHING</text><text x="90" y="180" fill="#fff" font-family="Arial,sans-serif" font-size="66" font-weight="900">ONET MASTER</text>
+</svg>
