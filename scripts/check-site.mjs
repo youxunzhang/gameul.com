@@ -39,7 +39,7 @@ for (const game of games) {
   if (!fs.existsSync(image)) failures.push(`${game.slug}: missing thumbnail ${game.thumbnail}`);
 }
 
-const publicFiles = ['index.html','games.html','about-us.html','contact.html','privacy-policy.html','terms-of-use.html','404.html','categories/puzzle-games/index.html','categories/word-games/index.html', ...games.map(game => `games/${game.slug}/index.html`)];
+const publicFiles = ['index.html','games.html','about-us.html','contact.html','privacy-policy.html','terms-of-use.html','404.html','categories/puzzle-games/index.html','categories/word-games/index.html','categories/parkour-games/index.html', ...games.map(game => `games/${game.slug}/index.html`)];
 const titles = new Map();
 for (const relative of publicFiles) {
   const file = path.join(root, relative);

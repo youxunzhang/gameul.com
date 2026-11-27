@@ -1,8 +1,9 @@
 # Gameul
 
 Gameul is an English-language static HTML5 game site for `https://gameul.com`.
-The public catalogue currently contains seven self-hosted games and does not
-publish third-party titles without documented commercial permission.
+The catalogue includes self-hosted originals, provider embeds and external game
+guides linking to Poki and CrazyGames. External-link games open on the provider
+website rather than being hosted or embedded by Gameul.
 
 ## Local development
 
@@ -34,6 +35,9 @@ Then open `http://127.0.0.1:8000/`.
 
 Add or update games in `data/games.json`, then run the build and check commands.
 Only records with `status: "published"` are included on public pages.
+Parkour games also appear in the homepage collection and at
+`/categories/parkour-games/`. Add them with `category: "Parkour"`; use
+`gameType: "external-link"` and a clean `externalUrl` for provider game pages.
 
 ## Advertising and privacy
 

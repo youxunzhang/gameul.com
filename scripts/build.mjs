@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const games = JSON.parse(fs.readFileSync(path.join(root, 'data', 'games.json'), 'utf8'))
   .filter(game => game.status === 'published');
-const today = '2026-11-15';
+const today = '2026-11-22';
 const siteUrl = 'https://gameul.com';
 
 const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({
@@ -65,6 +65,7 @@ ${homeSearch}    <nav class="primary-nav${current === 'home' ? ' portal-primary-
       ${navItem('home', '/', 'Home')}
       ${navItem('puzzle', '/categories/puzzle-games/', 'Puzzle')}
       ${navItem('word', '/categories/word-games/', 'Word')}
+      ${navItem('parkour', '/categories/parkour-games/', 'Parkour')}
       ${navItem('games', '/games.html', 'All Games')}
       ${navItem('about', '/about-us.html', 'About')}
     </nav>
@@ -80,7 +81,7 @@ function footer() {
   <div class="container">
     <div class="footer-grid">
       <div><h2>Gameul</h2><p>Play a Little, Every Day. Free browser games with no downloads and no sign-up required.</p></div>
-      <div><h3>Play</h3><ul class="footer-links"><li><a href="/games.html">All Games</a></li><li><a href="/categories/puzzle-games/">Puzzle Games</a></li><li><a href="/categories/word-games/">Word Games</a></li></ul></div>
+      <div><h3>Play</h3><ul class="footer-links"><li><a href="/games.html">All Games</a></li><li><a href="/categories/puzzle-games/">Puzzle Games</a></li><li><a href="/categories/word-games/">Word Games</a></li><li><a href="/categories/parkour-games/">Parkour Games</a></li></ul></div>
       <div><h3>Gameul</h3><ul class="footer-links"><li><a href="/about-us.html">About Us</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
       <div><h3>Legal</h3><ul class="footer-links"><li><a href="/privacy-policy.html">Privacy Policy</a></li><li><a href="/terms-of-use.html">Terms of Use</a></li></ul></div>
     </div>
@@ -122,7 +123,7 @@ const websiteSchema = {
   name: 'Gameul',
   alternateName: 'Gameul Games',
   url: `${siteUrl}/`,
-  description: 'Free online puzzle and word games that play instantly in a web browser.',
+  description: 'Discover free online puzzle, word, parkour and arcade games for your web browser.',
   inLanguage: 'en',
   potentialAction: {
     '@type': 'SearchAction',
@@ -144,6 +145,7 @@ const itemListSchema = {
 const featured = games.filter(game => game.featured);
 const puzzleGames = games.filter(game => game.category === 'Puzzle');
 const wordGames = games.filter(game => game.category === 'Word');
+const parkourGames = games.filter(game => game.category === 'Parkour');
 const gameBySlug = slug => games.find(game => game.slug === slug);
 const puzzleShowcase = ['2048', 'minesweeper', 'sudoku', 'sliding-puzzle'].map(gameBySlug).filter(Boolean);
 const bloxdShowcase = ['bloxd-survival', 'bloxd-one-block', 'bloxd-bedwars', 'bloxd-skyblock'].map(gameBySlug).filter(Boolean);
@@ -151,7 +153,7 @@ const quickShowcase = ['crazy-motorcycle', 'panda-bubble-shooter', 'onet-master'
 
 write('index.html', documentPage({
   title: 'Free Online Games – Play Instantly | Gameul',
-  description: 'Play free online puzzle, word, card and arcade games at Gameul. No downloads or sign-up required. Start playing in your browser.',
+  description: 'Discover free online puzzle, word, parkour and arcade games at Gameul. Browse our collection and choose a browser game to play.',
   canonical: '/', current: 'home', schemas: [websiteSchema, itemListSchema], bodyClass: 'home-page',
   body: `
   <div class="home-layout">
@@ -167,6 +169,14 @@ write('index.html', documentPage({
           <img src="/assets/images/games/2048.svg" alt="" width="640" height="400">
         </a>
         ${puzzleShowcase.map((game, index) => portalCard(game, index === 0 ? 'is-priority' : '')).join('')}
+      </section>
+
+      <section class="home-collection home-collection-parkour" id="parkour-games" aria-labelledby="parkour-collection-title">
+        <a class="collection-lead collection-parkour" href="/categories/parkour-games/">
+          <div><span>${parkourGames.length} games · Run, jump, repeat</span><h2 id="parkour-collection-title">Parkour &amp; Running Games</h2><strong>Explore category</strong></div>
+          <img src="/assets/images/games/obby-parkour-race.svg" alt="" width="640" height="400" loading="lazy">
+        </a>
+        ${parkourGames.map(game => portalCard(game)).join('')}
       </section>
 
       <section class="home-collection" aria-labelledby="bloxd-collection-title">
@@ -187,7 +197,7 @@ write('index.html', documentPage({
 
       <section class="home-seo-panel" aria-labelledby="why-gameul-title">
         <div><p class="eyebrow">No install. No account.</p><h2 id="why-gameul-title">Click a game and start playing</h2></div>
-        <p>Every Gameul title runs directly in your browser and is tested for desktop and mobile. Choose a cover above to open the game instantly.</p>
+        <p>Choose a cover to find controls and start playing. Gameul originals play here; selected third-party titles open on Poki or CrazyGames.</p>
         <a class="button" href="/games.html">Browse the game library</a>
       </section>
     </div>
@@ -200,11 +210,11 @@ write('games.html', documentPage({
   canonical: '/games.html', current: 'games', schemas: [itemListSchema],
   body: `
   <div class="container">
-    <header class="page-hero"><p class="eyebrow">Game library</p><h1>All Free Online Games</h1><p>Browse ${games.length} original browser games. Every title is playable on desktop and mobile with no download or account.</p></header>
+    <header class="page-hero"><p class="eyebrow">Game library</p><h1>All Free Online Games</h1><p>Browse ${games.length} browser games, including Gameul originals and games on Poki and CrazyGames. Choose a game for controls and a play button.</p></header>
     <section class="section compact" aria-labelledby="library-title" data-game-library>
       <h2 id="library-title" class="visually-hidden">Search and filter the game library</h2>
       <form class="search-form" id="game-search" data-game-search-form role="search"><input data-library-search type="search" name="q" aria-label="Search the game library" placeholder="Search by game, category or tag"><button type="submit">Search</button></form>
-      <div class="filter-bar" style="margin-top:1rem"><button class="filter-button" type="button" data-category-filter="all" aria-pressed="true">All</button><button class="filter-button" type="button" data-category-filter="puzzle" aria-pressed="false">Puzzle</button><button class="filter-button" type="button" data-category-filter="word" aria-pressed="false">Word</button><button class="filter-button" type="button" data-category-filter="adventure" aria-pressed="false">Adventure</button><button class="filter-button" type="button" data-category-filter="action" aria-pressed="false">Action</button><button class="filter-button" type="button" data-category-filter="party" aria-pressed="false">Party</button><button class="filter-button" type="button" data-category-filter="dress up" aria-pressed="false">Dress Up</button><span class="chip" data-results-count>${games.length} games</span></div>
+      <div class="filter-bar" style="margin-top:1rem"><button class="filter-button" type="button" data-category-filter="all" aria-pressed="true">All</button><button class="filter-button" type="button" data-category-filter="puzzle" aria-pressed="false">Puzzle</button><button class="filter-button" type="button" data-category-filter="word" aria-pressed="false">Word</button><button class="filter-button" type="button" data-category-filter="parkour" aria-pressed="false">Parkour</button><button class="filter-button" type="button" data-category-filter="adventure" aria-pressed="false">Adventure</button><button class="filter-button" type="button" data-category-filter="action" aria-pressed="false">Action</button><button class="filter-button" type="button" data-category-filter="party" aria-pressed="false">Party</button><button class="filter-button" type="button" data-category-filter="dress up" aria-pressed="false">Dress Up</button><span class="chip" data-results-count>${games.length} games</span></div>
       <div class="game-grid" style="margin-top:1.2rem">${games.map(card).join('')}</div>
       <div class="empty-state" data-empty-state hidden><strong>No games found.</strong><br>Try a shorter title or choose another category.</div>
     </section>
@@ -213,6 +223,10 @@ write('games.html', documentPage({
 
 function categoryPage(category, slug, title, intro, current) {
   const categoryGames = games.filter(game => game.category === category);
+  const isOutboundCategory = categoryGames.length > 0 && categoryGames.every(game => game.gameType === 'external-link');
+  const playDescription = isOutboundCategory
+    ? 'Choose a game for controls, tips and a play button that opens its official Poki or CrazyGames page.'
+    : 'Every game listed here is published, tested and playable on Gameul.';
   const canonical = `/categories/${slug}/`;
   const listSchema = {
     '@context': 'https://schema.org', '@type': 'ItemList', name: title, numberOfItems: categoryGames.length,
@@ -220,14 +234,15 @@ function categoryPage(category, slug, title, intro, current) {
   };
   return documentPage({
     title: `${title} – Play Free Online | Gameul`,
-    description: `${intro} Play instantly in your browser with no download or sign-up at Gameul.`,
+    description: `${intro} ${isOutboundCategory ? 'Find guides and links to play on Poki and CrazyGames.' : 'Play instantly in your browser with no download or sign-up at Gameul.'}`,
     canonical, current, schemas: [listSchema],
-    body: `<div class="container"><header class="page-hero"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / ${title}</nav><p class="eyebrow">Game category</p><h1>${title}</h1><p>${intro} Every game listed here is published, tested and playable on Gameul.</p></header><section class="section compact" aria-labelledby="category-games"><div class="section-header"><div><h2 id="category-games">Choose a game</h2><p>${categoryGames.length} ${category.toLowerCase()} ${categoryGames.length === 1 ? 'game' : 'games'} ready to play.</p></div></div><div class="game-grid">${categoryGames.map(card).join('')}</div></section><section class="section compact"><div class="content-card"><h2>Play free ${category.toLowerCase()} games online</h2><p>${intro} Gameul keeps controls simple and loads each title directly in the browser, so you can start without installing an app or creating an account.</p></div></section></div>`
+    body: `<div class="container"><header class="page-hero"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / ${title}</nav><p class="eyebrow">Game category</p><h1>${title}</h1><p>${intro} ${playDescription}</p></header><section class="section compact" aria-labelledby="category-games"><div class="section-header"><div><h2 id="category-games">Choose a game</h2><p>${categoryGames.length} ${category.toLowerCase()} ${categoryGames.length === 1 ? 'game' : 'games'} ready to play.</p></div></div><div class="game-grid">${categoryGames.map(card).join('')}</div></section><section class="section compact"><div class="content-card"><h2>Play free ${category.toLowerCase()} games online</h2><p>${intro} ${isOutboundCategory ? playDescription : 'Gameul keeps controls simple and loads each title directly in the browser, so you can start without installing an app or creating an account.'}</p></div></section></div>`
   });
 }
 
 write('categories/puzzle-games/index.html', categoryPage('Puzzle', 'puzzle-games', 'Free Online Puzzle Games', 'Play number, logic, memory and classic board puzzles designed for quick thinking and satisfying progress.', 'puzzle'));
 write('categories/word-games/index.html', categoryPage('Word', 'word-games', 'Free Online Word Games', 'Find hidden words, scan letter grids and enjoy relaxed vocabulary challenges on desktop or mobile.', 'word'));
+write('categories/parkour-games/index.html', categoryPage('Parkour', 'parkour-games', 'Free Online Parkour Games', 'Race across rooftops, leap between platforms and dodge obstacles in parkour races and endless runners.', 'parkour'));
 
 function gamePage(game) {
   const isExternal = game.gameType === 'external-iframe';
@@ -348,6 +363,7 @@ Sitemap: ${siteUrl}/sitemap.xml
 const sitemapPaths = [
   ['/', '1.0', 'weekly'], ['/games.html', '0.9', 'weekly'],
   ['/categories/puzzle-games/', '0.8', 'weekly'], ['/categories/word-games/', '0.7', 'weekly'],
+  ['/categories/parkour-games/', '0.8', 'weekly'],
   ...games.map(game => [game.gameUrl, '0.8', 'monthly']),
   ['/about-us.html', '0.4', 'yearly'], ['/contact.html', '0.3', 'yearly'],
   ['/privacy-policy.html', '0.2', 'yearly'], ['/terms-of-use.html', '0.2', 'yearly']
